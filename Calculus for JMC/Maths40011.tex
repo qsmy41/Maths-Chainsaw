@@ -1,0 +1,1363 @@
+\documentclass[12pt]{report}
+\usepackage[thinc]{esdiff} % for typesettign derivatives
+\usepackage{amsthm} % provides an enhanced version of LaTex's \newtheorem command
+\usepackage{mdframed} % framed environments that can split at page boundaries
+\usepackage{enumitem} % bulletin points or other means of listing things
+\usepackage{amsmath} % different results from various cases
+\usepackage{amssymb} % for AMS symbols
+
+
+\theoremstyle{definition}
+\mdfdefinestyle{defEnv}{%
+  hidealllines=false,
+  nobreak=true,
+  innertopmargin=-1ex,
+}
+
+\pagestyle{headings}
+\author{Demitrios PapaGeorgiou}
+\title{MATH40011 Calculus for JMC}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Integration}
+\section{Preliminaries}
+    The \emph{anti-derivative} or \emph{integral} of a function $f(x)$
+    
+    Given $f(x)$ defined over some interval, then if I can find a function $F(x)$ defined over the same interval
+    s.t. \[F'(x) = f(x)\]
+
+    Then $F(x)$ is the \emph{indefinite integral} of f, $F = \int f(x) \mathrm{d}x$
+
+    This is not unique.
+    Let $G$ be another indefinite integral, i.e. $G'(x) = f(x)$. Then $\diff {(F-G)}{x} = 0 \Rightarrow F(x)=G(x)+K$, 
+    where $K$ is a constant.
+
+\subsection{Area under a curve}
+Suppose $f(x)\ge0$ in some given interval $[a,b]$ and it is also continuous on $[a,b]$. $(a<b)$ 
+
+Define $F(x)$ to be the area under the curve between $x=a$ and some $x$. By definition $F(a)=0$
+
+\newmdtheoremenv[style=defEnv]{theorem}{Theorem}
+\begin{theorem}
+    The function $F(x)$ is differentiable and its derivative is equal to $f(x)$.
+    Another way to state this is \[
+        \frac{\mathrm{d}}{\mathrm{d}x} \int_a^x {f(t)} \mathrm{d}t = f(x)
+    \]That is, the rate of change of the area under curve at $x$ is precisely $f(x)$.
+    This is also known as \emph{the first part of Fundamental Theorem of Calculus}.
+\end{theorem}
+\begin{proof}
+    Newton quotient
+    \[
+        \frac{F(x+h)-F(x)}{h}
+    \]
+    Suppose $x\neb$ and also $h>0$.
+    $F(x+h)-F(x)$ is the are under the graph between $x$ and $x+h$.
+
+    Since $f(x)$ is continuous on $[x,x+h]$ and is defined in the interval, it must have a maximum at some point $x_+$
+    and minimum at some point $x_-$. Hence, $\forall t\in[x,x+h]$, 
+    \[
+        f(x_-) \le f(t) \le f(x_+)
+    \]
+    Can also bound the area using the rectangles
+    \[
+        h\cdot f(x_-) \le F(x+h)-F(x) \le h\cdot f(x_+)
+    ,\] i.e.
+    \[
+        f(x_-) \le \frac{F(x+h)-F(x)}{h} \le f(x_+)
+    \]
+    Since $x_+$ and $x_-$ are contained in $[x,x+h]$, as $h \to 0$, $x_-, x_+ \to x$ and by the squeezing theorem,
+    we have \[
+        \lim_{h \to 0} \frac{F(x+h)-F(x)}{h} = f(x)
+    ,\] i.e. \[
+      F'(x) = f(x)
+    \]
+    Hence the antiderivative is connected to area under the curve. The constant is fixed by $F(a) = 0$.
+
+    In other words, if I can guess a function $G(x)$ whose derivative is $f(x)$ 
+    [e.g. Guess $\log{x}$ for the antiderivative of $\frac{1}{x}$.]
+    Then since $F$ and $G$ differ by a constant, we have \[
+        F(x) = G(x) + K
+    \]
+    But $F(a)=0 \Rightarrow -G(a) = K \Rightarrow F(x) = G(x) - G(a)$.
+    Hence \[
+        \int_a^b f(x)\mathrm{d}x = F(b) = G(b) - G(a)
+    \]
+    \\This is the familiar \emph{definite integral}.
+    This is also known as \emph{the second part of the Fundamental Theorem of Calculus}.
+\end{proof}
+\newtheorem{ex}[theorem]{Example}
+\begin{ex}
+    \[
+        \int_1^2 x^2\mathrm{d}x = \frac{x^3}{3} \Big|_1^2 = \frac{8}{3} - \frac{1}{3} = \frac{7}{3}
+    \,.\]
+    Here $f(x) = x^2$, $G(x) = \frac{x^3}{3}$ is the guessed antiderivative.
+\end{ex}
+\subsection{Signed area definition}
+If $f(x)<0$, then area is below the $x$-axis. Define $F(x)$ to be \emph{minus} the area, leading to the definite integral.
+\[
+    \int_a^b f(x)\mathrm{d}x = F(b) - F(a)
+\]
+\section{The Riemann Sum}
+Given $f(x)$, $a \le x \le b$, take a \emph{partition} of the interval $[a,b]$ to be \[
+    x_i = a + ih, i = 0,1,2,\ldots,n
+\]\[
+    h = \frac{b-a}{n}
+\]
+\underline{Note}: My partition has regular spacing. Can generalize this to have a partition defined by a sequence 
+${\{x_k\}}_{k=0,1,\ldots,n}$ and in the limit $\max\limits_{k}\mathopen|x_k - x_{k-1}\mathclose| \rightarrow 0$.
+I am avoiding this technical issue which is quite irrelevant to what we want to do!
+
+Take any subinterval $[x_{i-1}, x_i]$ and let $x^*_i \in [x_{i-1}, x_i]$. Then the Riemann sum is $\sum_{i=1}^n f(x_i^*)h$.
+
+Three particularly useful ways: \[
+    x^*_i = x_i - \textnormal{``right-hand RS''}
+\]\[
+    x^*_i = x_{i-1} - \textnormal{``left-hand RS''}
+\]\[
+    x^*_i = \frac{1}{2}(x_i + x_{i-1}) - \textnormal{``midpoint RS''}
+\]
+
+Now in the limit $n \rightarrow \infty$, $h \rightarrow 0$, we can prove \[
+    \lim_{n \rightarrow \infty} \sum_{i=1}^n f(x_i^*)h = \int_a^b f(x) \mathrm{d}x
+\]
+\emph{Sketch of the proof}: \[
+    \textnormal{(Lower Riemann Sum)} \; L_n := \sum_{i=1}^n {\sup f([x_{i-1},x_i])} h
+\]\[
+    \textnormal{(Upper Riemann Sum)} \; U_n := \sum_{i=1}^n {\inf f([x_{i-1},x_i])} h
+\]
+By geometry, \[
+    L_n \le \int_a^b f(x)\mathrm{d}x \le U_n
+\]
+In the limit it gets squeezed, if the limit exists then it is the integral.
+
+\section{Properties of the definite integral}
+\begin{equation}
+    \int_a^b c\,f(x)\mathrm{d}x = c\int_a^b f(x)\mathrm{d}x
+\end{equation}
+\begin{equation}
+    \int_a^b (f(x) + g(x))\mathrm{d}x = \int_a^b f(x)\mathrm{d}x + \int_a^b g(x)\mathrm{d}x
+\end{equation}
+If $c\in(a,b)$ (and here $a<b$), then
+\begin{equation}
+    \int_a^b f(x)\mathrm{d}x = \int_a^c f(x)\mathrm{d}x + \int_c^b f(x)\mathrm{d}x
+\end{equation}
+If $f(x) \le g(x)$ for $x \in [a,b]$, then
+\begin{equation}
+    \int_a^b f(x)\mathrm{d}x \le \int_a^b g(x)\mathrm{d}x
+\end{equation}
+(Hence $\int_a^b f(x)\mathrm{d}x \le \int_a^b |f(x)|\mathrm{d}x$ 
+and $|\int_a^b f(x)\mathrm{d}x| \le \int_a^b |f(x)|\mathrm{d}x$)
+\begin{equation}
+    \int_b^a f(x)\mathrm{d}x = -\int_a^b f(x)\mathrm{d}x
+\end{equation}
+
+\subsection{Fundamental Theorem of Calculus}
+Suppose $F$ is differentiable on $[a,b]$ and $F'$ is integrable on $[a,b]$. Then \[
+    \int_a^b F'(x)\mathrm{d}x = F(b) - F(a)
+\] If $f$ is integrable on $[a,b]$ and has \emph{antiderivative} $F$, then \[
+    \int_a^b f(x)\mathrm{d}x = F(b) - F(a)
+\]
+\newmdtheoremenv[style=defEnv]{FTC}[theorem]{Theorem}
+\begin{FTC}
+    \[
+        \frac{\mathrm{d}}{\mathrm{d}x}\int_a^{g(x)} f(t)\mathrm{d}t = f(g(x))\cdot g'(x)
+    \]
+\end{FTC}
+\begin{proof}
+    Let \[
+        F(x) = \int_a^x f(t)\mathrm{d}t
+    \]
+    Then $F'(x) = f(x)$ --- already proved.
+    Now $\int_a^{g(x)} f(t)\mathrm{d}t = F(g(x))$ by definition of $F$.
+    \begin{eqnarray*}
+            \Rightarrow \frac{\mathrm{d}}{\mathrm{d}x} \int_a^{g(x)}f(t)\mathrm{d}t 
+            &=& \frac{\mathrm{d}}{\mathrm{d}x} F(g(x)) \\
+            &=& F'(g(x)) \cdot g'(x) \\
+            &=& f(g(x)) \cdot g'(x)
+    \end{eqnarray*}
+\end{proof}
+\begin{ex}
+    \[
+        \frac{\mathrm{d}}{\mathrm{d}x} \int_a^{x^2} e^t \mathrm{d}t = e^{x^{2}} \cdot 2x 
+    \]\[
+    \textnormal{or } \int_a^{x^{2}} e^{t}\mathrm{d}t = e^{t} |_a^{x^{2}} = e^{x^{2}} - e^{a} \textnormal{ (same as before)}
+    \]
+\end{ex}
+
+\section{Improper Integrals}
+\newmdtheoremenv[style=defEnv]{improper integral}[theorem]{Definition}
+\begin{improper integral}
+    $\int_a^{b} f(x) \mathrm{d}x$ is an \emph{improper integral} if
+    \begin{enumerate}[label = (\roman*)]
+        \item $a = \infty$ and/or $b = \infty$
+        \item $f(x) \rightarrow \pm \infty$ in $(a,b)$
+    \end{enumerate}
+\end{improper integral}
+To find improper integrals, we take the limit of proper integrals. If the limit is finite, the integral \emph{converges};
+otherwise it \emph{diverges}.
+\begin{ex}
+    \,
+
+    \begin{enumerate}[label = (\roman*)]
+        \item $\int_1^{\infty} \frac{1}{x^{2}} \mathrm{d}x 
+            = \lim_{b\rightarrow \infty} \int_1^{b} \frac{1}{x^{2}} \mathrm{d}x 
+            = \lim_{b\rightarrow\infty} (-\frac{1}{b} + 1) = 1$
+        \item $\int_1^{\infty} \frac{\mathrm{d}x}{x} = \lim_{b \rightarrow \infty} \log{b} = \infty$, \,i.e.\ diverges.
+    \end{enumerate}
+\end{ex}
+
+\subsection{Comparison Test}
+\fbox{\begin{minipage}{\linewidth}
+Suppose $f$ and $g$ satisfy
+\begin{enumerate}[label = (\arabic*)]
+    \item $f(x) \le g(x)\; \forall x \ge a$
+    \item $\exists \int_a^{b} f(x)\mathrm{d}x \textnormal{ and } \int_a^{b} g(x)\mathrm{d}x \;\forall b > a$
+\end{enumerate}
+Then 
+\begin{enumerate}[label = (\roman*)]
+    \item If $\int_a^{\infty} g(x)\mathrm{d}x$ is convergent, so is $\int_a^{\infty} f(x)\mathrm{d}x$
+    \item If $\int_a^{\infty} f(x)\mathrm{d}x$ is divergent, so is $\int_a^{\infty} g(x)\mathrm{d}x$
+\end{enumerate}
+Similarly for $\int_{-\infty}^{b} f(x)\mathrm{d}x$ and $\int_{-\infty}^{\infty} f(x)\mathrm{d}x$
+\end{minipage}}
+\,
+
+Comparison test is useful if we cannot carry out the integral exactly. It will tell us if it exists, 
+then we can find it numerically etc.
+
+\begin{flushleft}
+Common tricks for evaluation:
+\begin{enumerate}
+    \item Substitute constants with unknowns, or the other way round. 
+        The most common variables are $x$ and $\cos{x}$ or $\sin{x}$. 
+        Omitting/Adding certain variables may be better in some cases!
+    \item Substitute an expression with another expression which can be smaller/bigger for successful evaluation.
+        Use derivative if necessary.
+    \item (\textit{Special}) Use whatever means necessary (such as Integration by Parts) to generate $x^{p}$, 
+        where $p \le -1$, so that the integral converges.
+\end{enumerate}
+\end{flushleft}
+
+\begin{ex}
+    \;
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item \[
+                % the warning here is very awkward,
+                % why do I have to wrap around () with {}?
+                \int_0^{\infty} \frac{\sin{x}}{{(1+x)}^2} \mathrm{d}x \textnormal{ converges}
+        \]
+        First thing to quote is that $\int_0^{\infty} \frac{\mathrm{d}x}{{(1+x)}^{2}}$ converges by comparison to
+        $\int_1^{\infty} \frac{\mathrm{d}x}{x^{2}}$. (Why? If $x \ge 1$, $\frac{1}{{(1+x)}^{2}} < \frac{1}{x^{2}}$.)
+
+        By the comparison test, it converges because \[
+        \frac{|\sin{x}|}{{(1+x)}^{2}} \le \frac{1}{{(1+x)}^{2}} < \frac{1}{x^{2}} \textnormal{ for } x \ge 1
+        \]
+        \item \[
+                \int_1^{\infty} \frac{\mathrm{d}x}{\sqrt{1+x^{2}}} \textnormal{ diverges}
+        \]\[
+        \int_1^{b} \frac{\mathrm{d}x}{\sqrt{1+x^{2}}} \ge \int_1^{b} \frac{\mathrm{d}x}{\sqrt{x^2 + x^{2}}}
+                = \int_1^{b} \frac{\mathrm{d}x}{\sqrt{2}x}
+        \]
+        Now $\int_1^{\infty} \frac{\mathrm{d}x}{x}$ diverges 
+        $\Rightarrow$ So does $\int_1^{\infty} \frac{\mathrm{d}x}{\sqrt{1+x^{2}}}$
+
+        \item \[
+                \int_1^{\infty} \frac{\mathrm{d}x}{\sqrt{x}} \textnormal{ diverges}
+        \]
+        Here is a proof using the comparison theorem.
+
+        If $x \ge 1$, \[
+            \frac{1}{x} \le \frac{1}{\sqrt{x}} 
+            \Rightarrow \int_1^{b} \frac{1}{x} \mathrm{d}x < \int_1^{b} \frac{\mathrm{d}x}{\sqrt{x}}, \;b > 1
+        \] and $\int_1^{\infty} \frac{1}{x} \mathrm{d}x$ diverges.
+    \end{enumerate}
+    
+\end{ex}
+
+\subsection{Improper integrals of unbounded functions}
+WLOG, consider situation where $|f(x)| \rightarrow \infty$ as $x \rightarrow 0$. Again take limits of bounded integrals.
+E.g. \[
+    \int_0^{1} \frac{1}{x^{p}}\mathrm{d}x 
+    \begin{cases}
+        \textnormal{converges} & \textnormal{if } p < 1\\
+        \textnormal{diverges} & \textnormal{if } p \ge 1%
+    \end{cases}
+\]
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\begin{ex}
+    \,
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item 
+            \begin{eqnarray*}
+                \int_0^{1} \log{x} \mathrm{d}x 
+                &=& \lim_{\varepsilon \rightarrow 0} \int_\varepsilon^{1} \log{x} \mathrm{d}x \\
+                &=& \lim_{\varepsilon \rightarrow 0} (x\log{x}|_\varepsilon^{1} - 
+                \int_\varepsilon^{1} x \frac{1}{x}\mathrm{d}x) \\
+                &=& \lim_{\varepsilon \rightarrow 0} (-\varepsilon\log{\varepsilon} - 1 + \varepsilon) \\
+                &=& -1
+            \end{eqnarray*}
+        \item Show that the improper integral $I = \int_0^{\infty} \frac{e^{-x}}{\sqrt{x}}\mathrm{d}x$ converges.
+
+            Write $I = I_1 + I_2$ where $I_1 = \int_0^{1} \frac{e^{-x}}{\sqrt{x}} \mathrm{d}x$, 
+            $I_2 = \int_1^{\infty} \frac{e^{-x}}{\sqrt{x}} \mathrm{d}x$.\[
+                I_1 = \int_0^{1} \frac{e^{-x}}{\sqrt{x}}\mathrm{d}x < \int_0^{1} \frac{1}{\sqrt{x}} \mathrm{d}x
+                \textnormal{, which is convergent,}
+            \]\[
+            \int_1^{\infty} \frac{e^{-x}}{\sqrt{x}} \mathrm{d}x < \int_1^{\infty} e^{-x} \mathrm{d}x
+            \textnormal{, which is also convergent.}
+            \]
+    \end{enumerate}
+\end{ex}
+
+\subsection{Mean Value Theorem for Integrals}
+Given a function $f$ that is integrable on $[a,b]$, we define its average $\langle f \rangle_{[a,b]}$ by the formula \[
+    \langle f(x) \rangle_{[a,b]} = \frac{1}{b-a} \int_a^{b} f(x)\mathrm{d}x
+\]
+Since $\langle f \rangle_{[a,b]}$ is a number (constant), then we have \[
+    \int_a^{b} f(x) \mathrm{d}x = \int_a^{b} \langle f \rangle_{[a,b]} \mathrm{d}x
+\]
+
+\newmdtheoremenv[style=defEnv]{MVT for Integrals}[theorem]{Theorem}
+\begin{MVT for Integrals}
+    Let $f$ be continuous on $[a,b]$. Then $\exists\, x_0 \in (a,b)$ s.t. \[
+        f(x_0) = \frac{1}{b-a} \int_a^{b} f(x) \mathrm{d}x
+    \]
+\end{MVT for Integrals}
+\begin{proof}
+    Define $F(x) = \int_a^{x} f(t)\mathrm{d}t$. By the FTC we have \[
+    F'(x) = f(x) \; \forall x \in (a,b)
+    \]
+    $F$ is continuous at $a$ and $b$ (proof in exercises). By MVT we have \[
+        F'(x_0) = \frac{F(b) - F(a)}{b - a}
+    \]i.e.\[
+    f(x_0) = \frac{\int_a^{b}f(t)\mathrm{d}t - \int_a^{a}f(t)\mathrm{d}t}{b - a} = \frac{1}{b-a} \int_a^{b}f(t)\mathrm{d}t
+    \]
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{Generalized MVT for Integrals}[theorem]{Theorem}
+\begin{Generalized MVT for Integrals}
+    let $f$ and $g$ be continuous on $[a,b]$ with $g(x) \ge 0 \,\forall x \in [a,b]$. Then $\exists \,c\in [a,b]$ with \[
+        \int_a^{b} f(x)g(x)\mathrm{d}x = f(c)\int_a^{b} g(x)\mathrm{d}x
+    \]
+\end{Generalized MVT for Integrals}
+\begin{proof}
+    Since $f$ is continuous on $[a,b]$ it must have maximum $M$ and a minimum $m$ on $[a,b]$, i.e. $m \le f(x) \le M$.
+    Since $g(x) \ge 0$, we have $\forall \, x \in [a,b]$, \[
+        mg(x) \le f(x)g(x) \le Mg(x)
+    \]
+    By the properties of integral, we have \[
+        m\int_a^{b} g(x)\mathrm{d}x \le \int_a^{b} f(x)g(x)\mathrm{d}x \le M\int_a^{b} g(x)\mathrm{d}x
+    \]
+    By IVT, $\exists \, c \in [a,b]$ s.t. \[
+        f(c)\int_a^{b} g(x)\mathrm{d}x = \int_a^{b} f(x)g(x)\mathrm{d}x
+    \]
+\end{proof}
+
+\section{Applications of Integration}
+\subsection{Arc Length}
+\begin{eqnarray*}
+    \textnormal{Total length } L &\approx & \sum_{i=1}^{n} \sqrt{{(x_i - x_{i-1})}^{2} + {(f(x_i) - f(x_{i-1}))}^{2}} \\
+                                 &=& \sum_{i=1}^{n} (x_i - x_{i-1}) 
+                                 \sqrt{1 + {\left(\frac{f(x_i)-f(x_{i-1})}{x_i-x_{i-1}}\right)}^{2}}
+\end{eqnarray*}
+Now let $x_i - x_{i-1} = h = \frac{b-a}{n} := \Delta x$,
+\begin{eqnarray*}
+    L &=& \lim_{n \rightarrow \infty} 
+      \sum_{i=1}^{n} \Delta x \sqrt{1 + {\left(\frac{f(x_i) - f(x_{i-1})}{x_i - x_{i-1}}\right)}^{2}} \\
+      &=& \int_a^{b} {\left(1+{(f'(x))}^{2}\right)}^{\frac{1}{2}} \mathrm{d}x
+\end{eqnarray*}
+In parametric form this is \[
+    L = \int_{t_0}^{t_1} {\left[{\left(\frac{\mathrm{d}x}{\mathrm{d}t}\right)}^{2} + 
+    {\left(\frac{\mathrm{d}y}{\mathrm{d}t}\right)}^{2} \right]}^{\frac{1}{2}} \mathrm{d}t
+\]
+\subsection{Volumes and surface area of revolution}
+Given an area bounded by $x=a$, $x=b$, $y=f(x)$, $y=0$, then the volume of the solid produced by revolving $y=f$
+about the $x$-axis is given by\[
+    V = \int_a^{b} \pi {(f(x))}^{2} \mathrm{d}x
+\]
+Revolving the element about the $y$-axis gives a shell of volume \[
+    V = \int_a^{b} 2\pi x f(x) \mathrm{d}x
+\]
+As we revolve about the $x$-axis, the area of the surface area swept out is a strip of length $\approx 2\pi f(x_i)$
+and thickness
+\begin{eqnarray*}
+    \Delta l_i &= & {[{(x_i - x_{i-1})}^{2} + {(f(x_i) - f(x_{i-1}))}^{2}]}^{\frac{1}{2}} \\
+               &\approx & {[1 + {{(f'(x_i))}^{2}}]}^{\frac{1}{2}} \Delta x
+\end{eqnarray*}
+$\Rightarrow$ in the limit, area $S$ is \[
+    S = \int_a^{b} 2\pi f(x) \sqrt{1 + {(f'(x))}^{2}} \mathrm{d}x
+\]
+\subsection{Centre of mass}
+We must have a $0$ total moment in each axis. For instance, in 2D:\@\[
+    \left.
+    \begin{array}{rl}
+        \text{(1)} & \sum m_i(\overline{x} - x_i) = 0 \\
+        \text{(2)} & \sum m_i(\overline{y} - y_i) = 0
+    \end{array}
+    \right \} \Rightarrow(\overline{x}, \overline{y}) 
+    = \left(\frac{\sum\ m_i x_i}{\sum\ m_i}, \frac{\sum\ m_i y_i}{\sum\ m_i} \right) 
+\]
+\fbox{\begin{minipage}{\linewidth}
+\emph{General theory} --- divide into small rectangles, and so the moment about the whole plate $A$ about the $y$-axis is\[ \iint_A x\rho(x,y)\mathrm{d}x\mathrm{d}y = \overline{x}\iint_A \rho(x,y)\mathrm{d}x\mathrm{d}y
+\]
+Similarly, about the $x$-axis,\[
+    \iint_A y\rho(x,y)\mathrm{d}x\mathrm{d}y = \overline{y}\iint_A \rho(x,y)\mathrm{d}x\mathrm{d}y
+\]
+\end{minipage}}
+\\\\In the case of having a region $\{(x,y): a \le x \le b, 0 \le y \le f(x)\}$,\[
+    m = \int_a^b \rho f(x) \mathrm{d}x
+\]\[
+    M_y = \int_a^{b} \rho xf(x)\mathrm{d}x
+\]\[
+    M_x = \frac{1}{2}\int_a^{b} \rho {(f(x))}^{2} \mathrm{d}x
+\]Then\[
+\overline{x} = \frac{\int_a^{b} xf(x)\mathrm{d}x}{\int_a^{b} f(x)\mathrm{d}x}
+\qquad
+\overline{y} = \frac{\frac{1}{2} \int_a^{b} {(f(x))}^{2}\mathrm{d}x}{\int_a^{b} f(x)\mathrm{d}x}
+\]
+In the case of having a region $\{(x,y): a \le x \le b, g(x) \le y \le f(x)\}$, similarly\[
+    \overline{x} = \frac{\int_a^{b} x(f(x) - g(x))\mathrm{d}x}{\int_a^{b} f(x) - g(x) \mathrm{d}x}
+    \qquad
+    \overline{y} = \frac{\frac{1}{2} \int_a^{b} {(f(x))}^{2} - {(g(x))}^{2} \mathrm{d}x}
+    {\int_a^{b} f(x) - g(x) \mathrm{d}x}
+\]
+
+\subsection{Theorem of Pappus}
+Let $R$ be a region that lies on one side of a line $l$.
+\begin{itemize}
+    \item $A$ &= area of $R$
+    \item $V$ &= Volume obtained by rotating about $l$
+    \item $d$ &= distance travelled by the centre of mass when $R$ is rotated about $l$
+\end{itemize}
+Then\[
+    V = Ad
+\]
+\begin{ex}
+    Volume of a cylinder radius $r$
+    \\Take the function $y = r$, $0 \le x \le l$. Rotate about $x$-axis.\[
+        A = rl
+    \]
+    since $\overline{y} = \frac{1}{2}r$ (symmetry), \[
+        \Rightarrow d = \frac{1}{2} r \cdot 2\pi = \pi r
+    \]\[
+        V = rl \cdot \pi r = \pi r^{2} l \textnormal{ as known}
+    \]
+\end{ex}
+
+\section{Length and area in polar coordinates}
+\subsection{Length}
+\begin{description}
+    \item[\textit{Approach 1}] \,
+            \\\\Recall\[
+                L = \int_a^{b} {\left[{\left(\frac{\mathrm{d} x}{\mathrm{d}t} \right)}^{2}
+                + {\left(\frac{\mathrm{d} y}{\mathrm{d}t} \right)}^{2}\right]}^{\frac{1}{2}}
+            \]for parametric curves $(x(t),y(t))$.
+            Now in polar coordinates we have curves $r = f(\theta)$. So use $\theta$ as a parameter,\[
+                x = r\cos{\theta} = f(\theta)\cos{\theta}, \quad y = r\sin{\theta} = f(\theta)\sin{\theta}
+            \]Substitute $x$ and $y$ into $L$ above, we get
+            \begin{eqnarray*}
+                L &=& \int_{\alpha}^{\beta} {\left[{(f'\cos{\theta}-f\sin{\theta})}^{2} 
+                  + {(f'\sin{\theta}+f\cos{\theta})}^{2}\right]}^{\frac{1}{2}}\mathrm{d} \theta \\
+                  &=& \int_\alpha ^{\beta} {\left[{\left(f'(\theta)\right)}^{2} 
+                  + {\left(f(\theta)\right)}^{2}\right]}^{\frac{1}{2}} \mathrm{d}\theta \\
+                  &=& \int_\alpha ^{\beta} {\left[{\left(\frac{\mathrm{d} r}{\mathrm{d}\theta} \right)}^{2} 
+                  + r^{2}\right]}^{\frac{1}{2}}\mathrm{d}\theta
+            \end{eqnarray*}
+        \item[\textit{Approach 2}] \,
+            \\\\Use Pythagoras theorem to write infinitessimals,\[
+                {(\mathrm{d}r)}^{2} + r^{2}{(\mathrm{d}\theta)}^{2} = {(\mathrm{d}s)}^{2},
+                \quad
+                \mathrm{d}s = {\left[{\left(\frac{\mathrm{d}r}{\mathrm{d}\theta}\right)}^{2} + r^{2}\right]}^{\frac{1}{2}}
+            \]\[
+            \Rightarrow L = \int_\alpha ^{\beta} {\left[{\left(\frac{\mathrm{d}r}{\mathrm{d}\theta}\right)}^{2} 
+            + r^{2}\right]}^{\frac{1}{2}} \mathrm{d}\theta
+            \]
+\end{description}
+\begin{ex}
+    Find the length of the cardioid $r = 1 + \cos{\theta}$, $0 \le \theta \le 2\pi$.
+    \begin{eqnarray*}
+        L &=& \int_0^{2\pi}\sqrt{{\left(1+\cos{\theta}\right)}^{2} + \sin^{2}\theta} \mathrm{d}\theta \\
+          &=& \int_0^{2\pi} \sqrt{2 + 2\cos(\theta)} \mathrm{d}\theta \\
+          &=& \int_0^{\pi} 2\cos{\frac{\theta}{2}}\mathrm{d}\theta
+          + \int_\pi^{2\pi} -2\cos{\frac{\theta}{2}}\mathrm{d}\theta \quad
+          \text{\textcolor{red}{Be careful with this step!}} \\
+          &=& 8
+    \end{eqnarray*}
+\end{ex}
+
+\subsection{Area}
+Using segments of angles $\Delta \theta_i$,\[
+    \Delta A = \frac{1}{2} {\left(f(\theta)\right)}^{2} \Delta \theta_i
+\]\[
+\Rightarrow A = \frac{1}{2}\int_\alpha^{\beta} {\left(f(\theta)\right)}^{2}\mathrm{d}\theta 
+= \frac{1}{2}\int_\alpha^{\beta} r^{2}\mathrm{d}\theta
+\]
+\begin{ex}
+    Find the area enclosed by the four-petaled rose $r = \cos{2\theta}$.
+    \begin{eqnarray*}
+        A &=& \frac{1}{2}\int_{-\frac{\pi}{4}}^{\frac{\pi}{4}} \cos^{2}{2\theta}\,\mathrm{d}\theta \\
+          &=& \frac{1}{2}\int_{-\frac{\pi}{4}}^{\frac{\pi}{4}} \frac{1+\cos{4\theta}}{2}\mathrm{d}\theta \\
+          &=& \left(\frac{1}{4}\right)\left(\frac{\pi}{2}\right) \\
+          &=& \frac{\pi}{8}
+    \end{eqnarray*}
+    
+\end{ex}
+
+\chapter{Power Series and Taylor's Theorem}
+\section{Power Series}
+\subsection{Convergence tests and radius of convergence}
+\newmdtheoremenv[style=defEnv]{power series}[theorem]{Definition}
+\begin{power series}    
+    Let $x$ be a real number (can extend to complex numbers also) and ${\{a_{n}\}}_{n \ge 0}$ be a sequence of numbers.
+    Then we can form the \emph{power series} $\sum_{n=0}^{\infty} a_n x^{n}$.
+    The partial sums $S_N = \sum_{n=1}^{N} a_n x^{n}$ are degree $N$ polynomials.
+\end{power series}
+\newmdtheoremenv[style=defEnv]{radius of convergence}[theorem]{(Radius of Convergence) Theorem}
+\begin{radius of convergence}
+    $\exists R \in [0,\infty]$ s.t.
+    \begin{itemize}
+            \item $|z| < R \Rightarrow \sum a_n z^{n}$ is absolutely convergent, and
+            \item $|z| > R \Rightarrow \sum a_n z^{n}$ is divergent
+    \end{itemize}
+\end{radius of convergence}
+\begin{proof}
+    Let $S = \{|z|: a_n z^{n} \rightarrow 0\}$, nonempty since $0 \in S$. Then define \[
+        R = 
+        \begin{cases}
+            \sup{S} & \text{if $S$ bounded,} \\
+            \infty & \text{if $S$ unbounded.}
+        \end{cases}
+    \]Now suppose $|z| < R$.
+    Since $|z|$ is not an upper bound for $S$, $\exists w$ s.t. $|w| > |z|$ and $a_w w^{n} \rightarrow 0$.
+    In particular $|a_n w^{n}|$ is bounded by some $A \;\forall n$. Thus \[
+        |a_n z^{n}| = |a_n w^{n}|{\left|\frac{z}{w}\right|}^{n} \le A {\left|\frac{z}{w}\right|}^{n}
+    \]
+    Therefore, by comparison with the convergent series $\sum {\left|\frac{z}{w}\right|}^{n}$ 
+    (recall $\left|\frac{z}{w}\right| < 1$)
+    we find $\sum |a_n z^{n}|$ is convergent.
+
+    On the other hand, if $|z| > R$ then $a_n z^{n} \nrightarrow 0$ as $n \rightarrow \infty \Rightarrow 
+    \sum a_n z^{n}$ diverges.
+\end{proof}
+\subsection{Differentiation and integration of power series}
+\newmdtheoremenv[style=defEnv]{diff and int of power series}[theorem]{Theorem}
+\begin{diff and int of power series}
+    Let $f(x) = \sum_{n=0}^{\infty} a_n x^{n}$ be a power series which converges absolutely for $|x| < R$.
+    \\Then for $|x| < R$, $f(x)$ is differentiable\[
+        f'(x) = \sum_{n=1}^{\infty} n a_n x^{n-1}
+    \]and integrable\[
+    \int f(x)\mathrm{d}x = \sum_{n=0}^{\infty} \frac{a_n x^{n+1}}{n+1}
+    \]
+    For a power series \emph{within its radius of convergence}, we can differentiate or integrate term by term.
+\end{diff and int of power series}
+\begin{notes}
+    $f(x) = \sum_{n=0}^{\infty} a_n x^{n}$ can be differentiated an infinite number of times as long as $|x| < R$, 
+    and the derivatives will exist.
+    The way to show this is to consider each differentiated series as a new power series. For example,
+    \begin{eqnarray*}
+        \frac{\mathrm{d}^{k}}{\mathrm{d}x^{k}} \left(\sum_{}^{} a_n x^{n}\right)
+        &=& \sum_{}^{} n(n-1)(n-2)\cdots(n-(k-1))x^{(n-k)}a_n \\
+        &=& \sum_{}^{} \frac{n!}{(n-k)!} a_n x^{n-k}
+    \end{eqnarray*}
+    Using ratio test,\[
+        \lim_{n\rightarrow\infty} \frac{(n+1)!}{(n+1-k)!} \frac{(n-k)!}{n!} \left|\frac{a_{n+1}}{a_n}\right| |x|
+        = \lim_{n\rightarrow\infty} \left(\frac{n+1}{n+1-k}\right) \left|\frac{a_{n+1}}{a_n}\right| |x|
+        = L|x|
+    \]as for the undifferentiated power series,\[
+    \Rightarrow \frac{\mathrm{d}^{k}}{\mathrm{d}x^{k}} \left(\sum_{}^{} a_n x^{n}\right) 
+    \textnormal{converges for} \;|x| < R
+    \]
+\end{notes}
+
+\begin{ex}
+    Write down power series for $\frac{x}{1+x^{2}}$ and $\log{(1+x^{2})}$
+    \\\\Recall geometric series $1+r+r^{2}+\cdots = \frac{1}{1-r}$ for $|r| < 1$.
+    If $r = -x^{2}$ we have $x(1-x^{2}+x^{4}-x^{6}+\cdots) = \frac{1}{1+x^{2}} \cdot x$. Hence\[
+        \frac{x}{1+x^{2}} = \sum_{n=0}^{\infty} {(-1)}^{n}x^{2n+1}\text{,} \qquad |x| < 1 \;\text{for convergence}
+    \]Now for the $\log{(1+x^{2})}$ we observe that \[
+    \frac{\mathrm{d}}{\mathrm{d}x} \log{(1+x^{2})} = \frac{2x}{1+x^{2}} %chktex 29
+    \]So\[
+    \log{(1+x^{2})} = 2\int \frac{x}{1+x^{2}} \mathrm{d}x
+    \]If $|x| < 1$ we can integrate term by term.\,i.e.
+    \begin{eqnarray*}
+        \log{(1+x^{2})} &=& 2\int (x - x^{3} + x^{5} - \cdots)\mathrm{d}x \\
+                        &=& x^{2} - \frac{x^{4}}{2} + \frac{x^{6}}{3} - \frac{x^{8}}{4} + \cdots
+    \end{eqnarray*}
+\end{ex}
+\newmdtheoremenv[style=defEnv]{power series algebraic operations}[theorem]{Theorem}
+\begin{power series algebraic operations}
+    Let $f(x) := \sum_{n=0}^{\infty} a_n x^{n}$ and $g(x) := \sum_{n=0}^{\infty} b_n x^{n}$,
+    with radius of convergence being $R_1$ and $R_2$. Let $R:=\min{R_1, R_2}$. Then for $|x| < R$,
+    \begin{enumerate}[label = (\arabic*)]
+        \item $f(x) + g(x) = \sum_{n=0}^{\infty} (a_n + b_n)x^{n}$
+        \item $cf(x) = \sum_{n=0}^{\infty} c\,a_n x^{n}$
+        \item $f(x)g(x) = \sum_{n=0}^{\infty} \left(\sum_{m=0}^{n} a_m b_{n-m}\right) x^{n}$
+    \end{enumerate}
+\end{power series algebraic operations}
+
+\section{Taylor Series}
+This is a power series that represents a function $f(x)$ by using its derivatives at a single point.
+
+Assume the power series exists and identifies the coefficients. Take a fixed point $x = x_0$.
+If $\sum_{n=0}^{\infty} a_n {(x-x_0)}^n$ converges for $|x-x_0|$ small enough, we can find the coefficients as\[
+    a_k = \frac{1}{k!}f^{(k)}(x_0)
+\]\[
+\Rightarrow f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(x_0)}{n!}{(x-x_0)}^{n}
+\]This is the \emph{Taylor series about the point $x=x_0$}. If $x_0=0$ we get the \emph{Maclaurin series} \[
+f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n!} x^{n} 
+\]In both formulas we have assumed that $f(x)$ is infinitely differentiable on some interval containig the point $x=x_0$.
+This of course can happen for many functions, e.g. $f(x) = \sin{x}$, $f(x) = e^{x}$, $f(x) = \cos{x}, \ldots$
+
+\subsection{Derivation of power series}
+\begin{enumerate}
+    \item By definition, differentiate required amount of times.
+    \item express known terms in power series and do operations on them instead
+    \item compare coefficients, given that an exact value is known
+\end{enumerate}
+\\Some of the common Maclaurin series:\[
+    \frac{1}{1-x} = \sum_{n=0}^{\infty} x^{n} = 1 + x + x^{2} + x^{3} + \cdots 
+\]\[
+    e^{x} = \sum_{n=0}^{\infty} \frac{x^{n}}{n!} = 1 + x + \frac{x^{2}}{2!} + \frac{x^{3}}{3!} + \cdots
+\]\[
+\cos{x} = \sum_{n=0}^{\infty} {(-1)}^{n} \frac{x^{2n}}{(2n)!}
+= 1 - \frac{x^{2}}{2!} + \frac{x^{4}}{4!} - \frac{x^{6}}{6!} + \cdots
+\]\[
+\sin{x} = \sum_{n=0}^{\infty} {(-1)}^{n}\frac{x^{2n+1}}{(2n+1)!}
+= x - \frac{x^{3}}{3!} + \frac{x^{5}}{5!} - \frac{x^{7}}{7!} + \cdots
+\]\[
+\tan^{-1}{x} = \sum_{n=0}^{\infty} {(-1)}^{n} \frac{x^{2n+1}}{2n+1}
+= x - \frac{x^{3}}{3} + \frac{x^{5}}{5} - \frac{x^{7}}{7} + \cdots
+\]\[
+\log{(1+x)} = \sum_{n=1}^{\infty} {(-1)}^{n-1} \frac{x^{n}}{n} 
+= x - \frac{x^{2}}{2} + \frac{x^{3}}{3} - \frac{x^{4}}{4} + \cdots
+\]\[
+\log{(1-x)} = \sum_{n=1}^{\infty} -\frac{x^{n}}{n}
+= - x - \frac{x^{2}}{2} - \frac{x^{3}}{3} - \frac{x^{4}}{4} - \cdots
+\]
+\newmdtheoremenv[style=defEnv]{Taylor's theorem}[theorem]{(Taylor Series) Theorem}
+\begin{Taylor's theorem}
+    Let $f$ be a function defined on a closed interval between two numbers $x_0$ and $x$.
+    Assume that the function has $n+1$ derivatives on the interval and that they are all continuous. Then \[
+        f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!} {(x-x_0)}^{k} + R_n
+    \]where the \emph{remainder} $R_n$ is given by\[
+    R_n = \int_{x_0}^{x} \frac{{(x-t)}^{n}}{n!} f^{(n+1)}(t) \mathrm{d}t
+    \]
+\end{Taylor's theorem}
+\begin{proof}
+    Use integration by parts. From the FTC, we have \[
+        f(x) = f(x_0) + \int_{x_0}^{x} f'(t)\mathrm{d}t 
+    \]Now $\int_{x_0}^{x} f'(t)\mathrm{d}t = \int_{x_0}^{x} f'(t)\mathrm{d}(-(x-t))$, and use integration by parts,
+    \begin{eqnarray*}
+        \int_{x_0}^{x} f'(t)\mathrm{d}t
+        &=& +(t-x)f'(t)\big|^x_{x_0} - \int_{x_0}^{x} (t-x)f''(t)\mathrm{d}t \\
+        &=& (x-x_0)f'(x_0) + \int_{x_0}^{x} (x-t)f^{(2)}(t)\mathrm{d}t \\
+        &=& (x-x_0)f'(x_0) + \frac{{(x-x_0)}^{2}}{2}f^{(2)}(x_0) 
+        + \int_{x_0}^{x} \frac{{(x-t)}^{2}}{2}f^{(3)}(t)\mathrm{d}t \\
+        &\vdots&
+    \end{eqnarray*}
+    Repeat $n$ tiems to get the result.
+\end{proof}
+\subsection{Estimation Accuracy}
+Alternative form of the remainder:\[
+    R_n = \int_{x_0}^{x} \frac{{(x-t)}^{n}}{n!} f^{(n+1)}(t)\mathrm{d}t
+\]Use the generalized MVT for integrals, since $x_0 \le t \le x$, $x-t \ge 0$, $g(t) := \frac{{(x-t)}^{n}}{n!} \ge 0$.
+Thus $\exists \,c \in [x_0, x]$ s.t. \[
+    R_n = f^{(n+1)}(c) \int_{x_0}^{x} \frac{{(x-t)}^{n}}{n!} \mathrm{d}t
+\]\[
+\Rightarrow R_n = \frac{f^{(n+1)}(c)}{(n+1)!} {(x-x_0)}^{n+1}
+\]
+\fbox{\begin{minipage}{\linewidth}
+\emph{Converges to $f(x)$ if $R_n \rightarrow 0$ as $n \rightarrow \infty$!}
+\end{minipage}}
+\medskip
+\\Here is a very useful alternative of Taylor's theorem that we use in Numerical Analysis.
+Put $x = x_0 + h$ (and after that $x_0 \rightarrow x$ if you want)\[
+    f(x_0 + h) = \sum_{k=0}^{n} \frac{h^{k}}{k!}f^{(k)}(x_0) + R_n(x_0,h)
+\]
+\begin{eqnarray*}
+    R_n &=& \int_{x_0}^{x_0 + h} \frac{{(x_0 + h - t)}^{n}}{n!} f^{(n+1)}(t)\mathrm{d}t \\
+        &=& \frac{h^{n+1}}{(n+1)!} f^{(n+1)}(c) \quad \text{, where $c \in [x_0, x_0 + h]$}
+\end{eqnarray*}
+In terms of \emph{bounding the remainder}, for maclaurin series with $x_0 = 0$, for instance, use form\[
+    R_n = \frac{f^{(n+1)}(c)}{(n+1)!} x^{n+1}
+\]If $\left|f^{(n+1)}(c)\right| \le M_{n+1}$, then \[
+|R_n| \le M_{n+1} \frac{{|x|}^{n+1}}{(n+1)!}
+\]
+\begin{ex}
+    \,
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item \[
+            f(x) = \sin{x} = \sum_{k=0}^{n} {(-1)}^{k}\frac{x^{2k+1}}{(2k+1)!} + R_{2n+3}
+        \]where\[
+            |R_{2n+3}| = \left|\frac{f^{(2n+3)}(x)}{(2n+3)!}x^{2n+3}\right| \le \frac{{|x|}^{2n+3}}{(2n+3)!}
+        \]Hence \[
+        \sin{(0.1)} \approx 0.1 - \frac{10^{-3}}{3!} + \frac{10^{-5}}{5!}
+        \]with an error which is less than\[
+            \frac{0.1^{7}}{7!} = \frac{10^{-7}}{5040} < 10^{-10}
+        \]
+        \item Compute $\sin{(\frac{\pi}{6} + 0.2)}$ to an accuracy of $10^{-4}$.
+            Even though the power series of $\sin{x}$ will converge if we take enough terms,
+            since $\frac{\pi}{6} + 0.2$ is not small, we will need \emph{a lot of terms} to get to the required accuracy.
+            \\It is \emph{much} better to expand about $\frac{\pi}{6}$ using the formula \[
+                f(x_0 + h) = \sum_{k=0}^{n} \frac{h^{k}}{k!}f^{(k)}(x_0) + R_n(x_0,h)
+            \]Now $h = 0.2$, $f^{(n+1)}$ is $\sin$ or $\cos$, \[
+            \Rightarrow |R_n| \le \frac{0.2^{n+1}}{(n+1)!}
+            \Rightarrow R_3 \le \frac{0.2^{4}}{24} = \frac{16 \times 10^{-4}}{24} < 10^{-4}
+            \]\[
+            \Rightarrow \sin{(\frac{\pi}{6})} \approx \sin{\frac{\pi}{6}} + 0.2\cos{\frac{\pi}{6}} 
+            + \frac{0.2^{2}}{2!} \left(-\sin{\frac{\pi}{6}}\right) + \frac{0.2^{3}}{3!}\left(-\cos{\frac{\pi}{6}}\right) 
+            \]
+        \item Compute $e$ to 3 decimals. \[
+                e^{x} = 1 + x + \frac{x^{2}}{2!} + \cdots + \frac{x^{n}}{n!} + \frac{e^{c}}{(n+1)!} x^{n+1}
+            \]If $x<0$ then $c<0$ and $|R_n| \le \frac{{|x|}^{n+1}}{(n+1)!}$;
+            if $x>0$ and such that $x \le b$ say, then $|R_n| \le \frac{e^{b}}{(n+1)!} b^{n+1}$
+
+        Showed earlier (see chapter on logarithms) that $2<e<4$. Therefore\[
+                |R_n| \le \frac{e}{(n+1)!} \le \frac{4}{(n+1)!}
+            \]Need $\frac{4}{(n+1)!}$ to be less than $10^{-3}$. \[
+                |R_5| = \frac{4}{6!} = \frac{1}{180} > 10^{-3}
+            \]\[
+                |R_6| = \frac{4}{7!} = \frac{1}{1260} < 10^{-3}
+            \]So \[
+                e \approx 1 + 1 + \frac{1}{2!} + \frac{1}{3!} + \frac{1}{4!} + \frac{1}{5!} + \frac{1}{6!} + R_6
+            \]
+        \item Compute $\log{1.1}$ to 3 decimals.\[
+                |R_n| = \frac{f^{n+1}(0.1)}{(n+1)!} 0.1^{n+1} < \frac{0.1^{n+1}}{(n+1)!}
+        \]\[
+            |R_1| < \frac{0.1^{2}}{2!} > 10^{-3}
+        \]\[
+            |R_2| < \frac{0.1^{3}}{3!} < 10^{-3}
+        \]So\[
+        \log{1.1} \approx 0.1 - \frac{0.1^{2}}{2} + R_2
+        \]
+    \end{enumerate}
+\end{ex}
+
+\subsection{Alternative to L'Hôpital's rule}
+Sometimes it is easier to use Taylor's theorem instead of differentiating many times.
+\begin{ex}
+    \,
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item 
+            \begin{eqnarray*}
+                \lim_{x \rightarrow 0} \frac{\sin{x} - x}{\tan{x} - x}
+                &=& \lim_{x \rightarrow 0} \frac{\sin{x}\cos{x} - x\cos{x}}{\sin{x} - x\cos{x}} \\
+                &=& \lim_{x \rightarrow 0} \frac{\left(x - \frac{x^{3}}{6} + \cdots\right) 
+                \left(1-\frac{x^{2}}{2} + \cdots\right) - x \left(1 - \frac{x^{2}}{2} + \cdots\right)}
+                {x - \frac{x^{3}}{6} + \cdots - x\left(1 - \frac{x^{2}}{2} + \cdots\right) } \\
+                &=& \lim_{x \rightarrow 0} \frac{-\frac{x^{3}}{6} + \cdots}{\frac{x^{3}}{3}} \\
+                &=& -\frac{1}{2}
+            \end{eqnarray*}
+        \item 
+            \begin{eqnarray*}
+                \lim_{x \rightarrow 1} \frac{\log{x}}{e^{x} - e}
+                &=& \lim_{y \rightarrow 0} \frac{\log{(1+y)}}{e(e^{y}-1)} \qquad \text{(put $x = 1 + y$)}\\
+                &=& \lim_{y \rightarrow 0} \frac{y - \frac{y^{2}}{2} + \frac{y^{3}}{3} + \cdots}
+                {e(1 + y + \cdots - 1)} \\
+                &=& \frac{1}{e}
+            \end{eqnarray*}
+    \end{enumerate}
+\end{ex}
+
+\chapter{Trigonometric Series --- Fourier Series}
+\section{Orthogonal and orthonormal function spaces}
+\newmdtheoremenv[style=defEnv]{inner product of f and g}[theorem]{Definition}
+\begin{inner product of f and g}
+    If $f$, $g$ are real valuedtfunctions that are Riemann integrable on $[a,b]$, 
+    then we define the inner product of $f$ and $g$, denoted by $(f,g)$, by \[
+        (f,g) := \int_{a}^{b} f(x)g(x) \mathrm{d}x
+    \]\underline{Note} ${(f,f)}^{\frac{1}{2}} = {\left(\int_{a}^{b} f^{2} \mathrm{d}x\right)}^{\frac{1}{2}} 
+    := \parallel f \parallel \ge 0$
+\end{inner product of f and g}
+\newmdtheoremenv[style=defEnv]{orthogonal system}[theorem]{Definition}
+\begin{orthogonal system}
+    Let $S = \{\phi_0, \phi_1, \phi_2, \ldots\}$ be a collection of functions that are Riemann integrable on $[a,b]$.
+    If $(\phi_n, \phi_m) = 0$ whenever $m \neq n$, then $S$ is an \emph{orthogonal} system on $[a,b]$.
+    
+    If in addition $\left\|\phi_n\right\| = 1$, i.e. $\int_{a}^{b} \phi_n^{2} \mathrm{d}x = 1$,
+    then $S$ is said to be \emph{orthonormal} on $[a,b]$.
+
+    \underline{Note}: Can easiily go from orthogonal to orthonomal by considering $\frac{\phi_n}{\left\|\phi_n\right\| }$
+\end{orthogonal system}
+The orthonormal \emph{trigonometric system} will be used, where \[
+    \phi_0(x) = \frac{1}{\sqrt{2\pi}}, \phi_{2n-1}(x) = \frac{\cos{(nx)}}{\sqrt{\pi}},
+    \phi_{2n}(x) = \frac{\sin{(nx)}}{\sqrt{\pi}} \qquad (n = 1,2,\ldots)
+\]i.e. The system is\[
+S = \left\{\frac{1}{\sqrt{2\pi}}, \frac{\cos{x}}{\sqrt{\pi}}, \frac{\sin{x}}{\sqrt{\pi}},
+\frac{\cos{(2x)}}{\sqrt{\pi}}, \frac{\sin{(2x)}}{\sqrt{\pi}}, \ldots\right\}
+\]
+$S$ defined above is orthonormal on any interval of length $2\pi$, e.g. $[0,2\pi]$, $[-\pi,\pi]$, etc.
+
+
+\section{Periodic functions and periodic extensions}
+A function $f(x)$ is periodic with period $T$ if $\forall x$,\[
+    f(x + T) = f(x)
+\]It follows that a $T$-periodic function is also $mT$-periodic $\forall m \in \mathbb{Z}$, i.e.\[
+f(x \pm mT) = f(x)
+\]
+Start with any continuous function $f(x)$ in an interval $a \le x < b$. 
+Can extend this periodically to have period $T = b - a$.
+Function on $[a,b)$ extended periodically and the new function is discontinuous at %chktex 9
+$x = a + mT \;\forall m \in \mathbb{Z}$.
+
+\newmdtheoremenv[style=defEnv]{fn at points of discontinuity}[theorem]{Definition}
+\begin{fn at points of discontinuity}
+    At points of discontinuity $x = \xi$, define\[
+        f(\xi) = \frac{1}{2} \left[f(\xi_+) + f(\xi_-)\right] 
+    \]
+\end{fn at points of discontinuity}
+
+\subsection{Integrals over a period}
+For a periodic function $f(x)$ of period $T$ and for arbitrary values of $a$, we have \[
+    \int_{-a}^{T-a} f(x)\mathrm{d}x = \int_{0}^{T} f(x)\mathrm{d}x
+\]
+In fact, \[
+    \int_{\alpha}^{\beta} f(x)\mathrm{d}x = \int_{\alpha + T}^{\beta + T} f(x)\mathrm{d}x
+\]
+\begin{proof}
+    \[
+        \int_{\alpha}^{\beta} f(x)\mathrm{d}x = \int_{\alpha + T}^{\beta + T} f(y-T)\mathrm{d}y 
+        = \int_{\alpha + T}^{\beta + T} f(y)\mathrm{d}y = \int_{\alpha + T}^{\beta + T} f(x)\mathrm{d}x
+    \]
+\end{proof}
+
+\section{Superposition of harmonics and trigonometric polynomials}
+Start with an oscillation $\sin{(\omega x)}$. Here $\omega$ is the frequency. The period is $T = \frac{2\pi}{\omega}$.
+
+This is a ``pure'' harmonic oscillation. Signals --- e.g.\ sound, electromagnetic waves, water waves, 
+are not pure oscillations, they contain \emph{higher harmonics}.
+
+Lets add another oscillation of frequency $2\omega$, i.e. $\sin{(2\omega x)}$, whose period is 
+$T_2 = \frac{2\pi}{2\omega} = \frac{\pi}{\omega}$. This is called the \emph{1st harmonic}.
+
+Signal could be \[
+    S_2(x) = A_1\sin{(\omega x)} + B_2\sin{(2\omega x)}
+\]
+$S_2(x)$ has period $T = \frac{2\pi}{\omega}$ overall. 1st harmonic has period $\frac{T}{2}$.
+
+Can add more and more higher frequencies and in fact can produce a wave (oscillation) that is a 
+\emph{trigonometric polynomial} defined by\[
+    S_n(x) = \frac{1}{2} a_0 + \sum_{k=1}^{n} [a_k\cos{(k\omega x)} + b_k\sin{(k\omega x)}]
+\]
+The constant $\frac{1}{2} a_0$ is included. ($\frac{1}{2}$ is useful as we will see later)
+
+\underline{Note}: Went from $\omega_1 = \omega$ to $\omega_2 = 2\omega$ etc. All the frequencies have ratios that are rational.
+If $\frac{\omega_1}{\omega_2}$ is irrational, we get \emph{quasi-periodic} oscillations.
+
+\section{Complex Notation}
+Useful to use Euler's relation\[
+    \cos{\theta} + i\sin{\theta} = e^{i\theta}
+\] and since $\cos{\theta} - i\sin{\theta} = e^{-i\theta}$, \[
+\cos{\theta} = \frac{1}{2} \left(e^{i\theta} + e^{-i\theta}\right), \quad 
+\sin{\theta} = \frac{1}{2i} \left(e^{i\theta} - e^{-i\theta}\right) 
+\]
+So, can represent everything as complex and find real expressions by taking real or imaginary parts.\ e.g.\[
+    \frac{\mathrm{d}}{\mathrm{d}x} ae^{i\omega(x - \phi)} = ai\omega e^{i\omega(x - \phi)}
+\]
+Can also integrate \[
+    \int e^{inx}\mathrm{d}x = \int (\cos{nx} + i\sin{nx})\mathrm{d}x 
+    = \left[\frac{\sin{nx}}{n} - i \frac{\cos{nx}}{n}\right] = \frac{e^{inx}}{in}
+\]
+
+\subsection*{Orthogonality}
+\[
+    \int_{-\pi}^{\pi} e^{inx}\mathrm{d}x = 
+    \begin{cases}
+        0 & n \neq 0 \\
+        2\pi & n = 0
+    \end{cases}
+\]
+For any integers $m$, $n$ we have\[
+    \int_{-\pi}^{\pi} e^{inx}e^{-imx}\mathrm{d}x =
+    \begin{cases}
+        0 & n \neq m \\
+        2\pi & n = m
+    \end{cases}
+\]
+\subsection{Complex notation for trigonometric polynomials}
+Start with the polynomial (have set $\omega = 1$)\[
+    S_n(x) = \frac{1}{2}a_0 + \sum_{k=1}^{n} (a_k \cos{kx} + b_k \sin{kx})
+\] Use the relations found earlier
+\begin{eqnarray*}
+    S_n(x) &=& \frac{1}{2}a_0 + \sum_{k=1}^{n} a_k \left(\frac{e^{ikx} + e^{-ikx}}{2}\right) 
+            + b_k \left(\frac{e^{ikx} - e^{-ikx}}{2i}\right) \\
+           &=& \frac{1}{2}a_0 + \sum_{k=1}^{n} \frac{1}{2}(a_k - ib_k)e^{ikx} + 
+           \sum_{k=1}^{n} \frac{1}{2}(a_k + ib_k)e^{-ikx}
+\end{eqnarray*}
+Can now write this as a single complex series as follows
+\begin{equation}
+    S_n(x) = \sum_{k = -n}^{n} r_k e^{ikx} \label{eq:1}
+\end{equation}
+where\[
+\left.
+    \begin{align*}
+        & r_0 = \frac{1}{2} a_0 \\
+        & r_k = \frac{1}{2} (a_k - ib_k) \\
+        & r_{-k} = \frac{1}{2} (a_k + ib_k)
+    \end{align*}
+\quad\right\} k = 1,2,\ldots,n
+\]
+Notice that $r_k = r_{-k}^*$, where $*$ denotes complex conjugate.
+This is \emph{not accidental}. $S_n(x) \in \mathbb{R}$ in equation\eqref{eq:1}.
+Hence it must be equal to its complex conjugate.\[
+    S_n(x) = \sum_{k=-n}^{n} r_k e^{ikx}, \, S_n^*(x) = \sum_{k=-n}^{n} r_k^{*}e^{-ikx}
+\]Change indexing, put $k = -l$, to find\[
+S_n^*(x) = \sum_{l=n}^{-n} r_{-l}^{*} e^{ilx} = \sum_{l=-n}^{n} r_{-l}^{*}e^{ilx}
+= \sum_{k=-n}^{n} r_{-k}^{*} e^{ikx}
+\]
+Comparing the two, we can see that they are equal iff \[
+    r_k = r_{-k}^{*} \quad \text{i.e.} \quad r_k^{*} = r_{-k}
+\]
+Conversely, if we are given a complex form $f(x) = \sum_{k=-n}^{n} r_k e^{ikx}$,
+then $f(x) \in \mathbb{R} \iff r_k = r_{-k}^{*}$, i.e. \[
+    r_k + r_{-k} = r_k + r_k^{*} \quad \text{is real}
+\]\[
+r_k - r_{-k} = r_k - r_k^{*} \quad \text{is imaginary}
+\]
+\begin{ex}
+    Take $S_n(x) = \cos{x} + \frac{1}{2} \sin{x} + 3\cos{2x}$. Express as a complex trigonometric series.
+    \begin{eqnarray*}
+        S_n &=& \frac{1}{2}(e^{ix} + e^{-ix}) - \frac{i}{4} (e^{ix} - e^{-ix}) + \frac{3}{2} (e^{2ix} + e^{-2ix}) \\
+            &=& \left(\frac{1}{2} - \frac{i}{4}\right) e^{ix} + \left(\frac{1}{2} + \frac{i}{4}\right) e^{-ix}
+            + \frac{3}{2}e^{2ix} + \frac{3}{2}e^{-2ix} \\
+            &=& \sum_{k=-2}^{2} r_k e^{ikx}
+    \end{eqnarray*}
+    where $r_0 = 0, r_1 = \frac{1}{2} - \frac{i}{4}, r_{-1} = \frac{1}{2} + \frac{i}{4} = r_1^{*},
+    r_2 = \frac{3}{2}, r_{-2} = \frac{3}{2} = r_2^{*}$.
+\end{ex}
+
+\section{Fourier Series}
+Consider the trigonometric polynomial
+\begin{equation}
+    f(x) = S_n(x) = \frac{1}{2}a_0 + \sum_{n=1}^{N} (a_n \cos{nx} + b_n \sin{nx}) \label{eq:2}
+\end{equation}
+There are $2N + 1$ coefficients to determine.
+Use orthogonality on the interval $[-\pi, \pi]$ for $\sin{mx}, \cos{nx}$, etc.\[
+    \int_{-\pi}^{\pi} \sin{mx} \cos{nx} \mathrm{d}x 
+    = \int_{-\pi}^{\pi} \frac{1}{2} [\sin{(m+n)x} + \sin{(m-n)x}]\mathrm{d}x = 0
+\]\[
+\int_{-\pi}^{\pi} \sin{mx} \sin{nx}\mathrm{d}x
+= \int_{-\pi}^{\pi} \frac{1}{2} [\cos{(m-n)x} - \cos{(m+n)x}] \mathrm{d}x = 
+\begin{cases}
+    0 & \text{if } m \neq n \\
+    \pi & \text{if } m = n
+\end{cases}
+\]\[
+\int_{-\pi}^{\pi} \cos{mx} \cos{nx}\mathrm{d}x
+= \int_{-\pi}^{\pi} \frac{1}{2} [\cos{(m-n)x} + \cos{(m+n)x}] \mathrm{d}x = 
+\begin{cases}
+    0 & \text{if } m \neq n \\
+    \pi & \text{if } m = n
+\end{cases}
+\]
+The constant $a_0$ can be found immediately by integrating over $[-\pi, \pi]$,\[
+    \int_{-\pi}^{\pi} f(x)\mathrm{d}x 
+    = 2\pi a_0 + \sum_{k=1}^{N} \int_{-\pi}^{\pi} (a_k \cos{kx} + b_k \sin{kx}) \mathrm{d}x = 2\pi a_0
+\]\[
+\Rightarrow a_0 = \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x)\mathrm{d}x
+\]
+i.e. $a_0$ is the average (or mean) value of the function over the domain.
+\smallskip
+\\Next, take any integer $m \ge 1$, multiple $\eqref{eq:2}$ by $\cos{mx}$ and integrate over $[-\pi, \pi]$. 
+Using the \emph{orthogonality} property, we see that only the term containing $a_m$ in the sum will survive to give\[
+    \int_{-\pi}^{\pi} f(x) \cos{mx}\mathrm{d}x = a_m \int_{-\pi}^{\pi} \cos^{2}{mx}\mathrm{d}x = \pi a_m
+\]\[
+    \Rightarrow a_m = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x)\cos{mx}\mathrm{d}x
+\]
+Similarly, \[
+    b_m = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x)\sin{mx}\mathrm{d}x
+\]
+
+\newmdtheoremenv[style=defEnv]{fourier series}[theorem]{(Fourier Series) Theorem}
+\begin{fourier series}%
+\label{thm:fourierSeriesTheorem}
+    The fourier series\[
+        \frac{1}{2}a_0 + \sum_{n=1}^{\infty} (a_n \cos{nx} + b_n \sin{nx})
+    \]or\[
+        \sum_{n=-\infty}^{\infty} r_n e^{inx}
+    \] formed by the fourier coefficients \[
+    a_n = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos{nx}\mathrm{d}x \quad \text{\&} \quad
+    b_n = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin{nx}\mathrm{d}x
+    \]
+    converges to the value $f(x)$ for any piecewise continuous $f(x)$ of period $2\pi$ 
+    which has piecewise continuous derivatives of first and second order.*
+    \\At any discontinuities, the value of the function must be defined by $f(x) = \frac{1}{2}[f(x_+) + f(x_-)]$.
+\end{fourier series}
+*\underline{Note}: Can relax the assumption of the second derivative. 
+It is enough to have $f'(x)$ be piecewise continuous, i.e.\ the functon is pieceswise smooth.
+If $f(x)$ is continuous, the convergence is \emph{absolute} and \emph{uniform}. 
+If it is discontinuous, absolute and uniform convergence everywhere \emph{except at the discontinuity}.
+\medskip
+\\For the proof we will need some additional lemmas.
+\subsection{A trigonometric formula}
+We will prove the following --- needed later
+\begin{eqnarray*}
+    C_n(x) &=& \frac{1}{2} + \cos{x} + \cos{2x} + \cdots + \cos{nx} \\
+           &=& \frac{\sin{(n+1)x}}{2\sin{\frac{1}{2}x}}
+\end{eqnarray*}
+Clearly $\frac{1}{2}x \neq 0,\pm\pi,\pm 2\pi,\ldots$ i.e. $x \neq 0,\pm 2\pi, \pm 4\pi, \ldots$
+\smallskip
+\\
+\begin{minipage}{\linewidth}
+If we definie $C_n(x)$ at these points by $(n+\frac{1}{2})$, then the function is continuous everywhere.
+\end{minipage}
+\[
+    \lim_{x \rightarrow 2k\pi} \frac{\sin{(n+\frac{1}{2})x}}{2\sin{\frac{1}{2}x}}
+    = \frac{\left(n+\frac{1}{2}\right) \cos{(n+\frac{1}{2})x}}{\cos{\frac{1}{2}x}}
+    = n + \frac{1}{2}
+\]
+Use $\cos{kx} = \frac{1}{2} (e^{ikx} + e^{-ikx})$ to re-write\[
+    C_n(x) = \frac{1}{2} \sum_{k=-n}^{n} e^{ikx} 
+    = \frac{1}{2}(e^{-inx} + e^{ix}e^{-inx} + {\left(e^{ix}\right)}^{2}e^{-inx} + \cdots + e^{inx})
+\]
+i.e.\ a geometric progression with ratio $r = e^{ix} = \cos{x} + i\sin{x}$.
+\smallskip
+\\Now $r = 1$ only if $x = 0,\pm 2\pi, \ldots$, i.e.\ the exceptional points that we excluded (treated separatedly).
+Sum it up to find \[
+    C_n(x) = \frac{1}{2}e^{-inx}\frac{1 - r^{2n+1}}{1 - r}
+    = \frac{1}{2} \left[e^{-inx} - e^{i(n+1)x}\right] \frac{1}{1 - e^{ix}}
+\]
+Multiply top + bottom by $e^{-\frac{1}{2}ix}$
+\begin{eqnarray*}
+    \Rightarrow C_n(x) &=& \frac{1}{2}
+    \frac{[e^{-i(n+\frac{1}{2})x} - e^{i(n+\frac{1}{2})x}]}{e^{-\frac{1}{2}ix} - e^{\frac{1}{2}ix}} \\
+                       &=& \frac{\sin{(n+\frac{1}{2})x}}{2\sin{\frac{1}{2}x}}
+\end{eqnarray*}
+Integrate from 0 to $\pi$ we find\[
+    \int_{0}^{\pi} \frac{\sin(n+\frac{1}{2})t}{2\sin{\frac{1}{2}t}} \mathrm{d}t
+    = \int_{0}^{\pi} \left(\frac{1}{2} + \sum_{k=1}^{n} \cos{kt}\right) \mathrm{d}t
+    = \frac{\pi}{2}
+\]
+\subsection{Lemmas}
+\newmdtheoremenv[style=defEnv]{Riemann-lebesgue}[theorem]{(Riemann-Lebesgue) Lemma}
+\begin{Riemann-lebesgue}
+    If the function $g(x)$ is integrable on $[a,b]$ (e.g.\ it is piecewise continuous), then\[
+        I_\lambda = \int_{a}^{b} g(x) \sin{\lambda x}\,\mathrm{d}x
+    \] tends to 0 as $\lambda \rightarrow \infty$
+\end{Riemann-lebesgue}
+\begin{proof}
+    (Will do it when $g'$ is also piecewise continuous. For the general case see HW problems.)
+    \\Using integration by parts,
+    \begin{eqnarray*}
+        I_\lambda &=& \int_{a}^{b} g(x)\sin{\lambda x} \,\mathrm{d}x \\
+                  &=& {\left[-\frac{\cos{\lambda x}}{\lambda}g(x)\right]}_a^{b}
+                  + \int_{a}^{b} \frac{\cos{\lambda x}}{\lambda}g'(x) \mathrm{d}x \\
+                  &=& \frac{1}{\lambda}\left[g(a)\cos{\lambda a} - g(b)\cos{\lambda b} 
+                  + \int_{a}^{b} \cos{\lambda x} g'(x) \mathrm{d}x\right] 
+    \end{eqnarray*}
+    \[
+        \Rightarrow |I_\lambda | \le \frac{1}{\lambda}M \quad 
+        \text{for some constant M}
+    \]
+    And the result follows.
+\end{proof}
+\newmdtheoremenv[style=defEnv]{Lemma 2}[theorem]{Lemma}
+\begin{Lemma 2}
+    \[
+        \int_{0}^{\infty} \frac{\sin{z}}{z}\mathrm{d}z = \frac{\pi}{2}
+    \]
+\end{Lemma 2}
+\begin{proof}
+    Show improper integral exists, i.e. \[
+        \exists I = \lim_{M \rightarrow \infty} \int_{0}^{M} \frac{\sin{z}}{z}\mathrm{d}z
+    \] 
+    (\underline{Note} $z = 0$ is not a problem.)
+    \\Consider $0 < M < N$ and calculate
+    \begin{eqnarray*}
+        I_N - I_M &=& \int_{M}^{N} \frac{\sin{z}}{z}\mathrm{d}z \\
+                  &=& -\left.\frac{\cos{z}}{z}\right|_M^{N} - \int_{M}^{N} \frac{\cos{z}}{z^{2}}\mathrm{d}z \\
+                  &=& \frac{\cos{M}}{M} - \frac{\cos{N}}{N} - \int_{M}^{N} \frac{\cos{z}}{z^{2}}\mathrm{d}z \\
+                  &\le& \frac{1}{M} + \frac{1}{N} + \int_{M}^{N} \frac{\mathrm{d}z}{z^{2}} \\
+                  &=& \frac{2}{M}
+    \end{eqnarray*}
+    Hence convergence since $|I_N - I_M|$ can be made arbitrarily small (Cauchy).
+    In fact letting $N \rightarrow \infty$, we see that $|I - I_M| \le \frac{2}{M}$,
+    so $I_M$ approaches its limit algebraically.
+    \\Now take $p > 0$ arbitrarily and pick $M = \lambda p$.\[
+        I_M = I_{\lambda p} = \int_{0}^{\lambda p} \frac{\sin{z}}{z}\mathrm{d}z
+        = \int_{0}^{p} \frac{\sin{\lambda x}}{\lambda x} \lambda\mathrm{d}x
+        = \int_{0}^{p} \frac{\sin{\lambda x}}{x}\mathrm{d}x
+    \]
+    where we have now \emph{fixed} the integration range to $[0,p]$.
+    As $M \rightarrow \infty$, $\lambda p \rightarrow \infty$, i.e. $\lambda \rightarrow \infty$,
+    and by the estimate above \[
+        \left|I - \int_{0}^{p} \frac{\sin{\lambda x}}{x}\mathrm{d}x\right| \le \frac{2}{M} = \frac{2}{\lambda p}
+    \]
+    i.e. 
+    \begin{equation}
+        \lim_{\lambda \rightarrow \infty} \int_{0}^{p} \frac{\sin{\lambda x}}{x}\mathrm{d}x = I \quad 
+        \forall p \text{\ that are sufficiently big} \label{eq:3}
+    \end{equation}
+    
+    Cannot apply Riemann-Lebesgue directly. Consider the function \[
+        h(x) =
+        \begin{cases}
+            \frac{1}{x} - \frac{1}{2\sin{\frac{x}{2}}} & x \neq 0 \\
+            0 & x=0
+        \end{cases}
+    \]
+    \underline{Fact}: $h(x)$ is continuous and also has a continuous first derivative for $0 \le x < \pi$,
+    since by using taylor series expansion, 
+    $\frac{1}{x} - \frac{1}{2\sin{\frac{x}{2}}} = -\frac{x}{24} + Kx^{3} + \cdots$.
+    \smallskip
+    \\Now use the Riemann-Lebesgue Lemma to see that for $0 \le p < 2\pi$,\[
+        \int_{0}^{p} \sin{\lambda x} \left(\frac{1}{x} - \frac{1}{2\sin{\frac{x}{2}}}\right) \mathrm{d}x \rightarrow 0
+        \quad \text{as} \quad \lambda \rightarrow \infty
+    \]
+    \underline{Note}: The convergence is uniform for $0 \le p \le \pi$ since $|h(x)|$ and $|h'(x)|$ 
+    are both bounded in this interval.
+    \smallskip
+    \\From~\eqref{eq:3} we have immediately \[
+        \lim_{\lambda \rightarrow \infty}\int_{0}^{p} \frac{\sin{\lambda x}}{2\sin{\frac{x}{2}}} \mathrm{d}x = I
+    \]
+    Pick $\lambda = n + \frac{1}{2}$ and $p = \pi$, we have shown already that 
+    $\int_{0}^{\pi} \frac{\sin{(n+\frac{1}{2})x}}{2\sin{\frac{x}{2}}} \mathrm{d}x = \frac{\pi}{2}$
+    independent of $n$.
+    Hence we have proved:\[
+        I = \int_{0}^{\infty} \frac{\sin{z}}{z}\mathrm{d}z = \frac{\pi}{2}
+    \]
+\end{proof}
+
+\subsection{Proof of Fourier Series}
+Start with $n$th ``Fourier polynomial''\[
+    S_n(x) = \frac{1}{2}a_0 + \sum_{k=1}^{n} (a_k \cos{kx} + b_k \sin{kx})
+\]
+and substitute the formulas for $a_k$ $b_k$, change order of summation and integration (finite sum, so ok), to find
+\begin{eqnarray*}
+    S_n(x) &=& \frac{1}{\pi} \int_{-\pi}^{\pi} f(t)\left[\frac{1}{2} + 
+           \sum_{k=1}^{n} (\cos{kt}\cos{kx} + \sin{kt}\sin{kx})\right] \mathrm{d}t \\
+           &=& \frac{1}{\pi}\int_{-\pi}^{\pi} f(t) \left[\frac{1}{2} 
+           + \sum_{k=1}^{n} \cos{k(t-x)}\right] \mathrm{d}t \\
+           &=& \frac{1}{\pi}\int_{-\pi}^{\pi} f(t) 
+           \frac{\sin{\left[\left(n + \frac{1}{2}\right) \left(t-x\right) \right]}}
+           {2\sin{\frac{1}{2}(t-x)}} \mathrm{d}t \\
+           &=& \frac{1}{\pi}\int_{-\pi-x}^{\pi-x} 
+           \frac{f(x + \xi) \sin{(n + \frac{1}{2})\xi}}{2\sin{\frac{1}{2}\xi}} \mathrm{d}\xi \qquad 
+           \text{(substitute $\xi = t - x$)} \\
+           &=& \frac{1}{\pi} \int_{-\pi}^{\pi} f(x + \xi)
+           \frac{\sin{(n + \frac{1}{2})\xi}}{2\sin{\frac{1}{2}\xi}} \mathrm{d}\xi
+\end{eqnarray*}
+by using properties of integrals of periodic functions discussed earlier. Note that $x$ is a fixed number.
+\medskip
+\\We will prove that (and this proves Theorem~\ref{thm:fourierSeriesTheorem})\[
+    \lim_{n \rightarrow \infty} \frac{1}{\pi}\int_{-\pi}^{\pi} f(x+\xi)
+    \frac{\sin{(n + \frac{1}{2}) \xi}}{2\sin{\frac{1}{2} \xi}} \mathrm{d}\xi = f(x)
+\]
+At all points $x \in [-\pi, \pi]$, even points of discontinuity, we have \[
+    f(x) = \frac{1}{2} [f(x_+) + f(x_-)]
+\]
+We have proven already that 
+$\int_{0}^{\pi} \frac{\sin{(n+\frac{1}{2}) \xi}}{2\sin{\frac{1}{2} t}} \mathrm{d}t = \frac{\pi}{2}$,
+and by a change of variable $t = -t'$ we also find 
+$\int_{-\pi}^{0} \frac{\sin{(n + \frac{1}{2}) t'}}{2\sin{\frac{1}{2} t'}} \mathrm{d}t' = \frac{\pi}{2}$.
+Hence \[
+    f(x) = \frac{1}{\pi}\int_{0}^{\pi} f(x_+) \frac{\sin{(n+\frac{1}{2}) t}}{2\sin{\frac{1}{2} t}}\mathrm{d}t
+    + \frac{1}{\pi}\int_{-\pi}^{0} f(x_-) \frac{\sin{(n+\frac{1}{2}) t}}{2\sin{\frac{1}{2} t}} \mathrm{d}t
+\]
+Using this identity gives\[
+    \begin{split}
+        S_n(x) - f(x) = \frac{1}{\pi}\int_{0}^{\pi} [f(x+\xi) - f(x_+)] 
+        \frac{\sin{(n+\frac{1}{2})\xi}}{2\sin{\frac{1}{2}\xi}} \mathrm{d}\xi \\
+        + \frac{1}{\pi}\int_{-\pi}^{0} [f(x+\xi) - f(x_-)]
+        \frac{\sin{(n+\frac{1}{2})\xi}}{2\sin{\frac{1}{2}\xi}}\mathrm{d}\xi
+    \end{split}
+\]
+What is left to do is to prove that 
+\begin{enumerate}[label = (\roman*)]
+    \item $\frac{f(x + \xi) - f(x_+)}{\sin{\frac{1}{2} \xi}}$ is piecewise continuous and so is its 1st derivative,
+        on $0 \le \xi \le \pi$.
+    \item $\frac{f(x+\xi) - f(x_-)}{\sin{\frac{1}{2} \xi}}$ is piecewise continuous along with its 1st derivative on
+        $-\pi \le \xi \le 0$.
+\end{enumerate}
+Then by Riemann-Lebesgue Lemma $S_n \rightarrow f(x)$ as $n \rightarrow \infty$, i.e.\ convergence 
+(uniform away from discontinuities).
+
+\subsection{Examples of Fourier Series}
+Will consider $f(x)$ to be $2\pi$-periodic.
+\begin{enumerate}[label = (\roman*)]
+    \item If $f(x)$ is even, i.e. $f(-x) = f(x)$, then $f(x)$ has only a \emph{cosine series}.\[
+            a_n = \frac{2}{\pi}\int_{0}^{\pi} f(x) \cos{nx} \mathrm{d}x
+    \]
+    Similarly, if $f(x)$ is odd, $f(-x) = -f(x)$ then $f(x)$ has only a \emph{sine series}. \[
+        b_n = \frac{2}{\pi} \int_{0}^{\pi} f(x) \cos{nx} \mathrm{d}x
+    \]
+\item If a function is defined on $[0,\pi]$ by an expression $f(x)$, then it can be extended as an \emph{even}
+    or \emph{odd} function on $[-\pi,\pi]$.
+\end{enumerate}
+
+\subsection{Exponential complex form of Fourier Series}
+Have already shown that for real $f(x)$,
+\begin{eqnarray*}
+    f(x) &=& \frac{1}{2} a_0 + \sum_{n=1}^{\infty} (a_n \cos{nx} + b_n \sin{nx}) \\
+         &=& \sum_{n=-\infty}^{\infty} r_n e^{inx} \quad -\pi < x < \pi
+\end{eqnarray*}
+where\[
+    \left. 
+    \begin{align*}
+        & r_n = \frac{1}{2} (a_n - ib_n) \\
+        & r_{-n} = \frac{1}{2} (a_n + ib_n)
+    \end{align*}
+\right\} \text{for} \;n = 1,2,\ldots
+\]
+\begin{eqnarray*}
+    r_n &=& \frac{1}{2} (a_n - ib_n) \\
+        &=& \frac{1}{2} \frac{1}{\pi} \int_{-\pi}^{\pi} (f(x)\cos{nx} - if(x)\sin{nx}) \mathrm{d}x \\
+        &=& \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x) e^{-inx}\mathrm{d}x
+\end{eqnarray*}
+Similarly, \[
+    r_n = \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x) e^{inx}\mathrm{d}x
+\]
+(Clearly $r_n^{*} = r_{-n}$ since $f(x)$ is real)
+\medskip
+\\\fbox{\begin{minipage}{\linewidth}
+Hence\[
+    f(x) = \sum_{n=-\infty}^{\infty} r_n e^{inx}, -\pi < x < \pi
+\] where \[
+r_n = \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x) e^{-inx}\mathrm{d}x, n = 0, \pm 1, \pm 2,\ldots
+\]
+\end{minipage}}
+\subsection{Fourier Series over $2L$ periodic intervals}
+The set of functions\[
+    \frac{1}{\sqrt{2L}}, \frac{1}{\sqrt{L}}\cos{\left(n\frac{\pi x}{L}\right)}, 
+    \frac{1}{\sqrt{L}}\sin{\left(n \frac{\pi x}{L}\right)}, \quad
+    n = 1, 2, \ldots
+\]are orthonormal on $[-L, L]$ (and in fact on any interval $[a, a+2L]$ since the function is periodic).
+In addition,\[
+    \int_{-L}^{L} \sin{n\frac{\pi x}{L}}\sin{m \frac{\pi x}{L}}\mathrm{d}x
+        = \int_{-L}^{L} \cos{n \frac{\pi x}{L}} \cos{m \frac{\pi x}{L}}\mathrm{d}x = 
+        \begin{cases}
+            L & m = n \\
+            0 & n \neq n
+        \end{cases}
+\]
+and \[
+    \int_{-L}^{L} \sin{n \frac{\pi x}{L}} \cos{m \frac{\pi x}{L}} \mathrm{d}x = 0
+\]
+\fbox{\begin{minipage}{\linewidth}
+Therefore the real form is\[
+f(x) = \frac{1}{2} a_0 + \sum_{n=1}^{\infty} \left[a_n \cos{n \frac{\pi x}{L}}
++ b_n \sin{n \frac{\pi x}{L}}\right] 
+\]where\[
+a_n = \frac{1}{L}\int_{-L}^{L} f(x) \cos{n \frac{\pi x}{L}}\mathrm{d}x \quad \& \quad 
+b_n = \frac{1}{L}\int_{-L}^{L} f(x) \sin{n \frac{\pi x}{L}}\mathrm{d}x
+\]
+The complex form is\[
+    f(x) = \sum_{-\infty}^{\infty} r_n e^{in\frac{\pi x}{L}}, |x| \le L
+\]where\[
+r_n = \frac{1}{2L} \int_{-L}^{L} f(x) e^{-in \frac{\pi x}{L}}\mathrm{d}x, n = 0, \pm 1, \pm 2, \ldots
+\]
+\end{minipage}}
+
+\subsection{Parseval's Theorem}
+\newmdtheoremenv[style=defEnv]{Parseval's Theorem}[theorem]{Theorem}
+\begin{Parseval's Theorem}
+    If $f(x)$ is represented by its Fourier series\[
+        f(x) = \frac{1}{2} a_0 + \sum_{n=1}^{\infty} a_n \cos{nx} + b_n \sin{nx}, \;-\pi \le x \le \pi
+    \]then we have \[
+    \frac{1}{\pi}\int_{-\pi}^{\pi} {(f(x))}^{2} \mathrm{d}x 
+    = \frac{1}{2}a_0^{2} + \sum_{n=1}^{\infty} (a^{2}_n + b^{2}_n)
+    \]
+\end{Parseval's Theorem}
+\begin{proof}
+    Easier to use complex notation \[
+        f(x) = \sum_{n=-\infty}^{\infty} r_n e^{-inx}
+    \]where\[
+    r_n = \frac{1}{2}(a_n - ib_n), \,r_{-n} = \frac{1}{2} (a_n + ib_n) = r^{*}_n, \,r_0 = \frac{1}{2}a_0
+    \]\[
+    {(f(x))}^{2} = 
+    \left(\sum_{n=-\infty}^{\infty} r_n e^{-inx}\right) 
+    \left(\sum_{m=-\infty}^{\infty} r_m e^{-imx}\right) 
+    \]Integrate and use orthogonality, \[
+    \int_{-\pi}^{\pi} {(f(x))}^{2}\mathrm{d}x = 2\pi \sum_{n=-\infty}^{\infty} r_n r_{-n}
+    = 2\pi\sum_{n=-\infty}^{\infty} {|r_n|}^{2}
+    \]\[
+    \Rightarrow \frac{1}{\pi} \int_{-\pi}^{\pi} {(f(x))}^{2}\mathrm{d}x 
+    = \frac{1}{2} a_0^{2} + \sum_{n=1}^{\infty} (a_n^{2} + b_n^{2})
+    \]
+\end{proof}
+\begin{ex}
+    Compute the Fourier series of $\cos{\frac{x}{2}}$ over $(-\pi, \pi]$. %chktex 9
+    Use Parseval's theorem to deduce the value of\[
+        \sum_{n=1}^{\infty} \frac{1}{{(4n^{2} - 1)}^{2}}
+    \]
+    Function is even, so\[
+        \cos{\frac{x}{2}} = \frac{1}{2} a_0 + \sum_{n=1}^{\infty} a_n \cos{nx}, \,-\pi \le x \le \pi
+    \]\[
+    a_0 = \frac{2}{\pi}\int_{0}^{\pi} \cos{\frac{x}{2}}\mathrm{d}x = \frac{4}{\pi}
+    \]
+    \begin{eqnarray*}
+        a_n &=& \frac{2}{\pi} \int_{0}^{\pi} \cos{\frac{x}{2}} \cos{nx} \mathrm{d}x \\
+            &=& \frac{2}{\pi} \int_{0}^{\pi} \frac{1}{2} 
+            \left[\cos{\left(n+\frac{1}{2}\right)x} + \cos{\left(n-\frac{1}{2}\right)x}\right] \mathrm{d}x \\
+            &=& \frac{1}{\pi} \left[\frac{\sin{(n+\frac{1}{2})\pi}}{n+\frac{1}{2}} 
+            + \frac{\sin{(n-\frac{1}{2})\pi}}{n-\frac{1}{2}}\right] \\
+            &=& \frac{1}{\pi}\left[\frac{\cos{n\pi}}{n+\frac{1}{2}} - \frac{\cos{n\pi}}{n-\frac{1}{2}}\right] \\
+            &=& \frac{{(-1)}^{n}}{\pi}\left[\frac{2}{2n+1} - \frac{2}{2n-1}\right] \\
+            &=& \frac{{(-1)}^{n}}{\pi} \frac{-4}{4n^{2}-1}
+    \end{eqnarray*}
+    By Parseval's theorem,
+    \begin{eqnarray*}
+        \frac{1}{\pi}\int_{-\pi}^{\pi} \cos^{2}{\frac{x}{2}} \mathrm{d}x
+        &=& \frac{1}{2}a_0^{2} + \sum_{n=1}^{\infty} a_n^{2} \\
+        &=& \frac{8}{\pi^{2}} + \frac{16}{\pi^{2}}\sum_{n=1}^{\infty} \frac{1}{{(4n^{2} - 1)}^{2}}
+    \end{eqnarray*}
+    $LHS = 1$, therefore\[
+        \sum_{n=1}^{\infty} \frac{1}{{(4n^{2} - 1)}^{2}} = \frac{\pi^{2}- 8}{16}
+    \]
+\end{ex}
+
+\subsection{Fourier Transform as limit of Fourier Series}
+We discussed $2\pi$-periodic functions in detail. 
+Consider now $f(x)$ being periodic on $[-L, L]$ with $L$ being arbitrary.
+We have shown that \[
+    f(x) = \sum_{n=-\infty}^{\infty} r_n e^{in \frac{\pi x}{L}}, \, -L \le x \le L
+\]where\[
+r_n = \frac{1}{2L}\int_{-L}^{L} f(t) e^{-in \frac{\pi t}{L}} \mathrm{d}t, \, n = 0, \pm 1, \pm 2, \ldots
+\]
+Put $r_n$ into the sum to find\[
+    f(x) = \sum_{n=-\infty}^{\infty} \left(\frac{1}{2L} 
+    \int_{-L}^{L} f(t) e^{-in \frac{\pi t}{L}} \mathrm{d}t\right) e^{in \frac{\pi x}{L}}
+\]
+This is exact. We want to send $L \rightarrow \infty$.\[
+    f(x) = \frac{1}{2\pi}\sum_{n=-\infty}^{\infty} h\left(
+    \int_{-L}^{L} f(t)e^{-inht} \mathrm{d}t\right) e^{inhx}
+\]
+where $h = \frac{\pi}{L}$.
+In the limit $L \rightarrow \infty$, $h \rightarrow \infty$, 
+but $nh := \omega_n = 0(1)$.\[
+    f(x) = \frac{1}{2\pi} \sum_{n=-\infty}^{\infty} h\left(
+    \int_{-L}^{L} f(t)e^{-i\omega_n t} \mathrm{d}t\right)e^{i\omega_n x}
+\]
+This is of the form $\sum_{n=-\infty}^{\infty} G(\omega_n)h$.
+Now $h = \omega_{n+1} - \omega_n = (n + 1)h - nh := \delta\omega$,\[
+    \text{Riemann sum} \quad \sum_{n=-\infty}^{\infty} G(\omega_n)\delta\omega 
+    \rightarrow \int_{-\infty}^{\infty} G(\omega_n)\mathrm{d}\omega
+\]
+This gives, sending $L \rightarrow \infty$, \[
+    f(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} \left(\int_{-\infty}^{\infty} 
+    f(t) e^{-i\omega t}\mathrm{d}t\right) e^{i\omega x} \mathrm{d}\omega
+\]where $f(x)$ is defined on $\mathbb{R}$.
+This gives the \emph{Fourier Transform pair}:
+\medskip
+\\\fbox{\begin{minipage}{\linewidth}
+\[
+    f(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} \hat{f}(k) e^{ikx}\mathrm{d}k
+\]\[
+\hat{f}(x) = \int_{-\infty}^{\infty} f(x) e^{-ikx}\mathrm{d}x
+\]
+\end{minipage}}
+\medskip
+\\This is very useful in many applications. You will use them a lot to solve differential equations.
+
+
+
+\end{document} %chktex 17
