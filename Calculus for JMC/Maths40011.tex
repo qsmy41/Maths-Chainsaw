@@ -21,6 +21,100 @@
 \maketitle
 \tableofcontents
 
+\chapter{Differentiation}
+
+\section{Continuity and differentiability}
+
+\newmdtheoremenv[style=defEnv]{theorem}{Definition}
+\begin{theorem}
+    $f(x)$ is said to be continuous on an interval $[a,b]$ if \[
+        \lim_{x \rightarrow x_0} f(x) = f(x_0) \quad \forall x_0 \in [a,b]
+    \]
+\end{theorem}
+
+\newmdtheoremenv[style=defEnv]{differentiability}[theorem]{Definition}
+\begin{differentiability}
+    The function $f(x)$ is differentiable at $x$ if \[
+        \lim_{h \rightarrow 0} \frac{f(x+h) - f(x)}{h}
+    \] (Newton quotient) exists. We call this $f'(x)$ the derivative of $f$ at point $x$.
+    \\In other words, a function is differentiable at $x$ 
+    if right and left derivatives exists \emph{AND} are equal.\ i.e. \[
+        \lim_{t \rightarrow x^{+}} \frac{f(t) - f(x^+)}{t - x^+} 
+        = \lim_{t \rightarrow x^{-}} \frac{f(t) - f(x^-)}{t - x^-}
+    \]
+\end{differentiability}
+
+\newmdtheoremenv[style=defEnv]{differentiable means continuous}[theorem]{Theorem}
+\begin{differentiable means continuous}
+    If $f(x)$ is differentiable at $x = x_0$ then it is also continuous there.
+\end{differentiable means continuous}
+\begin{proof}
+    \begin{eqnarray*}
+        \lim_{x \rightarrow x_0} \Big(f(x) - f(x_0)\big)
+        &=& \lim_{x \rightarrow x_0} \left(\frac{f(x) - f(x_0)}{x - x_0} \cdot (x - x_0)\right) \\
+        &=& \lim_{x \rightarrow x_0} \left(\frac{f(x) - f(x_0)}{x - x_0}\right) 
+        \lim_{x \rightarrow x_0} (x - x_0) \\
+        &=& f'(x_0) \cdot 0 \\
+        &=& 0
+    \end{eqnarray*}
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{max point in an interval}[theorem]{Theorem}
+\begin{max point in an interval}
+    Let $f$ be a function which is defined and differentiable on the open interval $(a,b)$.
+    Let $c$ be a number in the interval which is a maximum for the function. Then $f'(c) = 0$.
+    Same if $c$ is a minimum of $f$.
+\end{max point in an interval}
+\begin{proof}
+    $f(c) \ge f(c+h) \Rightarrow f(c+h) - f(c) \le 0$, i.e.\[
+        \lim_{h \rightarrow 0^{+}} \frac{f(c+h) - f(c)}{h} \le 0
+    \]Similarly for the left limit, \[
+    \lim_{h \rightarrow 0^{-}} \frac{f(c+h) - f(c)}{h} \ge 0
+\]In order to be differentiable, $f'(c)$ can only be 0.
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{max and min in an interval}[theorem]{Theorem}
+\begin{max and min in an interval}
+    Let $f(x)$ be continuous on the closed interval $[a,b]$. 
+    Then $f(x)$ has a maximum and a minimum on this interval.\
+    i.e. $\exists c_1, c_2$ s.t. $f(c_1) \ge f(x)$ and $f(c_2) \le f(x) \;\forall x \in [a,b]$.
+\end{max and min in an interval}
+
+\newmdtheoremenv[style=defEnv]{MVT}[theorem]{(Mean Value) Theorem}
+\begin{MVT}
+    If $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$, 
+    then $\exists a < c < b$ s.t. \[
+        f'(c) = \frac{f(b) - f(a)}{b-a}
+    \]
+\end{MVT}
+
+\section{Inverse functions}
+
+\newmdtheoremenv[style=defEnv]{inverse function}[theorem]{Definition}
+\begin{inverse function}
+    Let $y = f(x)$ be defined on some interval. Given any $y_0$ in the range of $f$, if we can find a \emph{unique}
+    value $x_0$ in its domain such that $f(x_0) = y_0$, then we can define the \emph{inverse function}\[
+        x = g(y) ( = f^{-1}(y) )
+    \]
+\end{inverse function}
+
+\newmdtheoremenv[style=defEnv]{strictly increasing function has inverse}[theorem]{Theorem}
+\begin{strictly increasing function has inverse}
+    Let $f(x)$ be strictly increasing or strictly decreasing. Then the inverse function exists.
+\end{strictly increasing function has inverse}
+
+\newmdtheoremenv[style=defEnv]{derivative of inverse f}[theorem]{Theorem}
+\begin{derivative of inverse f}
+    let $f(x)$ be differentiable on $(a,b)$
+    and $f'(x) > 0$ or $f'(x) < 0 \forall x \in (a,b)$.
+    Then the inverse function exists and we have\[
+        g'(y) ( = f^{-1}(y) ) = \frac{1}{f(x)}
+    \]
+\end{derivative of inverse f}
+
+
+
+
 \chapter{Integration}
 \section{Preliminaries}
     The \emph{anti-derivative} or \emph{integral} of a function $f(x)$
@@ -39,14 +133,14 @@ Suppose $f(x)\ge0$ in some given interval $[a,b]$ and it is also continuous on $
 
 Define $F(x)$ to be the area under the curve between $x=a$ and some $x$. By definition $F(a)=0$
 
-\newmdtheoremenv[style=defEnv]{theorem}{Theorem}
-\begin{theorem}
+\newmdtheoremenv[style=defEnv]{1st part of FTC}[theorem]{Theorem}
+\begin{1st part of FTC}
     The function $F(x)$ is differentiable and its derivative is equal to $f(x)$.
     Another way to state this is \[
         \frac{\mathrm{d}}{\mathrm{d}x} \int_a^x {f(t)} \mathrm{d}t = f(x)
     \]That is, the rate of change of the area under curve at $x$ is precisely $f(x)$.
     This is also known as \emph{the first part of Fundamental Theorem of Calculus}.
-\end{theorem}
+\end{1st part of FTC}
 \begin{proof}
     Newton quotient
     \[
