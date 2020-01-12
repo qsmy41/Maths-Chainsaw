@@ -383,17 +383,32 @@
 \begin{continuous function}
     Given a function $f:\mathbb{R} \rightarrow \mathbb{R}$, we say that $f$ is \emph{continuous} at $a \in \mathbb{R}$ 
     iff \[
-        \forall \varepsilon > 0, \exists \delta > 0 \;\textnormal{s.t.}\; |x-a|<\delta \Rightarrow
+        \forall \varepsilon > 0, \exists \delta > 0 \;\textnormal{s.t.}\;
+        \forall x \;\textnormal{that are}\; |x-a|<\delta \Rightarrow
         |f(x) - f(a)| < \varepsilon
     \]
     We say that $f$ is continuous on $\mathbb{R}$ (or just ``continuous'') if it is continuous at all $a \in \mathbb{R}$.
 \end{continuous function}
 
+\newmdtheoremenv[style=defEnv]{discontinuous function}[theorem]{Definition}
+\begin{discontinuous function}
+    Given a function $f:\mathbb{R} \rightarrow \mathbb{R}$, we say that $f$ is \emph{discontinuous} at $a \in \mathbb{R}$ 
+    iff \[
+        \exists \varepsilon > 0 \;\textnormal{s.t.}\; \forall \delta > 0, \exists x \;\textnormal{with}\;  |x-a|<\delta \Rightarrow
+        |f(x) - f(a)| \ge \varepsilon
+    \]
+    
+\end{discontinuous function}
+
+
 \newmdtheoremenv[style=defEnv]{continuity with convergent sequence}[theorem]{Theorem}
 \begin{continuity with convergent sequence}
-    For all sequences $(x_n)$ which tends to $a$, 
-    $f:\mathbb{R} \rightarrow \mathbb{R}$ is continuous at $a \in \mathbb{R} 
-    \iff f(x_n) \rightarrow f(a)$
+        $f:\mathbb{R} \rightarrow \mathbb{R}$ is continuous at $a \in \mathbb{R} 
+        \iff f(x_n) \rightarrow f(a) \quad $\mbox{$\forall$ sequences $(x_n)$} which tends to $a$.
+
+        In other words, 
+        $f:\mathbb{R} \rightarrow \mathbb{R}$ is \emph{not} continuous at $a \in \mathbb{R} 
+        \iff f(x_n) \nrightarrow f(a) \quad $\mbox{$\forall$ sequences $(x_n)$} which tends to $a$.
 \end{continuity with convergent sequence}
 
 
