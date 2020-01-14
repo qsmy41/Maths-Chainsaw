@@ -1,0 +1,402 @@
+
+\documentclass[12pt]{report}
+\usepackage[thinc]{esdiff} % for typesettign derivatives
+\usepackage{amsthm} % provides an enhanced version of LaTex's \newtheorem command
+\usepackage{mdframed} % framed environments that can split at page boundaries
+\usepackage{enumitem} % bulletin points or other means of listing things
+\usepackage{amssymb} % for AMS symbols
+\usepackage{amsmath} % so as to use align
+
+\theoremstyle{definition}
+\mdfdefinestyle{defEnv}{%
+  hidealllines=false,
+  nobreak=true,
+  innertopmargin=-1ex,
+}
+
+\pagestyle{headings}
+\author{Marie Amellie}
+\title{Calculus, Algebra, and Analysis for JMC}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Group theory}
+
+Study of the simplest algebraic structure on a set.
+
+\section{Binary operations and groups}
+
+\newmdtheoremenv[style=defEnv]{theorem}{Definition}
+\begin{theorem}
+    \emph{Set} is a collection of distinct elements. Let $G$ be a set.
+    \textbf{\emph{Binary operation on G}} is a function\[
+        *: G \times G \rightarrow G \textnormal{(Closure is included)}
+    \]
+\end{theorem}
+
+\newtheorem{ex}[theorem]{Example}
+\begin{ex}
+    \;
+    
+    \begin{itemize}
+        \item $(\mathbb{N}, +), (\mathbb{Z}, +), (\mathbb{R}, \cdot)$
+        \item $(\mathbb{N}, -)$ not a binary op. Not closed.
+        \item $g, h \in G, g * h = h$
+        \item Find a certain $c \in G$, define $g*h = c \;\forall g, h \in G$
+    \end{itemize}
+    
+\end{ex}
+
+\begin{ex}
+    Cayley table: Draw a table of all the possible binary operations on a set.
+    How many possible binary operations on a finite set with $n$ elements?
+    In general, there are $\infty$-many biniary operatiions. In this case, there are $n^{n^2}$ possible binary operations.
+    \emph{In general, $g_i * g_j \neq g_j * g_i$} (Not commutative!)
+    
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{Associativity}[theorem]{Definition}
+\begin{Associativity}
+    A binary operation $*$ on a set $G$ is called associative if\[
+        (g*h)*k = g*(h*k) \;\forall g,h,k \in G
+    \]
+\end{Associativity}
+
+\begin{ex}
+    \;
+
+    \begin{itemize}
+        \item $+$ on $\mathbb{N, Z, R}$? Yes
+        \item $-$ on $\mathbb{R}$? No
+        \item $g*h = g^{h}$ on $\mathbb{N}$? No
+    \end{itemize}
+    
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{commutative}[theorem]{Definition}
+\begin{commutative}
+    A binary operation is called commutative if \[
+        \forall g, h \in G, g * h = h * g
+    \]
+\end{commutative}
+
+\begin{ex}
+    \;
+
+    \begin{itemize}
+        \item $+, \cdot$ on $\mathbb{N, Z, R, C}$
+        \item matrix multiplication ($AB \neq BA$ in general for $A, B$ in $M(\mathbb{R}^{n})$)
+        \item let $g, h \in \mathbb{R}$, $g * h = 1 + g \cdot h$: commutative but \emph{not associative}!
+    \end{itemize}
+    
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{identity element}[theorem]{Definition}
+\begin{identity element}
+    Let $(G, *)$ be a set. An element $e$ is called \emph{left identity} (respectively \emph{right identity}) if:\[
+        e * g = g (\textnormal{resp.}\; g * e = g) \;\forall\; g \in G
+    \]
+    \underline{Caution}: There might be \emph{many} left/right identities or none.
+\end{identity element}
+
+\begin{ex}
+    \;
+
+    \begin{enumerate}
+        \item let $(G,*)$ be a set with $g*h:=g$.
+            Find the left/right identities.
+
+            $\infty$-many (or equal to the number of elements)
+            right identities since $h$ satisfies definition $\forall h$.
+            No left identities: wanted $e * g = g = e$ by definitioin of $*$ (\emph{unless only one element}).
+        \item $(G, *)$, $g*h = 1 + gh$. 
+            Ex: No right/left identities.
+    \end{enumerate}
+\end{ex}
+
+Idea: We want a good unique identity.
+\newmdtheoremenv[style=defEnv]{unique identity}[theorem]{Theorem}
+\begin{unique identity}
+    let $(G, *)$ be set, such that $*$ has both a left identity $e_1$ \emph{and}
+    a right identity $e_2$, then\[
+        e_1 = e_2 =: e \quad \textnormal{and} \quad e \textnormal{ is unique.}
+    \]
+\end{unique identity}
+
+\begin{proof}
+    \;
+
+    \begin{itemize}
+            \item $e_1 = e_2$
+    \[
+    \Rightarrow \left\{
+        \begin{array}{l}
+        e_1 * g = g \Rightarrow e_1 * e_2 = e_2 \\
+        g * e_2 = g \Rightarrow e_1 * e_2 = e_1
+    \end{array}
+\right\} \forall\,g \in G \Rightarrow\,e_1 = e_2%chktex 1
+\]
+            \item Unicity: Assume there exists another identity $e'$.\[
+                \Rightarrow e' * g = g * e' = g
+            \]\[
+                e' * g = e' * e = e
+            \]\[
+                g * e' = e * e' = e'
+            \]Therefore \[
+                e = e'
+            \]
+    \end{itemize}
+    
+\end{proof}
+As soon as you get one left and one right identity, you have a unique identity $e$.
+
+\newmdtheoremenv[style=defEnv]{inverse}[theorem]{Definition}
+\begin{inverse}
+    let $(G,*)$ be a set. Let $g \in G$.
+    An element $h \in G$ is called left (resp.\ right) inverse if\[
+        h * g = e \;(\textnormal{resp. } g * h = e)
+    \]
+    \underline{Caution}: Again inverses might not exist, 
+    there might be many, or \emph{not} the same on both sides.
+\end{inverse}
+
+\begin{ex}
+    \,
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item $(\mathbb{N}, \cdot)$
+            1 has an inverse, otherwise \emph{no} inverse.
+        \item Find a binary operation on a set of 4 elements with left/right inverses
+            not the same but identity $e$.
+    \end{enumerate}
+    
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{equal left right inverse}[theorem]{Theorem}
+\begin{equal left right inverse}
+    Let $(G, *)$ be a set with associative binary operation and identity $e$.
+    Then if $h_1$ is left inverse, and $h_2$ is right inverse, then\[
+        h_1 = h_2 = g^{-1} \;\textnormal{ and \emph{it is unique}}
+    \]
+\end{equal left right inverse}
+
+\begin{proof}
+    \;
+
+    \begin{itemize}
+            \item $h_1 = h_2$
+
+                $h_1 * g = e, g * h_2 = e$. Therefore\[
+                    h_2 = e * h_2 = (h_1 * g) * h_2 = h_1 * (g * h_2) = e = h_1
+                \]
+            \item unicity: Assume $\exists g'^{-1}$ another inverse.\[
+                    g'^{-1} = e * g'^{-1} = (g^{-1} * g) * g'^{-1} 
+                    = g^{-1} * (g * g'^{-1}) = g^{-1} * e = g^{-1}
+            \]
+    \end{itemize}
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{Group Definition}[theorem]{(Group) Definition}
+\begin{Group Definition}
+    A set $(G,*)$ wth binary operatioin $*$ is called a \emph{group} if:
+    \begin{enumerate}[label = (\arabic*)]
+        \item $*$ is associative
+        \item $\exists e \in G$ an identity $\forall g \in G$
+        \item All elements $g \in G$ have an inverse $g^{-1}$
+    \end{enumerate}
+    \underline{Attention}: The identity and inverses are \emph{unique} by our previous results.
+    
+\end{Group Definition}
+
+\begin{ex}
+    \;
+
+    \begin{itemize}
+        \item $(\mathbb{Z}, +), (\mathbb{Z}_n, +)$ are groups.
+        \item $(\mathbb{N}, +)$ not a group $\Rightarrow$ no inverses.
+        \item $(\mathbb{C}, \cdot)$ not a group (0 has no multiplicative inverse),
+            but $(\mathbb{C}^{*}, \cdot)$ is. ($\mathbb{C}^{*} = \mathbb{C}\backslash \{0\}$)
+        \item $(G = \{e\}, *)$ with $e * e = e$ is a group called the \emph{trivial group}.
+        \item Empty set $\varnothing$ is not a group (No identity element.)
+    \end{itemize}
+    
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{finite group}[theorem]{Definition}
+\begin{finite group}
+    Let $G$ be a group. It is called \underline{finite} if it has finitely many elements.
+    
+    \underline{Notation}: $|G| = n$ (number of elements)
+
+    If $|G| = \infty$, the $G$ is called an infinite group.
+\end{finite group}
+
+\begin{ex}
+    \;
+
+    \begin{itemize}
+        \item the trivial group is finite, $|G| = 1$
+        \item let $G = \{1, -1, i, -i\} \subset \mathbb{C}$, with $* = \cdot$.
+            Is it a group? Yes. Check associativity, identity, and inverses.
+    \end{itemize}
+    
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{abelian group}[theorem]{(Abelian Group) Definition}
+\begin{abelian group}
+    A group is called \emph{Abelian} if $*$ is commutative.
+\end{abelian group}
+
+\begin{ex}
+    \;
+
+    \begin{itemize}
+            \item previous example, trvial group, $(\mathbb{Z}, +), (\mathbb{C}^{*}, \cdot)$
+            \item let $GL(\mathbb{R}^{n})$ be the set of all invertible $n \times n$ matrices, $* = $ matrix multiplication.
+                It is associative: $(AB)C = A(BC)$;
+                It has identity: $I_n$.
+                It has inverses: yes since we asked for it.
+                So this is a group of matrices.
+                But this is not Abelian since $AB \neq BA$.
+            \item let $G$ be the set of \emph{invertible} functions with $* = \circ$, the composition of functions.
+                Identity is $F(x) = x$; they are associative, invertible, but \emph{not Abelian}.
+    \end{itemize}
+    
+\end{ex}
+
+\section{Consequences of the axioms of group}
+
+
+
+\chapter{Applied Mathematical Methods}
+
+\section{Differential Equations}
+
+\subsection{Definitions and examples}
+
+\newmdtheoremenv[style=defEnv]{ODE}[theorem]{Definition}
+\begin{ODE}
+    An \emph{ordinary differential equation} (ODE) for $y(x)$ is an equation involving \underline{derivatives} of $y$.
+    \begin{equation}\label{ODE:1}
+        f(x, y, \frac{\mathrm{d} y}{\mathrm{d}x}, \frac{\mathrm{d}^{2} y}{\mathrm{d}x^{2}}, \ldots,
+        \frac{\mathrm{d}^{n} y}{\mathrm{d}x^{n}}) = 0
+        \end{equation}
+    \[
+        \frac{\mathrm{d}^{n} y}{\mathrm{d}x^{n}} = 
+        F(x, y, \frac{\mathrm{d} y}{\mathrm{d}x}, \ldots, \frac{\mathrm{d}^{n-1} y}{\mathrm{d}x^{n-1}})
+    \]
+    and we seek a solution (or solutions) for $y(x)$ satisfying the equations.
+    (If there are more independent variables then we have a partial differential equation (PDE).)
+\end{ODE}
+
+\newmdtheoremenv[style=defEnv]{order and power}[theorem]{Definition}
+\begin{order and power}
+    \;
+
+    \emph{Order} is the order of the highest derivative present.
+
+    \emph{Degree} is the power of the highest derivative when fractional powers have been removed.
+
+    \emph{\textbf{Linear} differential equation} is a differential equation that is defined by a \emph{linear polynomial}
+    in the unknown function and its derivative in each term of equation\eqref{ODE:1}.
+\end{order and power}
+
+\begin{ex}
+    \;
+
+    \begin{enumerate}[label = (\alph*)]
+        \item \underline{Particle moving along a line} with a given force $\rightarrow x(t)$ position
+            as function of time $t$.\[
+                \frac{\mathrm{d}^{2} x}{\mathrm{d}t^{2}} = f\left(t, x, \frac{\mathrm{d} x}{\mathrm{d}t} \right) 
+            \]e.g.\[
+                \frac{\mathrm{d}^{2}x}{\mathrm{d}t^{2}} = -\omega^{2}x - 2k\frac{\mathrm{d} x}{\mathrm{d}t} 
+            \]
+            The first term is regarding the restoring force,
+            while the second term is regarding the damping/friction.
+            The function is of order 2, degree 1, and linear.
+
+        \item \underline{Radius of curvature} of a curve
+
+            It can be shown that \[
+                R(x,y) = \frac{{\left[1 + {\left(\frac{\mathrm{d} y}{\mathrm{d}x} \right)}^{2}\right]}^{\frac{3}{2}}}
+                {\frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} }
+            \]
+            The function is of order 2 and degree 2.
+
+        \item \underline{Simple growth and decay}\[
+            \frac{\mathrm{d} Q}{\mathrm{d}t} = kQ
+        \]
+        The function is of order 1, degree 1, and linear.\ e.g. 
+        \begin{enumerate}[label = (\arabic*)]
+            \item $k > 0$. $Q$ as the quantity of money, and $k = (1 + \frac{r}{100})$, and $r$ being the rate of interest.
+            \item $k < 0$. $Q$ as the amount of radioactive material, and $k$ as the decay rate.
+        \end{enumerate}
+        Hence, obviously $Q(t) = Q_0e^{kt}$ where $Q_0 = Q(0)$ at $t = 0$.
+
+    \item \underline{Population dynamics}
+
+        $P(t)$ as population over time and $F(t)$ as food over time, with
+        \begin{equation}\label{ODE:2}
+                \frac{\mathrm{d} P}{\mathrm{d}t} = aP (a>0)
+            \end{equation}
+            
+        \[
+        \frac{\mathrm{d} F}{\mathrm{d}t} = c (c>0)
+        \]
+        These two equations form a linear system, with both being of order 1, degree 1.
+        
+        So $P(t) = P_0 e^{at}, F(t)=ct + F_0$.
+        Misery! Population outgrows food supply.
+
+        Pierre Verhulst (1845) replaced $a$ in equation\eqref{ODE:2} with $(a - bP)$
+        so that growth decreases as $P$ increases:
+        \begin{equation}\label{ODE:3}
+            \frac{\mathrm{d} P}{\mathrm{d}t} = aP - bP^{2}
+        \end{equation}
+        This is in fact a \emph{logistic ODE}, with order 1, degree 1, and nonlinear.
+
+        \underline{Note}: Equation\eqref{ODE:3} is \emph{separable}. Alternatively we can note that 
+        equation\eqref{ODE:3} is an example of a \textit{Bernoulli differential equation}\[
+            \frac{\mathrm{d} y}{\mathrm{d}x} + F(x)y = H(x)y^{n}
+        \]with $n\neq 0,1$
+        Substitution on $z(x) = {(y(x))}^{1-n} \Rightarrow$ a \emph{linear} equation for 
+        $z(x) \rightarrow $ solution. (See below)
+
+    \item \underline{Predator-Prey System}
+
+        $x(t)$ as prey and $y(t)$ as predators, we have
+        \begin{equation}\label{ODE:4}
+            \frac{\mathrm{d} x}{\mathrm{d}t} = ax - bxy,\quad
+            \frac{\mathrm{d} y}{\mathrm{d}t} = -cy + \hat{d}xy
+        \end{equation}
+        \underline{Note}: Equation\eqref{ODE:4} is \emph{separable} when written in principle\[
+            \frac{\mathrm{d} y}{\mathrm{d}x} = \frac{\frac{\mathrm{d} y}{\mathrm{d}t} }
+            {\frac{\mathrm{d} x}{\mathrm{d}t} } \Rightarrow y(x) \Rightarrow x(t), y(t)
+        \]
+        This is of order 1, degree 1, and a nonlinear system.
+        
+    \item \underline{Combat Model System} 
+        \begin{equation}\label{ODE:5}
+            \frac{\mathrm{d}x}{\mathrm{d}t} = -ay, \quad
+            \frac{\mathrm{d}y}{\mathrm{d}t} = -bx
+        \end{equation}
+        This is of order 1, degree 1, and linear system.
+
+        \underline{Note}: Again equation\eqref{ODE:5} is \emph{separable} when written as
+        $\frac{\mathrm{d} y}{\mathrm{d}x} = \frac{bx}{ay} \Rightarrow y(x) \Rightarrow x(t), y(t)$
+    \end{enumerate}
+    
+\end{ex}
+
+\subsection{General Statement}
+
+
+
+
+\chapter{linear algebra}
+
+\chapter{Analysis}
+
+
+\end{document}
