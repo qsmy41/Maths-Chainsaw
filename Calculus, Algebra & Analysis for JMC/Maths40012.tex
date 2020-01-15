@@ -15,7 +15,7 @@
 }
 
 \pagestyle{headings}
-\author{Marie Amellie}
+\author{Marie Amellie, Frank Berkshire}
 \title{Calculus, Algebra, and Analysis for JMC}
 \begin{document}
 \maketitle
@@ -357,9 +357,11 @@ As soon as you get one left and one right identity, you have a unique identity $
         This is in fact a \emph{logistic ODE}, with order 1, degree 1, and nonlinear.
 
         \underline{Note}: Equation\eqref{ODE:3} is \emph{separable}. Alternatively we can note that 
-        equation\eqref{ODE:3} is an example of a \textit{Bernoulli differential equation}\[
+        equation\eqref{ODE:3} is an example of a \textit{Bernoulli differential equation}
+        \begin{equation}\label{ODE:6}
             \frac{\mathrm{d} y}{\mathrm{d}x} + F(x)y = H(x)y^{n}
-        \]with $n\neq 0,1$
+        \end{equation}
+        with $n\neq 0,1$
         Substitution on $z(x) = {(y(x))}^{1-n} \Rightarrow$ a \emph{linear} equation for 
         $z(x) \rightarrow $ solution. (See below)
 
@@ -389,12 +391,477 @@ As soon as you get one left and one right identity, you have a unique identity $
     
 \end{ex}
 
-\subsection{General Statement}
+In general the solution of a differential equation of order $n$
+contains a number $n$ of \emph{arbitrary constants}. 
+This general solution can be specialised to a particular solution by
+assigninig definite values to these constants.
+
+\begin{ex}
+    \;
+
+\begin{enumerate}[label = (\alph*)]
+    \item Family or parabolae $y = Cx^{2}$ as constant $C$ takes different values.
+
+        On a particular curve of the family $\frac{\mathrm{d}y}{\mathrm{d}x} = 2Cx$.
+        By substitutiion, eliminate $C \Rightarrow \frac{\mathrm{d}y}{\mathrm{d}x} = \frac{2y}{x}$.
+        This is a geometrical statement about slopes.
+
+        \underline{Note}: 1st order differential equation $\leftrightarrow$ 1 arbitrary constant in general solution.
+
+    \item \[
+        \left.
+            \begin{align*}
+                x &= A\sin{\omega t} + B\cos{\omega t} \\
+                \frac{\mathrm{d}x}{\mathrm{d}t} & = A\omega\cos{\omega t} - B\omega\sin{\omega t} \\
+                \frac{\mathrm{d}^{2}x}{\mathrm{d}t^{2}}
+                                                & = -A\omega^{2}\sin{\omega t} - B\omega^{2}\cos{\omega t}
+            \end{align*}
+        \right\} \Rightarrow\frac{\mathrm{d}^{2}x}{\mathrm{d}t^{2}} + \omega^{2} x = 0
+    \]
+    \underline{Note}: 2nd order differential equation $\leftrightarrow$ 2 arbitrary constants in general solution.
+
+\end{enumerate}
+    
+\end{ex}
+
+Of course it's the reverse of this process we normally want to perform
+in order to get the general solution. We then often need a particular solution
+--- which satisfieis certain other conditions --- \emph{boundary} or \emph{initial condition}.
+These allow us to find the arbitrary constants in the solutions.
+
+\subsection{First Order Differential Equations}
+
+\subsubsection{Properties and approaches}
+
+There are essentially 4 types we can solve \emph{analytically}:
+\begin{itemize}
+        \item \emph{\textbf{separable}} 
+        \item \emph{\textbf{homogeneous}} 
+        \item \emph{\textbf{linear}} 
+        \item \emph{\textbf{exact}} (in Chapter ``Partial Differentiation and Multivariable Calculus'' later)
+\end{itemize}
+
+Let's look at them one by one:
+\begin{enumerate}[label = (\alph*)]
+    \item \textbf{\underline{Separable}} \[
+            \frac{\mathrm{d}y}{\mathrm{d}x} = G(x) \cdot H(y)
+    \] Solve by rearrangement and integration\[
+    \int_{}^{y} \frac{\mathrm{d}y}{H(y)} = \int_{}^{x} G(x)\mathrm{d}x
+    \]
+    E.g. \[
+        \begin{align*}
+            \frac{\mathrm{d}y}{\mathrm{d}x} & = xy^{2}e^{-x} \\
+            \int \frac{1}{y^{2}} \mathrm{d}y & = \int xe^{-x} \mathrm{d}x \\
+            -\frac{1}{y} & = -xe^{-x} - e^{-x} + C
+        \end{align*}
+    \]
+    Or singular solution $y = 0$.
+
+    If we want the particular solution which passes through $x = 1, y = 1$, then of course we need \[
+        C = -1 + 2e^{-1} \quad \textnormal{and} \quad \frac{1}{y} = (x+1)e^{-x} + 1 - 2e^{-1}
+    \]
+
+\item \textbf{\underline{Homogeneous}} \[
+        \frac{\mathrm{d}y}{\mathrm{d}x} = f\left(\frac{y}{x}\right) 
+    \]Substitution $\frac{y}{x} = u(x)$,
+    i.e.\ a new dependent variable, \[
+        \begin{align*}
+            \frac{\mathrm{d}y}{\mathrm{d}x} = u + x\frac{\mathrm{d}u}{\mathrm{d}x} & (= f(u)) 
+            \quad \textnormal{\textbf{\emph{(Remember!)}}} \\
+            f(u) - u & = \frac{x\mathrm{d}u}{\mathrm{d}x} \\
+            \int \frac{\mathrm{d}u}{f(u) - u} & = \int \frac{\mathrm{d}x}{x} \\
+            \vdots
+        \end{align*}
+    \]
+    E.g. 
+    \begin{enumerate}[label = (\roman*)]
+        \item \[
+            \begin{align*}
+                x^{2} \frac{\mathrm{d}y}{\mathrm{d}x} + xy - y^{2} & = 0 \\
+                \frac{\mathrm{d}y}{\mathrm{d}x} & = {\left(\frac{y}{x}\right)}^{2} - \frac{y}{x} \\
+                \frac{\mathrm{d}u}{\mathrm{d}x} & = \frac{u^{2} - 2u}{x} \\
+                \vdots
+            \end{align*}
+        \]
+    \item \[
+        \frac{\mathrm{d}y}{\mathrm{d}x} = \frac{x + y - 3}{x - y + 1}
+    \]This does not look homogeneous as it stands, but can be made so by substituting
+    $x= 1 + X, y = 2 + Y$, and the expression becomes\[
+        \frac{\mathrm{d}Y}{\mathrm{d}X} = \frac{X + Y}{X - Y} 
+        = \frac{1 + \left(\frac{Y}{X}\right)}{1 - \left(\frac{Y}{X}\right)}
+    \]Then let $\frac{Y}{X} = u(X)$,\[
+    \Rightarrow \int \left(\frac{1-u}{1+u^2}\right) \mathrm{d}u = \int \frac{\mathrm{d}X}{X}
+    \]
+    Eventually, the equation becomes\[
+        \tan^{-1}{\frac{Y}{X}} - \frac{1}{2} \ln{\left(1 + \frac{Y^2}{X^2}\right)} 
+        = \ln{X} + C
+    \]\[
+    \tan^{-1}{\left(\frac{y-2}{x-1}\right)} - \frac{1}{2} \ln{\left[{(x-1)}^{2} + {(y-2)}^{2}\right] } = C
+    \]
+    \underline{Note}: If we have e.g. $\frac{\mathrm{d}y}{\mathrm{d}x} = \frac{x + y - 3}{2(x + y) - 7}$,
+    then substitute $v(x) = x + y$ will work!
+    \end{enumerate}
+
+\item \textbf{\underline{Linear}} \[
+        \frac{\mathrm{d}y}{\mathrm{d}x} + F(x)y = G(x)
+        \]
+        1st power only for $y$ and $\frac{\mathrm{d}y}{\mathrm{d}x} $.
+        We apply an \emph{integrating factor} $R(x)$: \[
+R(x) = \exp{\left[\int_{}^{x} F(x)\mathrm{d}x\right] }
+\] This allows us to form the expression\[
+\frac{\mathrm{d}}{\mathrm{d}x} \left[y \exp{\left(\int_{}^{x} F(x)\mathrm{d}x\right) }\right] 
+= G(x) \exp{\left(\int_{}^{x} F(x)\mathrm{d}x\right) }
+\]and then integrate\ldots
+
+E.g. \[
+    (x+2) \frac{\mathrm{d}y}{\mathrm{d}x} - 4y = {(x+2)}^{6}
+\]\[
+\frac{\mathrm{d}y}{\mathrm{d}x} - \frac{4}{x+2} = {(x + 2)}^{5}
+\]\[
+\Rightarrow F(x) = -\frac{4}{x+2}, G(x) = {(x + 2)}^{5}
+\]Therefore,\[
+R(x) = \exp{\left[-\int_{}^{x} \left(\frac{4}{x+2}\right) \mathrm{d}x\right] }
+= \cdots = K{(x+2)}^{-4}
+\]Subsequently, take $K = 1$ W.L.O.G.:\[
+{(x+2)}^{-4}\frac{\mathrm{d}y}{\mathrm{d}x} - 4{(x+2)}^{-5} y
+= \frac{\mathrm{d}}{\mathrm{d}x} \left[y{(x+2)}^{-4}\right] = x + 2
+\]As such,\[
+y{(x + 2)}^{-4} = \frac{1}{2}x^{2} + 2x + C \quad \textnormal{(Put $C$ at the right time!)}
+\]\[
+y(x) = \left(\frac{1}{2}x^{2 + 2x + C}\right) {(x + 2)}^{4}
+\]
+(So e.g. $y(0) = 8 \Rightarrow C = \frac{1}{2}$)
+\end{enumerate}
+
+\subsubsection{Novelties!}
+
+\begin{enumerate}[label = (\roman*)]
+    \item Bernoulli equation (See Equation\eqref{ODE:6})
+        \\A nonlinear equation rendered linear by a substitution $u = y^{1-n}$\ldots
+
+    \item E.g.\[
+        \frac{\mathrm{d}y}{\mathrm{d}x} = \frac{1}{x + e^{y}}
+    \]It is \underline{nonlinear} for $y(x)$ but \underline{linear}  for $x(y)$:\[
+        \frac{\mathrm{d}x}{\mathrm{d}y} - x = e^{y} \Rightarrow \ldots
+    \]
+\end{enumerate}
+
+\subsection{`Special' Second Order Differential Equations}
+
+\newmdtheoremenv[style=defEnv]{General 2nd order ODE}[theorem]{Definition}
+\begin{General 2nd order ODE}
+    General Explicit form is\[
+        \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = F\left(x,y,\frac{\mathrm{d}y}{\mathrm{d}x} \right) 
+    \]
+\end{General 2nd order ODE}
+
+\begin{enumerate}[label = (\alph*)]
+    \item $y, \frac{\mathrm{d}y}{\mathrm{d}x}$ \textbf{missing}, i.e. \[
+            \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = f(x)
+    \]Just integrate twice!
+
+\item $x, \frac{\mathrm{d}y}{\mathrm{d}x}$ \textbf{missing}, i.e. \[
+        \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = f(y)
+\]
+\underline{Warning}: Do not write $\frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = \frac{1}{\frac{\mathrm{d}^{2}x}{\mathrm{d}y^{2}} } $
+\end{enumerate}
 
 
 
 
-\chapter{linear algebra}
+
+
+
+\chapter{Linear Algebra}
+
+\newmdtheoremenv[style=defEnv]{column vector}[theorem]{Definition}
+\begin{column vector}
+    A \emph{column vector} ($n$-column vector) $\pmb{v}_n$ is a tuple of $n$ real numbers written as a single columnn, 
+    with $a_1, a_2, a_3, \ldots, a_n \in \mathbb{R}$:\[
+    \pmb{v}_n := 
+    \begin{pmatrix}
+        a_1 \\
+        a_2 \\
+        a_3 \\
+        \vdots \\
+        a_n
+    \end{pmatrix}
+    \]
+\end{column vector}
+
+\newmdtheoremenv[style=defEnv]{set of column vectors}[theorem]{Definition}
+\begin{set of column vectors}
+    $\mathbb{R}^{n}$ is the set of all column vectors of height $n$ whose entries are real numbers.
+    In symbols:\[
+        \mathbb{R}^{n} = \{
+            \begin{pmatrix}
+                    a_1\\
+                    a_2\\
+                    \vdots\\
+                    a_n
+            \end{pmatrix}
+            : a_1, a_2, \ldots, a_n \in \mathbb{R}
+        \} 
+    \]
+\end{set of column vectors}
+
+\begin{ex}
+    $\mathbb{R}^{2}$ can be seen as Euclidean plane. $\mathbb{R}^{3}$ can be seen as Euclidean space.
+    \\\underline{Caution}: Our vectors always ``start'' at the origin.
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{zero vector}[theorem]{Definition}
+\begin{zero vector}
+    The \textbf{\emph{zero vector $\pmb{0}_n$}} is the height $n$-column vector all of whose entries are 0.
+\end{zero vector}
+
+
+\newmdtheoremenv[style=defEnv]{standard basis vector}[theorem]{Definition}
+\begin{standard basis vector}
+    The \textbf{\emph{standard basis vectors}} in $\mathbb{R}^{n}$ are the vectors\[
+        \pmb{e}_1 = \begin{pmatrix}
+                1\\
+                0\\
+                \vdots\\
+                0
+        \end{pmatrix}, \quad
+        \pmb{e}_2 = \begin{pmatrix}
+                0\\
+                1\\
+                \vdots\\
+                0
+        \end{pmatrix}, \quad \ldots, \quad
+        \pmb{e}_n = \begin{pmatrix}
+                0\\
+                0\\
+                \vdots\\
+                1
+        \end{pmatrix}
+    \]
+    i.e. $\pmb{e}_k$ is the vector with $k$th entry equal to 1 and all other entries equal to 0.
+\end{standard basis vector}
+
+\newmdtheoremenv{operations on column vectors}[theorem]{(Operations on column vectors) Definition}
+\begin{operations on column vectors}
+    Let \[
+        \pmb{v} = \begin{pmatrix}
+                v_1\\
+                v_2\\
+                \vdots\\
+                v_n
+        \end{pmatrix}, \quad
+        \pmb{u} = \begin{pmatrix}
+                u_1\\
+                u_2\\
+                \vdots\\
+                u_n
+            \end{pmatrix}
+    \]
+    be column vectors $\mathbb{R}^{n}$, and let $\lambda$ be a (real or complex) number.
+    \begin{enumerate}[label = (\arabic*)]
+        \item Addition on vectors in $\mathbb{R}^{n}$ is given by:\[
+                \begin{pmatrix}
+                        v_1 + u_1\\
+                        v_2 + u_2\\
+                        \vdots\\
+                        v_n + u_n
+                \end{pmatrix}
+            \]$+ : \mathbb{R}^{n} \times \mathbb{R}^{n} \rightarrow \mathbb{R}^{n}$ (binary operatioin).
+            $(\mathbb{R}^{n}, +)$ is a group.
+        \item \textbf{\emph{Scalar multiplication}} $\lambda \pmb{v}$ on $\mathbb{R}^{n}$:\[
+            \begin{pmatrix}
+                    \lambda v_1\\
+                    \lambda v_2\\
+                    \vdots\\
+                    \lambda v_n
+            \end{pmatrix}
+        \]$s : \mathbb{R} \times \mathbb{R}^{n} \rightarrow \mathbb{R}^{n}$, so not binary operation.
+    \item \textbf{\emph{Dot product}} $v \cdot u$ is defined to be the number $v_1 u_1 + v_2 u_2 + \cdots + v_n u_n$.
+            $\cdot : \mathbb{R}^{n} \times \mathbb{R}^{n} \rightarrow \mathbb{R}$, so not binary.
+    \end{enumerate}
+\end{operations on column vectors}
+
+\begin{ex}
+    Show that $(\mathbb{R}^{n}, +)$ is an Abelian group.
+    \begin{itemize}
+        \item Identity: $\pmb{0}_n$ ($v + \pmb{0}_n = \pmb{v}$)
+        \item $-\pmb{v}$ are inverses, where \[
+            -\pmb{v} := \begin{pmatrix}
+                    -v_1\\
+                    -v_2\\
+                    \vdots\\
+                    -v_n
+            \end{pmatrix}
+        \]
+        \item associativity: $(\pmb{u} + \pmb{v}) + \pmb{w} = \pmb{u} + (\pmb{v} + \pmb{w})$.
+        \item commutative: $\pmb{u} + \pmb{v} = \pmb{v} + \pmb{u}$
+    \end{itemize}
+    \underline{Caution}: $+$ only makes sense for vectors of the \emph{same size}.
+    e.g. $\pmb{v} \cdot \pmb{0}_n = 0 \in \mathbb{R}$.
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{combination of add and scalar multi}[theorem]{Definition}
+\begin{combination of add and scalar multi}
+    let $\pmb{v}_1, \pmb{v}_2, \pmb{v}_3, \ldots, \pmb{v}_n \in \mathbb{R}^{n}, \lambda_1, \lambda_2, \lambda_3, \ldots, \lambda_n \in \mathbb{R}$,
+    then \[
+        \lambda_1 \pmb{v}_1 + \lambda_2 \pmb{v}_2 + \cdots + \lambda_n \pmb{v}_n
+    \]is called a \textbf{\emph{linear combination}} of $\pmb{v}_1, \pmb{v}_2, \pmb{v}_3, \ldots, \pmb{v}_n$.
+\end{combination of add and scalar multi}
+
+\newmdtheoremenv[style=defEnv]{span of vectors}[theorem]{Definition}
+\begin{span of vectors}
+    The set of all linear combinatioins of a collection of vectors $\pmb{v}_1, \pmb{v}_2, \ldots, \pmb{v}_n$
+    is called the \textbf{\emph{span}} of the vectors $\pmb{v}_1, \pmb{v}_2, \ldots, \pmb{v}_n$.
+    \\Notation: 
+    
+    span$\left\{\pmb{v}_1, \pmb{v}_2,\ldots,\pmb{v}_n\right\} := 
+    \left\{\lambda_1 \pmb{v}_1 + \lambda_2 \pmb{v}_2 + \cdots + \lambda_n \pmb{v}_n 
+    | \lambda_1, \ldots, \lambda_n \in \mathbb{R}\right\}$
+\end{span of vectors}
+
+\begin{ex}
+    compute the span of 
+    \begin{itemize}
+        \item $\{\pmb{e}_1, \pmb{e}_2\}$, $\pmb{e}_1, \pmb{e}_2 \in \mathbb{R}^2$.
+            \[
+                \textnormal{span}\{\pmb{e}_1, \pmb{e}_2\} 
+                = \{\lambda_1 \pmb{e}_1 + \lambda_2 \pmb{e}_2 | \lambda_1, \lambda_2 \in \mathbb{R}\}
+            = \{
+                    \begin{pmatrix}
+                            \lambda_1\\
+                            \lambda_2
+                    \end{pmatrix}
+| \lambda_1, \lambda_2 \in\mathbb{R}\}\]
+
+\item span$\left\{\begin{pmatrix}
+        1\\
+        0\\
+        0
+\end{pmatrix}
+, \begin{pmatrix}
+        0\\
+        2\\
+        0
+\end{pmatrix}
+\right\} = \{
+\begin{pmatrix}
+        \lambda_1\\
+        2\lambda_2\\
+        0
+\end{pmatrix}
+| \lambda_1, \lambda_2 \in \mathbb{R}
+\}$
+    \end{itemize}
+    
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{length and norm}[theorem]{Definition}
+\begin{length and norm}
+    let $\pmb{v} \in \mathbb{R}^{n}$. The \textbf{\emph{length}} of $\pmb{v}$, a.k.a.\ the \textbf{\emph{norm}} 
+    of $\pmb{v}$, is the non-negative real number $||\pmb{v}||$ defined by \[
+        ||\pmb{v}|| = \sqrt{\pmb{v} \cdot \pmb{v}}
+    \]
+    \underline{Note}: $||\pmb{0}|| = 0$, and conversely if $\pmb{v} \neq 0$ then $||\pmb{v}|| > 0$.
+    This definition agrees with out usual ideas about the length of a vector in $\mathbb{R}^{2}$
+    or $\mathbb{R}^{3}$, which follows from Pythagoras' theorem.
+\end{length and norm}
+
+\newmdtheoremenv[style=defEnv]{unit vector}[theorem]{Definition}
+\begin{unit vector}
+    A vector $\pmb{v} \in \mathbb{R}^{n}$ is called a \textbf{\emph{unit vector}}
+    if $||\pmb{v}|| = 1$.
+\end{unit vector}
+
+\smallskip
+\begin{ex}
+    \;
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item Any non-zero vector $\pmb{v}$ can be made into a unit vector
+            $u := \frac{\pmb{v}}{||\pmb{v}||}$. This process is called \textbf{\emph{normalizing}}.
+        \item The standard basis vectors are unit vectors.
+    \end{enumerate}
+    
+\end{ex}
+
+\subsection{Basic Matrix Operations}
+
+\newmdtheoremenv[style=defEnv]{matrix definition}[theorem]{Definition}
+\begin{matrix definition}
+    An $n \times m$-matrix is a rectangular grid of numbers called the \emph{entries} of the matrix
+    with $n$ rows and $m$ columns. A real matrix is onne whose entries are real numbers,
+    and a complex matrix is one whose entries are complex numbers.
+
+    \underline{Notations}: $M_{n \times m}(\mathbb{R}), M_{n,m}(\mathbb{R}), \mbox{Mat}_{n\times m}(\mathbb{R}), \mathbb{R}^{n\times m}$.
+
+\end{matrix definition}
+
+\underline{Operations on matrices}:
+\newmdtheoremenv[style=defEnv]{matrices operation}[theorem]{Definition}
+\begin{matrices operation}
+    let $A = (a_{ij})$ and $B = (b_{ij})$ are $n\times m$-matrix, $\lambda \in \mathbb{R}$. Then:
+    \begin{enumerate}[label = (\arabic*)]
+        \item $A+B = n\times m$-matrix $\,(a_{ij} + b_{ij})$.
+            $+: M_{n \times m}(\mathbb{R}) \times M_{n \times m}(\mathbb{R}) \rightarrow M_{n \times m}(\mathbb{R})$
+        \item $\lambda A = n \times m$-matrix $\,(\lambda a_{ij})$
+    \end{enumerate}
+    
+\end{matrices operation}
+
+\newmdtheoremenv[style=defEnv]{addition on matrix is Abelian}[theorem]{Theorem}
+\begin{addition on matrix is Abelian}
+    $(M_{n \times m}(\mathbb{R}), +)$ is an Abelian grouop.
+\end{addition on matrix is Abelian}
+
+\newmdtheoremenv[style=defEnv]{transpose}[theorem]{Definition}
+\begin{transpose}
+    The \emph{transpose} $A^{T}$ of an $n \times m$-matrix $(a_{ij})$ is 
+    the $m \times n$-matrix $(a_{ij})$.
+\end{transpose}
+
+\newmdtheoremenv[style=defEnv]{multiplying matrix with vector}[theorem]{(Multiplying matrices with vectors) Definition}
+\begin{multiplying matrix with vector}
+    Let $A = (a_{ij})$ be an $n \times m$-matrix, $v \in \mathbb{R}^{m}$.
+    Then $Av$ is the vector in $\mathbb{R}^{n}$ with $i$-th row entry $\sum_{j=1}^{m} a_{ij}v_j$
+\end{multiplying matrix with vector}
+
+\begin{ex}
+    \begin{itemize}
+            \item 
+                Prove that for $A \in M_{n \times m}(\mathbb{R}), e_k \in \mathbb{R}^{m}$,
+                $Ae_k = k$-th column of A.
+    
+                \underline{Proof}: let $A = (a_{ij})$. By definition the $i$-th entry of $Ae_k$ is\[
+                    \sum_{j=1}^{m} a_{ij}{(e_k)}_j = a_{ik}
+                \]since $ {(e_k)}_j = 0$ whenever $j \neq k$, 1 for $j = k$
+            \item $\nu \cdot v = \nu^{T}v$
+            \item Let $I_n$ be the identity matrix. Show formally that $I_n \nu = \nu$, $\forall \nu \in \mathbb{R}^{n}$.
+            \item let $\nu_1, \nu_2, \nu_3 \in \mathbb{R}^{3}$.
+                Write the linear combination $3\nu_1 - 5\nu_2 + 7\nu_3$ as a multiplication of matrix
+                $A \in M_{3 \times 3}(\mathbb{R})$ with a vector $x \in \mathbb{R}^{3}$
+    \end{itemize}
+    
+\end{ex}
+
+\section{System of linear equations}
+
+\newmdtheoremenv[style=defEnv]{linear equation}[theorem]{Definition}
+\begin{linear equation}
+    A \emph{linear equation} in the variables $x_1, x_2, \ldots, x_n \in \mathbb{R}$
+    is an equation of the form:\[
+        \lambda_1 x_1 + \lambda_2 x_2 + \cdots + \lambda_n x_n = c, 
+        \,\textnormal{with }\, \lambda_1,\ldots,\lambda_n \subset \,\textnormal{\emph{Fixed} real numbers}
+    \]
+    \underline{Caution}: In particular, no powers/multiplications/function of one or more variables.
+\end{linear equation}
+
+\newmdtheoremenv[style=defEnv]{simultaneous list of linear equations}[theorem]{Definition}
+\begin{simultaneous list of linear equations}
+    A system of linnear equations is a simultaneous list of linear equations
+\end{simultaneous list of linear equations}
+
+
+
 
 \chapter{Analysis}
 
