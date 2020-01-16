@@ -6,6 +6,8 @@
 \usepackage{enumitem} % bulletin points or other means of listing things
 \usepackage{amssymb} % for AMS symbols
 \usepackage{amsmath} % so as to use align
+\usepackage{mathrsfs} % for the stylistic L
+
 
 \theoremstyle{definition}
 \mdfdefinestyle{defEnv}{%
@@ -25,7 +27,9 @@
 
 Study of the simplest algebraic structure on a set.
 
-\section{Binary operations and groups}
+\section{Basic Definitions and Examples}
+
+\subsection{Binary operations and groups}
 
 \newmdtheoremenv[style=defEnv]{theorem}{Definition}
 \begin{theorem}
@@ -199,7 +203,7 @@ As soon as you get one left and one right identity, you have a unique identity $
 
 \newmdtheoremenv[style=defEnv]{Group Definition}[theorem]{(Group) Definition}
 \begin{Group Definition}
-    A set $(G,*)$ wth binary operatioin $*$ is called a \emph{group} if:
+    A set $(G,*)$ with binary operatioin $*$ is called a \emph{group} if:
     \begin{enumerate}[label = (\arabic*)]
         \item $*$ is associative
         \item $\exists e \in G$ an identity $\forall g \in G$
@@ -213,7 +217,7 @@ As soon as you get one left and one right identity, you have a unique identity $
     \;
 
     \begin{itemize}
-        \item $(\mathbb{Z}, +), (\mathbb{Z}_n, +)$ are groups.
+        \item $(\mathbb{Z}, +), (\mathbb{Z}_n, +)$ (will see this later) are groups.
         \item $(\mathbb{N}, +)$ not a group $\Rightarrow$ no inverses.
         \item $(\mathbb{C}, \cdot)$ not a group (0 has no multiplicative inverse),
             but $(\mathbb{C}^{*}, \cdot)$ is. ($\mathbb{C}^{*} = \mathbb{C}\backslash \{0\}$)
@@ -228,7 +232,8 @@ As soon as you get one left and one right identity, you have a unique identity $
     Let $G$ be a group. It is called \underline{finite} if it has finitely many elements.
     
     \underline{Notation}: $|G| = n$ (number of elements)
-
+    
+    We say that $G$ has \textbf{\emph{order}} $n$.  
     If $|G| = \infty$, the $G$ is called an infinite group.
 \end{finite group}
 
@@ -265,7 +270,144 @@ As soon as you get one left and one right identity, you have a unique identity $
     
 \end{ex}
 
-\section{Consequences of the axioms of group}
+\subsection{Consequences of the axioms of group}
+
+\newmdtheoremenv[style=defEnv]{inverse binary opereation}[theorem]{Theorem}
+\begin{inverse binary opereation}
+    Let $(G,*)$ be a group, $g, h \in G$. Then \[
+        {(g*h)}^{-1} = h^{-1} * g^{-1}
+    \]
+\end{inverse binary opereation}
+\begin{proof}
+    To show: $(g*h) * (h^{-1} * g^{-1}) = e$.
+
+    Using assocativity, we have \[
+        g*(h*h^{-1})*g^{-1} = g*g^{-1} = e
+    \]
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{g to the power of n}[theorem]{Definition}
+\begin{g to the power of n}
+    Let $n \in \mathbb{Z}$, let $(G,*)$ be a group and let $g \in G$. Then we definie $g^{n}$ as follows:\[
+        g^{n} = \left\{
+            \begin{align*}
+                & g * g * \cdots * g & n > 0 \\
+                & g^{-1} * g^{-1} * \cdots * g^{-1} & n < 0 \\
+                & e & n = 0
+            \end{align*}
+            \right.
+    \]
+    where in the first case there are $n$ copies of $g$ in the product and ni the second there are $-n$
+    copies of $g^{-1}$, so that $g^{n} = {(g^{-1})}^{-n}$.
+\end{g to the power of n}
+
+\newmdtheoremenv[style=defEnv]{properties of g tp n}[theorem]{Theorem}
+\begin{properties of g tp n}
+    Let $n, m \in \mathbb{Z}$ and let $G, *$ be a group. Then
+    \begin{enumerate}
+        \item $g^{n} * g^{m} = g^{n + m}$
+        \item ${(g^{n})}^{m} = g^{nm}$
+    \end{enumerate}
+    
+\end{properties of g tp n}
+
+\begin{proof}
+    Exercise! (Hint: Induction.)
+\end{proof}
+
+\subsection{Modular Artihmetic and the group $\mathbb{Z}_n$}
+
+\newmdtheoremenv[style=defEnv]{congruent modulo n}[theorem]{Definition}
+\begin{congruent modulo n}
+    let $n > 0$, $n \in \mathbb{Z}$ fixed, $a,b \in \mathbb{Z}$. 
+    $a$ and $b$ are called \textbf{\emph{congruent modulo}} $n$ if $n | a - b$.
+\end{congruent modulo n}
+
+\newmdtheoremenv[style=defEnv]{modular arithmetic}[theorem]{Definition}
+\begin{modular arithmetic}
+    $\forall a, b, c \in \mathbb{Z}$, $n > 0$ fixed in $\mathbb{Z}$:
+    \begin{enumerate}[label = (\arabic*)]
+        \item $a \equiv a \mod n$ (reflexivity)
+        \item If $a \equiv b \mod n \iff b \equiv a \mod n$ (symmetry)
+        \item if $a \equiv b \mod n \;$ and $\;b \equiv c \mod n \quad \Longrightarrow \quad  a \equiv c \mod n$ (transitivity)
+    \end{enumerate}
+    
+\end{modular arithmetic}
+
+\newmdtheoremenv[style=defEnv]{equivalence class}[theorem]{Definition}
+\begin{equivalence class}
+    Given a set $S$ and an equivalence relation $\sim$ on $S$, the \textbf{\emph{equivalence class}}
+    of an element $a$ in $S$ is the set $\{x \in S \,|\, x \sim a\}$.
+\end{equivalence class}
+
+
+\newmdtheoremenv[style=defEnv]{equivalence classes}[theorem]{Definition}
+\begin{equivalence classes}
+    Define the equivalence class of $a \in \mathbb{Z}$ in the relation of congruence modulo $n$ as:\[
+        {[a]}_n := \left\{ b \in \mathbb{Z} \,|\, b \equiv a \mod n \right\} 
+    \]
+\end{equivalence classes}
+
+\newmdtheoremenv[style=defEnv]{group Zn}[theorem]{Definition}
+\begin{group Zn}
+    Define equivalence classes $\mathbb{Z}_n$ as\[
+        \mathbb{Z}_n := \left\{{[0]}_n, {[1]}_n, \ldots {[n-1]}_n\right\} 
+    \] with 2 \underline{binary operations} on $\mathbb{Z}_n$:
+    \begin{itemize}
+        \item[$+$:] $\mathbb{Z}_n \times \mathbb{Z}_n \rightarrow \mathbb{Z}_n$, 
+            $({[a]}_{n}, {[b]}_{n}) \mapsto {[a + b]}_{n}$
+        \item[$\cdot$:] $\mathbb{Z}_n \times \mathbb{Z}_n \rightarrow \mathbb{Z}_n$,
+            $({[a]}_{n}, {[b]}_{n}) \mapsto {[ab]}_{n}$
+    \end{itemize}
+    As we can see from the following lemma, the two operations are well-defined.
+\end{group Zn}
+
+\newmdtheoremenv[style=defEnv]{well-definied operations on Zn}[theorem]{Lemma}
+\begin{well-definied operations on Zn}
+    Let $a, a', b, b' \in \mathbb{Z}$ s.t. ${[a]}_n = {[a']}_n, {[b]}_n = {[b']}_n$.
+    Then ${[a + b]}_n = {[a' + b']}_n$, ${[a\cdot b]}_n = {[a' \cdot b']}_n$.
+\end{well-definied operations on Zn}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{Zn is Abelian}[theorem]{Theorem}
+\begin{Zn is Abelian}
+    $(\mathbb{Z}_n, +)$ is an Abelian group.
+\end{Zn is Abelian}
+
+\begin{proof}
+    \;
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item Associativity: 
+            \begin{eqnarray*}
+                ({[a]}_{n} + {[b]}_{n}) + {[c]}_{n}
+                &=& {[a + b]}_{n} + {[c]}_{n} \\
+                &=& {[a + b + c]}_{n} \\
+                &=& {[a]}_{n} + {[b + c]}_{n} \\
+                &=& {[a]}_{n} + ({[b]}_{n} + {[c]}_{n})
+            \end{eqnarray*}
+            
+        \item Commutativity:
+            \begin{eqnarray*}
+                {[a]}_{n} + {[b]}_{n}
+                &=& {[a + b]}_{n} \\
+                &=& {[b + a]}_{n} \\
+                &=& {[b]}_{n} + {[a]}_{n}
+            \end{eqnarray*}
+
+        \item Identity element: ${[0]}_{n}$
+        \item Inverse: Any element ${[a]}_{n}$ has an inverse ${[-a]}_{n}$.
+            
+    \end{enumerate}
+    
+\end{proof}
+
+
+
+
 
 
 
@@ -277,7 +419,8 @@ As soon as you get one left and one right identity, you have a unique identity $
 
 \newmdtheoremenv[style=defEnv]{ODE}[theorem]{Definition}
 \begin{ODE}
-    An \emph{ordinary differential equation} (ODE) for $y(x)$ is an equation involving \underline{derivatives} of $y$.
+    An \textbf{\emph{ordinary differential equation}} (ODE) for $y(x)$ 
+    is an equation involving \underline{derivatives} of $y$.
     \begin{equation}\label{ODE:1}
         f(x, y, \frac{\mathrm{d} y}{\mathrm{d}x}, \frac{\mathrm{d}^{2} y}{\mathrm{d}x^{2}}, \ldots,
         \frac{\mathrm{d}^{n} y}{\mathrm{d}x^{n}}) = 0
@@ -294,9 +437,9 @@ As soon as you get one left and one right identity, you have a unique identity $
 \begin{order and power}
     \;
 
-    \emph{Order} is the order of the highest derivative present.
+    \textbf{\emph{Order}} is the order of the highest derivative present.
 
-    \emph{Degree} is the power of the highest derivative when fractional powers have been removed.
+    \textbf{\emph{Degree}} is the power of the highest derivative when fractional powers have been removed.
 
     \emph{\textbf{Linear} differential equation} is a differential equation that is defined by a \emph{linear polynomial}
     in the unknown function and its derivative in each term of equation\eqref{ODE:1}.
@@ -563,9 +706,163 @@ y(x) = \left(\frac{1}{2}x^{2 + 2x + C}\right) {(x + 2)}^{4}
 \item $x, \frac{\mathrm{d}y}{\mathrm{d}x}$ \textbf{missing}, i.e. \[
         \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = f(y)
 \]
-\underline{Warning}: Do not write $\frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = \frac{1}{\frac{\mathrm{d}^{2}x}{\mathrm{d}y^{2}} } $
+\underline{Warning}: Do not write $\frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = \frac{1}{\frac{\mathrm{d}^{2}x}{\mathrm{d}y^{2}} } $.
+However, it may be true, but for what class of functions $y(x)$?
+
+Let $\frac{\mathrm{d}y}{\mathrm{d}x} = p$,\[
+    \Rightarrow \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = \frac{\mathrm{d}p}{\mathrm{d}x} 
+    =\frac{\mathrm{d}p}{\mathrm{d}y} \cdot \frac{\mathrm{d}y}{\mathrm{d}x} = p \frac{\mathrm{d}p}{\mathrm{d}y} 
+    = \frac{\mathrm{d}}{\mathrm{d}y} \left(\frac{1}{2}p^{2}\right) 
+\]This substitution is effective because it eliminates $x$,
+so that the equation becomes \underline{separable} for $p$ and $y$.
+
+Then we can integrate $\frac{\mathrm{d}}{\mathrm{d}y} \left(\frac{1}{2}p^{2}\right) = f(y)$
+w.r.t. $y$ to get $p(y)$. Then using the definition of $p$,\[
+x = \int \frac{\mathrm{d}y}{p(y)}
+\]
+The same is obtained by multiplying the original equation by $\frac{\mathrm{d}y}{\mathrm{d}x} $
+and recognizing $\frac{\mathrm{d}y}{\mathrm{d}x} \cdot \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} 
+= \frac{\mathrm{d}}{\mathrm{d}x} \left[\frac{1}{2}{(\frac{\mathrm{d}y}{\mathrm{d}x} )}^{2}\right] $
+
+\underline{Example}: \[
+    \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = -\omega^{2}y
+\]with $\omega$ being a real constant. (It is a simple harmonic motion.)
+\[
+    \Rightarrow \frac{1}{2}p^{2} = -\frac{1}{2}\omega^{2}y^{2} + C
+\]Let $C = \frac{1}{2}\omega^{2}\overline{A}^{2}$. We therefore get\[
+\frac{1}{p} = \frac{\mathrm{d}x}{\mathrm{d}y} = \pm \frac{1}{\omega {(\overline{A}^{2} - y^{2})}^{\frac{1}{2}}}
+\]\[
+\begin{align*}
+    \Rightarrow \omega x + \overline{B} & = \pm \sin^{-1}{\frac{y}{\overline{A}}} \\
+        y & = \overline{A} \sin{(\omega x + \overline{B})} \;\textnormal{W.L.O.G} \\
+          & = A\sin{\omega x} + B\cos{\omega x}
+\end{align*}
+\]
+
+\item $y$ \textbf{missing}, i.e. \[
+        \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = f\left(x, \frac{\mathrm{d}y}{\mathrm{d}x} \right) 
+\]We put $\frac{\mathrm{d}y}{\mathrm{d}x} = p$, so\[
+\frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = \frac{\mathrm{d}p}{\mathrm{d}x} = f\left(x, p\right) 
+\]
+i.e. First order $p(x)$. This substitution is effective because it eliminates $y$,
+so that the equation becomes \underline{separable} for $p$ and $x$.
+
+Solve for $p(x)$ then integrate $\Rightarrow y(x)$.
+
+\underline{Example}: Radius of curvature \[
+    \frac{{\left[1 + {\left(\frac{\mathrm{d}y}{\mathrm{d}x} \right)}^{2}\right]}^{\frac{3}{2}}}
+    {\frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} } = a \quad \textnormal{($a$ is an arbitrary constant)}
+\]\[
+\Rightarrow \frac{\mathrm{d}p}{\mathrm{d}x} = \frac{1}{a}{(1 + p^{2})}^{\frac{3}{2}}
+\]\[
+\Rightarrow \frac{x}{a} + C = \int \frac{\mathrm{d}p}{{(1 + p^{2})}^{\frac{3}{2}}} \quad 
+\textnormal{i.e.} \quad \frac{x}{a} - \frac{A}{a} = \frac{p}{{(1 + p^{2})}^{\frac{1}{2}}}
+\]\[
+    \Rightarrow \frac{\mathrm{d}y}{\mathrm{d}x} = p 
+    = \pm \frac{x - A}{{[a^{2} - {(x - A)}^{2}]}^{\frac{1}{2}}}
+\]\[
+\Rightarrow y = B \mp {[a^{2} - {(x - A)}^{2}]}^{\frac{1}{2}} \quad
+\textnormal{i.e.} \quad {(x-A)}^{2} + {(y-B)}^{2} = a^{2}
+\]
+So they are all circles of radius $a$!
+
+\item $x$ \textbf{missing}, i.e.\[
+        \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = f\left(y, \frac{\mathrm{d}y}{\mathrm{d}x} \right)
+        \]Yet again, let $\frac{\mathrm{d}y}{\mathrm{d}x} = p$, so\[
+p \frac{\mathrm{d}p}{\mathrm{d}y} = f(y, p)
+\]
+i.e. First order $p(y)$. So we solve for $p(y)$, then find $x = \int \frac{\mathrm{d}y}{p(y)}$.
+
+\underline{Example}: \[
+    \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = -\omega^{2}y \mp 2k{\left(\frac{\mathrm{d}y}{\mathrm{d}x} \right)}^{2}
+\]SHM with resistance proportional to $\text{(speed)}^{2}$.
+
+\item \textbf{Linear Equations}, i.e. $y, \frac{\mathrm{d}y}{\mathrm{d}x} $
+    only occur to 1st power, if at all.
+    So no products of $y$ and $\frac{\mathrm{d}y}{\mathrm{d}x} $.
+    The following section is dedicated to explaining the approach to solve linear differential equations.
 \end{enumerate}
 
+\subsubsection{General case --- Linear Equations}
+
+The general form is, for order $n$,
+\begin{equation}
+    \begin{align}\label{ODE:7}
+    \mathscr{L} y = a_0(x)\frac{\mathrm{d}^{n}y}{\mathrm{d}x^{n}} + a_1(x)\frac{\mathrm{d}^{n-1}y}{\mathrm{d}x^{n-1}}
+    & + a_2(x)\frac{\mathrm{d}^{n-2}y}{\mathrm{d}x^{n-2}} + \cdots \\
+    & + a_{n-1}(x)\frac{\mathrm{d}y}{\mathrm{d}x} + a_n(x)y = f(x)
+    \end{align}
+\end{equation}
+    
+
+where $a_0, a_1, \ldots, a_n$ and $f(x)$ are known functions of $x$ only.
+\smallskip
+\\$\mathscr{L}$ is a \textbf{linear operator}, operating on $y(x)$:\[%chktex 36
+    \mathscr{L} \equiv \left[a_0\frac{\mathrm{d}^{n}}{\mathrm{d}x^{n}} 
+    + a_1\frac{\mathrm{d}^{n-1}}{\mathrm{d}x^{n-1}} + \cdots + a_n\right] 
+\]
+The equation\eqref{ODE:7} is called \textbf{\emph{homogeneous}} iff $f(x) = 0 $
+and \textbf{\emph{inhomogeneous}} iff $f(x) \neq 0$.
+\\The homogeneous equation $\mathscr{L}y = 0$ has $n$ independent solutions
+$y_1(x), y_2(x)$, $\ldots, y_n(x)$ apart from \emph{trivial} $y(x) = 0$.
+That is to say that $\mathscr{L} y_i(x) = 0$ for $i = 1, 2, \ldots, n$.
+(\textbf{\emph{Independence}} is an algebraic property\ldots)
+Because of the linearity of $y_i(x)$ we find that the most general solution of the
+homogeneous equation $\mathscr{L} y = 0$ is given by
+\begin{equation}\label{ODE:8}
+    y(x) = A_1 y_1(x) + A_2 y_2(x) + \cdots + A_n y_n(x)
+\end{equation}
+with $A_1, A_2, \ldots, A_n$ being arbitrary constants. 
+This is because \[
+    \mathscr{L}y = \mathscr{L}\left(\sum_{i=1}^{n} A_i y_i(x)\right)
+    = \sum_{i=1}^{n} A_i (\mathscr{L}y_i(x)) = 0
+\]
+Of course equation\eqref{ODE:8} contains $n$ arbitrary constants in accord with the order $n$
+of the differential equation.
+\\\medskip
+\\For the inhomogeneous equation ($\mathscr{L}y = f(x)$\eqref{ODE:7}),
+the expression\eqref{ODE:8} is called the \textbf{\emph{complementary functions}} (CF) of equation\eqref{ODE:7}.
+Any solution of the inhomogeneous equation\eqref{ODE:7}, say $Y(x)$,
+is called a \textbf{\emph{particular integral}} (PI) of equation\eqref{ODE:7}.
+The most general solution of equation\eqref{ODE:7} is thus\[
+    y(x) = (\textnormal{CF}) + (\textnormal{PI})
+\]
+This contains $n$ arbitrary constants as required/expected!
+\medskip
+\\The constants can be specified in practice to produce a particular solution
+which satisfies ($n$) initial/boundary conditions.
+\\\underline{Note}
+\begin{enumerate}[label = (\alph*)]
+    \item For any two solutions $Y_1(x), Y_2(x)$ of equation\eqref{ODE:7},
+        their difference satisfies \[
+            \mathscr{L} (Y_1 - Y_2) = \mathscr{L}Y_1 - \mathscr{L}Y_2 = f(x) - f(x) = 0
+        \]
+    \item Generally, finding $y_1(x), y_2(x), \ldots, y_n(x)$ functions might be very tough
+        --- our differential equation has generally variable coefficients after all!
+        So we look at the most common case we need to study --- constant coefficients!
+        W.L.O.G.:\[
+            a_0(x) = 1, a_1(x) = a_1, a_2(x) = a_2, \ldots, a_n(x) = a_n
+        \]
+\end{enumerate}
+
+\subsubsection{Linear Equations --- Second Order, Constant Coefficients}
+Consider\[
+    \mathscr{L}y = \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + a_1 \frac{\mathrm{d}y}{\mathrm{d}x}
+    + a_2 y = f(x)
+\]
+Alternatively, in terms of notation, \[
+    \mathscr{L}y = y'' + a_1 y' + a_2 y = f(x)
+\]
+Overall flow of solving the equation is to firstly find CF then PI, \[
+    \Rightarrow y(x) = \textnormal{CF} + \textnormal{PI}
+\]
+
+\paragraph{Finding the CF}
+We need to solve
+\begin{equation}\label{ODE:9}
+    \mathscr{L}y = \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + a_1\frac{\mathrm{d}y}{\mathrm{d}x} + a_2 y = 0
+\end{equation}
+Try a solution of the form $y = e^{\lambda x}$ where $\lambda$ is a constant --- which we need to find!
 
 
 
@@ -758,10 +1055,10 @@ y(x) = \left(\frac{1}{2}x^{2 + 2x + C}\right) {(x + 2)}^{4}
 \newmdtheoremenv[style=defEnv]{length and norm}[theorem]{Definition}
 \begin{length and norm}
     let $\pmb{v} \in \mathbb{R}^{n}$. The \textbf{\emph{length}} of $\pmb{v}$, a.k.a.\ the \textbf{\emph{norm}} 
-    of $\pmb{v}$, is the non-negative real number $||\pmb{v}||$ defined by \[
-        ||\pmb{v}|| = \sqrt{\pmb{v} \cdot \pmb{v}}
+    of $\pmb{v}$, is the non-negative real number $\lVert\pmb{v}\rVert$ defined by \[
+        \lVert\pmb{v}\rVert = \sqrt{\pmb{v} \cdot \pmb{v}}
     \]
-    \underline{Note}: $||\pmb{0}|| = 0$, and conversely if $\pmb{v} \neq 0$ then $||\pmb{v}|| > 0$.
+    \underline{Note}: $\lVert\pmb{0}\rVert = 0$, and conversely if $\pmb{v} \neq 0$ then $\lVert\pmb{v}\rVert > 0$.
     This definition agrees with out usual ideas about the length of a vector in $\mathbb{R}^{2}$
     or $\mathbb{R}^{3}$, which follows from Pythagoras' theorem.
 \end{length and norm}
@@ -769,7 +1066,7 @@ y(x) = \left(\frac{1}{2}x^{2 + 2x + C}\right) {(x + 2)}^{4}
 \newmdtheoremenv[style=defEnv]{unit vector}[theorem]{Definition}
 \begin{unit vector}
     A vector $\pmb{v} \in \mathbb{R}^{n}$ is called a \textbf{\emph{unit vector}}
-    if $||\pmb{v}|| = 1$.
+    if $\lVert\pmb{v}\rVert = 1$.
 \end{unit vector}
 
 \smallskip
@@ -778,7 +1075,7 @@ y(x) = \left(\frac{1}{2}x^{2 + 2x + C}\right) {(x + 2)}^{4}
 
     \begin{enumerate}[label = (\arabic*)]
         \item Any non-zero vector $\pmb{v}$ can be made into a unit vector
-            $u := \frac{\pmb{v}}{||\pmb{v}||}$. This process is called \textbf{\emph{normalizing}}.
+            $u := \frac{\pmb{v}}{\lVert\pmb{v}\rVert}$. This process is called \textbf{\emph{normalizing}}.
         \item The standard basis vectors are unit vectors.
     \end{enumerate}
     
