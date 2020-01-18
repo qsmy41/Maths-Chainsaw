@@ -7,6 +7,7 @@
 \usepackage{amssymb} % for AMS symbols
 \usepackage{amsmath} % so as to use align
 \usepackage{mathrsfs} % for the stylistic L
+\usepackage{authblk} % for writing affiliationis
 
 
 \theoremstyle{definition}
@@ -17,8 +18,9 @@
 }
 
 \pagestyle{headings}
-\author{Marie Amellie, Frank Berkshire}
+\author{Lectured by Marie-Amelie Lawn, Frank Berkshire}
 \title{Calculus, Algebra, and Analysis for JMC}
+\affil{Typed by Aris Zhu Yi Qing}
 \begin{document}
 \maketitle
 \tableofcontents
@@ -776,6 +778,7 @@ i.e. First order $p(y)$. So we solve for $p(y)$, then find $x = \int \frac{\math
 \underline{Example}: \[
     \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = -\omega^{2}y \mp 2k{\left(\frac{\mathrm{d}y}{\mathrm{d}x} \right)}^{2}
 \]SHM with resistance proportional to $\text{(speed)}^{2}$.
+\\\underline{Hint}: Solving this equation is the perfect application for solving Bernoulli Equation!
 
 \item \textbf{Linear Equations}, i.e. $y, \frac{\mathrm{d}y}{\mathrm{d}x} $
     only occur to 1st power, if at all.
@@ -846,10 +849,12 @@ which satisfies ($n$) initial/boundary conditions.
 \end{enumerate}
 
 \subsubsection{Linear Equations --- Second Order, Constant Coefficients}
-Consider\[
+Consider
+\begin{equation}\label{ODE:11}
     \mathscr{L}y = \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + a_1 \frac{\mathrm{d}y}{\mathrm{d}x}
     + a_2 y = f(x)
-\]
+\end{equation}
+
 Alternatively, in terms of notation, \[
     \mathscr{L}y = y'' + a_1 y' + a_2 y = f(x)
 \]
@@ -863,6 +868,201 @@ We need to solve
     \mathscr{L}y = \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + a_1\frac{\mathrm{d}y}{\mathrm{d}x} + a_2 y = 0
 \end{equation}
 Try a solution of the form $y = e^{\lambda x}$ where $\lambda$ is a constant --- which we need to find!
+(It works by demonstration.) Evidently, \[
+    (\lambda^{2} + a_1 \lambda + a_2)e^{\lambda x} = 0
+\]The exponential cannot help --- for any $\lambda$ let alone for all $x$. So
+\begin{equation}\label{ODE:10}
+    \lambda^{2} + a_1 \lambda + a_2 = 0
+\end{equation}
+as the auxiliary equations. In general, there are two distinct roots $\lambda_1, \lambda_2$
+of this quadratic, so that $e^{\lambda_1 x}, e^{\lambda_2 x}$ are solutions of equation\eqref{ODE:9}, i.e.\[
+    \mathscr{L}\left(e^{\lambda_1 x}\right) = 0 = \mathscr{L}\left(e^{\lambda_2 x}\right)
+\]
+Because of the linearity property of $\mathscr{L}$ we have\[
+    y_{\textnormal{CF}} = A_1 e^{\lambda_1} + A_2 e^{\lambda_2 x}
+\]
+where $A_1, A_2$ are two arbitrary constants and
+$\mathscr{L} y_{\textnormal{CF}} = 0$ as required.
+\medskip
+\\If the roots of \,\eqref{ODE:10} are equal, i.e. 
+$\lambda_1 = \lambda_2 = \lambda$, then certainly $A_1 e^{\lambda x}$
+is a solution of \,\eqref{ODE:9} with \emph{one} arbitrary constant --- we need \emph{another}!
+A second linearly independent solution is given by $A_2 x e^{\lambda x}$, so that we have\[
+    y_{\textnormal{CF}} = A_1 e^{\lambda x} + A_2 x e^{\lambda x}
+\]
+We can see this easily: \,\eqref{ODE:10} must take the form ${(\lambda + \frac{a_1}{2})}^{2} = 0$
+since $a_2 = \frac{a_1^{2}}{4}$ and $\lambda = -\frac{a_1}{2}$ (repeated root).
+Then substituting $x e^{\lambda x}$ into \,\eqref{ODE:9} we have\[
+    \mathscr{L}\left(x e^{\lambda x}\right)
+    = (2 \lambda + a_1) e^{\lambda x} + (\lambda^{2} + a_1 \lambda + a_2) x e^{\lambda x} = 0
+\]
+as required. Here, $n$ in $\mathscr{L}$ is 2.
+
+\begin{ex}
+    \;
+
+    \begin{enumerate}
+        \item \[
+            \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + 5 \frac{\mathrm{d}y}{\mathrm{d}x} + 6y = 0
+        \]
+        $\Rightarrow \lambda^{2} + 5 \lambda + 6 = 0, \;\lambda = -3, -2$. So \[
+            y(x) = A_1 e ^{-3x} + A_2 e^{-2x}
+        \]
+        
+    \item \[
+        \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + 4\frac{\mathrm{d}y}{\mathrm{d}x} + 4y = 0
+    \]
+    $\Rightarrow \lambda^{2} + 4\lambda + 4 = 0, \;\lambda = -2, -2$. So\[
+        y(x) = A_1 e^{-2x} + A_2 x e^{-2x}
+    \]
+    \end{enumerate}
+\end{ex}
+
+\\What about \emph{complex roots} of \,\eqref{ODE:10}? (assuming $a_1, a_2 \in \mathbb{R}$)
+We know that the roots are complex conjugates, i.e. $\lambda_{1,2} = \alpha \pm i\beta, 
+\alpha, \beta \in \mathbb{R}$.
+Now, formally our solution is, as above, \[
+    y = A_1 e^{(\alpha + i\beta)x} + A_2 e^{(\alpha - i\beta)x}
+\]Since $\beta \neq 0$ here since the roots cannot be equal! so we can rewrite in alternative forms:\[
+    y = e^{\alpha x}\left[A_1 e^{i\beta x} + A_2 e^{-i\beta x}\right] 
+    = e^{\alpha x}\left[C_1 \cos{\beta x} + C_2 \sin{\beta x}\right] 
+\]
+where $A_1, A_2$ or $C_1, C_2$ can be taken as our arbitrary constants.
+(Naturally, $C_1 = A_1 + A_2, C_2 = (A_1 - A_2)i$ by De Moivre.)
+
+\begin{ex}
+    \[
+        \frac{\mathrm{d}^{2}x}{\mathrm{d}t^{2}} + 2k\frac{\mathrm{d}x}{\mathrm{d}t} + \omega^{2}x = 0
+    \]
+    which is the equation for damped harmonic oscillator ($k > 0$).\[
+        \lambda^{2} + 2k\lambda + \omega^{2} = 0, \quad
+        \lambda_{1, 2} = -k \pm \sqrt{k^{2} - \omega^{2}}
+    \]
+    and \[
+        x(t) = A_1 e^{\lambda_1 t} + A_2 e^{\lambda_2 t}
+    \] in general. This can be broken down into different cases.
+    \begin{enumerate}[label = (\arabic*)]
+        \item $k = 0$, i.e. \emph{No Damping}.\[
+            x = A_1 e^{i\omega t} + A_2 e^{-i\omega t}
+            = C_1 \cos{\omega t} + C_2 \sin{\omega t}
+        \]
+
+    \item $k^{2} < \omega^{2}$, i.e. \emph{Light Damping}.\[
+        x = A_1 e^{-kt + i\omega t} + A_2 e^{-kt - i\omega t}
+        = (C_1 \cos{\omega t} + C_2 \sin{\omega t}) e^{-kt}
+    \]with $\omega = {(\omega^{2} + k^{2})}^{\frac{1}{2}}$.
+
+\item $k^{2} > \omega^{2}$, i.e. \emph{Heavy Damping}.\[
+    x = A_1 e^{-|\lambda_1|t + A_2 e^{-|\lambda_2|t}}
+\]
+since $\lambda_1, \lambda_2$ are each neagative real.
+
+\item $k^{2} = \omega^{2}$, i.e. \emph{Critical Damping}.\[
+        \lambda_1 = \lambda_2 = -k \Rightarrow x = (A_1 + A_2 t)e^{-kt}
+\]
+    \end{enumerate}
+    \underline{Note}: $x(t)$ behaviours for various cases!
+\end{ex}
+
+\paragraph{Finding a PI}
+
+Now we have the CF we need any particular solution of \,\eqref{ODE:11},
+in order to complete the job of finding the general solution.
+The PI is \emph{not} unique!
+Our guide is the form of the function $f(x)$ on RHS.\@
+\begin{enumerate}[label = (\alph*)]
+    \item \emph{polynomial in $x$} 
+        \\Try a polynomial for the PI and choose the coefficients to fit!
+        \underline{Example}: \[
+            \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} - 3 \frac{\mathrm{d}y}{\mathrm{d}x} + 2y = x
+        \]Try $\textnormal{PI} = ax^{2} + bx + c$, where we need to find $a, b, c$.
+        This method is often known as the \underline{method of undetermined coefficients}.
+        \\We now determine them! (SIAS --- Suck It And See)\[
+            2a - 3(2ax + b) + 2(ax^{2} + bx + c) = x
+        \]
+        By comparing the coefficients, we can obtain \[
+            a = 0, b = \frac{1}{2}, c = \frac{3}{4} \Rightarrow 
+            y_{\textnormal{PI}} = \frac{1}{2}x + \frac{3}{4}
+        \]
+        Since $y_{\textnormal{CF}} = A_1 e^{x} + A_2 e^{2x}$ for this equation,
+        then the general solution can be written as\[
+            y(x) = A_1 e^{x} + A_2 e^{2x} + \frac{1}{2} x + \frac{3}{4}
+        \]
+        \underline{Note}: Our inclusion of $ax^{2}$ term in our trial PI has been 
+        self-correcting since it emerged that $a = 0$. This is always so;
+        the method gives what is needed!
+
+    \item \emph{multiple of $e^{bx}$} 
+        \\The obvious choice for the PI is $A e^{bx}$, since
+        the linear operator $\mathscr{L}$ generates only terms of this type 
+        --- choose $A$ to fit!
+        But there are two cases to consider:
+        \begin{enumerate}[label = (\roman*)]
+            \item $e^{bx}$ \emph{not} in $y_{\textnormal{CF}}$, i.e. $\mathscr{L}(e^{bx}) \neq 0$
+                \\\underline{Example}: \[
+                    \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + 5\frac{\mathrm{d}y}{\mathrm{d}x} + 6y = 7e^{8x}
+                \]with\[
+                y_{\textnormal{CF}} = A_1 e^{-3x} + A_2 e^{-2x}
+                \]
+                Try $y_{\textnormal{PI}} = A e^{8x}$, then\[
+                    A e^{8x}[64 + 40 + 6] = 7 e^{8x} \Rightarrow A = \frac{7}{110}
+                \]
+                and general solution is\[
+                    y(x) = y_{\textnormal{CF}} + \frac{7}{110} e^{8x}
+                \]
+
+            \item $e^{bx}$ is \emph{contained} in $y_{\textnormal{CF}}$, i.e. $\mathscr{L} e^{bx} = 0$
+                \smallskip
+                
+                Our trial solution in (i) now does not work!
+                We might hope (anticipate) that $xe^{bx}$ might be involved, and just try it\ldots (SIAS)
+                
+                A more `automatic' approach is to take the $Ae^{bx}$ from the CF (where $A$ was constant)
+                and try a PI of the form $A(x)e^{bx}$ --- called \textbf{\emph{variation of parameters}}.
+                We expect that $A(x)$ will be a polynomial in $x$!
+                
+                \underline{Example}: \[
+                    \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + 3x + 2y = e^{-x}
+                \]with\[
+                y_{\textnormal{CF}} = A_1 e^{-x} + A_2 e^{-2x}
+                \]
+                Try $y_{PI} = A(x) e^{-x}$.\[
+                    \Rightarrow (A'' - 2A' + A) e^{-x} + 3(A' - A) e^{-x} + 2Ae^{-x} = e^{-x}
+                \]
+                By comparing the coefficients, we get\[
+                A'' + A' = 1 
+                \] 
+                Afterwards, integrate with respect to $x$ once and we get \[
+                A' + A = x + \overline{C_1}
+                \]
+                Solving this first-order linear equation, and we get \[
+                    A = x + C_1 + C_2 e^{-x}
+                \]\[
+                \Rightarrow y_{\textnormal{PI}} = A(x)e^{-x}
+                = xe^{-x} + C_1 e^{-x} + C_2 e^{-2x}
+                \]
+                Take $\textnormal{PI} = xe^{-x}$ (W.L.O.G), we can obtain\[
+                    y(x) = A_1 e^{-x} + A_2 e^{-2x} + x e^{-x}
+                \]
+                Of course if the auxiliary equation has equal roots then $y_{\textnormal{CF}}$
+                has $xe^{bx}$ too! However the variabtion of parameters still works
+                --- or alternatively (a trial polynomial)($e^{bx}$).%chktex 36
+
+                \underline{Example}: \[
+                    \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + 4 \frac{\mathrm{d}y}{\mathrm{d}x} + 4y = e^{-2x}
+                \]with\[
+                y_{\textnormal{CF}} = A_1 e^{-2x} + A_2 xe^{-2x}
+                \]
+                We can then set PI as\[
+                    y_{\textnormal{PI}} = A(x)e^{-2x} 
+                    \Rightarrow \ldots A'' = 1
+                    \Rightarrow A = \frac{x^{2}}{2} + [\overline{A_1} + \overline{A_2}x]
+                \]\[
+                \Rightarrow y(x) = A_1 e^{-2x} + A_2 xe^{-2x} + \frac{x^{2}}{2}e^{-2x}
+                \]
+        \end{enumerate}
+        
+\end{enumerate}
 
 
 
@@ -870,6 +1070,10 @@ Try a solution of the form $y = e^{\lambda x}$ where $\lambda$ is a constant ---
 
 
 \chapter{Linear Algebra}
+
+\section{Introduction to Matrices and Vectors}
+
+\subsection{Column vectors}
 
 \newmdtheoremenv[style=defEnv]{column vector}[theorem]{Definition}
 \begin{column vector}
@@ -938,16 +1142,16 @@ Try a solution of the form $y = e^{\lambda x}$ where $\lambda$ is a constant ---
     i.e. $\pmb{e}_k$ is the vector with $k$th entry equal to 1 and all other entries equal to 0.
 \end{standard basis vector}
 
-\newmdtheoremenv{operations on column vectors}[theorem]{(Operations on column vectors) Definition}
-\begin{operations on column vectors}
-    Let \[
-        \pmb{v} = \begin{pmatrix}
+\paragraph{Operations on column vectors}
+
+    \[
+        \pmb{v} := \begin{pmatrix}
                 v_1\\
                 v_2\\
                 \vdots\\
                 v_n
         \end{pmatrix}, \quad
-        \pmb{u} = \begin{pmatrix}
+        \pmb{u} := \begin{pmatrix}
                 u_1\\
                 u_2\\
                 \vdots\\
@@ -976,7 +1180,6 @@ Try a solution of the form $y = e^{\lambda x}$ where $\lambda$ is a constant ---
     \item \textbf{\emph{Dot product}} $v \cdot u$ is defined to be the number $v_1 u_1 + v_2 u_2 + \cdots + v_n u_n$.
             $\cdot : \mathbb{R}^{n} \times \mathbb{R}^{n} \rightarrow \mathbb{R}$, so not binary.
     \end{enumerate}
-\end{operations on column vectors}
 
 \begin{ex}
     Show that $(\mathbb{R}^{n}, +)$ is an Abelian group.
@@ -1112,39 +1315,55 @@ Try a solution of the form $y = e^{\lambda x}$ where $\lambda$ is a constant ---
 
 \newmdtheoremenv[style=defEnv]{transpose}[theorem]{Definition}
 \begin{transpose}
-    The \emph{transpose} $A^{T}$ of an $n \times m$-matrix $(a_{ij})$ is 
+    The \textbf{\emph{transpose}} $A^{T}$ of an $n \times m$-matrix $(a_{ij})$ is 
     the $m \times n$-matrix $(a_{ij})$.
+    The \textbf{\emph{leading diagonal}} of a matrix is the $(1, 1), (2, 2), \ldots$ entries.
+    So the transpose is obtained by doing a reflection in the leading diagonal.
 \end{transpose}
 
 \newmdtheoremenv[style=defEnv]{multiplying matrix with vector}[theorem]{(Multiplying matrices with vectors) Definition}
 \begin{multiplying matrix with vector}
-    Let $A = (a_{ij})$ be an $n \times m$-matrix, $v \in \mathbb{R}^{m}$.
-    Then $Av$ is the vector in $\mathbb{R}^{n}$ with $i$-th row entry $\sum_{j=1}^{m} a_{ij}v_j$
+    Let $A = (a_{ij})$ be an $n \times m$-matrix, $\pmb{v} \in \mathbb{R}^{m}$.
+    Then $A\pmb{v}$ is the vector in $\mathbb{R}^{n}$ with $i$-th row entry $\sum_{j=1}^{m} a_{ij}\pmb{v}_j$
 \end{multiplying matrix with vector}
 
 \begin{ex}
+    \;
+
     \begin{itemize}
             \item 
-                Prove that for $A \in M_{n \times m}(\mathbb{R}), e_k \in \mathbb{R}^{m}$,
-                $Ae_k = k$-th column of A.
+                Prove that for $A \in M_{n \times m}(\mathbb{R}), \pmb{e}_k \in \mathbb{R}^{m}$,
+                $A\pmb{e}_k = k$-th column of A.
     
-                \underline{Proof}: let $A = (a_{ij})$. By definition the $i$-th entry of $Ae_k$ is\[
-                    \sum_{j=1}^{m} a_{ij}{(e_k)}_j = a_{ik}
-                \]since $ {(e_k)}_j = 0$ whenever $j \neq k$, 1 for $j = k$
-            \item $\nu \cdot v = \nu^{T}v$
-            \item Let $I_n$ be the identity matrix. Show formally that $I_n \nu = \nu$, $\forall \nu \in \mathbb{R}^{n}$.
-            \item let $\nu_1, \nu_2, \nu_3 \in \mathbb{R}^{3}$.
-                Write the linear combination $3\nu_1 - 5\nu_2 + 7\nu_3$ as a multiplication of matrix
-                $A \in M_{3 \times 3}(\mathbb{R})$ with a vector $x \in \mathbb{R}^{3}$
+                \underline{Proof}: let $A = (a_{ij})$. By definition the $i$-th entry of $A\pmb{e}_k$ is\[
+                    \sum_{j=1}^{m} a_{ij}{(\pmb{e}_k)}_j = a_{ik}
+                \]since $ {(\pmb{e}_k)}_j = 0$ whenever $j \neq k$, 1 for $j = k$
+            \item Let $I_n$ be the identity matrix. Show formally that $I_n \pmb{\nu} = \pmb{\nu}$, $\forall \pmb{\nu} \in \mathbb{R}^{n}$.
+            \item $\pmb{\nu} \cdot \pmb{v} = \pmb{\nu}^{T} \pmb{v}$
+            \item let $\pmb{\nu}_1, \pmb{\nu}_2, \pmb{\nu}_3 \in \mathbb{R}^{3}$.
+                Write the linear combination $3\pmb{\nu}_1 - 5\pmb{\nu}_2 + 7\pmb{\nu}_3$ as a multiplication of matrix
+                $A \in M_{3 \times 3}(\mathbb{R})$ with a vector $\pmb{x} \in \mathbb{R}^{3}$. Then\[
+                    A\pmb{x} = \begin{pmatrix}
+                        \pmb{\nu}_1 & \pmb{\nu}_2 & \pmb{\nu}_3
+                    \end{pmatrix} 
+                    \begin{pmatrix}
+                            x_1 \\
+                            x_2 \\
+                            x_3
+                    \end{pmatrix} 
+                    = x_1\pmb{\nu}_1 + x_2\pmb{\nu}_2 + x_3\pmb{\nu}_3
+                \]
+                with $\pmb{\nu}_1, \pmb{\nu}_2, \pmb{\nu}_3$ written as a column vector to form a matrix
+                in the above expression, thus using matrix multiplication to express linear combination of vectors.
     \end{itemize}
     
 \end{ex}
 
-\section{System of linear equations}
+\section{Systems of linear equations}
 
 \newmdtheoremenv[style=defEnv]{linear equation}[theorem]{Definition}
 \begin{linear equation}
-    A \emph{linear equation} in the variables $x_1, x_2, \ldots, x_n \in \mathbb{R}$
+    A \textbf{\emph{linear equation}} in the variables $x_1, x_2, \ldots, x_n \in \mathbb{R}$
     is an equation of the form:\[
         \lambda_1 x_1 + \lambda_2 x_2 + \cdots + \lambda_n x_n = c, 
         \,\textnormal{with }\, \lambda_1,\ldots,\lambda_n \subset \,\textnormal{\emph{Fixed} real numbers}
@@ -1154,7 +1373,16 @@ Try a solution of the form $y = e^{\lambda x}$ where $\lambda$ is a constant ---
 
 \newmdtheoremenv[style=defEnv]{simultaneous list of linear equations}[theorem]{Definition}
 \begin{simultaneous list of linear equations}
-    A system of linnear equations is a simultaneous list of linear equations
+    A system of $n$ linear equations is a list of simultaneous linear equations.
+    It can be converted to $A\pmb{x} = \pmb{b} \in \mathbb{R}^{m}$,with\[
+        A = \begin{pmatrix}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            a_{21} & a_{22} & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{m1} & a_{m2} & \cdots & a_{mn}
+        \end{pmatrix} 
+        \in \mathbb{R}^{m \times n}
+    \]
 \end{simultaneous list of linear equations}
 
 
