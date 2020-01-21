@@ -407,6 +407,83 @@ As soon as you get one left and one right identity, you have a unique identity $
     
 \end{proof}
 
+\begin{ex}
+    $(\mathbb{Z}_n, \cdot)$ is an Abelian group?
+    \\Similary to above for associative, commutative, and identity.
+    \\\underline{Inverses}:
+
+    Draw Caley table for $(\mathbb{Z}_3, \cdot)$.
+    We realize that ${[0]}_{3}$ has no inverses.
+    But $(\mathbb{Z}_3 \backslash \{{[0]}_{3}\}, \cdot)$ is.
+
+    Similarly, for $(\mathbb{Z}_4, \cdot)$, it does not have inverses for all classes.
+
+    \underline{Caution}: In general $(\mathbb{Z}_n, \cdot)$ is \emph{not}  a group.
+    The idea then is to make it a group by removing non-invertible elements.
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{equivalence class inverse}[theorem]{Lemma}
+\begin{equivalence class inverse}
+    The element ${[a]}_{n} \in \mathbb{Z}_n$ has an inverse $\iff (a, n) = 1$.
+\end{equivalence class inverse}
+
+\begin{proof}
+    $(a, n) = 1 \iff \exists b, c \in \mathbb{Z}, \,\text{s.t}\; ab + cn = 1
+    \iff cn = 1 - ab \iff \exists {[b]}_{n} \;\text{s.t.}\;
+    {[a]}_{n}{[b]}_{n} = {[1]}_{n}$.
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{invertible equivalence class}[theorem]{Definition}
+\begin{invertible equivalence class}
+    $\mathbb{Z}_n^{*} := \{ {[a]}_{n} \in \mathbb{Z}_n \;|\; \exists b \in \mathbb{Z}
+    \;\text{s.t.}\; {[a]}_{n}{[b]}_{n} = {[1]}_{n}\}$.
+\end{invertible equivalence class}
+
+\newmdtheoremenv[style=defEnv]{special equivalence class is Abelian}[theorem]{Theorem}
+\begin{special equivalence class is Abelian}
+    $(\mathbb{Z}_n^{*}, \cdot)$ is an Abelian group.
+\end{special equivalence class is Abelian}
+
+\begin{proof}
+    To Show: if ${[a]}_{n}, {[b]}_{n} \in (\mathbb{Z}_n^{*}, \cdot) 
+    \Rightarrow {[a]}_{n} \cdot {[b]}_{n} \in (\matZbb{Z}_n^{*}, \cdot)$.
+    \\$\Rightarrow\ (a, n) = (b, n) = 1 \Rightarrow\ (ab, n) = 1
+    \Rightarrow\ {[ab]}_{n} \;\text{has inverse}\; {[a]}_{n} {[b]}_{n}$.
+
+    Alternatively: if $g, h$ have inverse, $h^{-1}g^{-1} \;\text{is inverse of}\; gh$.
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{cyclic groups}[theorem]{Definition}
+\begin{cyclic groups}
+    Let $G$ be a group, $g \in G$. The \textbf{\emph{order}} of $g$ is the smallest positive integer $n > 0$ %chktex 1
+    such that $g^{n} = e$.
+
+    Notation: ord $g = n$. If $n = \infty$, then $g$ is called of infinite order.
+\end{cyclic groups}
+
+\begin{ex}
+    $G = (\mathbb{C}^{*}, \cdot)$, ord $\ (-1) = 2$, ord $i = 4$, ord $2 = \infty$
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{finite cyclic group}[theorem]{Lemma}
+\begin{finite cyclic group}
+    Let $G$ be a finite group. Then every element $g \in G$ has finite orders.%chktex 1
+\end{finite cyclic group}
+
+\begin{proof}
+    Assume $g \in G$ has infinite orders. %chktex 1
+    Write the list: $g^{0}, g^{1}, g^{2}, \ldots$
+
+    Since $|G| = n < \infty$, there are two elements 
+    $g^{k}, g^{l}$ s.t. $g^{k} = g^{l}$, $k > l$.
+    $\iff\ g^{k} g^{-l} = e \iff g^{k - l} = e$.%chktex 1, chktex 8
+
+    But then ord $g \le k - l < \infty$.%chktex 1, chktex 8
+\end{proof}
+
+
+
+
 
 
 
@@ -421,7 +498,7 @@ As soon as you get one left and one right identity, you have a unique identity $
 
 \newmdtheoremenv[style=defEnv]{ODE}[theorem]{Definition}
 \begin{ODE}
-    An \textbf{\emph{ordinary differential equation}} (ODE) for $y(x)$ 
+    An \textbf{\emph{ordinary differential equation}} (ODE) for $y (x)$
     is an equation involving \underline{derivatives} of $y$.
     \begin{equation}\label{ODE:1}
         f(x, y, \frac{\mathrm{d} y}{\mathrm{d}x}, \frac{\mathrm{d}^{2} y}{\mathrm{d}x^{2}}, \ldots,
@@ -515,7 +592,7 @@ As soon as you get one left and one right identity, you have a unique identity $
         $x(t)$ as prey and $y(t)$ as predators, we have
         \begin{equation}\label{ODE:4}
             \frac{\mathrm{d} x}{\mathrm{d}t} = ax - bxy,\quad
-            \frac{\mathrm{d} y}{\mathrm{d}t} = -cy + \hat{d}xy
+            \frac{\mathrm{d} y}{\mathrm{d}t} = -cy + dxy
         \end{equation}
         \underline{Note}: Equation\eqref{ODE:4} is \emph{separable} when written in principle\[
             \frac{\mathrm{d} y}{\mathrm{d}x} = \frac{\frac{\mathrm{d} y}{\mathrm{d}t} }
@@ -1060,8 +1137,76 @@ Our guide is the form of the function $f(x)$ on RHS.\@
                 \]\[
                 \Rightarrow y(x) = A_1 e^{-2x} + A_2 xe^{-2x} + \frac{x^{2}}{2}e^{-2x}
                 \]
+
         \end{enumerate}
         
+            \item $e^{bx}$ is \emph{polynomial} in $x$
+                
+                Try $\text{PI} = C(x) e^{bx}$ where $C(x)$ is a polynomial with coefficients to be found
+                --- as in (a), (b) above.
+
+            \item sines, cosines, sinh, cosh
+
+                We \emph{either} just recognize the pattern and put e.g. 
+                $A\cos{()} + B\sin{()}$ \emph{or} $A\cosh{()} + B\sinh{()}$, etc.
+
+                \emph{\underline{OR}} 
+
+                Make use of exponentials ---
+                maybe complex ones using $e^{ix} = \cos{x} + i \sin{x}$, etc.
+                
+                \underline{Example}: \[
+                    \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + 3 \frac{\mathrm{d}y}{\mathrm{d}x} + 2y 
+                    = e^{x}\cos{x}
+                \]
+                with \[
+                    y_{\textnormal{CF}} = A_1 e^{-x} + A_2 e^{-2x}.
+                \]
+                There is no obvious trouble with this CF\ldots
+
+                \begin{enumerate}[label = (\arabic*)]
+                    \item Try $y_{\textnormal{PI}} = B e^{x} \cos{x} + C e^{x} \sin{x}$
+                        because $\mathscr{L} (y_{\textnormal{PI}})$ produces terms of a similar type.
+                        Substitute in and equate coefficents of $e^{x} \cos{x}, e^{x}\sin{x}$
+                        on the two sides $\Rightarrow B = \frac{1}{10}, C = \frac{1}{10}$.
+
+                        \emph{\underline{OR}}
+
+                    \item Put RHS $= \frac{1}{2} e^{(1 + i)x} + \frac{1}{2} e^{(1 - i)x}
+                        (=\Re \left( e^{(1 + i)x} \right))$. Then try \[
+                            y_{\textnormal{PI}} = C_1 e^{(1 + i)x} 
+                            \Rightarrow [{(1 + i)}^{2} + 3(1 + i) + 2] C_1 = 1
+                        \]
+                        and $C_1 = \frac{1}{5(1 + i)} = \frac{1}{10}(1 - i)$,
+                        and \[
+                            y_{\textnormal{PI}} = \Re \left[\frac{1}{10} (1 - i) e^{(1 + i)x}\right] 
+                            = \frac{1}{10} e^{x}\cos{x} + \frac{1}{10}e^{x} \sin{x}
+                        \]
+                \end{enumerate}
+                Naturally, we might need to be adaptable if we find polynomials on RHS in $f(x)$
+                as well, or the `equal roots' case\ldots However something to beware:
+
+                \underline{Example}:\[
+                    \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + e\frac{\mathrm{d}y}{\mathrm{d}x} + 2y = \cosh{2x}
+                \]
+                with\[
+                    y_{\textnormal{CF}} = A_1 e^{-x} + A_2 e^{-2x}
+                \]
+                If we try $y_{\textnormal{PI}} = C_1 \cosh{2x} + C_2 \sinh{2x}$,
+                we would find $C_1, C_2$ not defined\ldots\[
+                    \left\{
+                        \begin{align*}
+                            6C_1 + 6C_2 & = 1 \\
+                            6C_1 + 6C_2 & = 0.
+                        \end{align*}
+                        \right.
+                \]
+                Why?! Well $\cosh{2x} = \frac{1}{2}(e^{2x} + e^{-2x})$ and
+                one of these exponentials \emph{is} in $y_{\textnormal{CF}}$.
+                The better one is \[
+                    y_{\textnormal{PI}} = \frac{1}{24} e^{2x} - \frac{1}{2} x e^{-2x}
+                \]using earlier results.
+
 \end{enumerate}
 
 
@@ -1384,6 +1529,140 @@ Our guide is the form of the function $f(x)$ on RHS.\@
         \in \mathbb{R}^{m \times n}
     \]
 \end{simultaneous list of linear equations}
+\underline{Caution}: Thee $m \times n$-matrix $A$ is called coefficient matrix.
+The matrix $(A|\pmb{b})$ where the vector $\pmb{b}$ is added as a column on the  right
+is called \textbf{\emph{augmented matrix}}.
+
+\newmdtheoremenv[style=defEnv]{consistent system}[theorem]{Definition}
+\begin{consistent system}
+    A system is called \textbf{\emph{consistent}} (resp.\ inconsistent)
+    if it has a solution $(s_1, s_2, \ldots, s_m)$ (resp.\ no solution).
+\end{consistent system}
+
+\begin{ex}
+    \[\left\{
+        \begin{align*}
+            & x_1 + x_3 - x_4 = 1 \\
+            & x_2 - x_4 = 6 \\
+            & x_1 + x_2 + 6x_3 - 3x_4 = 0
+        \end{align*}
+     \right.   
+    \]
+    Augmented matrix form:\[
+        \left(\begin{array}{@{}cccc|c@{}}%chktex 4, chktex 44
+                1 & 0 & 1 & -1 & 1 \\
+                0 & 1 & 0 & -1 & 6 \\
+                1 & 1 & 6 & -3 & 0
+        \end{array}\right)
+    \]
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{row operation}[theorem]{Definition}
+\begin{row operation}
+    A \textbf{\emph{row operation}} is one of the following procedures on a $n \times m$-matrix $(a_{ij})$:
+    \begin{enumerate}[label = (\arabic*)]
+        \item $r_i(\lambda)$: multiply row $i$ by a scalar $\lambda \in \mathbb{R}, \lambda \neq 0$.
+        \item $r_{ij}$: swap row $i$ with row $j$.
+        \item $r_{ij}(\lambda)$: multiply row $i$ by $\lambda \neq 0$, $\lambda \in \mathbb{R}$ and add it to row $j$.
+    \end{enumerate}
+\end{row operation}
+
+\begin{ex}
+    let $A = \begin{pmatrix}
+        1 & 2 \\
+        3 & 4
+    \end{pmatrix} $, so\[
+        r_{12} \Rightarrow \begin{pmatrix}
+            3 & 4 \\ 
+            1 & 2
+        \end{pmatrix} 
+    \]\[
+    r_2(2) \Rightarrow \begin{pmatrix}
+        1 & 2\\
+        6 & 8
+    \end{pmatrix} 
+    \]\[
+    r_{12}(2) \Rightarrow \begin{pmatrix}
+        1 & 2 \\
+        5 & 8
+    \end{pmatrix} 
+    \]
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{row operation on augmented matrix}[theorem]{Proposition}
+\begin{row operation on augmented matrix}
+    Let $A\pmb{x} = \pmb{b}$ be a system of linear equations in matrix form, $(A|\pmb{b})$
+    the augmented matrix, $(A'|\pmb{b}')$ the augmented matrix of the system after row operation.
+    Show that $x$ is solution of $A\pmb{x} = \pmb{b} \iff$ $x$ is solution of $A'\pmb{x} = \pmb{b}'$.
+\end{row operation on augmented matrix}
+
+\begin{proof}
+    row operations of type (1) and (2) $\Rightarrow$ trivial.%chktex 10
+
+    (3) Take equation $i$, multiply it by $\lambda$, add it to equation $j$.
+    $\Rightarrow (a_{j1} + \lambda a_{i 1}) x_1 + \cdots + (a_{jm} + \lambda a_{im})x_m = b_j + \lambda b_i$.
+\end{proof}
+\underline{Caution}: Every row operation is invertible: \[
+    {[r_i(\lambda)]}^{-1} = r_i(\frac{1}{\lambda}),\; {[r_{ij}]}^{-1} = r_{ij},\;
+    {[r_{ij}(\lambda)]}^{-1} = r_{ij}(-\lambda)
+\]
+
+\subsection{Gauss algorithm}
+\newmdtheoremenv[style=defEnv]{echelon form}[theorem]{Definition}
+\begin{echelon form}
+    The left most non-zero entry in a non-zero row is called \textbf{\emph{leading entry}}.
+    A matrix is called in \textbf{\emph{echelon form}} if:
+    \begin{enumerate}[label = (\arabic*)]
+        \item The leading entry in each non-zero row is 1.
+        \item The leading 1 of each row is to \emph{the right} of the leading 1 in the row above.
+        \item The zero-rows are \emph{below} all other rows.
+    \end{enumerate}
+\end{echelon form}
+
+\begin{ex}
+    \[
+        \begin{pmatrix}
+            0 & 0 & 0 \\
+            1 & 0 & 0 \\
+            0 & 1 & 0
+        \end{pmatrix}, \begin{pmatrix}
+        0 & 1 & 0\\
+        1 & 0 & 0\\
+        0 & 1 & 2
+        \end{pmatrix}, \begin{pmatrix}
+        1 & 3 & 2 & 0\\
+        0 & 1 & 0 & 0\\
+        0 & 0 & 0 & 0
+        \end{pmatrix} 
+    \]
+    Only the last one is in echelon form.
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{reduced echelon form}[theorem]{Definition}
+\begin{reduced echelon form}
+    A matrix is \textbf{\emph{row reduced echelon form}} if:
+    \begin{enumerate}[label = (\arabic*)]
+        \item It is in echelon form.
+        \item The leading 1 in each row is the \emph{only} non-zero entry in its column.
+    \end{enumerate}
+\end{reduced echelon form}
+
+\begin{ex}
+    \[
+        \begin{pmatrix}
+            1 & 0 & 0 & 1\\
+            0 & 0 & 1 & 0\\
+            0 & 0 & 0 & 0
+        \end{pmatrix}, \begin{pmatrix}
+            1 & \alpha & \beta & 2\\
+            0 & 0 & 1 & -2
+        \end{pmatrix}.
+    \]
+    The second one is not.
+\end{ex}
+
+
+
 
 
 
@@ -1391,4 +1670,4 @@ Our guide is the form of the function $f(x)$ on RHS.\@
 \chapter{Analysis}
 
 
-\end{document}
+\end{document}%chktex 7, chktex 17
