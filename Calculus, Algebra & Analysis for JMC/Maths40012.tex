@@ -481,7 +481,166 @@ As soon as you get one left and one right identity, you have a unique identity $
     But then ord $g \le k - l < \infty$.%chktex 1, chktex 8
 \end{proof}
 
+\newmdtheoremenv[style=defEnv]{distinct element in a group}[theorem]{Lemma}
+\begin{distinct element in a group}
+    Let $G$ be a group, $g \in G$, ord $g = n$. %chktex 1
+    Then all elements $\left\{g_0, g_1, g_2, \ldots, g^{n-1}\right\} $ are distinct.
+\end{distinct element in a group}
 
+\begin{proof}
+    Assume that $g^{i} = g^{j}$ for some $i, j, 0 \le i \le j \le n - 1$. %chktex 1, chktex 8
+    Then $g^{j-i} = g_0 = e$. Since $i < j, {j-i} < n$. Since n is smallest integer, s.t. $g^{n} = e$.
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{ord g <= n}[theorem]{Corollory}
+\begin{ord g <= n}
+    If $|G| = n < \infty$, $g \in G$, then ord $g \le n$. %chktex 1
+\end{ord g <= n}
+
+\begin{proof}
+    Assume \[
+        \exists i \in \mathbb{Z}, i \ge n + 1, \;\textnormal{s.t.}\; g^{i} = e \;\textnormal{for some}\;
+        g \in G, i \;\textnormal{is the smallest such integer}.
+    \]
+    By previous lemma, $\left\{g_0, g_1, g_2, \ldots, g^{i - 1}\right\} $ all distince.
+    There are $i$ elements $i > n$.
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{cyclic group}[theorem]{Definition}
+\begin{cyclic group}
+    We call a group $G$ \textbf{\emph{cyclic}} if \[
+        \exists g \in G \;\textnormal{s.t.}\; G = \left\{g^{n} | n \in \mathbb{Z}\right\}%
+.\]
+    $g$ is called a \textbf{\emph{generator}}.
+\end{cyclic group}
+
+\begin{ex}
+    \,
+
+    \begin{itemize}
+        \item $(\mathbb{Z}, +)$.
+            $2 = 1^{2} = 1 + 1$, $n = 1^{n}$.
+        \item $(\mathbb{Z}_n, +)$, generator ${[1]}_{n}$.
+        \item $\left\{\pm 1, \pm i\right\} $, generator $\pm i$.
+    \end{itemize}
+    
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{cyclic groups are Abelian}[theorem]{Lemma}
+\begin{cyclic groups are Abelian}
+    All cyclic groups are Abelian.
+\end{cyclic groups are Abelian}
+
+\begin{proof}
+    To show: $\forall h, k \in G, h \cdot k = k \cdot h$.
+
+    $G$ is cyclic 
+    $\Rightarrow{} G = \left\{g^{n} | n \in{}\mathbb{Z}\right\} $
+    for some generators $g \in G \Rightarrow h = g^{i}, k = g^{j}$.
+    \\$\Rightarrow{} h \cdot k = g^{i} \cdot g^{j} = g^{i + j} = g^{j + i} = g^{j} \cdot g^{i} = k \cdot h$.
+\end{proof}
+\underline{Warning}: The converse \emph{is not} true (Abelian does not imiply cyclic)
+\underline{Counter example}: $ (\mathbb{Q}, +)$.
+
+Assume $\mathbb{Q}$ is cyclic under +. \[
+    \Rightarrow \exists g \in \mathbb{Q} \;\textnormal{s.t.}\; q = g^{n} (= ng) \forall q \in \mathbb{Q}.
+\]
+Take $\frac{g}{2}$ ($\in \mathbb{Q}$ since $g \in \mathbb{Q}$)\[
+    \Rightarrow \frac{g}{2} = ng \;\textnormal{for some}\; n \in \mathbb{Z}.
+\]
+
+\newmdtheoremenv[style=defEnv]{G has element of order n}[theorem]{Lemma}
+\begin{G has element of order n}
+    Let $G$ be a \emph{finite} group, $|G| = n$. So \[
+        G \;\textnormal{is cyclic}\; \iff G \;\textnormal{contains an element of order}\; n
+    \]
+\end{G has element of order n}
+
+\begin{proof}
+    ``$\Rightarrow$'': $G$ is cyclic $\Rightarrow$ $G$ has generator $g$.
+    Assume ord $g = k$, so\[
+        \left\{g^0, \ldots, g^{k-1}\right\} \;\textnormal{are distinct}.
+    \]
+    $\Rightarrow$ $k = n$ since $|G| = n$.
+    
+    ``$<=$'' Let assume $\exists g \in G$, ord $g = n$.
+   \[
+       \Rightarrow \left\{g^{0}, g^{1}, \ldots, g^{n - 1}\right\} \;\textnormal{are all distinct.}
+   \]
+   But $|G| = n$, hence $g$ generates all the group.
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{order 2 of element of cyclic group}[theorem]{Lemma}
+\begin{order 2 of element of cyclic group}
+    Let $G$ be a finite group. Then if $G$ is cyclic, it has at most one element of order 2.
+\end{order 2 of element of cyclic group}
+
+\section{Symmetric groups}
+
+\newmdtheoremenv[style=defEnv]{permutation}[theorem]{Definition}
+\begin{permutation}
+    A \textbf{\emph{permutation}} is a bijective function:\[
+        \sigma : \left\{1, 2, \ldots, n\right\} \mapsto \left\{1, 2, \ldots, n\right\}.
+    \]
+\end{permutation}
+
+\newmdtheoremenv[style=defEnv]{symmetric group}[theorem]{Definition}
+\begin{symmetric group}
+    The set of all permutation $S_n := \\\left\{ \sigma : 
+    \left\{1, 2, \ldots, n\right\}  \mapsto \left\{1, 2, \ldots, n\right\} \right\} $
+    is called the \textbf{\emph{symmetric group}}.
+\end{symmetric group}
+
+\newmdtheoremenv[style=defEnv]{permutation is a group}[theorem]{Theorem}
+\begin{permutation is a group}
+    The set $(S_n, 0)$ is a group.
+\end{permutation is a group}
+
+\begin{proof}
+    \,
+
+    \begin{itemize}
+            \item \underline{Closure}: Let $\nu, \tau \in S_n$, 
+                then $\nu, \tau$ are bijective by definition,
+                so are $\tau \circ \nu$ and $\nu \circ \tau$.
+            \item \underline{Associativity}: composition of functions is associative.
+            \item \underline{Identity}: identity $\nu (h) = k \forall k \in \left\{1, 2, \ldots, n\right\} $.
+            \item \underline{Inverses}: By definition: bijections $\iff$ $\exists$ inverses!
+    \end{itemize}
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{order of Sn is n!}[theorem]{Proposition}
+\begin{order of Sn is n!}
+    $|S_n| = {n!}$.
+\end{order of Sn is n!}
+
+\newmdtheoremenv[style=defEnv]{cycles}[theorem]{Definition}
+\begin{cycles}
+    A permutation is called a \textbf{\emph{cycle}} if there is a sequence
+    $\left\{a_1, a_2, \ldots, a_k\right\} $ of distince numbers s.t.\[
+        \nu (a_1) = a_2, \nu(a_2) = a_3, \ldots, \nu (a_{k-1}) = a_k, \nu (a_k) = a_1
+    \]and $\nu (i) = i$ for any other $i$ \emph{not} in the sequence.
+\end{cycles}
+
+\newmdtheoremenv[style=defEnv]{k-cycle}[theorem]{Definition}
+\begin{k-cycle}
+    If the sequence $\left\{a_1, a_2, \ldots, a_n\right\} $ has $k$ elements,
+    we call $\nu$ a ``$k$-cycle''. (length of cycle)
+\end{k-cycle}
+
+\newmdtheoremenv[style=defEnv]{order of k-cycle}[theorem]{Proposition}
+\begin{order of k-cycle}
+    The order of a $k$-cycle is $k$.
+\end{order of k-cycle}
+
+\begin{proof}
+    We know immediiately that $\nu^{k} = \textnormal{id}$ by definition.
+    $\Rightarrow \textnormal{ord}\; \nu \le k$.
+    
+    Assume that ord $\nu = i < k$. But by definition of $\nu^{i}(a_1) = a_{i + 1} \neq a_1$.
+\end{proof}
+
+\underline{Notation of a $k$-cycle}: $(a_1, a_2, \ldots, a_k)$.
 
 
 
@@ -956,7 +1115,7 @@ of this quadratic, so that $e^{\lambda_1 x}, e^{\lambda_2 x}$ are solutions of e
     \mathscr{L}\left(e^{\lambda_1 x}\right) = 0 = \mathscr{L}\left(e^{\lambda_2 x}\right)
 \]
 Because of the linearity property of $\mathscr{L}$ we have\[
-    y_{\textnormal{CF}} = A_1 e^{\lambda_1} + A_2 e^{\lambda_2 x}
+    y_{\textnormal{CF}} = A_1 e^{\lambda_1 x} + A_2 e^{\lambda_2 x}
 \]
 where $A_1, A_2$ are two arbitrary constants and
 $\mathscr{L} y_{\textnormal{CF}} = 0$ as required.
@@ -1187,7 +1346,7 @@ Our guide is the form of the function $f(x)$ on RHS.\@
                 as well, or the `equal roots' case\ldots However something to beware:
 
                 \underline{Example}:\[
-                    \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + e\frac{\mathrm{d}y}{\mathrm{d}x} + 2y = \cosh{2x}
+                    \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + 3\frac{\mathrm{d}y}{\mathrm{d}x} + 2y = \cosh{2x}
                 \]
                 with\[
                     y_{\textnormal{CF}} = A_1 e^{-x} + A_2 e^{-2x}
@@ -1206,9 +1365,385 @@ Our guide is the form of the function $f(x)$ on RHS.\@
                 The better one is \[
                     y_{\textnormal{PI}} = \frac{1}{24} e^{2x} - \frac{1}{2} x e^{-2x}
                 \]using earlier results.
+                \smallskip
+                \\\underline{Conclusion}: Try to use complex numbers, because it avoids ``clashing'' with
+                hyperbolic functions, and also prevents calculation mistakes, like what would happen when
+                differentiating sines and cosines.
+\end{enumerate}
+\\Of course we might finally need to specialise our general solution to the particular solution
+that satisfies particular boundary conditions.
+\\\underline{Example}:\[
+    \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + \frac{\mathrm{d}y}{\mathrm{d}x} - 6y = \sin{x} + xe^{2x}
+\]subject to $y(0) = 0, \frac{\mathrm{d}y}{\mathrm{d}x} (0) = 0$.
+The general solution is\[
+    y(x) = A_1e^{-3x} + A_2e^{2x} - \frac{1}{50}(\cos{x} + 7\sin{x}) + \frac{e^{2x}}{50} (5x^{2} - 2x)%chktex 9, chktex 29
+\]and then\[
+    \left.\begin{align*}
+            0 & = A_1 + A_2 - \frac{1}{50} \\
+            0 & = -3A_1 + 2A_2 - \frac{7}{50} - \frac{1}{25}
+    \end{align*}
+\right\} \Rightarrow{} \left\{
+\begin{align*}
+    A_1 & = -\frac{7}{250} \\
+    A_2 & = \frac{12}{250}.
+\end{align*}
+\right.
+\]
 
+\subsection{Equations with variable coefficients}
+
+Special types to meet later (Bessel, Legendre, etc.) \ldots
+\smallskip
+\\A Novelty due to Euler (+ Cauchy!) If W.L.O.G.\[
+    x^{n} \frac{\mathrm{d}^{n}y}{\mathrm{d}x^{n}} + b_1 x^{n-1}\frac{\mathrm{d}^{n-1}y}{\mathrm{d}x^{n-1}} 
+    + \cdots + b_n y = f(x)
+\]with $b_1, b_2, \ldots, b_n$ constants.
+\begin{enumerate}[label = (\roman*)]
+    \item $f(x) = 0$. Try $y = x^{\lambda} \Rightarrow{}$ $n$ values of $\lambda$ in general.\[
+            y(x) = A_1 x^{\lambda_1} + A_2 x^{\lambda_2} + \cdots + A_n x^{\lambda_n}
+    \]with $n$ arbitrary constants.
+    
+\item $f(x) \neq 0$. The method in (i) above might not be nice for PI!\@
+    So put $x = e^{t}$ to \emph{stretch} the independent variable, becoming
+    a \emph{linear equation for $y(t)$} which has constant coefficients.
+    \smallskip
+    \\\underline{Example}:\[
+        x^{2}\frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} + 3x\frac{\mathrm{d}y}{\mathrm{d}x} + y = x^{3}.
+    \]Let $x = e^{t}$, so $\frac{\mathrm{d}x}{\mathrm{d}t} = e^{t} = t$,\[
+        \begin{align*}
+            \frac{\mathrm{d}y}{\mathrm{d}x} & = \frac{\frac{\mathrm{d}y}{\mathrm{d}t} }{\frac{\mathrm{d}x}{\mathrm{d}t} }
+            = \frac{1}{e^{t}} \frac{\mathrm{d}y}{\mathrm{d}t} \\
+            \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} & =
+            \frac{\frac{\mathrm{d}}{\mathrm{d}t} \frac{\mathrm{d}y}{\mathrm{d}x} }{\frac{\mathrm{d}x}{\mathrm{d}t}}
+            = \frac{\frac{\mathrm{d}}{\mathrm{d}t} \left(e^{-t} \frac{\mathrm{d}y}{\mathrm{d}t} \right)} {e^{t}}
+            = -e^{-2t}\frac{\mathrm{d}y}{\mathrm{d}t} + e^{-2t}\frac{\mathrm{d}^{2}y}{\mathrm{d}t^{2}}.
+        \end{align*}
+    \]The equation therefore becomes\[
+    \left(\frac{\mathrm{d}^{2}y}{\mathrm{d}t^{2}} - \frac{\mathrm{d}y}{\mathrm{d}t} \right) 
+    + 3\frac{\mathrm{d}y}{\mathrm{d}t} + y = e^{3t}
+    \]i.e.\[
+        \frac{\mathrm{d}^{2}y}{\mathrm{d}t^{2}} + 2\frac{\mathrm{d}y}{\mathrm{d}t} + y = e^{3t}.
+    \]So\[
+    y(t) = A_1 e^{-t} + A_2 t e^{-t} + \frac{1}{16}e^{3t}
+    \]and\[
+    y(x) = \frac{A_1}{x} + \frac{A_2}{x}\ln{x} + \frac{1}{16}x^{3}.
+    \]
 \end{enumerate}
 
+We should note that $x > 0$ and $x < 0$ need to be treated separately since $x = 0$ is an evident singularity.
+For $x< 0$ we would need to substitute $x = -e^{t}$ in the above method.
+
+
+\section{Difference Equations}
+
+\subsection{Definitions and Examples}
+
+(Recurrence relations, maps, discrete dynamical systems, \ldots)
+From variables whose change is `\emph{continuous}', we now consider variables which are `\emph{discrete}'.
+(`Season to season', `one accounrting period to the next', etc.)
+We have a \emph{dependent variable} $U(n)$ with \emph{integer independent variable} $n$
+--- together with a relation connecting $U(n)$ to $U(n + 1), U(n + 2), \cdots$.
+\medskip
+\\\underline{Note}:
+
+\begin{enumerate}[label = (\roman*)]
+    \item \textbf{\emph{Order}} corresponds to how many succeeding generations are involved.
+
+    \item \textbf{\emph{Difference equation}} is associated with e.g. $A(n+1) - A(n) = f[A(n)]$, for instance.
+\end{enumerate}
+
+
+\begin{ex}
+    \;
+
+    \begin{enumerate}[label = (\alph*)]
+        \item \underline{Fibonacci Sequence}
+
+            Leonardo of Pisa wondered about how many rabbit pairs would be produced in the $n$th generation
+            starting from a single pair and supposing that any pair from one generation produces a new pair
+            each generation after an initial gap\ldots\[
+                \left\{\begin{align*}
+                    & U(n) & = 1 && 1 && 2 && 3 && 5 && 8 && 13 & \cdots \\
+                    & n    & = 1 && 2 && 3 && 4 && 5 && 6 && 7  & \cdots \\
+                \end{align*}\right.
+            \]and\[
+                    U(n + 2) = U(n) + U(n + 1).
+                \]The equation is homogeneous (because only function of $U(n)$ is present 
+                without a single term of $f(n)$), linear, and second order.
+
+            \item \underline{Money}!
+
+                If we have an amount $A(n)$ at the beginning of an accounting period,
+                then the amount at the end of that period (i.e.\ at the beginning of the next)
+                is \[
+                    A(n+1) = (1 + \frac{R}{100}) A(n)
+                \]where $R\%$ is interest rate.
+                The equation is homogeneous, linear, and first order.
+                \smallskip
+                \\If a payment is made each period, then\[
+                    A(n + 1) = (1 + \frac{R}{100}) A(n) - P.
+                \]The equation is inhomogeneous, linear, and first order.
+
+            \item \underline{Population Dynamics}
+
+                Population $P(n)$ of an organism measured in each season is\[
+                    P(n+1) = aP(n) - b{[P(n)]}^{2}
+                \]where $a, b$ are positive. The first term indicates the growth,
+                while the second term indicates the overcrowding or competition.
+                (It is quadratic because it relates to the \emph{interactions} of two entities, 
+                and the number of way to choose such as pair from a population is quadratic!)
+                \smallskip
+                \\This is a form of what is known as the \textbf{\emph{logistic map}}.
+                It is homogeneous, nonlinear, anda first order.
+                This turns out to have many different behaviours to that of logistic differential equation.
+    \end{enumerate}
+\end{ex}
+
+\subsection{Linear Difference Equations}
+
+Broadly we use methods very similar to those we employed for linear differential equations ---
+particularly terminologies like `Complementary Function' and `Particular integral',
+`number of arbitrary constants', `order', \ldots
+
+\begin{ex}
+    \;
+
+    \begin{enumerate}[label = (\alph*)]
+        \item \underline{Fibonacci Sequence}\[
+                U(n + 2) = U(n) + U(n + 1)
+        \]
+        Try $U(n) = A \lambda^{n}$, where $A$ is an arbitrary constant and
+        $\lambda$ is a particular constant (to be found).
+        We can therefore obtain the \emph{characteristic equation} (as compared
+        with the \emph{auxiliary equation} in differential equations):\[
+            \lambda^{2} - \lambda - 1 = 0.
+        \]\[
+        \Rightarrow{} \lambda_{1,2} = \frac{1}{2} \pm \frac{1}{2} \sqrt{5}
+        = \tau, -\frac{1}{\tau}
+        \]with $\tau = 1.6180\ldots$, which is the golden number. We therefore get
+        \begin{eqnarray*}
+            U(n) & = & A_1 \lambda_1^{n} + A_2 \lambda_2^{n} \\
+                 & = & A_1 \tau^{n} + A_2 {\left(-\frac{1}{\tau}\right)}^{n}.
+        \end{eqnarray*}
+        Substitute in $U(1) = 1, U(2) = 1$, we obtain $A_1 = \frac{1}{\sqrt{5}}, A_2 = -\frac{1}{\sqrt{5}}$.\[
+            \Rightarrow{} U(n) = \frac{1}{\sqrt{5}} \left[{\left(\frac{1 + \sqrt{5}}{2}\right)}^{n}
+            - {\left(\frac{1-\sqrt{5}}{2}\right)}^{n}\right] 
+        \]which is known as the ``Binet formula''.
+        \medskip
+        \\A particular interesting identity as an application of the Fibonacci Sequence 
+        is the ``Cassini's identity'':\[
+            U(n+2) U(n) - {[U(n+1)]}^{2} = {(-1)}^{n+1}
+        \]which can show that $13 \times 5 - 8^{2} = 1$.
+        \medskip
+        \\There are other sequences, such as the Lucas sequence, where
+        $U(1) = 1, U(2) = 3$, etc.
+
+    \item \underline{MoneyA}\[
+            A(n+1) - \left(1 + \frac{R}{100}\right)A(n) = -P
+    \]
+    ${A(n)}_{\textnormal{CF}}$ is obtained by solving LHS = 0.
+    Try \[
+        A(n) = A\lambda^{n} \Rightarrow{} \lambda = 1 + \frac{R}{100}
+    \]and\[
+    {A(n)}_{\textnormal{CF}} = A{\left(1 + \frac{R}{100}\right)}^{n}.
+    \]\[
+    {A(n)}_{\textnormal{PI}} = C, \;\textnormal{where}\; C = \frac{-P}{1 - (1 + \frac{R}{100})}
+    \](The power terms cancel out each other due to the coefficient of $A(n)$.
+    Therefore we only take the coefficient of $A(n)$ and $A(n+1)$.) And so\[
+    A(n) = A{\left(1 + \frac{R}{100}\right)}^{n} - \frac{P}{\frac{-R}{100}}
+    \]
+    We also need to choose appropriate $A$ so that initial balance is $A(0)$.
+    \end{enumerate}
+    \underline{Note}: The methods employed in the previous exmaples are just like
+    those we used for differential equations which have the property of linearity.
+\end{ex}
+
+\subsubsection{General Case with constant coefficients}
+
+\[
+    \begin{align*}
+        \mathscr{L} U(n) = a_0 U(n + m) & + a_1 U(n + m - 1) + a_2 U(n + m - 2) + \cdots \\
+                                        & + a_{m - 1} U(n + 1) + a_m U(n) = f(n)
+    \end{align*}
+\]with $a_0, a_1, \ldots, a_m$ constants. The equation is linear, order $m$.
+It is homogeneous iff $f(n) = 0$, and inhomogeneous iff $f(n) \neq 0$.
+
+The General Solution (GS) can always be written as\[
+    U_{\textnormal{GS}} = U_{\textnormal{CF}} + U_{\textnormal{PI}}
+\]where $\mathscr{L}U_{\textnormal{CF}} = 0$, $\mathscr{L}U_{\textnormal{PI}} = f(n)$.
+$U_{\textnormal{CF}}$ has $m$ arbitrary constants, while $U_{\textnormal{PI}}$ is 
+any solution i.e.\ it is not unique.
+\medskip
+\\For the CF with a constant coefficient equation we try ${U(n)}_{\textnormal{CF}} \propto \lambda^{n}$\[
+    \Rightarrow{} \lambda^{n}[a_0 \lambda^{m} + a_1 \lambda^{m - 1} + \cdots + a_{m - 1}\lambda + a_{m}] = 0
+\]where $\lambda_1, \lambda_2, \ldots, \lambda_m$ are roots of this characteristic equation.
+Then\[
+    {U(n)}_{\textnormal{CF}} = A_1 \lambda_1^{n} + A_2 \lambda_2^{n} + \cdots + A_m \lambda_m^{n}
+\]with $A_1, A_2, \ldots, A_m$ being arbitrary constants.
+
+\begin{ex}
+    \;
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item \[
+                U(n + 2) + 7U(n + 1) - 18U(n) = 0
+        \]\[
+            \Rightarrow{} \lambda^{2} + 7\lambda - 18 = 0, \lambda_1 = -9, \lambda_2 = 2.
+        \]\[
+        \Rightarrow{} U(n) = A_1 {(-9)}^{n} + A_2 {(2)}^{n}.
+        \]
+        What about the equal roots case?
+
+    \item \[
+            U(n + 2) - 6U(n + 1) + 9U(n) = 0
+    \]\[
+        \Rightarrow{} \lambda^{2} - 6\lambda + 9 = 0, \lambda_1 = \lambda_2 = 3.
+    \]Certainly we have $A_1{(3)}^{n}$, but we need something else!
+    --- It is $A_2 n {(3)}^{n}$.\[
+        \Rightarrow{} U(n) = A_1 3^{n} + A_2 n 3^{n}.
+    \]
+    \end{enumerate}
+\end{ex}
+\noindent What about a PI?\@ Well, as for differential equations, it all depends on $f(n)$!
+\begin{enumerate}[label = (\alph*)]
+    \item $f(n) = Cp^{n}$ where $p \neq \lambda_1 \;\textnormal{or}\; \lambda_2$, and $C$ is a constant.
+        
+        This is easy! ${U(n)}_{\textnormal{PI}} = Ap^{n}$ with $A$ chosen suitably.
+        From our earlier example, we put\[
+            U(n + 2) + 7U(n + 1) - 18U(n) = 6{(4)}^{n}.
+            \]Since $4 \neq -9 \;\textnormal{or}\; 2$ we can write ${U(n)}_{\textnormal{PI}} = A (4^n)$,\[
+        A (4^{n + 2}) + 7A (4^{n + 1}) - 18A (4^{n}) = 6 (4^{n})
+        \]i.e.\ $16A + 28A - 18A = 6 \Rightarrow{} A = \frac{3}{13}$.
+        So \[
+            U_{\textnormal{GS}} = A_1 {(-9)}^{n} + A_2 {(2)}^{n} + \frac{3}{13} {(4)}^{n}.
+        \]
+
+    \item $f(n) = Cp^{n}$ where $p = \lambda_1$ (say)
+
+        Just as for a differential equations we need a more complicated 
+        ${U(n)}_{\textnormal{PI}} = A(n) \lambda_1^{n}$, where $A(n)$ is a polynomial in $n$.
+        Again from out earlier example, we put\[
+            U(n + 2) + 7U(n + 1) - 18U(n) = 3{(2)}^{n}.
+        \]Let's say\[
+        {U(n)}_{\textnormal{PI}} = A(n){(2)}^{n} = (a + bn + cn^{2})(2^{n})
+        \]
+        Well, apparently $a = 0$, after comparing with ${U(n)}_{\textnormal{CF}}$.
+        Then \[
+            \begin{align*}
+                [b(n+2) + c{(n+2)}^{2}]2^{n+2} & + 7[b(n+1) + c{(n+1)}^{2}]2^{n+1} \\
+                                               & - 18(bn + cn^{2})2^{n} = 3(2^{n})
+            \end{align*}
+        \]
+        Cancel a factor of $2^{n}$, then the $n^{2}$ terms are cancelled, and
+        $n$ terms leave $4(b+4c) + 14(b+2c) - 18b = 0$, and constant terms leave
+        $4(2b + 4c) + 14(b+c) = 3$. \[
+            \Rightarrow{} c = 0 \;\textnormal{and}\; b = \frac{3}{22}.
+        \]
+        So\[
+            U_{\textnormal{GS}} = A_1 {(-9)}^{n} + A_2 {(2)}^{n} + \frac{3}{22}n (2^{n})
+        \]and so on\ldots
+
+        Since our equation is linear, we can just add terms together to construct 
+        ${U(n)}_{\textnormal{PI}}$ for quite complicated $f(n)$ on RHS.\@
+
+        Some results can seem very strange! The Binet formula for Fibonacci numbers
+        involved irrational numbers as building blocks --- but produced integers!
+        
+        \underline{Example}: \[
+            U(n+2) - 2 U(n+1) + 5U(n) = 0
+        \]with say $U(1) = 6, U(2) = 2$ (so that $U(0) = 2$) 
+        which obviously produces a sequence of integers.
+        However,\[
+            \lambda^{2} - 2\lambda + 5 = 0 \Rightarrow{} \lambda_1 = 1 + 2i, \lambda_2 = 1 - 2i.
+        \]So\[
+        U(n) = A_1 {(1 + 2i)}^{n} + A_2 {(1 - 2i)}^{n}
+        \]Substitute $n = 0, 1$ into the equation, and we get\[
+            A_1 = 1 - i, A_2 = 1 + i
+        \]and\[
+        U(n) = (1 - i){(1 + 2i)}^{n} + (1 + i){(1 - 2i)}^{n}.
+    \]So $U(3) = -26$, etc.
+
+\item $f(n)$ is a polynomial in $n$
+
+    Well here we just need to choose a suitable polynomial and choose the coefficients
+    to fit the case.
+
+    \underline{Example}: Try to find \[
+      S(n) = 1^2 + 2^2 + \cdots + n^2 = \sum_{r=1}^{n} r^2.
+    \]
+    If we knew the answer or could guess, then we could confirm using induction.
+    If not we can just recognize that \[
+        S(n+1) - S(n) = {(n + 1)}^{2}
+    \]We can easily see that $\lambda = 1$, implying that\[
+    {S(n)}_{\textnormal{CF}} = A{(1)}^{n} = A.
+    \]Then\[
+    {S(n)}_{\textnormal{PI}} = an^{3} + bn^{2} + cn.
+\] (Do not need a constant term here since it is already in CF.) So\[
+a{(n + 1)}^{3} + b{(n + 1)}^{2} + c(n + 1) - an^{3} - bn^{2} - cn = {(n + 1)}^{2}
+\]Comparing the coefficients, we get $a = \frac{1}{3}, b = \frac{1}{2}, c = \frac{1}{6}$.
+So \[
+    {S(n)}_{\textnormal{GS}} = A + \frac{1}{3}n^{3} + \frac{1}{2}n^{2} + \frac{1}{6}n
+\]and $A = 0$ since we know $S(0) = 0, S(1) = 1$, etc. So\[
+S(n) = \frac{1}{3}n^{3} + \frac{1}{2}n^{2} + \frac{1}{6}n = \frac{1}{6}n(n+1)(2n+1).
+\]
+This method is constructive, and we can extend the idea to find
+$\sum_{r=1}^{n} r^{3} = {\left[\frac{1}{2}n(n+1)\right]}^{2}$, etc.
+
+As always, if we tried a polynomial PI which is too simple, or too complicated,
+the calculation is self-correcting!
+
+\item $f(n) = (\textnormal{polynomial in $n$}) {(p)}^{n}$
+
+    Just like our previous cases our expectation is\[
+        {U(n)}_{\textnormal{PI}} = (\textnormal{suitable polynomial}){(p)}^{n}.
+    \]Then following similar step: matching coefficients, substitute in values, 
+    obtain value of the constant if boundary condition is provided, etc.
+\end{enumerate}
+
+
+\subsection{Differencing and Difference Tables}
+
+\newmdtheoremenv[style=defEnv]{difference operator}[theorem]{Definition}
+\begin{difference operator}
+    The (forward) \textbf{\emph{difference operator}} $\Delta$ is defined by\[
+        \Delta U(n) = U(n+1) - U(n)
+    \]so that
+    \begin{eqnarray*}
+        \Delta^{2}U(n) & = & \Delta[U(n + 1) - U(n)] \\
+                  & = & \Delta U(n+1) - \Delta U(n) \\
+                  & = & [U(n + 2) - U(n + 1)] - [U(n + 1) - U(n)] \\
+                  & = & U(n + 2) - 2U(n + 1) + U(n)
+    \end{eqnarray*}
+    
+\end{difference operator}
+
+Now we can see that $\Delta n^{k} = {(n + 1)}^{k} - n^{k} = kn^{k - 1} + \cdots + 1$,
+and this means that \[
+    \Delta (\textnormal{polynomial in $n$ of degree $k$}) = (\textnormal{polynomial in $n$ of degree ($k -1$)})
+\]
+We can continue this process of course, $\Delta(\Delta(\Delta(\ldots))) = \Delta^{k}()$.\[
+    \Rightarrow{} \Delta^{k} (\textnormal{polynomial of degree $k$}) = (\textnormal{polynomial of degree 0})
+\]and $\Delta^{k+1}(\textnormal{polynomial of degree $k$}) = 0$.
+
+\underline{Note}: Successive differencing is a \emph{discrete} analogy to differentiation.
+($\frac{\mathrm{d}^{4}}{\mathrm{d}x^{4}} (x^{4}) = 24$ of course!)
+We can consider the reverse (\emph{inverse}) of the differencing process ($\approx$ integration).
+
+\begin{ex}
+    \;
+
+    \[
+        \begin{align*}
+            \Delta n^{4} & = {(n + 1)}^{4} - n^{4} = 4n^{3} + 6n^{2} + 4n + 1 \\
+            \Delta^{2} (n^{4}) & = \Delta (4n^{3}) + \Delta (6n^{2}) + \Delta (4n) + \Delta (1) 
+            = 12n^{2} + 24n + 14 \\
+            \Delta^{3} (n^{4}) & = 24n + 36 \\
+            \Delta^{4} (n^{4}) & = 24 \\
+            \Delta^{5} (n^{4}) & = 0.
+        \end{align*}
+        
+    \]
+\end{ex}
 
 
 
@@ -1423,7 +1958,7 @@ Our guide is the form of the function $f(x)$ on RHS.\@
 
     \begin{enumerate}[label = (\arabic*)]
         \item Any non-zero vector $\pmb{v}$ can be made into a unit vector
-            $u := \frac{\pmb{v}}{\lVert\pmb{v}\rVert}$. This process is called \textbf{\emph{normalizing}}.
+            $\hat{\pmb{u}} := \frac{\pmb{v}}{\lVert\pmb{v}\rVert}$. This process is called \textbf{\emph{normalizing}}.
         \item The standard basis vectors are unit vectors.
     \end{enumerate}
     
