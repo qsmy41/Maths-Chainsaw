@@ -453,6 +453,8 @@ As soon as you get one left and one right identity, you have a unique identity $
     Alternatively: if $g, h$ have inverse, $h^{-1}g^{-1} \;\text{is inverse of}\; gh$.
 \end{proof}
 
+\section{Cyclic groups}
+
 \newmdtheoremenv[style=defEnv]{cyclic groups}[theorem]{Definition}
 \begin{cyclic groups}
     Let $G$ be a group, $g \in G$. The \textbf{\emph{order}} of $g$ is the smallest positive integer $n > 0$ %chktex 1
@@ -489,7 +491,8 @@ As soon as you get one left and one right identity, you have a unique identity $
 
 \begin{proof}
     Assume that $g^{i} = g^{j}$ for some $i, j, 0 \le i \le j \le n - 1$. %chktex 1, chktex 8
-    Then $g^{j-i} = g_0 = e$. Since $i < j, {j-i} < n$. Since n is smallest integer, s.t. $g^{n} = e$.
+    Then $g^{j-i} = g^0 = e$. Since $i < j, {j-i} < n$. Since n is smallest integer, s.t. $g^{n} = e$,
+    contradicts with the condition.
 \end{proof}
 
 \newmdtheoremenv[style=defEnv]{ord g <= n}[theorem]{Corollory}
@@ -498,11 +501,9 @@ As soon as you get one left and one right identity, you have a unique identity $
 \end{ord g <= n}
 
 \begin{proof}
-    Assume \[
-        \exists i \in \mathbb{Z}, i \ge n + 1, \;\textnormal{s.t.}\; g^{i} = e \;\textnormal{for some}\;
-        g \in G, i \;\textnormal{is the smallest such integer}.
-    \]
-    By previous lemma, $\left\{g_0, g_1, g_2, \ldots, g^{i - 1}\right\} $ all distince.
+    Assume $\exists{}i \in{}\mathbb{Z}, i \ge{}n + 1, \;\textnormal{s.t.}\; g^{i} = e $
+    where $g \in{}G$, $i$ is the smallest such integer.
+    By previous lemma, $\left\{g_0, g_1, g_2, \ldots, g^{i-1}\right\} $ all distince.
     There are $i$ elements $i > n$.
 \end{proof}
 
@@ -539,15 +540,14 @@ As soon as you get one left and one right identity, you have a unique identity $
     for some generators $g \in G \Rightarrow h = g^{i}, k = g^{j}$.
     \\$\Rightarrow{} h \cdot k = g^{i} \cdot g^{j} = g^{i + j} = g^{j + i} = g^{j} \cdot g^{i} = k \cdot h$.
 \end{proof}
-\underline{Warning}: The converse \emph{is not} true (Abelian does not imiply cyclic)
-\underline{Counter example}: $ (\mathbb{Q}, +)$.
-
+\\\underline{Warning}: The converse \emph{is not} true (Abelian does not imiply cyclic)
+One counter example is $ (\mathbb{Q}, +)$.
 Assume $\mathbb{Q}$ is cyclic under +. \[
     \Rightarrow \exists g \in \mathbb{Q} \;\textnormal{s.t.}\; q = g^{n} (= ng) \forall q \in \mathbb{Q}.
 \]
 Take $\frac{g}{2}$ ($\in \mathbb{Q}$ since $g \in \mathbb{Q}$)\[
     \Rightarrow \frac{g}{2} = ng \;\textnormal{for some}\; n \in \mathbb{Z}.
-\]
+\]contradicting with original statements.
 
 \newmdtheoremenv[style=defEnv]{G has element of order n}[theorem]{Lemma}
 \begin{G has element of order n}
@@ -557,13 +557,15 @@ Take $\frac{g}{2}$ ($\in \mathbb{Q}$ since $g \in \mathbb{Q}$)\[
 \end{G has element of order n}
 
 \begin{proof}
+    \,
+
     ``$\Rightarrow$'': $G$ is cyclic $\Rightarrow$ $G$ has generator $g$.
     Assume ord $g = k$, so\[
         \left\{g^0, \ldots, g^{k-1}\right\} \;\textnormal{are distinct}.
     \]
     $\Rightarrow$ $k = n$ since $|G| = n$.
     
-    ``$<=$'' Let assume $\exists g \in G$, ord $g = n$.
+    ``$\Leftarrow$'': Let assume $\exists g \in G$, ord $g = n$.
    \[
        \Rightarrow \left\{g^{0}, g^{1}, \ldots, g^{n - 1}\right\} \;\textnormal{are all distinct.}
    \]
@@ -575,25 +577,79 @@ Take $\frac{g}{2}$ ($\in \mathbb{Q}$ since $g \in \mathbb{Q}$)\[
     Let $G$ be a finite group. Then if $G$ is cyclic, it has at most one element of order 2.
 \end{order 2 of element of cyclic group}
 
+\begin{proof}
+    Since $G$ is finite ($|G| = n$), and cyclic, $\exists g \in{}G$ of order $n$ ($g^{n} = e$),
+    and $G = \left\{g^{0}, g^{1}, \ldots, g^{n-1}\right\} $.
+    Assume $\exists$ an element of order 2: $h = g^{i}, (i \ge{}0, i \in{}\mathbb{Z})$, then\[
+        {(g^{i})}^{2} = e = g^{2i} \Rightarrow{}2i = n \Rightarrow{}
+        \left\{\begin{align*}
+            & \textnormal{$n$ is even: exactly one element,} \\
+            & \textnormal{$n$ is odd: no element of order 2.}
+        \end{align*}\right.
+    \]
+\end{proof}
+
+\begin{ex}
+    Are $(\mathbb{Z}^{*}_5, \cdot), (\mathbb{Z}^{*}_{15}, \cdot)$ cyclic?
+    (Recall that the notation $\mathbb{Z}^{*} = \mathbb{Z} \backslash\{0\}$,
+    and $\mathbb{Z}_n^{*}$ = set of all invertible congruence classes ${[a]}_{n}$.)
+
+    Hint: Use the previous lemma, or find out the generator.
+\end{ex}
+
+
 \section{Symmetric groups}
+
+\subsection{Permutations}
+
+\newmdtheoremenv[style=defEnv]{function classification}[theorem]{Definition}
+\begin{function classification}
+    A function $f$ from a set $X$ to a set $Y$ is called
+    \begin{itemize}
+            \item \textbf{\emph{one-to-one}} or \textbf{\emph{injective}} 
+                if $f(x_1) = f(x_2) \Rightarrow{}x_1 = x_2 \,\forall x_1, x_2 \in{}X$.
+                
+            \item \textbf{\emph{onto}} or \textbf{\emph{surjective}} if
+                $\forall y \in{}Y, \exists x \in{}X$ s.t. $f(x) = y$.
+
+            \item a \textbf{\emph{bijection}} if it is both \emph{injective} and \emph{surjective}.
+    \end{itemize}
+\end{function classification}
+
+Furthermore, $f$ is a bijection iif there is an inverse function $g: Y \mapsto X$
+s.t. $g \circ f$ is the identity function on $X$ and $f \circ g$ is the identity function on $Y$.
+
 
 \newmdtheoremenv[style=defEnv]{permutation}[theorem]{Definition}
 \begin{permutation}
     A \textbf{\emph{permutation}} is a bijective function:\[
         \sigma : \left\{1, 2, \ldots, n\right\} \mapsto \left\{1, 2, \ldots, n\right\}.
     \]
+    \underline{Notation}: We write the permutation as \emph{two-row notation}:
+    we write down the numbers 1 to $n$, and underneath each number $i$
+    we write down the number that $\sigma$ sends $i$ to:\[
+        \left|
+        \begin{align*}
+            & 1 && 2 && \cdots && n \\
+            & \sigma(1) && \sigma(2) && \cdots && \sigma(n)
+        \end{align*}
+        \right| 
+    \]
 \end{permutation}
+
+    Because $\sigma$ is a bijection, the bottom row of the table consists of the numbers
+    $1, 2, \ldots, n$ in some order. So a permutation is a `re-ordering' of the numbers 1 to $n$.
 
 \newmdtheoremenv[style=defEnv]{symmetric group}[theorem]{Definition}
 \begin{symmetric group}
     The set of all permutation $S_n := \\\left\{ \sigma : 
     \left\{1, 2, \ldots, n\right\}  \mapsto \left\{1, 2, \ldots, n\right\} \right\} $
-    is called the \textbf{\emph{symmetric group}}.
+    is called the \textbf{\emph{symmetric group}} (on $n$ symbols).
 \end{symmetric group}
 
 \newmdtheoremenv[style=defEnv]{permutation is a group}[theorem]{Theorem}
 \begin{permutation is a group}
-    The set $(S_n, 0)$ is a group.
+    The set $(S_n, \circ)$ is a group.
 \end{permutation is a group}
 
 \begin{proof}
@@ -604,9 +660,18 @@ Take $\frac{g}{2}$ ($\in \mathbb{Q}$ since $g \in \mathbb{Q}$)\[
                 then $\nu, \tau$ are bijective by definition,
                 so are $\tau \circ \nu$ and $\nu \circ \tau$.
             \item \underline{Associativity}: composition of functions is associative.
-            \item \underline{Identity}: identity $\nu (h) = k \forall k \in \left\{1, 2, \ldots, n\right\} $.
+            \item \underline{Identity}: identity $\nu (h) = k \;\forall k \in \left\{1, 2, \ldots, n\right\} $.
             \item \underline{Inverses}: By definition: bijections $\iff$ $\exists$ inverses!
     \end{itemize}
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{permutation is not Abelian}[theorem]{Theorem}
+\begin{permutation is not Abelian}
+    $(S_n, \circ)$ is not Abelian.
+\end{permutation is not Abelian}
+
+\begin{proof}
+    Exercise!
 \end{proof}
 
 \newmdtheoremenv[style=defEnv]{order of Sn is n!}[theorem]{Proposition}
@@ -614,19 +679,42 @@ Take $\frac{g}{2}$ ($\in \mathbb{Q}$ since $g \in \mathbb{Q}$)\[
     $|S_n| = {n!}$.
 \end{order of Sn is n!}
 
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\subsection{Cycle}
+
 \newmdtheoremenv[style=defEnv]{cycles}[theorem]{Definition}
 \begin{cycles}
-    A permutation is called a \textbf{\emph{cycle}} if there is a sequence
-    $\left\{a_1, a_2, \ldots, a_k\right\} $ of distince numbers s.t.\[
-        \nu (a_1) = a_2, \nu(a_2) = a_3, \ldots, \nu (a_{k-1}) = a_k, \nu (a_k) = a_1
-    \]and $\nu (i) = i$ for any other $i$ \emph{not} in the sequence.
+    A permutation is called a \textbf{\emph{cycle}} if there is \textbf{a} sequence
+    $\left\{a_1, a_2, \ldots, a_k\right\} $ of distinct numbers s.t.\[
+        \sigma (a_1) = a_2,\quad \sigma(a_2) = a_3,\quad \ldots,\quad \sigma (a_{k-1}) = a_k,\quad \sigma (a_k) = a_1
+    \]and $\sigma (i) = i$ for any other $i$ \emph{not} in the sequence.
+    The number $k$ is called the \textbf{\emph{length}} of the cycle, and we often abbreviate 
+    `cycle of length $k$' to `\textbf{\emph{$k$-cycle}}'.
 \end{cycles}
 
-\newmdtheoremenv[style=defEnv]{k-cycle}[theorem]{Definition}
-\begin{k-cycle}
-    If the sequence $\left\{a_1, a_2, \ldots, a_n\right\} $ has $k$ elements,
-    we call $\nu$ a ``$k$-cycle''. (length of cycle)
-\end{k-cycle}
+\begin{ex}
+    \[
+        \nu = \left|
+        \begin{align*}
+            & 1 && 2 && 3 && 4 \\
+            & 2 && 3 && 1 && 4
+        \end{align*}
+        \right|
+        \quad \textnormal{and} \quad
+        \tau= \left|
+        \begin{align*}
+            & 1 && 2 && 3 && 4 \\
+            & 2 && 1 && 4 && 3
+        \end{align*}
+        \right| 
+    \]
+    $\nu$ is a 3-cycle, it rotates the numbers 1, 2, 3 and fixes 4.
+    $\tau$ is not a cycle: no numbers are fixed, so if it was a cycle
+    it would have to be 4-cycle, but it is not.
+\end{ex}
 
 \newmdtheoremenv[style=defEnv]{order of k-cycle}[theorem]{Proposition}
 \begin{order of k-cycle}
@@ -634,13 +722,41 @@ Take $\frac{g}{2}$ ($\in \mathbb{Q}$ since $g \in \mathbb{Q}$)\[
 \end{order of k-cycle}
 
 \begin{proof}
-    We know immediiately that $\nu^{k} = \textnormal{id}$ by definition.
-    $\Rightarrow \textnormal{ord}\; \nu \le k$.
+    We know immediately that $\sigma^{k} = \textnormal{id}$ by definition.
+    $\Rightarrow \textnormal{ord}\; \sigma \le k$.
     
-    Assume that ord $\nu = i < k$. But by definition of $\nu^{i}(a_1) = a_{i + 1} \neq a_1$.
+    Assume that ord $\sigma = i < k$. But by definition of $\sigma^{i}(a_1) = a_{i + 1} \neq a_1$.
 \end{proof}
 
 \underline{Notation of a $k$-cycle}: $(a_1, a_2, \ldots, a_k)$.
+This means sending $a_1 \mapsto a_2 \mapsto a_3 \mapsto \cdots \mapsto a_k \mapsto a_1$
+and fixes all other elements. This only makes sense if the numbers 
+$a_1, a_2, \ldots, a_k$ are all distinct (or this permutation would not be a cycle).
+
+\begin{ex}
+    From the previous example, we would write the 3-cycle $\nu$ as (1, 2, 3).
+\end{ex}
+
+\noindent\underline{Note}:
+\begin{enumerate}[label = (\arabic*)]
+    \item There are several different ways of writing the same cycle, for instance
+        (1, 2, 3), (2, 3, 1), (3, 1, 2) are all the same. The usual convention is to
+        put the smallest number first.
+
+    \item A cycle of length one has to be the identity permutation.
+        So the 1-cycles (1), (3), (42), all denote the identity. 
+        The usual convention is to use (1), and this makes sense in any $S_n$.
+
+    \item Cycles make sense if all elements are distince.
+\end{enumerate}
+
+\begin{ex}
+    The permutation $\tau \in{}S_4$ from the second previous example is not a cycle,
+    but it is easy to see that it can be expressed as the composition\[
+        \tau = (3,4)(1,2)
+    \]of two 2-cycles.
+\end{ex}
+
 
 
 
