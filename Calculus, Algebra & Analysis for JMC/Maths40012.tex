@@ -457,7 +457,7 @@ As soon as you get one left and one right identity, you have a unique identity $
 
 \newmdtheoremenv[style=defEnv]{cyclic groups}[theorem]{Definition}
 \begin{cyclic groups}
-    Let $G$ be a group, $g \in G$. The \textbf{\emph{order}} of $g$ is the smallest positive integer $n > 0$ %chktex 1
+    Let $G$ be a group, $g \in G$. The \textbf{\emph{order}} of $g$ is the \emph{smallest positive} integer $n > 0$ %chktex 1
     such that $g^{n} = e$.
 
     Notation: ord $g = n$. If $n = \infty$, then $g$ is called of infinite order.
@@ -757,10 +757,90 @@ $a_1, a_2, \ldots, a_k$ are all distinct (or this permutation would not be a cyc
     \]of two 2-cycles.
 \end{ex}
 
+\newmdtheoremenv[style=defEnv]{disjoint cycles}[theorem]{Definition}
+\begin{disjoint cycles}
+    Two cycles $(a_1, a_2, \ldots, a_k), (b_1, b_2, \ldots, b_m)$ are \textbf{\emph{disjoint}}
+    if no $a_i$ is equal to any $b_j$.
+\end{disjoint cycles}
 
+\newmdtheoremenv[style=defEnv]{disjoint cycles commute}[theorem]{Theorem}
+\begin{disjoint cycles commute}
+    Disjoint cycles commute if the two cycles are disjonit, i.e.\
+    if $\alpha, \beta$ are disjoint cycles of the set $\{1, 2, \ldots, n\}$,
+    then $\alpha \circ \beta = \beta \circ \alpha$.
+\end{disjoint cycles commute}
 
+\begin{proof}
+    Exercise!
+\end{proof}
 
+\newmdtheoremenv[style=defEnv]{permutation's lemma}[theorem]{Lemma}
+\begin{permutation's lemma}
+    Let $\sigma \in S^{n}$ be a permutation.
+    \begin{enumerate}
+        \item For any $i \in \{1, \ldots, n\}$, there is a positive integer $d$
+            such that $\sigma^{d}(i) = i$. (In fact, such smallest $d \in [1, n]$.)
 
+        \item If $d$ is the smallest positive integer such that $\sigma^{d}(i) = i$,
+            then the numbers $i, \sigma(i), \sigma^{2}(i), \ldots, \sigma^{d-1}(i)$
+            are all distinct.
+
+        \item If $j \in \{1, \ldots, n\}$ is not in the set $\{i, \sigma(i), \ldots,
+            \sigma^{d-1}(i)\}$, then neither is $\sigma(j)$.
+    \end{enumerate}
+\end{permutation's lemma}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{permutation expressed as disjoint cycles}[theorem]{Proposition}
+\begin{permutation expressed as disjoint cycles}
+    Any permutation can be expressed as a product of some number of disjoint cycles.
+\end{permutation expressed as disjoint cycles}
+
+\begin{proof}
+    The proof is given by an explicit algorithm.
+    Pick any $\sigma \in S_n$. Then pick any number $i \in \{1, \ldots, n\}$.
+    By the previous lemma, there is an integer $d$ such that $\sigma^{d}(i) = i$.
+    Take the smallest such $d$, and also by previous lemma that 
+    $i, \sigma(i), \ldots, \sigma^{d-1}(i)$ are all distinct, we can then form the cycle\[
+        (i, \sigma(i), \ldots, \sigma^{d-1}(i))
+    \]Repeat the above process by choosing an element which does not occur in the cycle
+    until all numbers are in one of the cycles.
+    The permutation $\sigma$ will be the product of our list of cycles.
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{cycle-type}[theorem]{Definition}
+\begin{cycle-type}
+    When $\sigma$ is factored into disjoint cycles $\gamma_1\gamma_2\ldots\gamma_r$
+    we can record the lengths $(k_1, k_2,\ldots, k_r)$ of the cycles that occur,
+    and the list is called the \textbf{\emph{cycle-type}} of $\sigma$.
+\end{cycle-type}
+
+\begin{ex}
+    Factor and find the cycle-type of\[
+        \sigma = 
+        \left|\begin{align*}
+            & 1 && 2 && 3 && 4 && 5 && 6 && 7 \\
+            & 4 && 1 && 3 && 2 && 6 && 7 && 5
+        \end{align*}\right|.
+    \]
+    Answer: $\sigma = (1, 4, 2)(5, 6, 7)$, and the cycle-type of $\sigma$ is $(3, 3)$.
+    (We can leave out the 1's from the list, they are not important.)
+\end{ex}
+
+\section{subgroup}
+
+\newmdtheoremenv[style=defEnv]{subgroup}[theorem]{Definition}
+\begin{subgroup}
+    Let $(G, *)$ be a group. $H \subseteq G$ a subset. Then $H$ is called a subgroup of $G$ if:
+    \begin{enumerate}
+        \item $\forall g, h \in G, g * h \in H$. (Closure)
+        \item $e \in G$ is also in $H$. (identity element)
+        \item $g \in H \Rightarrow{}g^{-1} \in H$. (inverses)
+    \end{enumerate}
+\end{subgroup}
 
 
 
@@ -2157,6 +2237,8 @@ We can consider the reverse (\emph{inverse}) of the differencing process ($\appr
 
 \section{Systems of linear equations}
 
+\subsection{Definitions}
+
 \newmdtheoremenv[style=defEnv]{linear equation}[theorem]{Definition}
 \begin{linear equation}
     A \textbf{\emph{linear equation}} in the variables $x_1, x_2, \ldots, x_n \in \mathbb{R}$
@@ -2301,7 +2383,7 @@ is called \textbf{\emph{augmented matrix}}.
 \begin{ex}
     \[
         \begin{pmatrix}
-            1 & 0 & 0 & 1\\
+            1 & 0 & 0 & 3\\
             0 & 0 & 1 & 0\\
             0 & 0 & 0 & 0
         \end{pmatrix}, \begin{pmatrix}
@@ -2309,9 +2391,136 @@ is called \textbf{\emph{augmented matrix}}.
             0 & 0 & 1 & -2
         \end{pmatrix}.
     \]
-    The second one is not.
+    The second one is not, unless $\beta = 0$.
 \end{ex}
 
+The point of RRE form is that if we have a system of equations\[
+    A\pmb{x} = \pmb{b}
+\]and $A$ is in RRE form, then we can easily read off the solution (if any).
+There are four cases to consider:
+\begin{enumerate}[label = (\arabic*)]
+    \item Every column of $A$ contains a leading 1, and there are no zeros row.
+        In this case the only possibility is that $A = I_n$ is the identity matrix.
+        Then the equations are simply\[
+            \begin{align*}
+                x_1 & = b_1 \\
+                x_2 & = b_2 \\
+                \vdots \\
+                x_n & = b_n 
+            \end{align*}
+        \]
+        and they have a unique solution, the entries of $\pmb{b}$.
+
+    \item Every column of $A$ contains a leading 1, and there are some zero rows.
+        Then $A$ must have more rows than columns, and it must be a matrix of the form\[
+            A = 
+            \begin{pmatrix}
+                  I_n \\
+                  \pmb{0}_{k \times n}
+            \end{pmatrix} 
+        \]
+        i.e.\ it looks like an identity matrix with a block of zeros underneath.
+        In this case, the first $n$ equations are\[
+            \begin{align*}
+                x_1 & = b_1 \\
+                x_2 & = b_2 \\
+                \vdots \\
+                x_n & = b_n
+            \end{align*}
+        \]
+        and the last $k$ equations are\[
+            \begin{align*}
+                0 & = b_{n + 1} \\
+                0 & = b_{n + 2} \\
+                \vdots \\
+                0 & = b_{n + k}
+            \end{align*}
+        \]
+        Now there are two possibilities:
+        \begin{itemize}
+                \item If any of the last $k$ entries of $\pmb{b}$ are non-zero
+                    then this system has no solutions, because the last $k$ equations
+                    are never satisfied for any $\pmb{x}$ and the system is inconsistent.
+
+                \item If the last $k$ entries of $\pmb{b}$ are all zero then the system
+                    has a unique solution, given by setting $x_i = b_i$ for each $i \in [1, n]$.
+        \end{itemize}
+        
+    \item Some columns of $A$ do not contain a leading 1, but there are no zero rows, for instance\[
+        A = \begin{pmatrix}
+            1 & 0 & a_{13} \\
+            0 & 1 & a_{23}
+        \end{pmatrix} 
+        \quad \textnormal{or} \quad
+        A = \begin{pmatrix}
+            1 & a_{12} & 0 \\
+            0 & 0 & 1
+        \end{pmatrix}.
+    \]
+    If the $i$th column of $A$ does not contain a leading 1 then the corresponding variable $x_i$
+    is called a \textbf{\emph{free variable}}, or free parameter. These variables can be set to
+    any values. Each remaining variable is called a \textbf{\emph{basic variable}} and 
+    we have a single equation\[
+        x_j + (\ldots) = b_j
+    \]
+    where the expression in the brackets only contains free parameters.
+    This equations determines the value of $x_j$, in terms of the entries in $\pmb{b}$
+    and the values of the free parameters.
+    This kind of system always has infinitely many solutions, we say it is \textbf{\emph{underdetermined}}.
+\end{enumerate}
+
+\newmdtheoremenv[style=defEnv]{pivot position}[theorem]{Definition}
+\begin{pivot position}
+    A leading entry in a matrix in RRE form is also called a \textbf{\emph{Pivot position}}.
+    A \textbf{\emph{Pivot column}} is a column containing a Pivot position.
+\end{pivot position}
+
+\newmdtheoremenv[style=defEnv]{Any matrix can convert to RRE}[theorem]{Proposition}
+\begin{Any matrix can convert to RRE}
+    Any matrix can be put into RRE form by performing a sequence of row operations.
+\end{Any matrix can convert to RRE}
+
+\begin{proof}
+    Our proof will consist of the explicit description of the algorithm.
+    Let $A$ be an arbitrary matrix.
+    Step 1---Step 3 below is called the \textbf{\emph{forward phase}}
+    and is used to bring the matrix A into echelon form.
+    Step 4 is called the \emph{backwad phase}
+    and is used to bring $A$ inito RRE form.
+
+    \underline{Step 1}: Choose your first pivot position,
+    which is the first non-zero leading term. Do row operation
+    such that the leading term becomes 1.
+
+    \underline{Step 2}: Create zeros below your first leading entry by
+    multiplying the row with the leading entry and subtract it from the subsequent rows.
+
+    \underline{Step 3}: Repeat the first two steps to bring the whole matrix into echelon form.
+
+    \underline{Step 4}: Create zeros above the leading entries to convert to RRE row by row,
+    by multiplying the row where the selected leading entry is in, and subtract it from the above rows.
+
+\end{proof}
+
+    \medskip
+    It is also true (althouth we won't show this) that the RRE form of a matrix is unique;
+    if you apply any sequence of row operations which puts your matrix into RRE form,
+    the result is the same as the output of the algorithm we just described.
+
+    Now we have a systematic procedure for solving a system of simultaneous linear equations
+    $A\pmb{x} = \pmb{b}$:
+    \begin{enumerate}[label = (\arabic*)]
+        \item Form the augmented matrix $(A|\pmb{b})$.
+        \item Apply the algorithm above to put the augmented matrix into RRE form $(A'|\pmb{b}')$.
+        \item Read off the solutions to $A'\pmb{x} = \pmb{b}'$
+    \end{enumerate}
+    
+    In fact it's not necessary to get the whole matrix $(A'|\pmb{b}')$ into RRE form, 
+    you can stop when the left block $A'$ is in RRE form. Doing further operations to adjust
+    the final column will not help you read the solutions.
+
+
+    
 
 
 
