@@ -8,6 +8,8 @@
 \usepackage{amsmath} % so as to use align
 \usepackage{mathrsfs} % for the stylistic L
 \usepackage{authblk} % for writing affiliationis
+\usepackage{graphicx} % for importing images
+\graphicspath{{./images/}} % for the path to images
 
 
 \theoremstyle{definition}
@@ -841,6 +843,152 @@ $a_1, a_2, \ldots, a_k$ are all distinct (or this permutation would not be a cyc
         \item $g \in H \Rightarrow{}g^{-1} \in H$. (inverses)
     \end{enumerate}
 \end{subgroup}
+
+\underline{Note}: We can replace (2) with (2') $H \neq \varnothing$.
+
+\begin{proof}
+    $H \neq \varnothing \iff \exists h \in H \Rightarrow{} h^{-1} \in H
+    \Rightarrow{} h * h^{-1} = e \in H$.
+\end{proof}
+
+\underline{Notation}: $H \le G$ means $H$ is a subgroup of $G$.
+v.s. $\subseteq$.
+
+\begin{ex}
+    \begin{itemize}
+            \item  $(\mathbb{Z}, +) \le (\mathbb{Q}, +) \le (\mathbb{R}, +) \le (\mathbb{C}, +)$.
+            \item $n\mathbb{Z} := (\{nz | z \in \mathbb{Z}\}, +) \le (\mathbb{Z}, +)$.
+            \item Any group has two immediate subgroup: $(G, *) \le (G, *)$, and $(\{e\}, *)$ trivial subgroup.
+                If $H \le G$, $H \neq G$, $G$ is called \emph{proper};
+                if $H \neq \{e\}$, $H$ is called \emph{non-trivial}.
+    \end{itemize}
+    
+   \end{ex}
+
+\newmdtheoremenv[style=defEnv]{subgroup test}[theorem]{Proposition}
+\begin{subgroup test}
+    Let $(G, *)$ be a group, $H \subseteq G$, $H \neq \varnothing$.
+    Then if $\forall x, y \in H, x * y^{-1} \in H \Rightarrow{} H \le G$.
+\end{subgroup test}
+
+\begin{proof}
+    To show: $H$ is subgroup.
+    \begin{enumerate}
+        \item $H \neq \varnothing \Rightarrow{} \exists x \in H$,
+            take $y = x$ (by assumption) $\Rightarrow{} x*y^{-1} = x * x^{-1} = e \in H$.
+        \item Inverse: Assume $x \in H$, set $y = x$, and the other as the identity:
+            (by assumption) $\Rightarrow{} e * x^{-1} = x^{-1} \in H$.
+        \item Closure: Take $x, y \in H$, we know that by the previous point, $y^{-1} \in H$.
+        By assumption, $x * {(y^{-1})}^{-1} = x * y \in H$.
+    \end{enumerate}
+\end{proof}
+
+\begin{ex}
+    Show that $H = \{\sigma \in S_n | \sigma(1) = 1 \} \le S_n$ using subgroup test.
+    \begin{itemize}
+        \item $H \neq \varnothing$ since $\textnormal{id}(i) = i \forall i \in
+            \{1, \ldots, n\} \Rightarrow{} \textnormal{id}(1) = 1$, hence id $\in H$.
+        \item Take $\sigma, \tau \in H$. To show $\sigma \circ \tau^{-1} \in H
+            \iff \sigma \circ \tau^{-1}(1) = 1 \Rightarrow{} \sigma(1) = 1$.
+            Therefore $\sigma \circ \tau^{-1} \in H \le S_n$.
+    \end{itemize}
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{cyclic subgroup}[theorem]{Definition}
+\begin{cyclic subgroup}
+    Let $(G, *)$ be a group, $g \in G$, $\langle g\rangle = \{g^{i} | i \in \mathbb{Z}\}$.
+    Then $\langle g \rangle$ is called the \textbf{\emph{cyclic subgroup}} of $G$ gennerated by $g$.
+\end{cyclic subgroup}
+
+\newmdtheoremenv[style=defEnv]{cyclic subgroup prop}[theorem]{Proposition}
+\begin{cyclic subgroup prop}
+    $\langle g \rangle \le G$.
+\end{cyclic subgroup prop}
+
+\begin{proof}
+    Subgroup test: 
+    \begin{itemize}
+            \item To show $\langel g\rangel  \neq \varnothing$.
+            \item Pick $x,y \in \langel g\rangel  \Rightarrow{} x = g^{i}, y = g^{j}$.
+                Now $x * y^{-1} = g^{i}g^{-j} \in \langel g\rangel $.
+    \end{itemize}
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{ord of cyclic subgroup}[theorem]{Lemma}
+\begin{ord of cyclic subgroup}
+    If ord $g = n$, then $|\langel g\rangel | = n$.
+\end{ord of cyclic subgroup}
+
+\begin{proof}
+    ord $g = n \Rightarrow{} \{g^{0}, g^{1}, g^{2}, \ldots, g^{n-1}\}$ all distinct.
+    $\Rightarrow{} |\langel g\rangel | \le n$.
+    To show $|\langel g\rangel | = n$. Take $i \in \mathbb{Z}, i \ge n$.
+    By the Euclidean algorithm: $i = qn + r$ for some $q, r \in \mathbb{Z}, 0 \le r \langel  n$.
+    Now any element $g^{i} = g^{qn + r} = g^{qn} \cdot g^{r} = e g^{r} = g^{r}$.
+    So any element of $\langel g\rangel $ is one of the list $\{g^{0}, g^{1}, \ldots, g^{n - 1}\} \Rightarrow{}
+    |\langel g\rangel | = n$.
+\end{proof}
+
+\begin{ex}
+    \[
+        \sigma = \left|
+        \begin{align*}
+            & 1 && 2 && 3 \\
+            & 2 && 3 && 1
+        \end{align*}
+        \right| \in{}S_3
+    \]So ord $\sigma = 3$.
+    $\langle \sigma \rangle = \{ e, (1, 2, 3), (1, 3, 2)\}$.
+\end{ex}
+
+\section{Cosets and Lagrange Theorem}
+
+\newmdtheoremenv[style=defEnv]{cosets}[theorem]{Definition}
+\begin{cosets}
+    Let $(G, *)$ be a group. $H \le G$, $g \in G$.
+    The \textbf{\emph{left coset}} of $H$ by $g$ is $gH :- \{gh | h \in H\}$.
+    Similarly, the \textbf{\emph{right coset}} of $H$ by $g$ is
+    $Hg := \{hg | h \in H\}$.
+\end{cosets}
+
+\underline{Notation}: Set of left cosets: $G:H \,:= \{gH | g \in G\}$.
+Set of right cosets: $H:G \,:= \{Hg | g \in G\}$.
+
+\underline{Warning}: If $G$ is Abelian, $gH = Hg \forall g$.
+
+\begin{ex}
+    Take again: $\langle (1, 2, 3)\rangle \le S_3$.
+    Compute the left and right coset of $(1, 2)$ and $(2, 3)$.
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{coset property}[theorem]{Proposition}
+\begin{coset property}
+    Let $(G, *)$ be a group, $H \le G$, $g_1, g_2 \in G$.
+    Then $g_1 H = g_2 H \iff g_2 \in g_1 H$.
+\end{coset property}
+
+\begin{proof}
+    \begin{itemize}
+            \item ``$\Rightarrow{}$''
+
+                Assume $g_1 H = g_2 H$, $e \in H \Rightarrow{} g_2 e \in g_2 H = g_1 H$.
+                
+            \item ``$\Leftarrow$''
+
+                $g_2 \in g_1 H \iff g_2 = g_1 h$, for some $h \in H$.
+                First $g_1 H \le g_2 H$.
+                An element of $g_1 H$ is of the form $g, h$ for $h_1 \in H$.
+                \[
+                    \Rightarrow{} g_1 h_1 = (g_2 h^{-1}) h_1 = g_2 (h^{-1} h_1) \in g_2 H.
+                \]
+                Now $g_2 H \le g_1 H$.
+
+                Any element of $g_2 H$ is of the form $g_2 h_2
+                = (g_1 h) h_2 = g_1 (h h_2) \in g_1 H$.
+    \end{itemize}
+    
+\end{proof}
+
 
 
 
@@ -1913,6 +2061,7 @@ the calculation is self-correcting!
     
 \end{difference operator}
 
+(Attention: binomial coefficients appear in the above process! and this continues on!)
 Now we can see that $\Delta n^{k} = {(n + 1)}^{k} - n^{k} = kn^{k - 1} + \cdots + 1$,
 and this means that \[
     \Delta (\textnormal{polynomial in $n$ of degree $k$}) = (\textnormal{polynomial in $n$ of degree ($k -1$)})
@@ -1922,6 +2071,7 @@ We can continue this process of course, $\Delta(\Delta(\Delta(\ldots))) = \Delta
 \]and $\Delta^{k+1}(\textnormal{polynomial of degree $k$}) = 0$.
 
 \underline{Note}: Successive differencing is a \emph{discrete} analogy to differentiation.
+Do a comparison with the definition of differentiation at a point.
 ($\frac{\mathrm{d}^{4}}{\mathrm{d}x^{4}} (x^{4}) = 24$ of course!)
 We can consider the reverse (\emph{inverse}) of the differencing process ($\approx$ integration).
 
@@ -1937,9 +2087,304 @@ We can consider the reverse (\emph{inverse}) of the differencing process ($\appr
             \Delta^{4} (n^{4}) & = 24 \\
             \Delta^{5} (n^{4}) & = 0.
         \end{align*}
-        
     \]
+
+    \begin{figure}
+    \includegraphics[scale = 0.15]{inverseDifferencing.jpg}
+    \centering
+    \caption{graph of reverse differencing porcess}\label{fig:invDiff}
+    % In figure env, label is always after caption for it to function normally.
+    \end{figure}
+    
+    \noindent And and example of the \emph{inverse} process is as shown in figure~\ref{fig:invDiff}.
+    To find out the sequence of $R(n)$ beyond $n = 7$, one can keep on differencing
+    the sequence (which is \emph{polynomial-like}) until its fourth and fifth order,
+    realizing the repetitive $0$s and $1$s pattern, construct further 1s and 0s,
+    and do the inverse back until order 0, i.e.\ constructing $R(n)$. 
+    The pattern continues, in fact, only when $R(n)$ is a $k = 4$ degree polynomial in $n$.
+
+    \medskip
+    \noindent \underline{Note}: (Not in syllabus) There is a discrete analogy to Taylor's expansion,
+    involving Newton's forward difference interpolation formula \ldots
 \end{ex}
+
+The sequence in the inverse process is actually\[
+    \begin{align*} 
+        & \begin{aligned}
+        1 + (n - 1) + \frac{1}{2}(n-1)(n-2) & + \frac{1}{6}(n-1)(n-2)(n-3) \\
+                                            & + \frac{1}{24}(n-1)(n-2)(n-3)(n-4) 
+        \end{aligned} \\
+                    & = \begin{pmatrix}
+                            n-1 \\
+                            0
+                    \end{pmatrix} + \begin{pmatrix}
+                            n-1 \\
+                            1
+                    \end{pmatrix} + \begin{pmatrix}
+                            n-1 \\
+                            2
+                    \end{pmatrix} + \begin{pmatrix}
+                            n-1 \\
+                            3
+                    \end{pmatrix} + \begin{pmatrix}
+                            n-1 \\
+                            4
+                    \end{pmatrix} \\
+                    & = \begin{pmatrix}
+                            n \\
+                            0
+                    \end{pmatrix} + \begin{pmatrix}
+                            n \\
+                            2
+                    \end{pmatrix} + \begin{pmatrix}
+                            n \\
+                            4
+                    \end{pmatrix}.
+    \end{align*}
+\]
+\begin{figure}
+  \includegraphics[scale=0.15]{circlePartition.jpeg}
+  \centering
+  \caption{Circle Division}\label{fig:circDiv}
+\end{figure}
+
+This expression represents the numbers of distinct regions into which the interior of a circle
+is partitioned when $n$ distinct boundary points are connected by straight lines, as shown in figure~\ref{fig:circDiv}.
+This is, however, not easy to prove!
+
+
+\subsection{First Order Recurrence/Discrete Nonlinear Systems}
+
+Consider $x_{n + 1} = F(x_n)$ where $x_n = x(n), x_n \neq 0$.
+And we have initial choice $x_0$: \[
+    \Rightarrow{} x_1 = F(x_0)
+    \Rightarrow{} x_2 = F(x_1) = F(F(x_0)) = F^{(2)}(x_0) \Rightarrow{} \ldots
+\]
+
+This process is called \textbf{\emph{iteration}} ---
+some function is used repeatedly --- \emph{iterative process}.
+We can repersent this process graphically, as shown in Figure~\ref{fig:cobweb}.
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{CobwebDiagram.jpg}
+  	\centering
+    \caption{'Cobweb' Diagram}\label{fig:cobweb}
+\end{figure}
+
+There are 2 fixed points $P_1$ and $P_2$, for which the $x$ values satisfy\[
+    X = F(X) \Rightarrow{} X_1, X_2.
+\]
+However, the \emph{character} of $P_1$ and $P_2$ is very different ---
+initial values $x_0$ which start near $X_1$ have $x_n$ which approaches $X_1$,
+while those $x_0$ which start near $X_2$ certainly are \emph{not} giving $x_n$
+which approaches $X_2$!
+
+\newmdtheoremenv[style=defEnv]{attractor and repeller}[theorem]{Definition}
+\begin{attractor and repeller}
+    $X_1$ corresponding to $P_1$ is said to be \textbf{\emph{asymptotically stable}} or \emph{attracting},
+    and is called \textbf{\emph{attractor}};
+    $X_2$ corresponding to $P_2$ is said to be \textbf{\emph{unstable}} or \emph{repelling},
+    and is called \textbf{\emph{repeller}}.
+\end{attractor and repeller}
+
+How can we distinguish them analytically?
+
+\medskip
+Suppose $x_{n + 1} = F(x_n)$ and $X = F(X)$.
+We put $X = x_n + \epsilon_n$ and imagine $x_0$ is chosen so that
+$\epsilon_0$ is `small' i.e.\ $x_0$ is `near' to $X$.
+Let's see how $\epsilon_n$ develops (whether $x_n$ converges or diverges to $X$):\[
+        X - \epsilon_{n + 1} & = x_{n + 1} = F(x_n) = F(X - \epsilon_n)
+        = F(X) - \epsilon_n F'(X) + \frac{1}{2}\epsilon_n^{2}F(X) + \cdots
+        \]with the last step using taylor expansion, and by cancelling $X$ and $F(X)$, we get\[
+        \epsilon_{n + 1} = \epsilon_n F'(X) - \frac{1}{2}\epsilon_n^{2}F''(X) + \cdots.
+\]
+$\epsilon_{n + 1}$ can therefore be estimated using different values of the various orders of $F(X)$:
+\begin{itemize}
+    \item $F'(X) \neq 0 \Rightarrow{} \epsilon_{n+1} \approx \epsilon_n F'(X)
+        \Rightarrow{} \epsilon_n \approx \epsilon_0 {[F'(X)]}^{n}$.
+
+        This process is called \textbf{\underline{first order process}}.
+        Then if $|F'(X)|<1$, then $\epsilon_n \rightarrow{} 0$ and $X$ is an attractor.
+        Otherwise if $|F'(X)|>1$, then $\epsilon_n$ diverges and $X$ is a repeller.
+        However, if $|F'(X)| = 1$ then it depends on the case --- nothing is already proven.
+
+    \item $F'(X) = 0, F''(X) \neq 0 \Rightarrow{} \epsilon \approx -\frac{1}{2}\epsilon_n^{2}F''(X)
+        \Rightarrow{} \epsilon_{n + 1} \propto \epsilon_n^{2}$.
+
+        This process is called \textbf{\underline{second order process}}.
+        $\forall \epsilon_0$ sufficiently small, we have $\epsilon_n \rightarrow{} 0$,
+        and $X$ is \emph{always} an attractor. 
+        (Proof is not provided here.)
+        
+        Note that it is \emph{faster} than first order convergence,
+        therefore it is usually preferred to design a process such that it is
+        second order for studying that particular matter for better result.
+
+    \item $F'(X) = 0, F''(X) = 0, F'''(X) \neq 0 \Rightarrow{} \epsilon_{n + 1} \propto \epsilon_n^{3}$.%chktex 23
+
+        This process is called \textbf{\underline{third order process}}.
+\end{itemize}
+And so on. The \emph{rate} of convergence increases with the order of the process.
+Third order process and beyond are usually unnecessary, but occasionally they
+may be required. In practice we hope for second order,
+but will often settle for first order.
+
+\begin{ex}
+    \,
+
+    \begin{enumerate}[label = (\alph*)]
+        \item \[
+                x_{n+1} = \frac{1}{2}\left(x_n + \frac{A}{x_n}\right) = F(x_n)
+        \]
+        which is a method for finding $\sqrt{A}$.
+        For instance, $A=12, x_0 = 2, \ldots, x_4 = 3.4641$, etc.
+
+        The fixed points are $X = \frac{1}{2}\left(X + \frac{A}{X}\right)
+        \rightarrow{} X = \pm \sqrt{A}$. By drawing the Cobweb diagram, we should see that
+        $x_0 > 0 \Rightarrow{} x_n \rightarrow{} \sqrt{A}, x_0 < 0 \Rightarrow{} x_n \rightarrow{} \sqrt{A}$.
+
+        Next we find out which order the process is:\[
+            \begin{align*}
+                F'(X)  & = \frac{1}{2}\left(1 - \frac{A}{X^{2}}\right) = 0 \\
+                F''(X) & = \frac{A}{X^{3}} = \pm \frac{1}{\sqrt{A}} \neq 0.
+            \end{align*}
+        \]
+        So this is a second order process, and $\pm \sqrt{A}$ are attractors with
+        $\epsilon_{n + 1} \propto \epsilon_{n}^{2}$.
+
+        \underline{Exercise}: Consider $A < 0$?
+
+    \item Solve\[
+            f(x) = x^{2} - 6x + 2 = 0.
+    \]
+    We can rearrange this in various ways and write it in iterative process:
+    \begin{enumerate}[label = (\roman*)]
+        \item $x_{n + 1} = 6 - \frac{2}{x}$
+        \item $x_{n + 1} = \frac{1}{6}x_n^{2} + \frac{1}{3}$
+        \item $x_{n + 1} = \sqrt{6x_n - 2}$
+        \item $x_{n + 1} = x_n - \frac{x_n^{2} - 6x_n + 2}{2x - 6}
+            = \frac{x_n^{2} - 2}{2x_n - 6}$.
+    \end{enumerate}
+
+    Examining these (see Problem Sheet 3) we find that (iv) is the `best buy'
+    in that it is the \emph{only} second order process and it is the only one
+    which allows us to obtain both roots and attractors if we choose $x_0$ suitably.
+
+\item \[
+        x_{n + 1} = x_n (2 - Ax_n)
+\]
+which is a method for finding a reciprocal \emph{without} division! ($x_n \rightarrow{} \frac{1}{A}$)
+It is a second order process.
+
+\underline{Note}: Examples (a), (b)(iv), (c) are examples of what is now called %chktex 36
+the \emph{Newton(-Raphson) Method} for finding solutions of $f(x) = 0$: \[%chktex 36
+    x_{n + 1} = F(x_n) = x_n - \frac{f(x_n)}{f'(x_n)}.
+\]
+Such a process is \emph{normally} at least second order (good!) because \[
+    F'(x) = 1 - \frac{f'(x)}{f'(x)} + \frac{f(x)f''(x)}{{(f'(x))}^{2}} = 0
+\]and\[
+F''(x) = \frac{f''(x)}{f'(x)} \neq 0 \;\textnormal{usually}.
+\]
+However, there are some difficulties in implementing the method successfully,
+including choosing a value near roots, having multiple roots, etc.
+    
+\item modern, practical, surprising\ldots \underline{Population Dynamics}
+
+    Recall the \emph{logistic map equation}:\[
+        P(n + 1) = aP(n) - b{(P(n))}^{2}
+    \]
+    which is a simple mathematical model with very complicated dynammics.
+    Put $x_n = \frac{b}{a}P(n)$, and we get\[
+        x_{n + 1} = ax_n(1 - x_n)
+    \]
+    with $a$ being the constant. This is the standard form of logistic map.
+
+    Although there is no restriction for mathematical interest,
+    the `physical' interest is in $0 \le a \le 4$ so that $[0, 1] \rightarrow{} [0, 1]$.
+    We can easily see that the maximum value that $x_n (1 - x_n)$ can get is $\frac{1}{4}$,
+    therefore having any $a > 4$ would definitely result in $x_{n + 1} > 1 \Rightarrow{}
+    x_{n + 2} < 0$, and let alone $a < 0$.
+    We certainly would not want negative population values!
+
+    There are evidently two fixed points satisfying\[
+        X = aX(1 - X) \Rightarrow{} X = 0 \;\textnormal{and}\; X = 1 - \frac{1}{a}.
+    \]
+    Which do we get, and when?
+    Take the first order process and analyse with different ranges of $a$:\[
+        |F'(X)| = |a(1 - 2X)|.
+    \]
+    \begin{itemize}
+        \item $0 \le a < 1$, $a = 0$ is trivial.
+
+            We can deduce that $x = 0$ is an attractor,
+            while $x = 1 - \frac{1}{a}$ is a repeller.
+            This makes sense because it is a linear model made worse by overcrowding.
+
+        \item $1 < a < 3$.
+
+            We can decude that $x= 0$ is a repeller,
+            while $x = 1 - \frac{1}{a}$ is an attractor.
+            This makes sense because it is an exponential growth stabilised by overcrowding.
+
+            This behaviour is very similar to that of the logistic differential equation
+            --- what follows is definitely not so!
+
+        \item $a > 3$.
+
+            We can deduce that $x = 0$ and $x = 1 - \frac{1}{a}$ are both repellers.
+
+            So what exactly do we get?
+            We get `\emph{period doubling}'.
+
+            \medskip
+            Consider $x_{n + 2} = F(x_{n + 1}) = F(F(x_{n})) = F^{(2)}(x_n)
+            = a[ax_n (1 - x_n)][1 - ax_n(1 - x_n)]$.
+            The fixed points of this satisfy
+            \begin{equation}\label{eqn:1}
+                X = a^{2}X(1 - X)[1 - aX(1-X)]
+            \end{equation}
+            We still have $X = 0, X = 1 - \frac{1}{a}$ of course,
+            but now we have two new ones, say $X_1$ and $X_2$, satisfying
+            \begin{equation}\label{eqn:2}
+                a^{2}X^{2} - a(a+1)X + (a+1) = 0
+            \end{equation}
+            which is derived from dividing equation~\eqref{eqn:1} with the two known solutions.
+            (Or do factorization accordingly.) We also know that $X_1 = F(F(X_1)), X_2 = F(F(X_2))$,
+            and thus we must have\[
+                X_1 = F(X_2), \quad X_2 = F(X_1)
+            \]
+            because with $F(X_1) = F(F(F(X_1)))$, $F(X_1)$ being the solution to itself 
+            being applied to $F$ twice, there is nothing other than $X_2$ 
+            which can possibly be the value of $F(X_1)$: The two known values cannot be duplicated,
+            and $X_1$ itself is a repeller, thereby impossible to be a fixed point of the map.
+            Similarly for the value of $X_1$, $X_1 = F(X_2)$.
+
+            This forms a \emph{flip} or \emph{2-cycle}. (Before becoming 4-cycle, 8-cycle, etc.)
+            This is an attractor when\[
+                \left|\frac{\mathrm{d}}{\mathrm{d}x} F(F(x)) \right| < 1
+            \]\[
+                \Rightarrow{} |F'(X_1)F'(X_2)| < 1,
+                |a(1 - 2X_1) a(1 - 2X_2)| < 1
+            \]and using Vieta's theorem to obtain the sum and product of the two roots
+            from equation~\eqref{eqn:2}, we get\[
+                3 < a < 1 + \sqrt{6}
+            \]
+            for positive $a$. For increasingly larger $a > 1 + \sqrt{6}$, we then obtain 4 cycle
+            $\Rightarrow{}$ 8 cycle $\Rightarrow{} \ldots \Rightarrow{}$ $2^{\infty}$ cycle.
+    \end{itemize}
+    \end{enumerate}
+    
+\end{ex}
+
+\paragraph{Novelty!}
+The stable windows get shorter in geometrical progression
+at rate $\frac{1}{4.669\ldots}$, where $4.669\ldots$ is the \emph{\underline{Feigenbaum constant}}.
+(The first one. There is another one, which is not introduced by Berkshire.)
+For $3.57 < a \le 4$, `Chaos' + periodic windows!
+
+
+\section{Linear Systems of Differential Equations}
 
 
 
@@ -2475,7 +2920,7 @@ There are four cases to consider:
     A \textbf{\emph{Pivot column}} is a column containing a Pivot position.
 \end{pivot position}
 
-\newmdtheoremenv[style=defEnv]{Any matrix can convert to RRE}[theorem]{Proposition}
+\newmdtheoremenv[style=defEnv]{Any matrix can convert to RRE}[theorem]{(Gau$\beta$ algorithm) Proposition}
 \begin{Any matrix can convert to RRE}
     Any matrix can be put into RRE form by performing a sequence of row operations.
 \end{Any matrix can convert to RRE}
@@ -2520,7 +2965,122 @@ There are four cases to consider:
     the final column will not help you read the solutions.
 
 
+\begin{ex}
+    Solve\[
+        \left\{
+            \begin{align*}
+                & 3x_1 + 5x_2 - 4x_3 = 0 \\
+                & -3x_1 - 2x_2 + 4x_3 = 0 \\
+                & 6x_2 + x_2 - 8x_3 = 0. \\
+            \end{align*}
+            \right.
+    \]
+    The RRE form of the above equation is\[
+        \begin{pmatrix}
+            1 & 0 & -\frac{4}{3} & 0 \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 0
+        \end{pmatrix} 
+    \]
+    and the geometric interpretation of this is a line!
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{Solutions to a system is 0, 1, infinity}[theorem]{Proposition}
+\begin{Solutions to a system is 0, 1, infinity}
+    The number of solutions to a system $A\pmb{x} = \pmb{b}$ is always either 0, 1, or $\infty$.
+\end{Solutions to a system is 0, 1, infinity}
+
+\begin{proof}
+    Assume the number of solutions is not 0, and not 1.
+    Take 2 solution $\nu$ and $\upsilon$, $\pmb{\nu} \neq \pmb{\upsilon}$.\[
+        \Rightarrow{} A\pmb{\nu} = A\pmb{\upsilon} = b \Rightarrow{}
+        A(\pmb{\nu} - \pmb{\upsilon}) = 0 = \omega \neq 0
+    \]
+    Take: $\nu + \lambda \omega, \lambda \in \mathbb{R}$\[
+        \Rightarrow{} A(\nu + \lambda\omega) = A\nu + \lambda A\omega = A\pmb{\nu} = \pmb{b} = \pmb{b}
+    \]
+    So $\pmb{\nu} + \lambda \pmb{\omega}$ is a solution $\forall \lambda \in \mathbb{R}$
+    $\Rightarrow{} \infty$ many solutions.
+\end{proof}
+
+\subsection{matrix multiplication}
+
+\newmdtheoremenv[style=defEnv]{matrix multiplicatioin}[theorem]{Definition}
+\begin{matrix multiplicatioin}
+    $A \in M_{m, n}(\mathbb{R}), B \in M_{n, k}(\mathbb{R})$. Then the product $AB$
+    is defined such that the ${(AB)}_{ik} = \sum_{j = 1}^{n} a_{ij}b_{jk}$ (row $i$ column $k$)
+\end{matrix multiplicatioin}
+
+\underline{Operation}: $M_{m,n}(\mathbb{R}) \times M_{n, k}(\mathbb{R}) \rightarrow{} M_{m, k}(\mathbb{R})$.
+It is a binary operation on $M_{n,n}(\mathbb{R})$, square matrices! 
+Be careful with the size of the matrices.
+
+\bigskip
+\underline{Caution}:
+
+\begin{itemize}
+    \item The $(i, j)$-entry of $AB$ is the dot product of $r_i^{T}$ with $c_j$.
+
+    \item Other way to see it: column $j$ of $AB$ is $Ac_j$.
+\end{itemize}
+
+\newmdtheoremenv[style=defEnv]{matrix properties}[theorem]{Proposition}
+\begin{matrix properties}
+    Let $A, A' \in M_{m,n}(\mathbb{R}), B, B' \in M_{n,p}(\mathbb{R})$. Then
+    \begin{enumerate}[label = (\arabic*)]
+        \item $A(BC) = (AB)C$. (Associativity)
+        \item \[
+            \left\{
+                \begin{align*}
+                    & A(B + B') = AB + AB' \\
+                    & (A + A')B = AB + A'B
+                \end{align*}
+            \right\} \quad \textnormal{Distributivity}
+        \]
+                
+    \item $\forall \lambda \in \mathbb{R}, (\lambda A)B = A(\lambda B) = \lambda (AB)$.
+        (Compatibility with scalar multiplication.)
+    \end{enumerate}
     
+\end{matrix properties}
+
+
+\underline{Caution}: 
+\begin{itemize}
+    \item Let $A \in M_{m,n}(\mathbb{R})$, then $0_{k \times m} A = 0_{k\times n},
+        A 0_{n \times e} = 0_{m \times e}$.
+
+    \item $\forall A \in M_{n,n}(\mathbb{R}), I_n A = AI_n = A$.
+
+    \item In general, $AB \neq BA$, i.e.\ not commutative.
+
+    \item $A^2$ does not guarantee to be $0_{n, n}$, e.g.\ $\begin{pmatrix}
+            0 & 0 \\
+            1 & 0 
+    \end{pmatrix} $
+\end{itemize}
+
+\newmdtheoremenv[style=defEnv]{diagonal matrix}[theorem]{Definition}
+\begin{diagonal matrix}
+    A \textbf{\emph{diagonal matrix}} is a square matrix $D \in M_{n,n}(\mathbb{R})$, s.t.\[
+        \left\{
+            \begin{align*}
+                & D_{ij} = 0, i \neq j \\
+                & D_{ij} = \lambda_i \in \mathbb{R}, i = j
+            \end{align*}
+        \right.
+    \]
+    Goal: When can we bring matrices to this form? $\leadsto$ diagonalization.
+\end{diagonal matrix}
+
+\newmdtheoremenv[style=defEnv]{inverse square matrix}[theorem]{Definition}
+\begin{inverse square matrix}
+    Let $A \ini M_{n,n}(\mathbb{R})$. A $n \times n$-matrix $A^{-1}$ is called \textbf{\emph{inverse}}
+    of $A$ if:\[
+        AA^{-1} = I_n = A^{-1}A.
+    \]
+    \underline{Caution}: Not all matrices are invertible!
+\end{inverse square matrix}
 
 
 
