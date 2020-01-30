@@ -2356,9 +2356,17 @@ including choosing a value near roots, having multiple roots, etc.
             \]
             because with $F(X_1) = F(F(F(X_1)))$, $F(X_1)$ being the solution to itself 
             being applied to $F$ twice, there is nothing other than $X_2$ 
-            which can possibly be the value of $F(X_1)$: The two known values cannot be duplicated,
-            and $X_1$ itself is a repeller, thereby impossible to be a fixed point of the map.
+            which can possibly be the value of $F(X_1)$: The two known values are repellers,
+            as deduced previously, and also $X_1$ itself has to be a repeller,
+            thereby impossible to be a fixed point of the map.
             Similarly for the value of $X_1$, $X_1 = F(X_2)$.
+
+            (The other possible approach to make it intuitive is that,
+            as $n$ tends to infinity, $X_1$ becomes periodic with a cycle of 2.
+            Therefore the value of $F(X_1)$ has to be a \emph{convergent value} as well.
+            This is similar for $X_2$. To ensure that both $X_1$ and $X_2$ are 2-periodic,
+            and both are the two possible values of $x_\infty$, $F(X_1)$ \emph{has to} be $X_2$,
+            and similarly $F(X_2)$ has to be $X_1$.)
 
             This forms a \emph{flip} or \emph{2-cycle}. (Before becoming 4-cycle, 8-cycle, etc.)
             This is an attractor when\[
@@ -2386,6 +2394,210 @@ For $3.57 < a \le 4$, `Chaos' + periodic windows!
 
 \section{Linear Systems of Differential Equations}
 
+Previously we saw some simple examples of systems of differential equations,
+where there is more than one dependent variable, e.g.\ the first order system
+\begin{equation}\label{eqn:4}
+    \left\{\begin{align*}
+        & \frac{\mathrm{d}x}{\mathrm{d}t} = F(x,y) \\
+        & \frac{\mathrm{d}y}{\mathrm{d}t} = G(x,y).
+    \end{align*}\right.
+\end{equation}
+A very important class for us to consider is that of \emph{linear systems}:
+\begin{equation}\label{eqn:3}
+    \left\{\begin{align*}
+        & \frac{\mathrm{d}x}{\mathrm{d}t} = ax + by \\
+        & \frac{\mathrm{d}y}{\mathrm{d}t} = cx + dy
+    \end{align*}\right.
+\end{equation}
+where, in general, $a, b, c, d$ could be functions of time ---
+we take them to be \emph{constants} in our discussion.
+System~\eqref{eqn:3} is called \textbf{\emph{homogeneous}}.
+If there are further \underline{added} constants or functions of time
+on RHS of~\eqref{eqn:3} then the system would be called \textbf{\emph{inhomogeneous}}.
+
+\noindent \underline{Notes}:~\eqref{eqn:3} is a \textbf{\emph{coupled system}} in general,
+in that $x$ and $y$ appear on \emph{each} RHS.\@
+
+\paragraph{Examples}
+\,
+
+\begin{enumerate}[label = (\alph*)]
+    \item \underline{Combat}:\[
+        \left\{\begin{align*}
+            & \frac{\mathrm{d}x}{\mathrm{d}t} = -ay \\
+            & \frac{\mathrm{d}y}{\mathrm{d}t} = -bx.
+        \end{align*}\right.
+    \]
+    Here $a = 0 = d$; $b, c$ are both negative in~\eqref{eqn:3}.
+
+\item \underline{Romance}!\[
+    \left\{
+        \begin{align*}
+            & \frac{\mathrm{d}r}{\mathrm{d}t} = ar + bj \\
+            & \frac{\mathrm{d}j}{\mathrm{d}t} = cr + dj
+        \end{align*}
+        \right.
+\]
+where $a,b,c,d$ can plausibly be positive or negative!
+($r(t)$ is Romeo's love/hate for Juliet at time $t$.
+Similarly, $j(t)$ is Juliet's love/hate for Romeo at time $t$.)
+
+\item \underline{Linear Ordinary Differential Equations of higher order}
+
+    E.g.\ Our damped harmonic oscillator\[
+        \frac{\mathrm{d}^{2}x}{\mathrm{d}t^{2}} + 2k\frac{\mathrm{d}x}{\mathrm{d}t}
+        + \omega^{2}x = 0
+    \]can be written in the form\[
+        \left\{
+            \begin{align*}
+                & \frac{\mathrm{d}x}{\mathrm{d}t} = y \\
+                & \frac{\mathrm{d}y}{\mathrm{d}t} = \omega^{2}x - 2ky.
+            \end{align*}
+            \right.
+    \]
+
+\item \underline{General nonlinear systems}
+
+    In general we can find equilibria of~\eqref{eqn:4} by solving
+    $F(x,y) = 0 = G(x,y)$. The local behaviour of $x,y$ near these equilibria
+    is that of a local linear System (via Taylor expansion).
+    This analysis allows us to infer the properties of the full nonlinear systems.
+\end{enumerate}
+
+How do we solve \emph{linear systems} like~\eqref{eqn:3}?
+
+A desirable and worthy aim is to try to \emph{decouple} the equations ---
+if necessary by making a suitable change of variables. This is a good idea
+because if we have a decoupled system, e.g.\[
+    \frac{\mathrm{d}x}{\mathrm{d}t} = 2x, \quad \frac{\mathrm{d}y}{\mathrm{d}t} = -3y
+\]then for an initial ($t = 0$) point $(x_0, y_0)$ the solution would be
+$(x,y) = (x_0 e^{2t}, y_0 e^{-3t})$. In this case, as shown in Figure~\ref{fig:phasePortrait},
+all the trajectories are given by
+$x^{3}y^{2} =$ constant, and the particular solution has $x^{3}y^{2} = x_0^{3}y_0^{2}$.
+Within a family of solutions, the value of $x$ and $y$ changes as the value of $t$ changes,
+with the direction specified in the diagram. 
+
+As such, we can also see that there is one equilibrium point at $O(0, 0)$, where any changes
+in the value of $t$ does not change the value of $x$ and $y$. In addition, the equilibrium point
+is \emph{not stable} since, although having perturbation in the $y$-axis converges back to 0,
+perturbations along the $x$-axis diverges to infinity. So $O$ is definitely not an attractor.
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{phasePortrait.jpeg}
+  	\centering
+    \caption{`phase' portrait}\label{fig:phasePortrait}
+\end{figure}
+
+\bigskip
+What can be done with a coupled system? e.g.
+\begin{equation}\label{eqn:5}
+    \left\{
+        \begin{align*}
+            & \frac{\mathrm{d}x}{\mathrm{d}t} = -4x - 3y \\
+            & \frac{\mathrm{d}y}{\mathrm{d}t} = 2x + 3y
+        \end{align*}\right.
+\end{equation}
+
+(For the moment we consider a homogeneous system --- some inhomogeneous later.)
+
+\paragraph{Methods}
+\;
+
+\begin{enumerate}[label = (\arabic*)]
+    \item We might recognize that \[
+            \left(\frac{\mathrm{d}}{\mathrm{d}t} + 4\right) x = -3y \quad\textnormal{and}\quad
+            \left(\frac{\mathrm{d}}{\mathrm{d}t} - 3\right) y = 2x
+    \]\[
+    \Rightarrow{} \left(\frac{\mathrm{d}}{\mathrm{d}t} - 3\right) 
+    \left(\frac{\mathrm{d}}{\mathrm{d}t} + 4\right) x
+    = -3\left(\frac{\mathrm{d}}{\mathrm{d}t} - 3\right) y = -6x
+    \]\[
+        \Rightarrow{}\frac{\mathrm{d}^{2}x}{\mathrm{d}t^{2}} + \frac{\mathrm{d}x}{\mathrm{d}t} - 6x = 0.
+    \]
+    Solve this using the previous methods: $\lambda_1 = 2, \lambda_2 = -3$, so that
+    $x(t) = A_1e^{2t} + A_2e^{-3t}$. Naturally we can then find $y(t)$ from the first rearrangement above:\[
+        y(t) = -\frac{1}{3}\left(\frac{\mathrm{d}}{\mathrm{d}t} + 4\right) x
+        = -2A_1e^{2t} - \frac{1}{3}A_2e^{-3t}
+    \]and we note that our solution for $x(t), y(t)$ depends on 2 arbitrary constants --- as it must!
+
+    Afterwards, we can also find $y(x)$ by eliminating $t$, if we wish. Using the expressions we obtained
+    for $x(t)$ and $y(t)$, we can obtain \[
+        (x + 3y) = -5A_1e^{2t}, \quad (2x + y) = \frac{5}{3}A_2e^{-3t}
+    \]\[
+    \Rightarrow{} {(x + 3y)}^{3} {(2x + y)}^{2} = \frac{3125}{9}A_1^{3}A_2^{2}.
+    \]
+    We can then draw the family of trajectories in the $(x,y)$ plane (phase portrait).
+
+\item We might also note that our~\eqref{eqn:5} can be written as\[
+    \frac{\mathrm{d}y}{\mathrm{d}x} = \frac{\frac{\mathrm{d}y}{\mathrm{d}t} }{\frac{\mathrm{d}x}{\mathrm{d}t} }
+    = \frac{2x + 3y}{-4x - 3y} = \frac{2 + 3 \left(\frac{y}{x}\right) }{-4 - 3 \left(\frac{y}{x}\right) }.
+\]
+This is homogeneous 1st order D.E. We put $\frac{y}{x} = u(x) \Rightarrow{} x\frac{\mathrm{d}u}{\mathrm{d}x} 
++ u = \frac{2 + 3u}{-4 - 3u}$, and then we get\[
+    x\frac{\mathrm{d}u}{\mathrm{d}x} = \frac{2 + 7u + 3u^{2}}{-4 - 3u}
+\]solving this equation and we get\[
+    -\ln{x} = \frac{3}{5}\ln{(1 + 3u)} + \frac{2}{5}\ln{(2 + u)} + C
+\]substituting $x$ and $y$ back and eliminating $t$ and we get\[
+{(x + 3y)}^{3}{(2x + y)}^{2} = C.
+\]
+
+\underline{Warning}: This method is not favourable as it does not contain any information regarding $t$--- 
+it was got rid of at the very start, therefore no time-depence of $x$ and $y$, i.e.\ $x(t), y(t)$.
+As a result, we cannot do certain things such as drawing the phase portrait!
+
+\item We might just \emph{\underline{notice(!)}} that\[ %chktex 36
+    \begin{align*}
+        & \frac{\mathrm{d}}{\mathrm{d}t} (2x + y) = 2(-4x - 3y) + (2x + 3y) = -3(2x + y) \\
+        & \frac{\mathrm{d}}{\mathrm{d}t} (x + 3y) = (-4x - 3y) + 3(2x + 3y) = 2(x + 3y)
+    \end{align*}
+\]so that\[
+    \left\{
+        \begin{align*}
+            2x + y & = C_1e^{-3t} \\
+            x + 3y & = C_2e^{2t}
+        \end{align*}
+        \right.
+\]\[
+    \Rightarrow{}\left\{
+        \begin{align*}
+            x & = \frac{3}{5}C_1e^{-3t} - \frac{1}{5}C_2e^{2t} \\
+            y & = -\frac{1}{5}C_1e^{-3t} + \frac{2}{5}C_2e^{2t}
+        \end{align*}
+        \right.
+    \]and of course ${(x + 3y)}^{3}{(2x + y)}^{2} = C$ again.
+    \begin{figure}
+      	\includegraphics[scale=0.15]{2ndPhasePortrait.jpeg}
+      	\centering
+        \caption{phase portrait of~\eqref{eqn:5}}\label{fig:2ndPhaseP}
+    \end{figure}
+    
+
+    All the aforementioned methods have the same phase portrait, as shown in Figure~\ref{fig:2ndPhaseP},
+    but method (3) gives the germ of a good idea!
+
+\item How can we arrive at the linear combinations we used previously in an orderly manner
+    and not just `by inspection' or luck?!
+
+    We write our system~\eqref{eqn:5} in a different way:\[
+        \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
+                x \\
+                y
+        \end{pmatrix} = \begin{pmatrix}
+        -4 & -3 \\
+        2 & 3
+        \end{pmatrix} \begin{pmatrix}
+                x \\
+                y
+        \end{pmatrix} 
+    \]
+      which is $\frac{\mathrm{d}}{\mathrm{d}t} \pmb{v} = M\pmb{v}$ in vector/matrix notation.
+      Now try $\pmb{v} = \pmb{V}e^{\lambda t}$ with $\pmb{V}$ \emph{not} depending on $t$,
+      i.e.\ it is a \emph{constant vector}. This implies that\[
+          M\pmb{V} = \lambda \pmb{V}, \;\textnormal{i.e.}\; (M - \lambda I)\pmb{V} = 0
+      \]converting to an eigenvalue/eigenvector problem to find appropriate $\lambda, \pmb{V}$.
+
+      For non-trivial $\pmb{V}$ (i.e.\ $\neq 0$) then we must have
+\end{enumerate}
 
 
 
