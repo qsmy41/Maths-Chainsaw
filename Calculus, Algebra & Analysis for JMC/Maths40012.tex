@@ -10,7 +10,7 @@
 \usepackage{authblk} % for writing affiliationis
 \usepackage{graphicx} % for importing images
 \graphicspath{{./images/}} % for the path to images
-
+\usepackage{soul}
 
 \theoremstyle{definition}
 \mdfdefinestyle{defEnv}{%
@@ -2345,28 +2345,25 @@ including choosing a value near roots, having multiple roots, etc.
                 X = a^{2}X(1 - X)[1 - aX(1-X)]
             \end{equation}
             We still have $X = 0, X = 1 - \frac{1}{a}$ of course,
+            (it is a fixed point on a map done twice.)
             but now we have two new ones, say $X_1$ and $X_2$, satisfying
             \begin{equation}\label{eqn:2}
                 a^{2}X^{2} - a(a+1)X + (a+1) = 0
             \end{equation}
             which is derived from dividing equation~\eqref{eqn:1} with the two known solutions.
-            (Or do factorization accordingly.) We also know that $X_1 = F(F(X_1)), X_2 = F(F(X_2))$,
-            and thus we must have\[
-                X_1 = F(X_2), \quad X_2 = F(X_1)
-            \]
-            because with $F(X_1) = F(F(F(X_1)))$, $F(X_1)$ being the solution to itself 
-            being applied to $F$ twice, there is nothing other than $X_2$ 
-            which can possibly be the value of $F(X_1)$: The two known values are repellers,
-            as deduced previously, and also $X_1$ itself has to be a repeller,
-            thereby impossible to be a fixed point of the map.
-            Similarly for the value of $X_1$, $X_1 = F(X_2)$.
+            (Or do factorization accordingly.) 
 
-            (The other possible approach to make it intuitive is that,
-            as $n$ tends to infinity, $X_1$ becomes periodic with a cycle of 2.
-            Therefore the value of $F(X_1)$ has to be a \emph{convergent value} as well.
-            This is similar for $X_2$. To ensure that both $X_1$ and $X_2$ are 2-periodic,
-            and both are the two possible values of $x_\infty$, $F(X_1)$ \emph{has to} be $X_2$,
-            and similarly $F(X_2)$ has to be $X_1$.)
+            \medskip
+            We also know that $X_1 = F(F(X_1)), X_2 = F(F(X_2))$.
+            As such, choosing $X_1$, and applying the map once, we can see that $F(X_1) = F(F(F(X_1)))$,
+            i.e.\ both $X_1$ and $F(X_1)$ are 
+            \ul{the two fixed points of the map done twice},
+            satisfying the equation~\eqref{eqn:2}, which is exactly looking for the two roots which are
+            \ul{the fixed points of the logistic map done twice},
+            and there are no other such fixed point except for $X_2$,
+            thus we must have\[
+                X_1 = F(X_2), \quad X_2 = F(X_1).
+            \]
 
             This forms a \emph{flip} or \emph{2-cycle}. (Before becoming 4-cycle, 8-cycle, etc.)
             This is an attractor when\[
@@ -2379,17 +2376,31 @@ including choosing a value near roots, having multiple roots, etc.
                 3 < a < 1 + \sqrt{6}
             \]
             for positive $a$. For increasingly larger $a > 1 + \sqrt{6}$, we then obtain 4 cycle
-            $\Rightarrow{}$ 8 cycle $\Rightarrow{} \ldots \Rightarrow{}$ $2^{\infty}$ cycle.
+            $\Rightarrow{}$ 8 cycle $\Rightarrow{} \ldots \Rightarrow{}$
+            arbitrary number of cycle, or \emph{chaotic behaviour}!
     \end{itemize}
     \end{enumerate}
     
 \end{ex}
 
 \paragraph{Novelty!}
-The stable windows get shorter in geometrical progression
-at rate $\frac{1}{4.669\ldots}$, where $4.669\ldots$ is the \emph{\underline{Feigenbaum constant}}.
-(The first one. There is another one, which is not introduced by Berkshire.)
+The stable windows (when it is still in a certain number of cycle instead of
+being completely random, or rather \emph{chaotic} behaviour) get shorter in geometrical progression
+at rate $\frac{1}{4.669\ldots}$, where $4.669\ldots$ is the \emph{Feigenbaum constant}.
+(The first one. There is another one, which is not introduced by Berkshire, and 
+actually beyond the scope of the current study, according to Wikipedia.)
 For $3.57 < a \le 4$, `Chaos' + periodic windows!
+
+\bigskip
+For motivation to study this section, please watch the following youtube video:
+
+\ul{https://www.youtube.com/watch?v=ovJcsL7vyrk}
+
+\bigskip
+For studying in detail, please read the following book recommended by our dear lecturer Frank Berkshire:
+
+\ul{https://physicaeducator.files.wordpress.com/2018/02/classical-mechanics-by-kibble-and-berkshire.pdf}
+
 
 
 \section{Linear Systems of Differential Equations}
