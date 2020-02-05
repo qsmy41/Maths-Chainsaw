@@ -448,7 +448,7 @@ As soon as you get one left and one right identity, you have a unique identity $
 
 \begin{proof}
     To Show: if ${[a]}_{n}, {[b]}_{n} \in (\mathbb{Z}_n^{*}, \cdot) 
-    \Rightarrow {[a]}_{n} \cdot {[b]}_{n} \in (\matZbb{Z}_n^{*}, \cdot)$.
+    \Rightarrow {[a]}_{n} \cdot {[b]}_{n} \in (\mathbb{Z}_n^{*}, \cdot)$.
     \\$\Rightarrow\ (a, n) = (b, n) = 1 \Rightarrow\ (ab, n) = 1
     \Rightarrow\ {[ab]}_{n} \;\text{has inverse}\; {[a]}_{n} {[b]}_{n}$.
 
@@ -505,7 +505,7 @@ As soon as you get one left and one right identity, you have a unique identity $
 \begin{proof}
     Assume $\exists{}i \in{}\mathbb{Z}, i \ge{}n + 1, \;\textnormal{s.t.}\; g^{i} = e $
     where $g \in{}G$, $i$ is the smallest such integer.
-    By previous lemma, $\left\{g_0, g_1, g_2, \ldots, g^{i-1}\right\} $ all distince.
+    By previous lemma, $\left\{g_0, g_1, g_2, \ldots, g^{i-1}\right\} $ all distinct.
     There are $i$ elements $i > n$.
 \end{proof}
 
@@ -749,7 +749,7 @@ $a_1, a_2, \ldots, a_k$ are all distinct (or this permutation would not be a cyc
         So the 1-cycles (1), (3), (42), all denote the identity. 
         The usual convention is to use (1), and this makes sense in any $S_n$.
 
-    \item Cycles make sense if all elements are distince.
+    \item Cycles make sense if all elements are distinct.
 \end{enumerate}
 
 \begin{ex}
@@ -838,7 +838,7 @@ $a_1, a_2, \ldots, a_k$ are all distinct (or this permutation would not be a cyc
 \begin{subgroup}
     Let $(G, *)$ be a group. $H \subseteq G$ a subset. Then $H$ is called a subgroup of $G$ if:
     \begin{enumerate}
-        \item $\forall g, h \in G, g * h \in H$. (Closure)
+        \item $\forall g, h \in H, g * h \in H$. (Closure)
         \item $e \in G$ is also in $H$. (identity element)
         \item $g \in H \Rightarrow{}g^{-1} \in H$. (inverses)
     \end{enumerate}
@@ -1769,7 +1769,7 @@ Our guide is the form of the function $f(x)$ on RHS.\@
                 \begin{enumerate}[label = (\arabic*)]
                     \item Try $y_{\textnormal{PI}} = B e^{x} \cos{x} + C e^{x} \sin{x}$
                         because $\mathscr{L} (y_{\textnormal{PI}})$ produces terms of a similar type.
-                        Substitute in and equate coefficents of $e^{x} \cos{x}, e^{x}\sin{x}$
+                        Substitute in and equate coefficients of $e^{x} \cos{x}, e^{x}\sin{x}$
                         on the two sides $\Rightarrow B = \frac{1}{10}, C = \frac{1}{10}$.
 
                         \emph{\underline{OR}}
@@ -2504,6 +2504,8 @@ For studying in detail, please read the following book recommended by our dear l
 
 \section{Linear Systems of Differential Equations}
 
+\subsection{definitions and examples}
+
 Previously we saw some simple examples of systems of differential equations,
 where there is more than one dependent variable, e.g.\ the first order system
 \begin{equation}\label{eqn:4}
@@ -2557,14 +2559,15 @@ Similarly, $j(t)$ is Juliet's love/hate for Romeo at time $t$.)
     E.g.\ Our damped harmonic oscillator\[
         \frac{\mathrm{d}^{2}x}{\mathrm{d}t^{2}} + 2k\frac{\mathrm{d}x}{\mathrm{d}t}
         + \omega^{2}x = 0
-    \]can be written in the form\[
+    \]can be written in the form
+    \begin{equation}\label{eqn:7}
         \left\{
             \begin{align*}
                 & \frac{\mathrm{d}x}{\mathrm{d}t} = y \\
                 & \frac{\mathrm{d}y}{\mathrm{d}t} = \omega^{2}x - 2ky.
             \end{align*}
             \right.
-    \]
+    \end{equation}
 
 \item \underline{General nonlinear systems}
 
@@ -2682,13 +2685,18 @@ As a result, we cannot do certain things such as drawing the phase portrait!
     \end{figure}
     
 
-    All the aforementioned methods have the same phase portrait, as shown in Figure~\ref{fig:2ndPhaseP},
-    but method (3) gives the germ of a good idea!
+    All the aforementioned methods have the same phase portrait, as shown in Figure~\ref{fig:2ndPhaseP}.
+    The direction of the two straight lines $x + 3y = 0$ and $2x + y = 0$ can be found easily,
+    and the other four trajectories has to follow the same direction as those two straight lines,
+    unless there are two trajectories intersect and have an equilibrium point.
+
+    Method (3) gives the germ of a good idea!
 
 \item How can we arrive at the linear combinations we used previously in an orderly manner
     and not just `by inspection' or luck?!
 
-    We write our system~\eqref{eqn:5} in a different way:\[
+    We write our system~\eqref{eqn:5} in a different way:
+    \begin{equation}\label{eqn:6}
         \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
                 x \\
                 y
@@ -2699,15 +2707,654 @@ As a result, we cannot do certain things such as drawing the phase portrait!
                 x \\
                 y
         \end{pmatrix} 
-    \]
+    \end{equation}
       which is $\frac{\mathrm{d}}{\mathrm{d}t} \pmb{v} = M\pmb{v}$ in vector/matrix notation.
       Now try $\pmb{v} = \pmb{V}e^{\lambda t}$ with $\pmb{V}$ \emph{not} depending on $t$,
       i.e.\ it is a \emph{constant vector}. This implies that\[
-          M\pmb{V} = \lambda \pmb{V}, \;\textnormal{i.e.}\; (M - \lambda I)\pmb{V} = 0
+          M\pmb{V} = \lambda \pmb{V}, \;\textnormal{i.e.}\; (M - \lambda I)\pmb{V} = \pmb{0}
       \]converting to an eigenvalue/eigenvector problem to find appropriate $\lambda, \pmb{V}$.
 
-      For non-trivial $\pmb{V}$ (i.e.\ $\neq 0$) then we must have
+      For non-trivial $\pmb{V}$ (i.e.\ $\neq 0$) then we must have\[
+          \det{
+          \begin{pmatrix}
+              -4-\lambda & -3 \\
+              2 & 3-\lambda
+          \end{pmatrix} 
+      } = 0
+      \]
+      $\Rightarrow{}(-4-\lambda)(3-\lambda)+6 = 0$, $\lambda^{2}+\lambda-6 = 0$,
+      $\lambda_1 = 2, \lambda_2 = -3$.
+      And computing the respective eigenvector, we get
+      \[\pmb{V}_1 = \begin{pmatrix}
+              1 \\
+              -2
+      \end{pmatrix} , \pmb{V}_2 = \begin{pmatrix}
+              3 \\
+              -1
+          \end{pmatrix} ,\] or any scalar multiple of these vectors.
+      (Substitute $\lambda_1, \lambda_2$ into $(M - \lambda I)$ and compute its RRE,
+      and read off from RRE.)
+
+      We now note the \emph{linearity} of our system, so we can write\[
+          \begin{pmatrix}
+                  x \\
+                  y
+          \end{pmatrix} = B_1\begin{pmatrix}
+                  1 \\
+                  -2
+          \end{pmatrix} e^{2t} + B_2\begin{pmatrix}
+                  3 \\
+                  -1
+          \end{pmatrix} e^{-3t}
+      \]where $B_1, B_2$ are arbitrary constants.
+      Therefore $x = B_1 e^{2t} + 3B_2 e^{-3t}$,
+      $y = -2B_{1}e^{2t} - B_2 e^{-3t}$.
+      (Note: results are the same as the previous methods.)
 \end{enumerate}
+
+\subsection{System decoupling}
+How does the last method do it? From the eigenvectors $\pmb{V}_1, \pmb{V}_2$ form the matrix\[
+    S = (\pmb{V}_1 \quad \pmb{V}_2) \qquad\textnormal{i.e.\ 2 $\times$ 2}
+\]and write \[\pmb{v} = \begin{pmatrix}
+        x \\
+        y
+    \end{pmatrix} = S\begin{pmatrix}
+            \xi \\
+            \eta
+    \end{pmatrix}.
+\](\emph{Similarity transformation}: tranform linearly $(x,y)$ to new axes $(\xi, \eta)$)
+The vector form of~\eqref{eqn:6} becomes\[
+    \frac{\mathrm{d}}{\mathrm{d}t} \left[S \begin{pmatrix}
+            \xi \\
+            \eta
+    \end{pmatrix} \right] 
+    = S\frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
+            \xi \\
+            \eta
+    \end{pmatrix} 
+    = MS\begin{pmatrix}
+            \xi \\
+            \eta
+    \end{pmatrix} 
+\]\[
+    \Rightarrow{}\frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
+            \xi \\
+            \eta
+    \end{pmatrix} = S^{-1}MS\begin{pmatrix}
+            \xi \\
+            \eta
+    \end{pmatrix} 
+\]assuming that $S$ is a \emph{nonsingular matrix} (invertible).  
+Then by noting that\[
+    S^{-1}S = \begin{pmatrix}
+            R_1 \\
+            R_2
+    \end{pmatrix} \begin{pmatrix}
+    \pmb{V}_1 & \pmb{V}_2
+    \end{pmatrix} = I_n
+\]where $R_1, R_2$ are of dimension $1 \times 2$.
+Using $M\pmb{V} = \lambda \pmb{V}$, we can deduce that\[
+    S^{-1}MS = \begin{pmatrix}
+            R_1 \\
+            R_2
+    \end{pmatrix} MS = \begin{pmatrix}
+            R_1 \\
+            R_2
+    \end{pmatrix} \begin{pmatrix}
+    \lambda_1 \pmb{V}_1 & \lambda_2 \pmb{V}_2
+    \end{pmatrix} = \begin{pmatrix}
+    \lambda_1 & 0 \\
+    0 & \lambda_2
+    \end{pmatrix} 
+\]which is a diagonal matrix. 
+For instance, in~\eqref{eqn:6}, \[
+    S = \begin{pmatrix}
+        1 & 3 \\
+        -2 & -1
+    \end{pmatrix}, S^{-1} = \frac{1}{5} \begin{pmatrix}
+        -1 & -3 \\
+        2 & 1
+    \end{pmatrix} 
+\]\[
+    \Rightarrow{}\frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
+            \xi \\
+            \eta
+    \end{pmatrix} = \begin{pmatrix}
+    2 & 0 \\
+    0 & -3
+    \end{pmatrix} \begin{pmatrix}
+            \xi \\
+            \eta
+    \end{pmatrix}
+\]and this is decoupled!
+As such, $\frac{\mathrm{d}}{\mathrm{d}t} \xi = 2\xi, \frac{\mathrm{d}}{\mathrm{d}t} \eta = -3\eta$
+$\Rightarrow{}\xi = C_1 e^{2t}, \eta = C_2 e^{-3t}$. Therefore as before, \[
+    \begin{pmatrix}
+            x \\
+            y
+    \end{pmatrix}  = S\begin{pmatrix}
+            \xi \\
+            \eta
+    \end{pmatrix} = \begin{pmatrix}
+            C_1 e^{2t} + 3C_2 e^{-3t} \\
+            -2C_1 e^{2t} - C_2 e^{-3t}
+    \end{pmatrix} 
+\]
+
+\paragraph{General Theory}
+Does this vector/matrix method always work?
+
+For $\pmb{v} = \begin{pmatrix}
+        x \\
+        y
+\end{pmatrix} , \frac{\mathrm{d}\pmb{v}}{\mathrm{d}t} = M\pmb{v}$,
+substituting with $\pmb{v} = \pmb{V}e^{\lambda t}$,
+we get $(M - \lambda I)\pmb{V} = \pmb{0}$.
+The solution depends \emph{crucially} on the nature of the eigenvalue/eigenvector problem
+$\lambda_1, \pmb{V}_1, \lambda_2, \pmb{V}_2$.
+
+We note that $\lambda_1 + \lambda_2 =$ \emph{trace} of $M$ (sum of the leading diagonal of $M$),
+and $\lambda_1\lambda_2 = \det{M}$. Both can be derived by looking at the quadratic equation
+derived from calculating the determinant of $(M - \lambda I)$ to be $0$.
+The equation is \emph{characteristic} for $M$.
+\begin{itemize}
+        \item $\lambda_1 \neq \lambda_2$
+
+            Our example~\eqref{eqn:6} was of this type, thereby having
+            $\pmb{V}_1, \pmb{V}_2$ eigenvectors. Our system decouples via 
+            the \emph{similarity transformation} and $S^{-1}MS$ is a diagonal matrix.  
+            This is essentially the situation even when the $\lambda_i$ are \emph{complex}.
+
+        \item $\lambda_1 = \lambda_2 = \lambda$
+
+            We've always had some difficulty with the equal roots cases\ldots
+            Here the difficulty presents in that the matrix $S$, which effects
+            the desired decoupling \emph{may not exist}.
+
+            \begin{enumerate}[label = (\roman*)]
+                \item 2 distinct eigenvectors exist.
+                    
+                    If $\pmb{V}_1, \pmb{V}_2$ are distinct for $M, \lambda$
+                    then it is true that $M\pmb{v} = \lambda\pmb{v}$ for any vector,
+                    i.e.\ $M = \lambda I$ and\[
+                        \begin{pmatrix}
+                                x \\
+                                y
+                        \end{pmatrix} = B_1 \pmb{V}_1 e^{\lambda t} + B_2 \pmb{V}_2 e^{\lambda t}.
+                    \]
+                    with $\pmb{V}_1, \pmb{V}_2$ being two linearly-independent 
+                    and random vectors in the plane.
+
+                \item Only one eigenvector exists.
+
+                    The best that can be done by a similarity transformation
+                    is to reduce the system to e.g.\[
+                        \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
+                                \xi \\
+                                \eta
+                        \end{pmatrix} = \begin{pmatrix}
+                        \lambda & 0 \\
+                        1 & \lambda
+                        \end{pmatrix} \begin{pmatrix}
+                                \xi \\
+                                \eta
+                        \end{pmatrix}
+                    \]or equivalent. The diagonal form is \emph{not} achievable. 
+                    By looking at $\frac{\mathrm{d}\eta}{\mathrm{d}t} $, we realize that\[
+                        \frac{\mathrm{d}\eta}{\mathrm{d}t} = \xi + \lambda \eta
+                        \Rightarrow{}\frac{\mathrm{d}\eta}{\mathrm{d}t} - \lambda \eta = \xi,
+                    \]
+                    where the CF of $\eta$ already appears in $\xi$.
+                    So we have to use $t e^{\lambda t}$ instead. As such,\[
+                        \begin{pmatrix}
+                                \xi \\
+                                \eta
+                        \end{pmatrix} = C_1 \begin{pmatrix}
+                                0 \\
+                                1
+                        \end{pmatrix} e^{\lambda t} + C_2 \begin{pmatrix}
+                                1 \\
+                                t
+                        \end{pmatrix} e^{\lambda t}.
+                    \]
+            \end{enumerate}
+\end{itemize}
+
+\underline{Note}: If $M$ is actually a \emph{symmetric matrix} with real entries then
+$\lambda_1, \lambda_2$ are real, the $\pmb{V}_1, \pmb{V}_2$ are real and orthogonal.
+If we then choose $\pmb{V}_1, \pmb{V}_2$ (as we may, if we wish) to be of unit length (normalised),
+then $S^{-1} = S^{T}$ and $S$ represents a rotation in the $x, y$ plane (or rotation + reflection).
+$S$ is an orthogonal matrix.
+
+\subsection{Typical Phase Portraits}
+
+What do the phase portraits look like in the various different cases?
+The eigenvalues $\lambda_1, \lambda_2$ are evidently crucial in determining the structure
+and the time $t$ evolution arrows on the trajectories.
+
+The eigenvectors determine the crucial $\xi, \eta$ decoupled coordinate directions,
+where appropriate. We note in the interpretation of the diagrams that\[
+    \xi \propto e^{\lambda_1 t},\quad \eta \propto e^{\lambda_2 t}
+\]\[
+\Rightarrow{}\xi \propto \eta^{\frac{\lambda_1}{\lambda_2}},\quad
+\frac{\mathrm{d}\xi}{\mathrm{d}\eta} \propto \eta^{\frac{\lambda_1}{\lambda_2} - 1}
+\;\textnormal{in general}.
+\]
+Thus dominant eigenvector \emph{nearly always} depends on 
+$\left|\frac{\lambda_1}{\lambda_2}\right| > 1$ or $\left|\frac{\lambda_1}{\lambda_2}\right| < 1$,
+and the other trajectories come in \emph{parallel}/\emph{tangent} to the dominant eigenvector.  
+Now pardon me for the shameleses numerous screenshots of Berkshire's notes for the phase portraits.
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{PP1.jpeg}
+  	\centering
+  	\caption{case 1}\label{PP1}
+\end{figure}
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{PP2.jpeg}
+  	\centering
+  	\caption{case 2}\label{PP2}
+\end{figure}
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{PP3i.jpeg}
+  	\centering
+    \caption{case 3 (i)}\label{PP3i}
+\end{figure}
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{PP3ii.jpeg}
+  	\centering
+    \caption{case 3 (ii)}\label{PP3ii}
+\end{figure}
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{PP4.jpeg}
+  	\centering
+  	\caption{case 4}\label{PP4}
+\end{figure}
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{PP5.jpeg}
+  	\centering
+  	\caption{case 5}\label{PP5}
+\end{figure}
+
+Further explanation for case 5: say $x(t)$ and $y(t)$ can be expressed as\[
+    \begin{align*}
+        x(t) & = A_1 \cos{\nu t} + A_2 \sin{\nu t} \\
+        y(t) & = ()A_1 \cos{\nu t} + ()A_2 \sin{\nu t}
+    \end{align*}
+\]
+By solving for $\cos{\nu t}$ and $\sin{\nu t}$, we can see that they are directly proportional to
+the different linear combination of $x(t)$ and $y(t)$. By applying the formula
+$\cos^{2}{\nu t} + \sin^{2}{\nu t} = 1$,
+we derive that the equation for $x$ and $y$ are both at power 2, therefore
+we can see that the graph should be \emph{elliptic}.
+
+\begin{ex}
+    \,
+
+    \begin{enumerate}[label = (\roman*)]
+        \item~\eqref{eqn:5} is `case 2'.
+
+        \item~\eqref{eqn:7} --- the damped harmonic oscillator --- is:
+            \begin{itemize}
+                    \item $k=0$ corresponds to `case 5'.
+                    \item $k^{2} < \omega^{2}$ coresponds to `case 4'.
+                    \item $k^{2} > \omega^{2}$ corresponds to `case 1'.
+                    \item $k^{2} = \omega^{2}$ corresponds to `case 3(ii)'.
+            \end{itemize}
+            
+        \item $\lambda_1 = \lambda_2$ awkward (case 3(ii)).
+
+            Try solving
+            \begin{equation}\label{eqn:8}
+                \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
+                        x \\
+                        y
+                \end{pmatrix} = \begin{pmatrix}
+                1 & -1 \\
+                1 & 3
+                \end{pmatrix} \begin{pmatrix}
+                        x \\
+                        y
+                \end{pmatrix} 
+            \end{equation}
+            $\Rightarrow{}\lambda_1 = 2 = \lambda_2$ and we have $\pmb{V} = \begin{pmatrix}
+                    1 \\
+                    -1
+                \end{pmatrix}$ (\underline{sole} eigenvector here),
+                so that $\begin{pmatrix}
+                        x \\
+                        y
+                \end{pmatrix} = B_1 \begin{pmatrix}
+                        1 \\
+                        -1
+                \end{pmatrix} e^{2t}$ is certainly part of our solutions.
+                To find the complete solution we can avoid some rather more
+                advanced linear algebra by just anticipating a general form 
+                for our second part of the solution\[
+                    \begin{pmatrix}
+                            x \\
+                            y
+                    \end{pmatrix} = \begin{pmatrix}
+                            a \\
+                            b
+                    \end{pmatrix} t e^{2t} + \begin{pmatrix}
+                            c \\
+                            d
+                    \end{pmatrix} e^{2t}
+                \]and find $a, b, c, d$ to  fit!
+                Note that $\begin{pmatrix}
+                        c \\
+                        d
+                \end{pmatrix}$ is needed since it does not span the space!
+                So $\begin{pmatrix}
+                        c \\
+                        d
+                    \end{pmatrix}$ is not parallel (or antiparallel) to the eigenvector $\begin{pmatrix}
+                            1 \\
+                            -1
+                    \end{pmatrix}$.
+                    Substitute into~\eqref{eqn:8}:\[
+                        2\begin{pmatrix}
+                                a \\
+                                b
+                        \end{pmatrix} t e^{2t} + \left[\begin{pmatrix}
+                                a \\
+                                b
+                        \end{pmatrix} + 2\begin{pmatrix}
+                                c \\
+                                d
+                        \end{pmatrix} \right] e^{2t}
+                        = M\left[\begin{pmatrix}
+                                a \\
+                                b
+                        \end{pmatrix} t e^{2t} + \begin{pmatrix}
+                                c \\
+                                d
+                        \end{pmatrix} e^{2t}\right].
+                    \]
+                    Equate coefficients respectively of $te^{2t}, e^{2t}$ on each side:\[
+                        \left\{\begin{align*}
+                            & (M - 2I)\begin{pmatrix}
+                                    a \\
+                                    b
+                            \end{pmatrix} = \begin{pmatrix}
+                                    0 \\
+                                    0
+                            \end{pmatrix} \\
+                            & (M - 2I)\begin{pmatrix}
+                                    c \\
+                                    d
+                            \end{pmatrix} = \begin{pmatrix}
+                                    a \\
+                                    b
+                            \end{pmatrix} 
+                        \end{align*}\right.
+                        \Rightarrow{}\left\{
+                            \begin{align*}
+                                & \begin{pmatrix}
+                                        a \\
+                                        b
+                                \end{pmatrix} = \pmb{V} = \begin{pmatrix}
+                                        1 \\
+                                        -1
+                                \end{pmatrix} \;\textnormal{or any multiple} \\
+                                & \begin{pmatrix}
+                                    -1 & -1 \\
+                                    1 & 1
+                                \end{pmatrix} \begin{pmatrix}
+                                        c \\
+                                        d
+                                \end{pmatrix} = \begin{pmatrix}
+                                        1 \\
+                                        -1
+                                \end{pmatrix}                             
+                            \end{align*}
+                        \]\[
+                                \Rightarrow{}\begin{pmatrix}
+                                        c \\
+                                        d
+                                \end{pmatrix} = \begin{pmatrix}
+                                        K \\
+                                        -1-K
+                                \end{pmatrix} \;\textnormal{($K$ is arbitrary)}
+                    \]
+                    Finally we have for this second solution:\[
+                        B_2 \begin{pmatrix}
+                                1 \\
+                                -1
+                        \end{pmatrix} t e^{2t} + B_2 \left[\begin{pmatrix}
+                                0 \\
+                                -1
+                        \end{pmatrix} + K\begin{pmatrix}
+                                1 \\
+                                -1
+                        \end{pmatrix} \right] e^{2t}.
+                    \]The term with coefficient $K$ is not needed since
+                    it has already appeared in the first half of the solution.
+                    Thus the general solution is\[
+                        \begin{pmatrix}
+                                x \\
+                                y
+                        \end{pmatrix} = B_1\begin{pmatrix}
+                                1 \\
+                                -1
+                        \end{pmatrix} e^{2t} + B_{2} \left[\begin{pmatrix}
+                                1 \\
+                                -1
+                        \end{pmatrix} t e^{2t} + \begin{pmatrix}
+                                0 \\
+                                -1
+                        \end{pmatrix} e^{2t}\right] 
+                    \]with two arbitrary constants as required.
+            
+                \item $\lambda_1 \neq \lambda_2$ but complex pair (case 4/5)
+
+                    \begin{enumerate}[label = (\alph*)]
+                        \item \[
+                            \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
+                                    x \\
+                                    y
+                            \end{pmatrix} = \begin{pmatrix}
+                            -\frac{1}{2} & 1 \\
+                            -1 & -\frac{1}{2}
+                            \end{pmatrix} \begin{pmatrix}
+                                    x \\
+                                    y
+                            \end{pmatrix} 
+                        \]$\Rightarrow{}
+                        \lambda_1 = -\frac{1}{2} + i, \lambda_2 = -\frac{1}{2}-i$,
+                        and we can find eigenvectors formally \[
+                            \pmb{V}_1 = \begin{pmatrix}
+                                    1 \\
+                                    i
+                            \end{pmatrix}, \pmb{V}_2 = \begin{pmatrix}
+                                    1 \\
+                                    -i
+                            \end{pmatrix}.
+                        \]So we have\[
+                            \begin{pmatrix}
+                                    x \\
+                                    y
+                            \end{pmatrix} = B_1\begin{pmatrix}
+                                    1 \\
+                                    i
+                            \end{pmatrix} e^{(-\frac{1}{2} + i)t} + B_2 \begin{pmatrix}
+                                    1 \\
+                                    -i
+                            \end{pmatrix} e^{(-\frac{1}{2}-i)t}
+                        \]where $B_1, B_2$ are arbitrary. Looking at $\Re$ and $\Im$ parts,\[
+                        \begin{align*}
+                            \begin{pmatrix}
+                                    1 \\
+                                    \pm i
+                                \end{pmatrix} e^{(-\frac{1}{2}\pm i)t} 
+                                & = \begin{pmatrix}
+                                        1 \\
+                                        \pm i
+                                    \end{pmatrix} e^{-\frac{1}{2}t}
+                                    (\cos{t} \pm i\sin{t}) \\
+                                & = \begin{pmatrix}
+                                        e^{-\frac{1}{2}t}\cos{t} \\
+                                        -e^{-\frac{1}{2}t}\sin{t}
+                                    \end{pmatrix} \pm i\begin{pmatrix}
+                                    e^{-\frac{1}{2}t}\sin{t} \\
+                                    e^{-\frac{1}{2}t}\cos{t}
+                                    \end{pmatrix} 
+                        \end{align*}
+                        \]\[
+                            \Rightarrow{}\begin{pmatrix}
+                                    x \\
+                                    y
+                            \end{pmatrix} = C_1\begin{pmatrix}
+                                    e^{-\frac{1}{2}t}\cos{t} \\
+                                    -e^{-\frac{1}{2}t}\sin{t}
+                            \end{pmatrix} + C_2\begin{pmatrix}
+                                    e^{-\frac{1}{2}t}\sin{t} \\
+                                    e^{-\frac{1}{2}t}\cos{t}
+                            \end{pmatrix} 
+                        \]
+                        where $C_1 = B_1 + B_2, C_2 = (B_1 - B_2)i$.
+                        The form above is best for real initial condition.
+                    
+                    \item Simple harmonic oscillator ($k = 0$)\[
+                        \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
+                                x \\
+                                y
+                        \end{pmatrix} = \begin{pmatrix}
+                        0 & 1 \\
+                        -\omega^{2} & 0
+                        \end{pmatrix} \begin{pmatrix}
+                                x \\
+                                y
+                        \end{pmatrix} \iff \frac{\mathrm{d}^{2}x}{\mathrm{d}t^{2}} 
+                        + \omega^{2}x = 0, y = \frac{\mathrm{d}x}{\mathrm{d}t}.
+                    \]
+                    $\Rightarrow{}\lambda_1 = i\omega, \lambda_2 = -i\omega$,
+                    $\pmb{V}_1 = \begin{pmatrix}
+                            1 \\
+                            i\omega
+                        \end{pmatrix} , \pmb{V}_2 = \begin{pmatrix}
+                                1 \\
+                                -i\omega
+                        \end{pmatrix}$.
+                        Therefore,\[
+                            \begin{align*}
+                            \begin{pmatrix}
+                                    x \\
+                                    y
+                            \end{pmatrix} 
+                            & = B_1\begin{pmatrix}
+                                    1 \\
+                                    i\omega
+                            \end{pmatrix} e^{i\omega t} + B_{2} \begin{pmatrix}
+                                    1 \\
+                                    -i\omega
+                            \end{pmatrix} e^{-i\omega t} \\
+                            & = C_1 \begin{pmatrix}
+                                \cos{\omega t} \\
+                                -\omega \sin{\omega t}
+                            \end{pmatrix} + C_2\begin{pmatrix}
+                            \sin{\omega t} \\
+                            \omega \cos{\omega t}
+                            \end{pmatrix}.
+                            \end{align*}
+                        \]
+                  \end{enumerate}
+    \end{enumerate}
+\end{ex}
+
+\subsection{Extensions}
+
+\begin{enumerate}[label = (\roman*)]
+    \item inhomogeneous systems\[
+        \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
+                x \\
+                y
+        \end{pmatrix} - M\begin{pmatrix}
+                x \\
+                y
+        \end{pmatrix} = \begin{pmatrix}
+        f_1(t) \\
+        f_2(t)
+        \end{pmatrix}
+    \]can be solved by the standard method we used for simple linear ordinary differential equations\[
+        \begin{pmatrix}
+                x \\
+                y
+            \end{pmatrix}_{\textnormal{GS}} = \begin{pmatrix}
+                    x \\
+                    y
+                \end{pmatrix}_{\textnormal{CF}} + \begin{pmatrix}
+                        x \\
+                        y
+                    \end{pmatrix}_{\textnormal{PI}}
+    \]
+    We solved CF earlier in this chapter. For PI, it is very difficult in general.
+    Here1 we just need to find any single particular solution for simple cases such as
+    $f_1$ and $f_2$ are constants, so the let PI be a constant vector, and solve for it will do.
+
+\item higher order systems
+
+    The whole process may be generalised, e.g.\[
+        \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
+                x \\
+                y \\
+                z
+        \end{pmatrix} = \begin{pmatrix}
+        1 & 1 & 2 \\
+        1 & 2 & 1 \\
+        2 & 1 & 1
+        \end{pmatrix} \begin{pmatrix}
+                x \\
+                y \\
+                z
+        \end{pmatrix}.
+    \]
+    Since $\det{(M - \lambda I)} = 0$, $\lambda^{3} - 4 \lambda^{2} - \lambda + 4 = 0$,\[
+        \lambda_1 = 4, \lambda_2 = 1, \lambda_3 = -1,
+        \pmb{V}_1 = \begin{pmatrix}
+                1 \\
+                1 \\
+                1
+        \end{pmatrix} , \pmb{V}_2 = \begin{pmatrix}
+                1 \\
+                -2 \\
+                1
+        \end{pmatrix} , \pmb{V}_3 = \begin{pmatrix}
+                1 \\
+                0 \\
+                -1
+        \end{pmatrix}
+    \]\[
+        \Rightarrow{}\begin{pmatrix}
+                x \\
+                y \\
+                z
+        \end{pmatrix} = B_1\begin{pmatrix}
+                1 \\
+                1 \\
+                1
+        \end{pmatrix} e^{4t} + B_2\begin{pmatrix}
+                1 \\
+                -2 \\
+                1
+        \end{pmatrix} e^{t} + B_3\begin{pmatrix}
+                1 \\
+                0 \\
+                -1
+        \end{pmatrix} e^{-t}.
+    \]
+    It is also possible to have equal roots, or complex conjugate pair!
+\end{enumerate}
+
+
+
+
 
 
 
@@ -3393,7 +4040,20 @@ Be careful with the size of the matrices.
         \right.
     \]
     Goal: When can we bring matrices to this form? $\leadsto$ diagonalization.
+    E.g. $I_n, 0_{n\times n}$.
 \end{diagonal matrix}
+
+\newmdtheoremenv[style=defEnv]{upper and lower triangular matrix}[theorem]{Definition}
+\begin{upper and lower triangular matrix}
+    \textbf{\emph{Lower triangular matrix}}: $a_{ij} = 0, i < j$. (strictly lower if $i \le j$)
+    \textbf{\emph{Upper triangular matrix}}: $a_{ij} = 0, i > j$. (strictly upper if $i \ge j$)
+\end{upper and lower triangular matrix}
+
+\begin{ex}
+    echelon form, RRE (Upper triangular).
+    Lower + upper triangular = diagonal.
+\end{ex}
+
 
 \newmdtheoremenv[style=defEnv]{inverse square matrix}[theorem]{Definition}
 \begin{inverse square matrix}
@@ -3401,8 +4061,252 @@ Be careful with the size of the matrices.
     of $A$ if:\[
         AA^{-1} = I_n = A^{-1}A.
     \]
-    \underline{Caution}: Not all matrices are invertible!
+    \underline{Caution}: Not all matrices are \emph{invertible}!
 \end{inverse square matrix}
+
+\newmdtheoremenv[style=defEnv]{lemma Of inverse matrix}[theorem]{Lemma}
+\begin{lemma Of inverse matrix}
+    \,
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item If $A$ is invertible, then its inverse is unique.
+        \item If $A$ is invertible and either $AB = I_n$ or $BA = I_n$, for some $B \ini M_{n\times n}(\mathbb{R})$,
+            then $B = A^{-1}$.
+    \end{enumerate}
+    
+\end{lemma Of inverse matrix}
+
+\begin{proof}
+    \,
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item See group theory.
+        \item $B = I_n B = (A^{-1} A)B = A^{-1} (AB) = A^{-1} I_n = A^{-1}$.
+            Same for $BA$.
+    \end{enumerate}
+    
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{AB = A-1 B-1}[theorem]{Lemma}
+\begin{AB = A-1 B-1}
+    Assume $A,B \in M_{n \times n}(\mathbb{R})$, invertible.
+    Then $AB$ is invertible and ${(AB)}^{-1} = B^{-1}A^{-1}$.
+\end{AB = A-1 B-1}
+
+\newmdtheoremenv[style=defEnv]{invertibility}[theorem]{Lemma}
+\begin{invertibility}
+    let $A \in M_{n \times n}(\mathbb{R})$.
+    \begin{enumerate}[label = (\arabic*)]
+        \item If $\exists \pmb{\upsilon} \in \mathbb{R}^{n}, \pmb{\upsilon} \neq 0$ 
+            s.t. $A\pmb{\upsilon} = 0$, then $A$ is not invertible.
+
+            (extended: same if $\pmb{\upsilon} \in \mathbb{R}^{n}^{T}, \pmb{\upsilon}A = 0$.)
+        \item If $\exists B \in M_{n \times n}(\mathbb{R}), B \neq 0_{n \times n}$ s.t.
+            $AB = 0_{n \times n}$ or $BA = 0_{n \times n}$, then $A$ is not invertible.
+    \end{enumerate}
+\end{invertibility}
+
+\begin{proof}
+    \,
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item (contrapositive) Assume $A$ is invertible $\iff \exists A^{-1} \in M_{n\times n}(\mathbb{R})$,
+            s.t. $AA^{-1} = A^{-1}A = I_n$.
+            Assume $A\pmb{\upsilon} = 0$, so 
+            $A^{-1}A\upsilon = I_n \upsilon = \upsilon$, contradiction.
+        \item Assume $BA = 0_{n\times n}$. $A$ invertible $\Rightarrow{}\exists A^{-1}$
+            s.t. $AA^{-1} = I_n$.
+            Therefore $B = BI_{n} = B(AA^{-1}) = (BA)A^{-1} = 0_{n\times n}$, contradiction.
+    \end{enumerate}
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{invertible so row/column of zero}[theorem]{Corollary}
+\begin{invertible so row/column of zero}
+    If $A \in M_{n\times n}(\mathbb{R})$ invertible, then it cannot have a row/column of zeros.
+\end{invertible so row/column of zero}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{elementary matrix}[theorem]{Definition}
+\begin{elementary matrix}
+    An \textbf{\emph{elementary matrix}} $R$ is a matrix which differs from $I_n \in M_{nn \times n}(\mathbb{R})$
+    by only \emph{one} elementary row operation.
+\end{elementary matrix}
+
+\begin{description}
+    \item[Type 1] Apply $r_i(\lambda)$ to $I_n$.
+        Multiplying $A \in M_{n\times n}(\mathbb{R})$ by $R_i(\lambda)$
+        on the left.
+        
+    \item[Type 2] Apply $r_{ij}$ to $I_n$.
+        Multiplying $A$ by $R_{ij}$ on th left swaps row $i$ and $j$ in $A$.
+
+    \item[Type 3] Apply $r_{ij}(\lambda)$ to $I_n$.
+\end{description}
+
+\underline{Fact}: Elementary matrices are \emph{invertible} since row operations arer reversible.
+
+\newmdtheoremenv[style=defEnv]{elementary row operations are invertible}[theorem]{Lemma}
+\begin{elementary row operations are invertible}
+    Let $A \in M_{n\times n}(\mathbb{R})$, $A'$ obtained from $A$
+    by elementary row operations.
+    Then $A$ invertible $\iff$ $A'$ invertible.
+\end{elementary row operations are invertible}
+
+\begin{proof}
+    $A \in M_{n\times n}(\mathbb{R})$. Say we got $A'$ from $A$ by row operation.
+    $A' = RA$ for some $R$ elementary matrix, Both $A$ and $R$ are invertible.
+    Then $A'$ is invertible, and $A'^{-1} = A^{-1}R^{-1}$.
+
+    For `$\Leftarrow$', $A' = RA \iff R^{-1}A' = A$.
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{invertible A'}[theorem]{Lemma}
+\begin{invertible A'}
+    $A\in M_{n\times n}(\mathbb{R})$, $A'$ the RRE form of $A$. Then:
+    $A'$ invertible $\iff$ $A'$ has no zero rows.
+\end{invertible A'}
+
+\begin{proof}
+    ``$\Leftarrow$'': Assume $A'$ has no zero rows $\Rightarrow{}$ A' has a leading one in each column.
+    $\Rightarrow{}A' = I_n$.
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{invertible matrix is identity itself}[theorem]{Corollary}
+\begin{invertible matrix is identity itself}
+    $A$ is invertible $\iff$ Its RRE form is the identity matrix.
+\end{invertible matrix is identity itself}
+
+\underline{Algorithm to compute inverse}:
+
+\begin{description}
+    \item[Step 1] Write the augmented matrix $(A|I_n)$.
+    \item[Step 2] Bring $(A|I_n)$ to RRE form
+        $\rightarrow{}(A|I_n)\rightarrow{}(R_1A|R_1 I_n)\rightarrow{}\cdots
+        \rightarrow{}(R_m\cdots R_2 R_1 A|R_m\cdots R_2 R_1)$.
+    \item[Step 3] Read result.
+\end{description}
+
+\begin{ex}
+    \[
+        A = \begin{pmatrix}
+            0 & 1 & 2 \\
+            1 & 0 & 3 \\
+            4 & -3 & 8
+        \end{pmatrix} 
+    \]and calculate its inverse!
+
+    \[
+            \begin{align*}
+                (A|I_3) & = \begin{pmatrix}
+                    0 & 1 & 2 & 1 & 0 & 0 \\
+                    1 & 0 & 3 & 0 & 1 & 0 \\
+                    4 & -3 & 8 & 0 & 0 & 1
+                \end{pmatrix} \\
+                        & = \begin{pmatrix}
+                            1 & 0 & 3 & 0 & 1 & 0 \\
+                            0 & 1 & 2 & 1 & 0 & 0 \\
+                            4 & -3 & 8 & 0 & 0 & 1
+                        \end{pmatrix} \\
+                        & = \begin{pmatrix}
+                            1 & 0 & 3 & 0 & 1 & 0 \\
+                            0 & 1 & 2 & 1 & 0 & 0 \\
+                            0 & -3 & -4 & 0 & -4 & 1
+                        \end{pmatrix} \\
+                        & = \begin{pmatrix}
+                            1 & 0 & 3 & 0 & 1 & 0 \\
+                            0 & 1 & 2 & 1 & 0 & 0 \\
+                            0 & 0 & 2 & 3 & -4 & 1
+                        \end{pmatrix} \\
+                        & = \begin{pmatrix}
+                            1 & 0 & 3 & 0 & 1 & 0 \\
+                            0 & 1 & 2 & 1 & 0 & 0 \\
+                            0 & 0 & 1 & \frac{3}{2} & -2 & \frac{1}{2}
+                        \end{pmatrix} \\
+                        & \vdots \\
+                        & = \begin{pmatrix}
+                            1 & 0 & 0 & -\frac{9}{2} & 7 & -\frac{3}{2} \\
+                            0 & 1 & 0 & -2 & 4 & -1 \\
+                            0 & 0 & 1 & \frac{3}{2} & -2 & \frac{1}{2}
+                        \end{pmatrix} 
+            \end{align*}
+        \]
+\end{ex}
+
+\underline{Caution}: If at any point you get a row of 0s, Stop! (matrix not invertible)
+\underline{Caution}: Now that we know how to get inverses. Consider:
+$A\pmb{x} = \pmb{b}$. (system of linear equations)
+If $A$ invertibl: $A^{-1}\pmb{b} = \pmb{x}$. (Solution is unique.)
+
+\newmdtheoremenv[style=defEnv]{determinant}[theorem]{Definition}
+\begin{determinant}
+    let $A = \begin{pmatrix}
+        a_{11} & a_{12} \\
+        a_{21} & a_{22}
+    \end{pmatrix} $,
+    so det $A = a_{11}a_{22} - a_{21}a_{12}\neq 0 \iff A$
+\end{determinant}
+
+\newmdtheoremenv[style=defEnv]{submatrix}[theorem]{Definition}
+\begin{submatrix}
+    Let $A \in M_{n\times n} (\mathbb{R})$. $A_{ij}$ is the \textbf{\emph{submatrix}} obtained
+    by deleting row $i$ and column $j$ of $A$. $A_{ij}$ is called the $(i,j)$-minor.
+\end{submatrix}
+
+\newmdtheoremenv[style=defEnv]{determinant of nxn matrix}[theorem]{Definition}
+\begin{determinant of nxn matrix}
+    The \textbf{\emph{determinant}} of an $n\times n$-matrix $A = (a_{ij})$ is given by:\[
+        \det{A} = \sum_{j}^{} {(-1)}^{j + i} a_{ij} \;\det{A_{ij}}
+        = \sum_{i}^{} {(-1)}^{i + j} a_{ij} \;\det{A_{ij}}.
+    \]
+    The first expression is called the \emph{expansion along the $i$-th row},
+    while the second expression is called the \emph{expansion along the $j$-th column}.
+\end{determinant of nxn matrix}
+
+\begin{ex}
+    Find the determinant of\[
+        \begin{pmatrix}
+            1 & 0 & 1 & 0 \\
+            0 & 1 & 0 & 1 \\
+            2 & 2 & 1 & 0 \\
+            0 & 0 & 2 & 1
+        \end{pmatrix}.
+    \]
+\end{ex}
+
+\paragraph{Rules for determinants}
+Let $A \in M_{n\times n}(\mathbb{R})$.
+\begin{enumerate}[label = (\arabic*)]
+    \item Operation $r_i(\lambda)$ produces matrix $B$, s.t. $\det{B} = \lambda \det{A}$.
+    \item Operation $r_{ij}$ produces matrix $B$, s.t. $\det{B} = - \det{A}$.
+    \item Operation $r_{ij}(\lambda)$ leaves determinant invariant.
+    \item let $B \in M_{n\times n}(\mathbb{R})$, $\det{AB} = \det{A} \cdot \det{B}$.
+    \item $\det{A} = \det{A^{T}}$.
+\end{enumerate}
+
+\newmdtheoremenv[style=defEnv]{invertible matrix is not 0}[theorem]{Proposition}
+\begin{invertible matrix is not 0}
+    $n\times n$-matrix $A$ is invertible $\iff \det{A} \neq 0$.
+\end{invertible matrix is not 0}
+
+\begin{proof}
+    \,
+
+    \begin{itemize}
+            \item ``$\Rightarrow{}$'': Assume $A$ invertible
+                $\Rightarrow{} \exists A^{-1}$ s.t. $AA^{-1} = I_n$.
+                ($\det{I_n} = 1$!) So
+                $\det{(AA^{-1})} = \det{A}\cdot\det{A^{-1}} = \det{I_n} = 1$.
+                Therefore $\det{A} \neq 0 \neq \det{A^{-1}}$.
+
+            \item ``$\Leftarrow$'': Assume $\det{A} \neq 0$.
+                So the determinant of RRE form $A'$ is going to be $\neq 0$
+                $\Rightarrow{}A' = I_n \Rightarrow{}A$ invertible.
+    \end{itemize}
+    
+\end{proof}
 
 
 
