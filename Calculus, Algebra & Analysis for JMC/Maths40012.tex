@@ -4315,5 +4315,88 @@ Let $A \in M_{n\times n}(\mathbb{R})$.
 
 \chapter{Analysis}
 
+\newmdtheoremenv[style=defEnv]{sequence}[theorem]{Definition}
+\begin{sequence}
+    A \textbf{\emph{sequence}} (of real numbers) is a map (function) $F: \mathbb{N} \mapsto \mathbb{R}$.
+\end{sequence}
+
+\newmdtheoremenv[style=defEnv]{triangle inequality}[theorem]{(Triangle Inequality) Theorem}
+\begin{triangle inequality}
+    Triangle inequality: $|x-y| \le |x-z| + |z-y|$. (most common form: $|x+y| \le |x| + |y|$)
+
+    ``Reversed'' triangle inequality: $||x|-|y|| \le |x-y|$.
+\end{triangle inequality}
+
+\begin{proof}
+    Assume $|x| \ge |y|$, and replace $x$ with $x - y$ in $||x|-|y|| \le |x-y|$:\[
+        |x| \le |x-y|+|y| \Rightarrow{}||x|-|y|| \le |x|-|y| \le |x-y|.
+    \]
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{convergent sequences}[theorem]{Definition}
+\begin{convergent sequences}
+    A sequence $a_n$ is \textbf{\emph{convergent}} if \[
+        \exists L \in \mathbb{R} \;\textnormal{s.t.}\; \forall \epsilon > 0,
+        \exists N \in \mathbb{N} \;\textnormal{s.t.}\; \forall n \ge N, |a_n - L| \le \epsilon.
+    \]
+\end{convergent sequences}
+
+\newmdtheoremenv[style=defEnv]{divergent sequences}[theorem]{Definition}
+\begin{divergent sequences}
+    A sequence $a_n$ is called \textbf{\emph{divergent}} if\[
+        \forall L \in \mathbb{R}, \exists \epsilon > 0 \;\textnormal{s.t.}\;
+        \forall N \in \mathbb{N}, \exists n \ge N \;\textnormal{s.t.}\; |a_n - L| \ge \epsilon.
+    \]
+\end{divergent sequences}
+
+\begin{ex}
+    \,
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item $a_n = \frac{1}{n} \rightarrow{} 0$.
+            (Hint: Use Archimedian property: $\forall \epsilon > 0, \exists N \in \mathbb{N}$
+            s.t. $N > \frac{1}{\epsilon}$.)
+            
+        \item $a_n = C \rightarrow{} C$.
+
+        \item $a_n = n$ is divergent.
+
+        \item $a_n = {(-1)}^{n}$ is divergent.
+            (Hint: applying triangle inequality, $|a_n - a_{n + 1}| = 
+            |a_n - L + L - a_{n + 1}| \le |a_n - L| + |L - a_{n - 1}|$.)
+    \end{enumerate}
+    
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{shift of (an)}[theorem]{Definition}
+\begin{shift of (an)}
+    Let $(a_n)$ be a sequence, $S \in \mathbb{N}$.
+    The \textbf{\emph{shift}} of $(a_n)$ by $S$ is the sequence $b_n := a_{n+S}$.
+\end{shift of (an)}
+
+\newmdtheoremenv[style=defEnv]{shift of (an) converges if (an) converges}[theorem]{Lemma}
+\begin{shift of (an) converges if (an) converges}
+    $b_n$ converges $\iff$ $a_n$ converges.
+\end{shift of (an) converges if (an) converges}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{bounded def}[theorem]{Definition}
+\begin{bounded def}
+    Let $(a_n)$ be a sequence. Then:
+    \begin{itemize}
+        \item $(a_n)$ is \textbf{\emph{bounded above}} if $\exists R_1 \in \mathbb{R}$ s.t. $a_n \le R_1$.
+
+        \item $(a_n)$ is \textbf{\emph{bounded below}} if $\exists R_2 \in \mathbb{R}$ s.t. $a_n \ge R_2$.
+
+        \item $(a_n)$ is \textbf{\emph{bounded}} if $\exists R \in \mathbb{R}$ s.t. $|a_n| \le R$.
+            (Take $R = \max{(|R_1|, |R_2|)}$)
+    \end{itemize}
+\end{bounded def}
+
+
+
 
 \end{document}%chktex 7, chktex 17
