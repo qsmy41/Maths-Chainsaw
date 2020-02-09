@@ -4095,12 +4095,12 @@ Be careful with the size of the matrices.
 
 \newmdtheoremenv[style=defEnv]{invertibility}[theorem]{Lemma}
 \begin{invertibility}
-    let $A \in M_{n \times n}(\mathbb{R})$.
+    Let $A \in M_{n \times n}(\mathbb{R})$.
     \begin{enumerate}[label = (\arabic*)]
-        \item If $\exists \pmb{\upsilon} \in \mathbb{R}^{n}, \pmb{\upsilon} \neq 0$ 
-            s.t. $A\pmb{\upsilon} = 0$, then $A$ is not invertible.
+        \item If $\exists \pmb{\upsilon} \in \mathbb{R}^{n}, \pmb{\upsilon} \neq \pmb{0}$ 
+            s.t. $A\pmb{\upsilon} = \pmb{0}$, then $A$ is not invertible.
 
-            (extended: same if $\pmb{\upsilon} \in \mathbb{R}^{n}^{T}, \pmb{\upsilon}A = 0$.)
+            (extended: same if $\pmb{\upsilon} \in \mathbb{R}^{n}^{T}, \pmb{\upsilon}A = \pmb{0}$.)
         \item If $\exists B \in M_{n \times n}(\mathbb{R}), B \neq 0_{n \times n}$ s.t.
             $AB = 0_{n \times n}$ or $BA = 0_{n \times n}$, then $A$ is not invertible.
     \end{enumerate}
@@ -4131,8 +4131,10 @@ Be careful with the size of the matrices.
 
 \newmdtheoremenv[style=defEnv]{elementary matrix}[theorem]{Definition}
 \begin{elementary matrix}
-    An \textbf{\emph{elementary matrix}} $R$ is a matrix which differs from $I_n \in M_{nn \times n}(\mathbb{R})$
+    An \textbf{\emph{elementary matrix}} $R$ is a matrix which differs from $I_n \in M_{n \times n}(\mathbb{R})$
     by only \emph{one} elementary row operation.
+    Multiplying a matrix by the elementary matrix on the left is equivalent of performing an
+    elementary row operation on that matrix.
 \end{elementary matrix}
 
 \begin{description}
@@ -4141,12 +4143,14 @@ Be careful with the size of the matrices.
         on the left.
         
     \item[Type 2] Apply $r_{ij}$ to $I_n$.
-        Multiplying $A$ by $R_{ij}$ on th left swaps row $i$ and $j$ in $A$.
+        Multiplying $A$ by $R_{ij}$ on the left swaps row $i$ and $j$ in $A$.
 
     \item[Type 3] Apply $r_{ij}(\lambda)$ to $I_n$.
 \end{description}
 
-\underline{Fact}: Elementary matrices are \emph{invertible} since row operations arer reversible.
+\underline{Fact}: Elementary matrices are \emph{invertible} since row operations are reversible.
+You can always produce an inverse of an elementary matrix which represents the reversed
+process of elementary row operation.
 
 \newmdtheoremenv[style=defEnv]{elementary row operations are invertible}[theorem]{Lemma}
 \begin{elementary row operations are invertible}
@@ -4238,7 +4242,7 @@ Be careful with the size of the matrices.
 \underline{Caution}: If at any point you get a row of 0s, Stop! (matrix not invertible)
 \underline{Caution}: Now that we know how to get inverses. Consider:
 $A\pmb{x} = \pmb{b}$. (system of linear equations)
-If $A$ invertibl: $A^{-1}\pmb{b} = \pmb{x}$. (Solution is unique.)
+If $A$ invertible: $A^{-1}\pmb{b} = \pmb{x}$. (Solution is unique.)
 
 \newmdtheoremenv[style=defEnv]{determinant}[theorem]{Definition}
 \begin{determinant}
@@ -4246,7 +4250,7 @@ If $A$ invertibl: $A^{-1}\pmb{b} = \pmb{x}$. (Solution is unique.)
         a_{11} & a_{12} \\
         a_{21} & a_{22}
     \end{pmatrix} $,
-    so det $A = a_{11}a_{22} - a_{21}a_{12}\neq 0 \iff A$
+    so det $A = a_{11}a_{22} - a_{21}a_{12}\neq 0 \iff A$ is invertible.
 \end{determinant}
 
 \newmdtheoremenv[style=defEnv]{submatrix}[theorem]{Definition}
@@ -4258,8 +4262,8 @@ If $A$ invertibl: $A^{-1}\pmb{b} = \pmb{x}$. (Solution is unique.)
 \newmdtheoremenv[style=defEnv]{determinant of nxn matrix}[theorem]{Definition}
 \begin{determinant of nxn matrix}
     The \textbf{\emph{determinant}} of an $n\times n$-matrix $A = (a_{ij})$ is given by:\[
-        \det{A} = \sum_{j}^{} {(-1)}^{j + i} a_{ij} \;\det{A_{ij}}
-        = \sum_{i}^{} {(-1)}^{i + j} a_{ij} \;\det{A_{ij}}.
+        \det{A} = \sum_{j}^{} {(-1)}^{j + i} a_{ij} \det{A_{ij}}
+        = \sum_{i}^{} {(-1)}^{i + j} a_{ij} \det{A_{ij}}.
     \]
     The first expression is called the \emph{expansion along the $i$-th row},
     while the second expression is called the \emph{expansion along the $j$-th column}.
@@ -4302,7 +4306,8 @@ Let $A \in M_{n\times n}(\mathbb{R})$.
                 Therefore $\det{A} \neq 0 \neq \det{A^{-1}}$.
 
             \item ``$\Leftarrow$'': Assume $\det{A} \neq 0$.
-                So the determinant of RRE form $A'$ is going to be $\neq 0$
+                Since elementary matrices are invertible, their determinants are $\neq 0$,
+                so the determinant of RRE form $A'$ is going to be $\neq 0$
                 $\Rightarrow{}A' = I_n \Rightarrow{}A$ invertible.
     \end{itemize}
     
@@ -4376,12 +4381,20 @@ Let $A \in M_{n\times n}(\mathbb{R})$.
 
 \newmdtheoremenv[style=defEnv]{shift of (an) converges if (an) converges}[theorem]{Lemma}
 \begin{shift of (an) converges if (an) converges}
+    Let $(a_n)$ be a sequence, $S \in \mathbb{N}$, and $b_n := a_{n + S}$, then
     $b_n$ converges $\iff$ $a_n$ converges.
 \end{shift of (an) converges if (an) converges}
 
 \begin{proof}
     Exercise!
 \end{proof}
+
+\newmdtheoremenv[style=defEnv]{increasing and decreasing sequence}[theorem]{Definition}
+\begin{increasing and decreasing sequence}
+    A sequence is (strictly) decreasing if $\forall n\in \mathbb{N}, a_{n + 1}\le a_n$ (resp. $a_{n + 1} < a_n$).
+    A sequence is (strictly) increasing if $\forall n \in \mathbb{N}, a_{n + 1}\ge a_n$ (resp. $a_{n + 1} > a_n$).
+\end{increasing and decreasing sequence}
+
 
 \newmdtheoremenv[style=defEnv]{bounded def}[theorem]{Definition}
 \begin{bounded def}
@@ -4395,6 +4408,120 @@ Let $A \in M_{n\times n}(\mathbb{R})$.
             (Take $R = \max{(|R_1|, |R_2|)}$)
     \end{itemize}
 \end{bounded def}
+
+\newmdtheoremenv[style=defEnv]{infimum and supremum}[theorem]{Definition}
+\begin{infimum and supremum}
+    \textbf{\emph{Supremum}} is the least upper bound, \textbf{\emph{infimum}} is the biggest lower bound
+\end{infimum and supremum}
+
+\newmdtheoremenv[style=defEnv]{Completeness axiom}[theorem]{(Completeness) Axiom}
+\begin{Completeness axiom}
+    Let $S \subseteq \mathbb{R}, S \neq \varnothing$, bounded above (resp.\ below),
+    then $S$ has a supremum in $\mathbb{R}$ (resp.\ infimum).
+\end{Completeness axiom}
+
+\begin{ex}
+    $S = \left\{s \in \mathbb{Q} : s^{2} < 2\right\} $ does not have a supremum. Prove it!
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{increasing and bounded above}[theorem]{Proposition}
+\begin{increasing and bounded above}
+    Let $(a_n)$ be increasing and bounded above, then it is convergent,
+    and $a_n \rightarrow{} \sup{a_n}$.
+\end{increasing and bounded above}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{convergent series is bounded}[theorem]{Proposition}
+\begin{convergent series is bounded}
+    Let $(a_n)$ be convergent, then $a_n$ is bounded.
+\end{convergent series is bounded}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{bounded monotonic sequence is convergent}[theorem]{Theorem}
+\begin{bounded monotonic sequence is convergent}
+    A bounded monotonic sequence is convergent.
+\end{bounded monotonic sequence is convergent}
+
+\begin{ex}
+    Consider $a_{n + 1} = \sqrt{a_n + 6}, a_1 = 0$. 
+    Show that it is bounded (by 3) and monotonic.
+    ($a_n = \sqrt{a_n a_n} < \sqrt{3a_n} = \sqrt{a_n + 2a_n} < \sqrt{a_n + 6} = a_{n + 1}$.)
+\end{ex}
+
+
+\newmdtheoremenv[style=defEnv]{limit of convergence is unique}[theorem]{Proposition}
+\begin{limit of convergence is unique}
+    Suppose $\exists L, M \in \mathbb{R}$ s.t. $a_n \rightarrow{}L$ and $a_n \rightarrow{}M$.
+    Then $L = M$. (The limit is \emph{unique}.)
+\end{limit of convergence is unique}
+
+\begin{proof}
+    Exercise! (using direct proof or contradiction)
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{algebra of limits of sequences}[theorem]{Theorem}
+\begin{algebra of limits of sequences}
+    Let $(a_n)$ and $(b_n)$ be sequences s.t. $a_n \rightarrow{}L, b_n \rightarrow{}M, \lambda\in\mathbb{R}$, then:
+    \begin{enumerate}[label = (\arabic*)]
+        \item $a_n + b_n \rightarrow{}L + M$
+        \item $|a_n| \rightarrow{}|L|$
+        \item $\lambda a_n \rightarrow{}\lambda L$
+        \item $a_n b_n \rightarrow{} LM$
+        \item If $M \neq 0, b_n \neq 0 \forall n, \frac{a_n}{b_n} \rightarrow{}\frac{L}{M}$.
+    \end{enumerate}
+    
+\end{algebra of limits of sequences}
+
+\begin{proof}
+    Exercise! (the fourth one can be proven in two approaches)
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{sandwich theorem}[theorem]{(Sandwich Test) Proposition}
+\begin{sandwich theorem}
+    Assume $a_n \le b_n \le c_n \,\forall n, 
+    a_n \rightarrow{}L \,\wedge\, c_n \rightarrow{}L \Rightarrow{}b_n \rightarrow{}L$.
+\end{sandwich theorem}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{subsequences}[theorem]{Definition}
+\begin{subsequences}
+    Let $(a_n)$ be a sequence, $(a_{F(n)})$ is a subsequence if $F: \mathbb{N} \mapsto{} \mathbb{N}$
+    is strictly increasing.
+\end{subsequences}
+
+\newmdtheoremenv[style=defEnv]{subsequence limit}[theorem]{Proposition}
+\begin{subsequence limit}
+    Assume $a_n \rightarrow{} L$, then for any subsequence $a_{F(n)}$,
+    $a_{F(n)} \rightarrow{} L$.
+\end{subsequence limit}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{divergent subsequence}[theorem]{Corollary}
+\begin{divergent subsequence}
+    A sequence having (divergent) subsequences converging to different limits is divergent.
+\end{divergent subsequence}
+
+\newmdtheoremenv[style=defEnv]{monotonic subsequence}[theorem]{Proposition}
+\begin{monotonic subsequence}
+    Any sequence has a monotonic subsequence.
+\end{monotonic subsequence}
+
+\begin{proof}
+    Exercise! (Recall \emph{peak points}!)
+\end{proof}
+
 
 
 
