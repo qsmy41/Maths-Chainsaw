@@ -4310,8 +4310,180 @@ Let $A \in M_{n\times n}(\mathbb{R})$.
                 so the determinant of RRE form $A'$ is going to be $\neq 0$
                 $\Rightarrow{}A' = I_n \Rightarrow{}A$ invertible.
     \end{itemize}
-    
 \end{proof}
+
+\newmdtheoremenv[style=defEnv]{permutation theory}[theorem]{Definition}
+\begin{permutation theory}
+    Let $\sigma \in S_n$. An \textbf{\emph{inversion}} is a pair of integers $(i,j)$ s.t.:\[
+        0 < i < j \le n \quad\textnormal{and}\quad \sigma(i)\ge\sigma(j).
+    \]
+    The \textbf{\emph{sign}} of a permutation $\textnormal{sgn}\sigma$ is given by
+    \begin{itemize}
+            \item $+1$, if number of inversion is even
+            \item $-1$, if number of inversion is odd.
+    \end{itemize}
+\end{permutation theory}
+
+\newmdtheoremenv[style=defEnv]{det of A}[theorem]{Definition}
+\begin{det of A}
+    Let $A \in M_{n,n}(\mathbb{R})$, then \[\det{A} = 
+    \sum_{\sigma \in S_n}^{} \textnormal{sgn}\,\sigma\, a_{1\sigma(1)}a_{2\sigma(2)}\cdots a_{n\sigma(n)}.\]
+\end{det of A}
+
+\begin{ex}
+        Let $A = I_n$. Show that $\det{I_n} = 1$.
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{eigenvalue and vector}[theorem]{Definition}
+\begin{eigenvalue and vector}
+    Let $A \in M_{n\times n}(\mathbb{R}), \lambda \in \mathbb{R}, \lambda$ is an \textbf{\emph{eigenvalue}}
+    to the \textbf{\emph{eigenvector}} $\pmb{\upsilon} \in \mathbb{R}^{n}\backslash\{\pmb{0}\}$ if\[
+        A\pmb{\upsilon} = \lambda\pmb{\upsilon}.
+    \]
+    Geometrically, applying $A$ to $\pmb{\upsilon}$ just ``rescales'' $\pmb{\upsilon}$.
+\end{eigenvalue and vector}
+
+\underline{Warning}:
+\begin{itemize}
+    \item $\pmb{\upsilon}$ eigenvector $\iff (A-\lambda I_n)\pmb{\upsilon} = \pmb{0}$.
+    \item $I_n \pmb{\upsilon} = \pmb{\upsilon} \,\forall \pmb{\upsilon} \neq \pmb{0}$
+        $\Rightarrow{}$ 1 is the only eigenvalue to \emph{all} vectors.
+    \item $0_{n\times n} \pmb{\upsilon} = \pmb{0}_n = 0\cdot\pmb{\upsilon}$ 
+        $\Rightarrow{}$ 0 is the only eigenvalue to \emph{all} vectors.
+\end{itemize}
+
+\newmdtheoremenv[style=defEnv]{eigenvalue property}[theorem]{Proposition}
+\begin{eigenvalue property}
+    Let $A \in M_{n\times n}(\mathbb{R})$.
+    Then $\lambda$ is eigenvalue of $A$ $\iff$ $A-\lambda I_n$ is not invertible.
+\end{eigenvalue property}
+
+\begin{proof}
+    $A$ invertible $\iff$ $\exists n$ non-zero vectors s.t. $A\pmb{\upsilon} = \pmb{0}$.
+    Since we want \emph{non-zero} solutions of $(A - \lambda I_n)\pmb{\upsilon} = 0$,
+    $A - \lambda I_n$ cannot be invertible!
+\end{proof}
+
+\begin{ex}
+    $A = \begin{pmatrix}
+        1 & 2\\
+        2 & 1
+    \end{pmatrix}$. Find the eigenvalues.
+
+    Augmented matrix:\[
+        \begin{pmatrix}
+            1 - \lambda & 2 & 0 \\
+            2 & 1 - \lambda & 0
+        \end{pmatrix}.
+    \]
+    \begin{description}
+        \item[Case 1] $\lambda = 1 \Rightarrow{}$ RRE is $I_2$, not what we want!
+        \item[Case 2] Assume $\lambda \neq 1$. Convert to RRE,
+            and to ensure that the matrix is not invertible,
+            $\lambda^{2} - 2\lambda - 3 = 0 \Rightarrow{} \lambda = -1, 3$.
+    \end{description}
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{trace of A}[theorem]{Definition}
+\begin{trace of A}
+    \textbf{\emph{Trace}} of $A_{n\times n}(\mathbb{R})$ tr $A$ is $\sum_{i=1}^{n} a_{ii}$.
+\end{trace of A}
+
+\newmdtheoremenv[style=defEnv]{characteristic polynomial}[theorem]{Definition}
+\begin{characteristic polynomial}
+    The \textbf{\emph{characteristic polynomial}} of $A_{n\times n}(\mathbb{R})$ is\[
+        \lambda^{2} - \textnormal{tr}\,A\;\lambda + \det{A}
+    \]
+\end{characteristic polynomial}
+
+\newmdtheoremenv[style=defEnv]{diagonalization}[theorem]{Definition}
+\begin{diagonalization}
+    Let $A,B \in M_{n\times n}(\mathbb{R})$. $A$ and $B$ are called \textbf{\emph{similar}} if
+    $\exists P \in M_{n\times n}(\mathbb{R})$ invertible s.t.\[
+        A = P^{-1}BP.
+    \]
+    $A$ is called \textbf{\emph{diagonalizable}} if $B$ is diagonal.
+    If $A$ is similar to $B$, then $B$ is similar to $A$.
+\end{diagonalization}
+
+\newmdtheoremenv[style=defEnv]{similar matrices have the same eigenvalues}[theorem]{Proposition}
+\begin{similar matrices have the same eigenvalues}
+    Similar matrices have the same eigenvalues.
+\end{similar matrices have the same eigenvalues}
+
+\begin{proof}
+    To solve: \[
+        \begin{align*}
+            0 & = \det{(A-\lambda I_n)} \\
+              & = \det{(P^{-1}BP - \lambda I_n)} \\
+              & = \det{(P^{-1}BP - \lambda P^{-1}P)} \\
+              & = \det{(P^{-1}(B-\lambda I_n)P)} \\
+              & = \det{P^{-1}} \det{(B-\lambda I_n)} \det{P} \\
+              & = \det{(P^{-1}P)}\det{(B-\lambda I_n)} \\
+              & = 1 \cdot \det{(B-\lambda I_n)} \\
+              & = \det{(B-\lambda I_n)}.
+        \end{align*}
+    \]
+\end{proof}
+
+\underline{Warning}: The eigenvectors are in general \emph{not} the same.
+But if $A\pmb{\upsilon} = \lambda \pmb{\upsilon} \iff P^{-1}BP\pmb{\upsilon} = \lambda\pmb{\upsilon}$
+$\iff B(P\pmb{\upsilon}) = \lambda (P\pmb{\upsilon})$.
+
+\newmdtheoremenv[style=defEnv]{eigenvalues of D}[theorem]{Lemma}
+\begin{eigenvalues of D}
+    Let $A \in M_{n\times n}(\mathbb{R})$. Assume $\pmb{\upsilon}_1, \pmb{\upsilon}_2,\ldots,\pmb{\upsilon}_n$
+    are eigenvectors of $A$. Then if $P = (\pmb{\upsilon}_1 \quad \pmb{\upsilon}_2 \,\cdots\, \pmb{\upsilon}_n)$
+    is invertible, then $A$ is diagonalizable and $A = PDP^{-1}$ with $D$'s leading
+    diagonal entries being the eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$.
+\end{eigenvalues of D}
+
+\begin{proof}
+    We can consider $P^{-1}AP = D \iff AP = PD$.
+    Look at the $k$-th column vector of $AP$: $A\pmb{\upsilon}_k = \lambda_k \pmb{\upsilon}_k$.
+    Look at the $k$-th column vector of $PD$: $P\lambda_k e_k = \lambda_k Pe_k = \lambda_k$.
+    ($e_k$ is an identity matrix)
+\end{proof}
+
+\section{vector space}
+
+\newmdtheoremenv[style=defEnv]{vector space}[theorem]{Definition}
+\begin{vector space}
+    A \textbf{\emph{vector space}} is a set $V$ together with
+                \begin{itemize}
+                        \item a binary operation: $+:V\times V \rightarrow{} V$,
+                            $(v, \upsilon) \mapsto v + \upsilon$.
+                        \item a scalar multiplication: $\mathbb{R}\times V \rightarrow{} V$,
+                            $(\lambda, \upsilon) \mapsto \lambda \upsilon$.
+                \end{itemize}
+              such that:
+              \begin{enumerate}[label = (\arabic*)]
+                  \item $(V,+)$ is an Abelian group
+                  \item $1 \cdot \upsilon = \upsilon$.
+                  \item $\forall \lambda, \mu \in \mathbb{R}, \upsilon \in V$:
+                      $\lambda(\mu\upsilon) = (\lambda\mu)\upsilon$
+                  \item $\forall \lambda \in \mathbb{R}, \upsilon,v \in V$:
+                      $\lambda(v +\upsilon) = \lambda v + \lambda\upsilon$
+                  \item $\forall \lambda, \mu \in \mathbb{R}, \upsilon \in V$,
+                      $(\lambda + \mu)\upsilon = \lambda\upsilon + \mu\upsilon$.
+              \end{enumerate}
+              There are 9 axioms to be satisfied!
+\end{vector space}
+
+\begin{ex}
+    \,
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item Our ``model'': $\mathbb{R}^{n}$. Especially $\mathbb{R}$ is a vector space.
+
+        \item 
+            $\mathbb{R}{[x]}_{\le n} = \left\{a_0+ a_1x + a_2x^{2} + \cdots + a_n x^{n}
+            |a_0, a_1,\ldots, a_n\in \mathbb{R}, x\in \mathbb{R}\right\} $.
+
+        \item $M_{n,m}(\mathbb{R})$.
+    \end{enumerate}
+    
+\end{ex}
 
 
 
@@ -4519,10 +4691,49 @@ Let $A \in M_{n\times n}(\mathbb{R})$.
 \end{monotonic subsequence}
 
 \begin{proof}
-    Exercise! (Recall \emph{peak points}!)
+    Exercise! (Recall \emph{peak points}! Divide into two cases, where
+    $S = \left\{n \,|\, a_m > a_n \,\forall m > n\right\} $.)
 \end{proof}
 
+\newmdtheoremenv[style=defEnv]{Bolzano-weierstrass}[theorem]{Theorem}
+\begin{Bolzano-weierstrass}
+    Any \emph{bounded} sequence has convergent subsequence.
+\end{Bolzano-weierstrass}
 
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\underline{Warninig}: In general you cannot find the convergent subsequence explicitly.
+
+\newmdtheoremenv[style=defEnv]{Cauchy sequence}[theorem]{Definition}
+\begin{Cauchy sequence}
+    Let $(a_n)$ be a sequence. $(a_n)$ is \textbf{\emph{Cauchy}} if:\[
+        \forall \epsilon > 0, \exists N \in \mathbb{N} \,\textnormal{s.t.}\,
+        \forall m,n>N, |a_m - a_n| < \epsilon.
+    \]
+\end{Cauchy sequence}
+
+\newmdtheoremenv[style=defEnv]{Cauchy sequence is bounded}[theorem]{Proposition}
+\begin{Cauchy sequence is bounded}
+    A Cauchy sequence is bounded.
+\end{Cauchy sequence is bounded}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{convergent is cauchy}[theorem]{Proposition}
+\begin{convergent is cauchy}
+    Let $(a_n)$ be a convergent sequence $\iff$ $(a_n)$ is Cauchy.
+\end{convergent is cauchy}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\underline{Warning}: Cauchy $\iff$ convergent \emph{in} $\mathbb{R}$ 
+(and in $\mathbb{C}$), not in $\mathbb{Q}$!
 
 
 
