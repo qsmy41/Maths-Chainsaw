@@ -4452,20 +4452,20 @@ $\iff B(P\pmb{\upsilon}) = \lambda (P\pmb{\upsilon})$.
     A \textbf{\emph{vector space}} is a set $V$ together with
                 \begin{itemize}
                         \item a binary operation: $+:V\times V \rightarrow{} V$,
-                            $(v, \upsilon) \mapsto v + \upsilon$.
+                            $(v, \nu) \mapsto v + \nu$.
                         \item a scalar multiplication: $\mathbb{R}\times V \rightarrow{} V$,
-                            $(\lambda, \upsilon) \mapsto \lambda \upsilon$.
+                            $(\lambda, \nu) \mapsto \lambda \nu$.
                 \end{itemize}
               such that:
               \begin{enumerate}[label = (\arabic*)]
                   \item $(V,+)$ is an Abelian group
-                  \item $1 \cdot \upsilon = \upsilon$.
-                  \item $\forall \lambda, \mu \in \mathbb{R}, \upsilon \in V$:
-                      $\lambda(\mu\upsilon) = (\lambda\mu)\upsilon$
-                  \item $\forall \lambda \in \mathbb{R}, \upsilon,v \in V$:
-                      $\lambda(v +\upsilon) = \lambda v + \lambda\upsilon$
-                  \item $\forall \lambda, \mu \in \mathbb{R}, \upsilon \in V$,
-                      $(\lambda + \mu)\upsilon = \lambda\upsilon + \mu\upsilon$.
+                  \item $1 \cdot \nu = \nu$.
+                  \item $\forall \lambda, \mu \in \mathbb{R}, \nu \in V$:
+                      $\lambda(\mu\nu) = (\lambda\mu)\nu$
+                  \item $\forall \lambda \in \mathbb{R}, \nu,v \in V$:
+                      $\lambda(v +\nu) = \lambda v + \lambda\nu$
+                  \item $\forall \lambda, \mu \in \mathbb{R}, \nu \in V$,
+                      $(\lambda + \mu)\nu = \lambda\nu + \mu\nu$.
               \end{enumerate}
               There are 9 axioms to be satisfied!
 \end{vector space}
@@ -4485,12 +4485,168 @@ $\iff B(P\pmb{\upsilon}) = \lambda (P\pmb{\upsilon})$.
     
 \end{ex}
 
+\newmdtheoremenv[style=defEnv]{vector space property}[theorem]{Lemma}
+\begin{vector space property}
+    $V$ is vector space, $x \in V$, then
+    \begin{enumerate}[label = (\arabic*)]
+        \item $\forall n \in \mathbb{N}, nx = x + x + \cdots + x$.
+        \item $0 x = 0_V$.
+        \item $(-1)x$ is additive inverse.
+    \end{enumerate}
+\end{vector space property}
+
+\begin{proof}
+    \,
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item $1v = v \forall v \in V$.
+            $2v = (1 + 1)v = 1v + 1v = v + v$.
+            Induction!
+
+        \item $0x = (0 + 0)x = 0x + 0x$.
+            Since there is an inverse of $0x$ because addition is Abelian,
+            add it on both sides:\[
+                0_V = 0x + {(0x)}^{-1} = 0x + 0x + {(0x)}^{-1} = 0x + 0_V = 0x.
+            \]
+
+        \item $0_V = 0x = (1 + (-1))x = 1x + (-1)x = x + (-1)x$, therefore
+            $(-1)x = x^{-1}$ over addition.
+    \end{enumerate}
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{subspace}[theorem]{Definition}
+\begin{subspace}
+    Let $V$ be a vector space. A subset $U \subseteq V$ is called \textbf{\emph{subspace}} if:
+    \begin{enumerate}[label = (\arabic*)]
+        \item If $x, y \in U$, $x + y \in U$. (Closure on addition)
+        \item If $x \in U, \lambda \in \mathbb{R}$, then $\lambda x \in U$. (Closure on scalar multiplication)
+        \item $0_V \in U$. (equivalent to saying $U \neq \varnothing$)
+    \end{enumerate}
+\end{subspace}
+
+\underline{Note}: $(U, +)$ is an Abelian group.
+
+\begin{ex}
+    \,
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item Let $U \in \mathbb{R}^{3}, U = \{\begin{pmatrix}
+                x \\
+                y \\
+                z
+        \end{pmatrix} | x + y + z = 0\}$.
+        It is geometrically a plane! (spanned by $\begin{pmatrix}
+                -1 \\
+                1 \\
+                0
+        \end{pmatrix}$ and $\begin{pmatrix}
+                -1 \\
+                0 \\
+                1
+            \end{pmatrix}$.) It ``looks'' like $\mathbb{R}^{2}$.
+
+        \item Let $U \subseteq \mathbb{R}^{\mathbb{R}} 
+            := \left\{F | F:\mathbb{R} \mapsto \mathbb{R}\right\}$,
+            $U := \left\{F | F(\pi) = 0\right\} $.
+            (Be careful with the $e$, treat it as $0^{f}:x\mapsto 0$)
+
+        \item $U := \left\{\lambda v | \lambda \in \mathbb{R}\right\} \subseteq V $.
+
+        \item Every vector space has two \emph{trivial} subspaces: itself and $\{0_V\}$.
+    \end{enumerate}
+
+    If $U \subseteq V$ is a subspace which is neither itself nor $\{0_V\}$, then
+    it is called a \textbf{\emph{proper}} subspace.
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{union and intersection of subspaces}[theorem]{Lemma}
+\begin{union and intersection of subspaces}
+    Let $V$ be a vector space, $U, W \subseteq V$ are subspaces, then
+    \begin{enumerate}[label = (\arabic*)]
+        \item $U \cap W$ is a subspace.
+        \item $U \cup W$ is \emph{not} a subspace.
+            (Unless $U \subseteq W$ and $W \subseteq U$.)
+    \end{enumerate}
+\end{union and intersection of subspaces}
+
+\begin{proof}
+    Exercise! (Write it out rigorously!)
+\end{proof}
+
+\paragraph{Remark}
+\begin{itemize}
+        \item 
+    Concrete example for (2): let $U = \{\begin{pmatrix}
+            x \\
+            0
+    \end{pmatrix} | x \in \mathbb{R}\}, W = \{\begin{pmatrix}
+            0 \\
+            y
+    \end{pmatrix} | y \in \mathbb{R}\}$. Both subspaces form a coordinate system,
+    and their addition forms the coordinates on the coordinate system!
+
+    \item $U + V := \{x + y | x \in U, y \in W\}$ is a subspace of $V$. (Exercise)
+\end{itemize}
+
+\newmdtheoremenv[style=defEnv]{spanning sets}[theorem]{Definition}
+\begin{spanning sets}
+    Let $V$ be a vector space, $S \subseteq V$ be a subset.
+    A \textbf{\emph{linear combination}} of elements $v_1, v_2, \ldots, v_n \in S$ is a vector $x \in V$:\[
+        x = \lambda_1 v_1 + \lambda_2 v_2 + \cdots + \lambda_n v_n
+    \]where $\lambda_1, \lambda_2, \ldots, \lambda_n \in \mathbb{R}$.
+\end{spanning sets}
+
+Subsequently, all $V$ denotes a vector space.
+
+\newmdtheoremenv[style=defEnv]{subspace and linear combination}[theorem]{Lemma}
+\begin{subspace and linear combination}
+    Let $U \neq \varnothing, U \subseteq V$, then $U$ is a subspace $\iff$
+    every linear combination of element of $U$ is in $U$.
+\end{subspace and linear combination}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{span of a subset of vector space}[theorem]{Definition}
+\begin{span of a subset of vector space}
+    Let $S \subseteq V$ be a subset $S \neq \varnothing$,\[
+        \textnormal{Span}\,S:= \{\lambda_1 v_1 + \lambda_2 v_2 + \cdots + \lambda_n v_n |
+        \lambda_1, \lambda_2, \ldots, \lambda_n \in \mathbb{R}, v_1, v_2, \ldots, v_n \in S\}.
+    \]
+    In addition, \[
+        \textnormal{Span}\,\varnothing := \{0_V\}.
+    \]
+\end{span of a subset of vector space}
+
+\newmdtheoremenv[style=defEnv]{span S is a subspace}[theorem]{Proposition}
+\begin{span S is a subspace}
+    Span $S$ is a subspace of $V$.
+\end{span S is a subspace}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{spanning set S}[theorem]{Definition}
+\begin{spanning set S}
+    Set $S$ is called the \textbf{\emph{spanning set}}.
+\end{spanning set S}
+
+\begin{ex}
+    Take Span$\{e_1, e_2, e_3\}$ $= \mathbb{R}^{3}$,
+    which forms the normal 3-D coordinate system we usually see.
+\end{ex}
+
+
 
 
 
 
 
 \chapter{Analysis}
+
+\section{Sequence and Convergence}
 
 \newmdtheoremenv[style=defEnv]{sequence}[theorem]{Definition}
 \begin{sequence}
@@ -4734,6 +4890,51 @@ $\iff B(P\pmb{\upsilon}) = \lambda (P\pmb{\upsilon})$.
 
 \underline{Warning}: Cauchy $\iff$ convergent \emph{in} $\mathbb{R}$ 
 (and in $\mathbb{C}$), not in $\mathbb{Q}$!
+
+\section{Continuity}
+
+\newmdtheoremenv[style=defEnv]{right limit}[theorem]{Definition}
+\begin{right limit}
+    Let $a \in \mathbb{R}$, $F: (a, \infty) \mapsto \mathbb{R}$, $F \rightarrow{}L \in \mathbb{R}$
+    as $x \rightarrow{}a^{+}$ if\[
+        \forall \epsilon > 0, \exists \delta > 0 \,\textnormal{s.t.}\,
+        x \in (a, a + \delta) \Rightarrow{}|F(x) - L| < \epsilon.
+    \]
+    This is called the \textbf{\emph{right limit}}.
+    The pictorial illustration of this concept is as shown in Figure~\ref{fig:rightLimit}.
+\end{right limit}
+
+\begin{figure}
+  	\includegraphics[scale=0.5]{rightLimit.png}
+  	\centering
+    \caption{right limit illustration}\label{fig:rightLimit}
+\end{figure}
+
+\newmdtheoremenv[style=defEnv]{left limit}[theorem]{Definition}
+\begin{left limit}
+    Let $a \in \mathbb{R}$, $F: (-\infty, a) \mapsto \mathbb{R}$, $F \rightarrow{}L \in \mathbb{R}$
+    as $x \rightarrow{}a^{-}$ if\[
+        \forall \epsilon > 0, \exists \delta > 0 \,\textnormal{s.t.}\,
+        x \in (a - \delta, a) \Rightarrow{}|F(x) - L| < \epsilon.
+    \]
+    This is called the \textbf{\emph{left limit}}.
+    Graphical understanding is similar to that of right limit.
+\end{left limit}
+
+\underline{Caution}: $F(a)$ does not need to be defined!
+
+\newmdtheoremenv[style=defEnv]{left and right limit are equal}[theorem]{Lemma}
+\begin{left and right limit are equal}
+    Suppose $F:(a,b) \mapsto \mathbb{R}$, and assume that $\lim_{x \rightarrow{}a^{+}} = L_1$,
+    $\lim_{x \rightarrow{}a^{+}} = L_2$, then $L_1 = L_2$.
+\end{left and right limit are equal}
+
+\begin{proof}
+    Exercise! (Be careful to take $\delta := \min{(\delta_1, \delta_2)}$
+    instead of the maximum!)
+\end{proof}
+
+
 
 
 
