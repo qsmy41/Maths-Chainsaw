@@ -7,10 +7,11 @@
 \usepackage{amssymb} % for AMS symbols
 \usepackage{amsmath} % so as to use align
 \usepackage{mathrsfs} % for the stylistic L
-\usepackage{authblk} % for writing affiliationis
+\usepackage{authblk} % for writing affiliations
 \usepackage{graphicx} % for importing images
 \graphicspath{{./images/}} % for the path to images
-\usepackage{soul}
+\usepackage{soul} % for separable underline
+\usepackage{textcomp} % for using degree symbot
 
 \theoremstyle{definition}
 \mdfdefinestyle{defEnv}{%
@@ -3352,10 +3353,451 @@ we can see that the graph should be \emph{elliptic}.
     It is also possible to have equal roots, or complex conjugate pair!
 \end{enumerate}
 
+\section{Partial Differentiation}
 
+\subsection{Introduction}
 
+Consider a function $u = u(x,y)$ of 2 independent variables $x, y$.
+We can think of $u$ as being the height of a surface above the $(x,y)$ plane.
+It is often helpful to visualize the surface using \emph{contour lines}\[
+    u(x,y) = C
+\]for different values of $c$, which is a constant.
+The countour lines are marked with the value $C$ which $u(x,y)$ would give.
 
+Physically $u$ could represent a geometrical object or temperature or pressure or \ldots
+We now look at (spatial) rates of change.
+Firstly, start at $P(x,y)$ and move a small distance $\delta x = h$ in the $x$ direction
+to $Q(x+h,y)$ i.e.\ keeping $y$ fixed. 
 
+\newmdtheoremenv[style=defEnv]{partial differentiation}[theorem]{Definition}
+\begin{partial differentiation}
+We define (if the limit exists):\[
+    \frac{\partial u}{\partial x} = \lim_{h\rightarrow{}0}
+    \left[\frac{u(x+h, y) - u(x,y)}{h}\right] 
+\]as the rate of change of $u$ with respect to $x$ at $P$ (keeping $y$ fixed).
+\end{partial differentiation}
+\textbf{\underline{Notations}}: $\frac{\partial u}{\partial x} , 
+{\left(\frac{\partial u}{\partial x} \right)}_y,
+u_x,\ldots$
+Be careful with the subscripts!
+
+\medskip
+Similarly, for $P(x,y) \rightarrow{}P(x, y+k)$, we define:\[
+    \frac{\partial u}{\partial y} = \lim_{k\rightarrow{}0}\left[
+    \frac{u(x,y+k) - u(x,y)}{k}\right] 
+\]as the rate of change of $u$ with respect to $y$ at $P$ (keeping $x$ fixed).
+The notations: $\frac{\partial u}{\partial y} , 
+{\left(\frac{\partial u}{\partial y} \right)}_x,
+u_y,\ldots$
+
+\paragraph{Examples}
+\,
+
+\begin{enumerate}[label = (\roman*)]
+    \item $u = x^{2}\sin{y} + y^{3}$\[
+        \Rightarrow{}\frac{\partial u}{\partial x} = 2x\sin{y},\quad
+        \frac{\partial u}{\partial y} x^{2}\cos{y} + 3y^{2}.
+    \]
+    We can, of course, consider higher derivatives:\[
+        \frac{\partial^{2}u}{\partial x^{2}} 
+        = \frac{\partial }{\partial x} \left(\frac{\partial u}{\partial x} \right) 
+        = u_{xx}, \quad
+        \frac{\partial^{2}u}{\partial x \partial y} 
+        = \frac{\partial}{\partial x} \left(\frac{\partial u}{\partial y} \right) 
+        = u_{xy}
+    \]
+    Note the order of the partial differentiation in the second expression.
+    For the example above we have\[
+        \begin{align*}
+            \frac{\partial^{2}u}{\partial x^{2}} & = 2\sin{y}, & \frac{\partial^{2}u}{\partial y^{2}} & = -x^{2}\sin{y} + 6y, \\ 
+            \frac{\partial^{2}u}{\partial y \partial x} & = 2x\cos{y}, & \frac{\partial^{2}u}{\partial x \partial y} & = 2x\cos{y}.
+        \end{align*}
+    \]
+    We note that, in this case, $\frac{\partial^{2}u}{\partial x \partial y}
+    = \frac{\partial^{2}u}{\partial y \partial x} $, which is a general result,
+    requiring only continuity of LHS and RHS --- usually the case.
+    E.g. $\frac{x-y}{x+y}$ is not continuous at $(x,y) = (0,0)$.
+
+    Similarly, we generally have $u_{xxyyx} = u_{yxyxx} = \ldots$.
+
+\item $u(x,y) = a\sin{(x - ct)}$\[
+    \begin{align*}
+        \frac{\partial u}{\partial x} & = a\cos{(x-ct)}, & \frac{\partial^{2}u}{\partial x^{2}} & = -a\sin{(x-ct)}, \\
+        \frac{\partial u}{\partial t} & = -ac\cos{(x-ct)}, & \frac{\partial^{2}u}{\partial t^{2}} & = -ac^{2}\sin{(x-ct)}.
+    \end{align*}
+\]
+We can see that $u(x,t)$ satisfies\[
+    \frac{\partial^{2}u}{\partial x^{2}} = \frac{1}{c^{2}} \frac{\partial^{2}u}{\partial t^{2}} 
+\]which is a 2nd order linear P.D.E.
+It is the one-dimensional wave equation.
+
+In fact, any reasonable function $f(x-ct)$ will satisfy this equation!
+It represents a wave form moving (with $c>0$ here) to the right.
+(if $c<0$, then moving to the left)
+
+\item $u = \tan^{-1}{\frac{y}{x}}$.
+    This satisfies\[
+        \nabla^{2} u = \frac{\partial^{2}u}{\partial x^{2}} + \frac{\partial^{2}u}{\partiay y^{2}} = 0.
+    \]which is a second order linear P.D.E.
+    It is famously known as the Laplace's equation.
+\end{enumerate}
+
+\subsection{The Total Differential}
+
+When we have a function of a single varialbe $f(x)$,
+and we make a small change $x \rightarrow{} x + \delta x$
+so that $f \rightarrow{} f + \delta f$, then 
+$\delta f \approx \frac{\mathrm{d}f}{\mathrm{d}x} \delta x$.
+In the limit (``small, $\rightarrow{}0$'')\[
+    \mathrm{d}f = \frac{\mathrm{d}f}{\mathrm{d}x} \mathrm{d}x.
+\]
+Now for a function of two variables, small changes $x \rightarrow{} x + \delta x$,
+$y \rightarrow{} y + \delta y$ lead to $u(x,y) \rightarrow{} u + \delta u$,
+with $\delta u = u(x+\delta x, y+\delta y) - u(x,y)$, so
+$\delta u \approx \frac{\partial u}{\partial x} \delta x + \frac{\partial u}{\partial y} \delta y$.
+
+\newmdtheoremenv[style=defEnv]{total differential}[theorem]{Definition}
+\begin{total differential}
+    The \textbf{\emph{total differential}} of $u(x,y)$ is\[
+    \mathrm{d}u = \frac{\partial u}{\partial x} \mathrm{d}x + \frac{\partial u}{\partial y} \mathrm{d}y.
+\]
+The idea can be generalized to higher dimensions, e.g. $u(x,y,z)$ etc.
+\end{total differential}
+
+\paragraph{Examples}
+\,
+
+\begin{enumerate}[label = (\roman*)]
+    \item $u = x^{2}\sin{y} + y^{3}$, and we can get\[
+            \delta u \approx (2x\sin{y})\delta x + (x^{2}\cos{y} + 3y^{2})\delta y
+    \]\[
+    \mathrm{d}u = (2x\sin{y})\mathrm{d}x + (x^{2}\cos{y} + 3y^{2})\mathrm{d}y.
+    \]
+
+\item Area of a rectangle $A = xy$. Here\[
+    \begin{align*}
+        \delta A & = (x + \delta x)(y + \delta y) - xy \\
+                 & = \underbrace{y\delta x + x\delta y}_\text{1st order small} 
+                 + \underbrace{\delta x \delta y}_\text{2nd order small}
+    \end{align*}
+\]Therefore $\delta A \approx y \delta x + x \delta y \iff
+\mathrm{A} = y \mathrm{d}x + x\mathrm{d}y$.
+
+\item Height of a building $h = x\tan{\theta}$.
+
+    Let $x = 200$m with error $\pm 2$m, $\theta$ = 20\textdegree\ with error $\pm \frac{1}{2}$\textdegree.
+    We can derive that\[
+        \delta h \approx (\tan{\theta})\delta x + (x\sec^{2}{\theta})\delta\theta.
+    \]
+    Central estimate is $200\tan{\left(\frac{\pi}{9}\right)} = 72.8$m.\[
+        \Rightarrow{}\delta h \approx 0.36\delta x + 226.5\delta\theta
+    \]with $|\delta x| \le 2, |\delta \theta|\le \frac{\pi}{360} = 0.0087$. So\[
+    |\delta h| \le (0.36)(2) + (226.5)(0.0087) = 2.7\textnormal{m}
+\]and $h = 72.8 \pm 2.7$m. (which is $\pm 3.7\%$)
+\end{enumerate}
+
+\subsection{Function of a function --- `The Chain Rule'}
+
+If we have $u = f(x)$ and $x = g(t)$, then we have as a consequence\[
+    \frac{\mathrm{d}u}{\mathrm{d}t} = \frac{\mathrm{d}u}{\mathrm{d}x} \cdot \frac{\mathrm{d}x}{\mathrm{d}t} 
+    = f'(x)g'(t) = f'(g(t))g'(t).
+\]
+Now consider $u = u(x,y)$ where $x(t)$ and $y(t)$. We saw previously that\[
+\delta u \approx \frac{\partial u}{\partial x} \delta x + \frac{\partial u}{\partial y} \delta y
+\quad\Longrightarrow{}\quad \frac{\delta u}{\delta t} \approx \frac{\partial u}{\partial x}
+\frac{\delta x}{\delta t} + \frac{\partial u}{\partial y} \frac{\delta y}{\delta t}.
+\]
+
+\newmdtheoremenv[style=defEnv]{the chain rule}[theorem]{Definition}
+\begin{the chain rule}
+    The chain rule in 3-dimension is\[
+        \frac{\mathrm{d}u}{\mathrm{d}t} = \frac{\partial u}{\partial x} 
+        \frac{\mathrm{d}x}{\mathrm{d}t} + \frac{\partial u}{\partial y} \frac{\mathrm{d}y}{\mathrm{d}t} 
+    \]where $x$ and $y$ are functions \emph{only} of $t$.
+\end{the chain rule}
+
+E.g.\ if $x(r,s)$ and $y(r,s)$ then\[
+    \frac{\partial \overline{u}}{\partial r} = \frac{\partial \overline{u}}{\partial x} 
+    \frac{\partial x}{\partial r} + \frac{\partial \overline{u}}{\partial y} \frac{\partial y}{\partial r},\quad
+    \frac{\partial \overline{u}}{\partial s} = \frac{\partial \overline{u}}{\partial x}
+    \frac{\partial x}{\partial s} + \frac{\partial \overline{u}}{\partialyy} \frac{\partial y}{\partialss}.
+\]
+
+\paragraph{Examples}
+\,
+
+\begin{enumerate}[label = (\roman*)]
+    \item Volume $V$ of a cylindrical box of radius $r$ and height $h$: $V = \pi r^{2}h$.
+
+        If we know that $r = 2t, h = 1 + t^{2}$, then\[
+            \begin{align*}
+                \frac{\mathrm{d}V}{\mathrm{d}t} & = \frac{\partial V}{\partial r} \frac{\mathrm{d}r}{\mathrm{d}t} 
+                + \frac{\partial V}{\partial h} \frac{\mathrm{d}h}{\mathrm{d}t} \\
+                                                & = (2\pi rh)(2) + (\pi r^{2})(2t) \\
+                                                & = 8\pi (t + 2t^{3})
+            \end{align*}
+        \]
+        \underline{Check}: $V = \pi{(2t)}^{2}(1+t^{2}) = 4\pi(t^{2}+t^{4})$,
+        and of course $\frac{\mathrm{d}V}{\mathrm{d}t} = 8\pi t + 16\pi t^{3}$.
+
+    \item $u(x,y) = \overline{u}(s,t) = x^{2}y$ with $x = st$, $y = s + t$.
+        \[
+            \Rightarrow{}\left\{\begin{align*}
+                    \frac{\partial \overline{u}}{\partial s} & = \frac{\partial u}{\partial x} 
+                    \frac{\partial x}{\partial s} + \frac{\partial u}{\partial y} \frac{\partial y}{\partial s} 
+                    = (2xy)(t) + (x^{2})(1) = \cdots = 3s^{2}t^{2} + 2st^{3} \\
+                    \frac{\partial \overline{u}}{\partial t} & = \frac{\partial u}{\partial x}
+                    \frac{\partial x}{\partial t} + \frac{\partial u}{\partial y} \frac{\partial y}{\partial t}
+                    = (2xy)(s) + (x^{2})(1) = \cdots = 3s^{2}t^{2} + 2s^{3}t.
+            \end{align*}\right.
+        \]
+        Again, we can check this since $u(x,y) = {(st)}^{2}(s+t) = \overline{u}(s,t)$.
+
+    \item $u(x,y) = xy + y^{2}$, a \emph{cautionary} example!
+
+        If we have a second relation $y = x + t$, then of course\[
+            \overline{u}(x,t) = x(x+t) + {(x + t)}^{2}.
+        \]
+        We have to be careful when we look at the variation of $u$ and $\overline{u}$ with respect to $x$:
+        \begin{enumerate}[label = (\alph*)]
+            \item $\frac{\partial u}{\partial x} = y (= x + t)$
+            \item $\frac{\partial \overline{u}}{\partial x} = 2x + t + 2(x + t) (= 4x + 3t)$.
+        \end{enumerate}
+        These are not the same --- $u$ and $\overline{u}$ have the same function values
+        at corresponding points. But in (a), $y$ is being kept constant ${\left(\frac{\partial u}{\partial x} \right)}_{y}$,
+        and in (b), $t$ is being kept constant ${\left(\frac{\partial \overline{u}}{\partial x} \right)}_{t}$,
+        So care is needed evidently! Ensure that the substitution is \emph{disjoint}!
+\end{enumerate}
+
+\subsection{From Cartesians to Polars}
+\[
+    \underbrace{u(x,y)}_\text{Cartesians} = \underbrace{\overline{u}(r,\theta)}_\text{Plane Polars}
+\]with\[
+    \left\{\begin{align*}
+            x & = r\cos{\theta} \\
+            y & = r\sin{\theta}
+    \end{align*}\right.,\qquad \left\{\begin{align*}
+            r & = {(x^{2} + y^{2})}^{\frac{1}{2}} \\
+            \theta & = \tan^{-1}{\frac{y}{x}}
+    \end{align*}\right..
+\]
+Both are \emph{orthogonal} systems!
+We need to be careful! E.g.\[
+    {\left(\frac{\partial x}{\partial r} \right)}_{\theta} = \cos{\theta} \quad\textnormal{and}\quad
+    {\left(\frac{\partial r}{\partial x} \right)}_{y} = \frac{x}{{(x^{2} + y^{2})}^{\frac{1}{2}}} = \cos{\theta}.
+\]
+They are keeping keeping different constants, so we should \emph{not} be tempted! \[
+    {\left(\frac{\partial x}{\partial r} \right)}_{\theta} \neq
+    \frac{1}{{\left(\frac{\partial r}{\partial x} \right)}_{y}}.
+\]
+\underline{Note}: The Cartesian and Polar versions of our function
+have the same function values, but are described differently! E.g.\[
+    u(x,y) = x^{2}+y^{2} = r^{2} = \overline{u}(r,\theta)
+\]and it is not $(r^{2} + \theta^{2})$.
+
+\subsubsection{Chain rule}
+
+\[
+    \begin{align*}
+        \frac{\partial u}{\partial x} & = \frac{\partial \overline{u}}{\partial r} \frac{\partial r}{\partial x}
+        + \frac{\partial \overline{u}}{\partial \theta} \frac{\partial\theta}{\partial x} \\
+                                      & = (\cos{\theta})\frac{\partial \overline{u}}{\partial r}
+                                      + \left(-\frac{\sin{\theta}}{r}\right) \frac{\partial \overline{u}}{\partial \theta}
+    \end{align*}
+\]and\[
+    \begin{align*}
+        \frac{\partial u}{\partial y} & = \frac{\partial \overline{u}}{\partial r} \frac{\partial r}{\partial y}
+        + \frac{\partial \overline{u}}{\partial \theta} \frac{\partial\theta}{\partial y} \\
+                                      & = (\sin{\theta})\frac{\partial \overline{u}}{\partial r} 
+                                      + \left(\frac{\cos{\theta}}{r}\right) \frac{\partial \overline{u}}{\partial \theta}.
+    \end{align*}
+\]
+
+\newmdtheoremenv[style=defEnv]{partial differential operators}[theorem]{Definition}
+\begin{partial differential operators}
+    The \textbf{\emph{partial differential operators}} are defined as\[
+        \begin{align*}
+            \frac{\partial}{\partial x} & = \cos{\theta}\frac{\partial}{\partial r}
+            - \frac{\sin{\theta}}{r}\frac{\partial}{\partial \theta} \\
+            \frac{\partial}{\partial y} & = \sin{\theta}\frac{\partial}{\partial r} 
+            + \frac{\cos{\theta}}{r}\frac{\partial}{\partial \theta}
+        \end{align*}
+    \]which relate rates of change in the two different coordinate systems!
+\end{partial differential operators}
+
+\paragraph{Examples}
+\,
+
+\begin{enumerate}[label = (\roman*)]
+    \item $u(x,y) = x^{2}-y^{2} = r^{2}(\cos^{2}{\theta} - \sin^{2}{\theta}) = \overline{u}(r,\theta)$.\[
+        \frac{\partial u}{\partial x} = 2x = 2r\cos{\theta}, \quad
+        \frac{\partial u}{\partial y} = -2y = -2r\sin{\theta}.
+    \]
+
+\item We can express 
+    % Why do the brackets appear to be of different size?
+    ${\left(\frac{\partial u}{\partial x}\right)}^{2} + {\left(\frac{\partial u}{\partial y}\right)}^{2}$
+    in plane polars as\[
+        \begin{align*}
+        {\left[(\cos{\theta})\frac{\partial \overline{u}}{\partial r} 
+        + \left(-\frac{\sin{\theta}}{r}\right) \frac{\partial \overline{u}}{\partial \theta} \right]}^{2}
+        & + {\left[(\sin{\theta})\frac{\partial \overline{u}}{\partial r} 
+        + \left(\frac{\cos{\theta}}{r}\right) \frac{\partial \overline{u}}{\partial \theta} \right]}^{2} \\
+        & = {\left(\frac{\partial \overline{u}}{\partial r} \right)}^{2}
+        + \frac{1}{r^{2}} {\left(\frac{\partial \overline{u}}{\partial \theta} \right)}^{2}.
+        \end{align*}
+    \]
+
+\item For Laplace equation $\frac{\partial^{2}u}{\partial x^{2}} + \frac{\partial^{2}u}{\partial y} = 0$,\[
+    \begin{align*}
+        \frac{\partial^{2}u}{\partial x^{2}}
+        & = \frac{\partial}{\partial x} \left(\frac{\partial u}{\partial x} \right)
+        = \left(\cos{\theta} \frac{\partial}{\partial r} 
+        - \frac{\sin{\theta}}{r} \frac{\partial}{\partial \theta} \right)
+        \left(\cos{\theta} \frac{\partial \overline{u}}{\partial r} 
+        - \frac{\sin{\theta}}{r}\frac{\partial \overline{u}}{\partial \theta} \right) \\
+        & \;\vdots \quad\textnormal{Attrition!} \\
+        & \begin{aligned}[t]
+        = \cos^{2}{\theta}\frac{\partial^{2} \overline{u}}{\partial r^{2}} 
+        - \frac{2\cos{\theta}\sin{\theta}}{r} \frac{\partial^{2} \overline{u}}{\partial r \partial \theta} 
+        & + \frac{\sin^{2}{\theta}}{r} \frac{\partial \overline{u}}{\partial r} \\
+        & + \frac{\sin^{2}{\theta}}{r^{2}}\frac{\partial^{2}\overline{u}}{\partial \theta^{2}} 
+        + \frac{2\sin{\theta}\cos{\theta}}{r^{2}}\frac{\partial \overline{u}}{\partial \theta}
+        \end{aligned}
+    \end{align*}
+\]and\[
+    \begin{align*}
+        \frac{\partial^{2}u}{\partial y^{2}}
+        & = \frac{\partial}{\partial y} \left(\frac{\partial u}{\partial y} \right)
+        = \left(\sin{\theta} \frac{\partial}{\partial r} 
+        + \frac{\cos{\theta}}{r} \frac{\partial}{\partial \theta} \right)
+        \left(\sin{\theta} \frac{\partial \overline{u}}{\partial r} 
+        + \frac{\cos{\theta}}{r}\frac{\partial \overline{u}}{\partial \theta} \right) \\
+        & \;\vdots \quad\textnormal{Attrition!} \\
+        & \begin{aligned}[t]
+        = \sin^{2}{\theta}\frac{\partial^{2} \overline{u}}{\partial r^{2}} 
+        + \frac{2\cos{\theta}\sin{\theta}}{r} \frac{\partial^{2} \overline{u}}{\partial r \partial \theta} 
+        & + \frac{\cos^{2}{\theta}}{r} \frac{\partial \overline{u}}{\partial r} \\
+        & + \frac{\cos^{2}{\theta}}{r^{2}}\frac{\partial^{2}\overline{u}}{\partial \theta^{2}} 
+        - \frac{2\sin{\theta}\cos{\theta}}{r^{2}}\frac{\partial \overline{u}}{\partial \theta}.
+        \end{aligned}
+    \end{align*}
+\]
+Hence\[
+    \frac{\partial^{2}u}{\partial x^{2}} + \frac{\partial^{2}u}{\partial y^{2}}
+    = \underbrace{\frac{\partial^{2}\overline{u}}{\partial r^{2}} + \frac{1}{r}
+    \frac{\partial \overline{u}}{\partial r}}_\text{$=\frac{1}{r}\frac{\partial}{\partial r} 
+\left(r\frac{\partial \overline{u}}{\partial r} \right) $} 
+    + \frac{1}{r^{2}} \frac{\partial^{2}\overline{u}}{\partial \theta^{2}} = 0.
+\]
+Laplace in 3 dimensions is\[
+    \frac{\partial^{2}u}{\partial x^{2}} + \frac{\partial^{2}u}{\partial y} + \frac{\partial^{2}u}{\partial z} = 0.
+\]
+\end{enumerate}
+
+\subsection{Implicit Functions}
+
+If we have a function defined implicitly $F(x,y) = 0$,
+then $F$ does not change as $x$ and $y$ do so.
+The total derivative then is\[
+    \mathrm{d}F = \frac{\partial F}{\partial x} \mathrm{d}x + \frac{\partial F}{\partial y} \mathrm{d}y = 0.
+\]So the derivative of $y$ with respect to $x$ is given by\[
+    \frac{\mathrm{d}y}{\mathrm{d}x} = -\frac{F_x}{F_y}.
+\]
+
+\paragraph{Examples}
+\,
+
+\begin{enumerate}[label = (\roman*)]
+    \item $F(x,y) = x^{2}\sin{y} + xy - 1 = 0$, then\[
+            \frac{\mathrm{d}y}{\mathrm{d}x} = -\frac{2x\sin{y}+y}{x^{2}\cos{y}+x}.
+    \]
+    If we have an implicit function of 3 variables $F(x,y,z) = 0$, 
+    this constrains our point $(x,y,z)$ to be on a particular surface.
+    We can certainly regard, if we wish, $x= x(y,z)$ or $y = y(x,z)$ or $z = z(x,y)$.
+    Now, no change in $F$ on the surface,\[
+        \Rightarrow{}\mathrm{d}F = \frac{\partial F}{\partial x} \mathrm{d}x
+        + \frac{\partial F}{\partial y} \mathrm{d}y + \frac{\partial F}{\partial z} \mathrm{d}z = 0.
+    \]
+    Then:
+    \begin{itemize}
+        \item At constant $y$: ${\left(\frac{\partial z}{\partial x} \right)}_{y}=-\frac{F_x}{F_z}$
+        \item At constant $x$: ${\left(\frac{\partial z}{\partial y} \right)}_{x}=-\frac{F_y}{F_z}$
+        \item At constant $z$: ${\left(\frac{\partial y}{\partial x} \right)}_{z}=-\frac{F_x}{F_y}$.
+    \end{itemize}
+
+    \underline{Note}: Here\[
+        {\left(\frac{\partial z}{\partial x} \right)}_{y} 
+        = \frac{1}{{\left(\frac{\partial x}{\partial z} \right)}_{y}}
+    \]because the variable $y$ is being kept constant on both sides ---
+    we are looking at variation on a constant $y$ slice of the $F=0$ surface!
+
+\item In thermodynamics the equation of \emph{state} of a gas/liquid is written\[
+        F(p,V,T) = 0
+    \]It is an implicit definition of $p = p(V,T)$.
+    Only in simple cases can we express this relation \emph{explicitly},
+    e.g.\ ideal gas $P = \frac{RT}{V}$.
+\end{enumerate}
+
+\noindent In any case, from the general relation above, we can show that\[
+    {\left(\frac{\partial P}{\partial V} \right)}_{T}
+    {\left(\frac{\partial V}{\partial T} \right)}_{P}
+    {\left(\frac{\partial T}{\partial P} \right)}_{V} = -1
+\]an example of an \emph{exact thermodynamic identity}.
+
+\subsection{Taylor Series}
+
+Recall that for functions with \emph{one} independent variable, we have\[
+    u(x) = u(x_0) + (x-x_0)u'(x_0) + \frac{{(x-x_0)}^{2}}{2!}u''(x_0) +\cdots
+\]or\[
+u(x_0 + h) = u(x_0) + hu'(x_0) + \frac{h^{2}}{2!}u''(x_0) +\cdots
+\]and it is called `Maclaurin' if $x_0 = 0$.
+
+Now extended: we now consider a function $u(x,y)$ of two independent variables $x,y$
+in the neighbourhood of $(x_0,y_0)$. That is we seek an expansion in power of $h = x-x_0$,
+$k = y-y_0$. So\[
+    \begin{align*}
+        u(x,y) & = u(x_0 + h, y_0 + k) \\
+               & = u(x_0, y_0 + k) + h\frac{\partial}{\partial x} [u(x_0, y_0 + k)]
+               + \frac{h^{2}}{2!} \frac{\partial^{2}}{\partial x^{2}} [u(x_0, y_0 + k)] + \cdots
+    \end{align*}
+\]where\[
+    \begin{align*}
+        u(x_0, y_0 + k) & = u(x_0, y_0) + k\frac{\partial u}{\partial y} (x_0, y_0)
+        + \frac{k^{2}}{2!}\frac{\partial^{2}}{\partial y^{2}} [u(x_0, y_0)] + \cdots \\
+        h\frac{\partial}{\partial x} [u(x_0, y_0 + k)]
+                        & = h\left[\frac{\partial}{\partial x} [u(x_0, y_0)]
+                        + k\frac{\partial^{2}}{\partial y \partial x} [u(x_0, y_0)] + \cdots\right] \\
+        \frac{h^{2}}{2!} \frac{\partial^{2}}{\partial x^{2}} [u(x_0, y_0 + k)]
+                        & = \frac{h^{2}}{2!}\left[\frac{\partial^{2}}{\partial x^{2}} [u(x_0, y_0)]
+                        + k\frac{\partial^{3}}{\partial y \partial x^{2}} [u(x_0, y_0)] + \cdots\right] \\
+                        & \;\,\vdots
+    \end{align*}
+\]Now collect the terms, and we get\[
+\begin{align*}
+u(x,y) = u_0 
+& + \underbrace{\left[h{\left(\frac{\partial u}{\partial x} \right)}_{0}
++ k{\left(\frac{\partial u}{\partial y} \right)}_{0}\right]}_\text{first order} \\
+& + \frac{1}{2!}\underbrace{\left[h^{2}{\left(\frac{\partial^{2}u}{\partial x^{2}} \right)}_{0}
++ 2hk{\left(\frac{\partial^{2}u}{\partial x \partial y} \right)}_{0}
++ k^{2}{\left(\frac{\partial^{2}u}{\partial y^{2}} \right)}_{0}\right]}_\text{second order} + \cdots
+\end{align*}
+\]where the subscript $0$ means that it is evaluated at $(x_0, y_0)$.
+
+\medskip
+\noindent There is a straightforward pattern to these terms, where we are assuming
+that $\frac{\partial^{2}u}{\partial x \partial y} = \frac{\partial^{2}u}{\partial y \partial x} $ etc.
+We can write the operator \[
+\mathscr{D} = h\frac{\partial}{\partial x} + k\frac{\partial}{\partial y}.
+\] 
+The above Taylor series can then be re-written as\[
+    u(x_0 + h, y_0 + k) = u_0 + \mathscr{D}u_0 + \frac{\mathscr{D}^{2}u_0}{2!} + \frac{\mathscr{D}^{3}u_0}{3!} + \cdots
+\]and our pattern involves the binomial coefficients explicitly, i.e.\ \[
+    \mathscr{D}^{3}u_0 = h^{3}\frac{\partial^{3}u_0}{\partial x^{3}}
+    + 3h^{2}k\frac{\partial^{3}u_0}{\partial x^{2} \partial y}
+    + 3hk^{2}\frac{\partial^{3}u_0}{\partial x \partial y^{2}} 
+    + k^{3}\frac{\partial^{3}u_0}{\partial y^{3}},\;\textnormal{etc.}
+\]
 
 
 
