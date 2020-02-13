@@ -1090,7 +1090,7 @@ Set of right cosets: $H:G \,:= \{Hg | g \in G\}$.
     \item study of symmetries $\rightarrow$ ``Lie Groups''
 \end{enumerate}
 
-
+% End of Group Theory
 
 
 \chapter{Applied Mathematical Methods}
@@ -1938,7 +1938,7 @@ We have a \emph{dependent variable} $U(n)$ with \emph{integer independent variab
                 and the number of way to choose such as pair from a population is quadratic!)
                 \smallskip
                 \\This is a form of what is known as the \textbf{\emph{logistic map}}.
-                It is homogeneous, nonlinear, anda first order.
+                It is homogeneous, nonlinear, and first order.
                 This turns out to have many different behaviours to that of logistic differential equation.
     \end{enumerate}
 \end{ex}
@@ -3799,6 +3799,7 @@ The above Taylor series can then be re-written as\[
     + k^{3}\frac{\partial^{3}u_0}{\partial y^{3}},\;\textnormal{etc.}
 \]
 
+% End of mathematical methods
 
 
 \chapter{Linear Algebra}
@@ -5081,7 +5082,7 @@ Subsequently, all $V$ denotes a vector space.
 \end{ex}
 
 
-
+% End of Linear Algebra
 
 
 
@@ -5333,16 +5334,43 @@ Subsequently, all $V$ denotes a vector space.
 \underline{Warning}: Cauchy $\iff$ convergent \emph{in} $\mathbb{R}$ 
 (and in $\mathbb{C}$), not in $\mathbb{Q}$!
 
-\section{Continuity}
+\section{Limits}
+
+\newmdtheoremenv[style=defEnv]{f tends to L as x tends to infinity}[theorem]{Definition}
+\begin{f tends to L as x tends to infinity}
+    Let $L \in \mathbb{R}$, $f:\mathbb{R}\mapsto\mathbb{R}$. 
+    $f(x)\rightarrow{}L$ as $x \rightarrow{}\infty$ iff\[
+        \forall \epsilon > 0, \exists R\in \mathbb{R} 
+        \;\textnormal{s.t.}\;x>R\Rightarrow{}
+        |f(x)-L|<\epsilon.
+    \]
+\end{f tends to L as x tends to infinity}
+
+\newmdtheoremenv[style=defEnv]{f tends to infinity as x tends to a}[theorem]{Definition}
+\begin{f tends to infinity as x tends to a}
+    Let $a \in \mathbb{R}$, $f:\mathbb{R}\mapsto\mathbb{R}$. 
+    $f(x)\rightarrow{}\infty$ as $x\rightarrow{}a$ iff\[
+        \forall M\in\mathbb{R}, \exists \delta>0 \;\textnormal{s.t.}\;
+        |x-a|<\delta \Rightarrow{}f(x)>M.
+    \]
+\end{f tends to infinity as x tends to a}
+
+\newmdtheoremenv[style=defEnv]{f tends to infinity as x tends to infinity}[theorem]{Definition}
+\begin{f tends to infinity as x tends to infinity}
+    Let $L \in \mathbb{R}$, $f:\mathbb{R}\mapsto\mathbb{R}$. 
+    $f(x) \rightarrow{} \infty$ as $x\rightarrow{}\infty$ iff\[
+        \forall M \in R, \exists R\in\mathbb{R}\;\textnormal{s.t.}\;x>R\Rightarrow{}f(x)>M.
+    \]
+\end{f tends to infinity as x tends to infinity}
 
 \newmdtheoremenv[style=defEnv]{right limit}[theorem]{Definition}
 \begin{right limit}
     Let $a \in \mathbb{R}$, $F: (a, \infty) \mapsto \mathbb{R}$, $F \rightarrow{}L \in \mathbb{R}$
-    as $x \rightarrow{}a^{+}$ if\[
+    as $x \rightarrow{}a^{+}$ iff\[
         \forall \epsilon > 0, \exists \delta > 0 \,\textnormal{s.t.}\,
         x \in (a, a + \delta) \Rightarrow{}|F(x) - L| < \epsilon.
     \]
-    This is called the \textbf{\emph{right limit}}.
+    This is called the \textbf{\emph{right-hand limit}}.
     The pictorial illustration of this concept is as shown in Figure~\ref{fig:rightLimit}.
 \end{right limit}
 
@@ -5355,11 +5383,11 @@ Subsequently, all $V$ denotes a vector space.
 \newmdtheoremenv[style=defEnv]{left limit}[theorem]{Definition}
 \begin{left limit}
     Let $a \in \mathbb{R}$, $F: (-\infty, a) \mapsto \mathbb{R}$, $F \rightarrow{}L \in \mathbb{R}$
-    as $x \rightarrow{}a^{-}$ if\[
+    as $x \rightarrow{}a^{-}$ iff\[
         \forall \epsilon > 0, \exists \delta > 0 \,\textnormal{s.t.}\,
         x \in (a - \delta, a) \Rightarrow{}|F(x) - L| < \epsilon.
     \]
-    This is called the \textbf{\emph{left limit}}.
+    This is called the \textbf{\emph{left-hand limit}}.
     Graphical understanding is similar to that of right limit.
 \end{left limit}
 
@@ -5376,8 +5404,78 @@ Subsequently, all $V$ denotes a vector space.
     instead of the maximum!)
 \end{proof}
 
+\newmdtheoremenv[style=defEnv]{limit definition}[theorem]{(Limit) Definition}
+\begin{limit definition}
+    Let $a,L \in\mathbb{R}, f:\mathbb{R}\backslash\{a\}\mapsto\mathbb{R}$.
+    $f(x)\rightarrow{}L$ as $x\rightarrow{}a$,
+    or $\lim_{x\rightarrow{}a}f(x) = L$, iff\[
+        \forall \epsilon>0, \exists \delta>0 \;\textnormal{s.t.}\;
+        0<|x-a|<\delta \Rightarrow{}|f(x)-L|<\epsilon.
+    \]
+\end{limit definition}
+
+\newmdtheoremenv[style=defEnv]{Algebra of limits}[theorem]{Definition}
+\begin{Algebra of limits}
+    Let $I\subset \mathbb{R}$ be an open iinterval and let $a\in I$ be a point.
+    Take two functions $f,g:I\backslash\{a\}\mapsto\mathbb{R}$ s.t.\[
+        \lim_{x\rightarrow{}a} f(x) = L_1 \qquad\;\textnormal{and}\;\qquad
+        \lim_{x\to a} g(x) = L_2,
+    \]then
+    \begin{enumerate}
+        \item $\lim_{a\to 0}(f(x)+g(x)) = L_1 + L_2$
+        \item $\lim_{a\rightarrow{}0}(f(x)g(x)) = L_1L_2$
+        \item If $f(x)\neq 0 \;\forall x$, then $\lim_{a\to{}0}\frac{1}{f(x)}=\frac{1}{L_1}$.
+    \end{enumerate}
+\end{Algebra of limits}
+
+\subsection{Continuous functions}
+
+\newmdtheoremenv[style=defEnv]{continuous at a}[theorem]{Definition}
+\begin{continuous at a}
+    Let $f:(b,c)\mapsto\mathbb{R}$, and pick $a\in(b,c)$.
+    $f$ is \textbf{\emph{continuous at}} $a$ iff\[
+        \lim_{x\rightarrow{}a}f(x) = f(a)
+    \]or the other way to say it is\[
+        \forall \epsilon>0, \exists \delta>0 \;\textnormal{s.t.}\;
+        |x-a|<\delta \Rightarrow{}|f(x) - f(a)|<\epsilon.
+    \]
+\end{continuous at a}
+
+\newmdtheoremenv[style=defEnv]{continuous function}[theorem]{Definition}
+\begin{continuous function}
+    Let $f:I\mapsto\mathbb{R}$, where $I\subset\mathbb{R}$ is either
+    \begin{itemize}
+        \item an interval $(a,b)$ for some $a,b\in\mathbb{R}$, or
+        \item an interval $(-\infty, b)$, or
+        \item an interval $(a, \infty)$, or
+        \item $I = \mathbb{R}$,
+    \end{itemize}
+    we say that $f$ is \textbf{\emph{continuous everywhere}}, or just \textbf{\emph{continuous}},
+    if $f$ is continuous at $a \;\forall a\in I$.
+    The four kinds of subsets $I\subset\mathbb{R}$ are called \textbf{\emph{open intervals}}.
+\end{continuous function}
+
+\paragraph{Strategy for $\epsilon-\delta$-proofs of continuity}
+\begin{enumerate}
+    \item Compute $f(a)$.
+    \item Look at $|f(x)-f(a)|$ to see how it can be controlled by $|x-a|<\delta$.
+    \item (This step may not be required.) Assume $\delta<C$ for some $C\in\mathbb{R}^{+}$
+        in order to control other possible factors of $|f(x) - f(a)|$ found in the previous step.
+    \item Find $\delta$ as a function of $\epsilon$ $(\delta(\epsilon))$ and write down
+        the proof starting over from the begeinning.
+\end{enumerate}
+
+\newmdtheoremenv[style=defEnv]{discontinuous at a}[theorem]{Definition}
+\begin{discontinuous at a}
+    $f$ is \textbf{\emph{discontinuous at}} $a$ iff\[
+        \exists \epsilon>0 \;\textnormal{s.t.}\; \forall\delta>0,
+        |x-a|<\delta \Rightarrow{}|f(x)-f(a)|>\epsilon.
+    \]
+\end{discontinuous at a}
 
 
+
+% End of Analysis
 
 
 \end{document}%chktex 7, chktex 17
