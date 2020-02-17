@@ -5073,13 +5073,48 @@ Subsequently, all $V$ denotes a vector space.
 
 \newmdtheoremenv[style=defEnv]{spanning set S}[theorem]{Definition}
 \begin{spanning set S}
-    Set $S$ is called the \textbf{\emph{spanning set}}.
+    Set $S$ is called the \textbf{\emph{spanning set}} if Span $S = V$.
 \end{spanning set S}
 
 \begin{ex}
     Take Span$\{e_1, e_2, e_3\}$ $= \mathbb{R}^{3}$,
     which forms the normal 3-D coordinate system we usually see.
 \end{ex}
+
+\newmdtheoremenv[style=defEnv]{span of subset of subspace}[theorem]{Lemma}
+\begin{span of subset of subspace}
+    $S \subseteq V$ subset, $S \subset U$ for some subspace $U \subset V$.
+    Then span $S \subseteq U$.
+\end{span of subset of subspace}
+
+\begin{proof}
+    $U$ subspace $\Rightarrow{}$ closed under addition + scalar multiplication
+    $\Rightarrow{}$ closed under taking linear combination.
+    Then since $S \subseteq U \Rightarrow{}$ Span $S \subseteq U$ by definition.
+\end{proof}
+
+\underline{Warning}: If $S$ is a spanning set of $V$, it cannot be contained 
+in any proper subspace of $V$.
+
+\newmdtheoremenv[style=defEnv]{finite spanning set}[theorem]{Definition}
+\begin{finite spanning set}
+    A vector space is called \textbf{\emph{finite-dimensional}} if it has a \emph{finite spanning set}.
+\end{finite spanning set}
+
+\underline{Notation}: $\dim{V} < \infty$.
+
+\newmdtheoremenv[style=defEnv]{dimension def}[theorem]{Definition}
+\begin{dimension def}
+    The \textbf{\emph{dimension}} of a finite-dimensional vector space
+    is the size of the smallest spanning set.
+\end{dimension def}
+
+\newmdtheoremenv[style=defEnv]{linear independence}[theorem]{Definition}
+\begin{linear independence}
+    
+\end{linear independence}
+
+
 
 
 % End of Linear Algebra
@@ -5455,6 +5490,12 @@ Subsequently, all $V$ denotes a vector space.
     The four kinds of subsets $I\subset\mathbb{R}$ are called \textbf{\emph{open intervals}}.
 \end{continuous function}
 
+\begin{ex}
+    \textbf{\emph{Rational functions}} $R(x):=\frac{P(x)}{Q(x)}$ are continuous,
+    if $P, Q$ polynomial, and $Q(X) \neq 0 \;\forall x$.
+\end{ex}
+
+
 \paragraph{Strategy for $\epsilon-\delta$-proofs of continuity}
 \begin{enumerate}
     \item Compute $f(a)$.
@@ -5472,6 +5513,140 @@ Subsequently, all $V$ denotes a vector space.
         \exists x\in\mathbb{R} [|x-a|<\delta \wedge|f(x)-f(a)|\ge\epsilon].
     \]
 \end{discontinuous at a}
+
+While picking the particular $x$ so that it satisfy the discontinuity condition,
+ensure that it satisfy for \emph{all} $\delta$.
+\begin{ex}
+    $F:\mathbb{R}\rightarrow{}\mathbb{R}$,
+    $g(x)=0$ when $x=0$, and $g(x) = \sin{\frac{1}{x}}$ when $x\neq 0$.
+    Prove that $F$ is not continuous at 0.
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{continiuos function composition is continuous}[theorem]{Proposition}
+\begin{continiuos function composition is continuous}
+    Let $I \subset \mathbb{R}$ and $J \subset \mathbb{R}$ be open intervals,
+    $f:I\rightarrow{}F(I)\subset J \subset\mathbb{R}$, 
+    $g:J\rightarrow{}\mathbb{R}$ are continuous,
+    then $g\circ f:I\rightarrow{}\mathbb{R}$ is continuous.
+\end{continiuos function composition is continuous}
+
+\subsubsection{Sequential Criterion for continuous functions}
+
+There is connection between (convergent) sequences and continuous function.
+
+\newmdtheoremenv[style=defEnv]{continuous function and sequences}[theorem]{Proposition}
+\begin{continuous function and sequences}
+    Let $I\subset \mathbb{R}$, then $f:I\rightarrow{}\mathbb{R}$ is continuous
+    $\iff f(a_n) \rightarrow{} f(a)$ $\forall (a_n)$ s.t. $a_n \rightarrow{}a$.
+\end{continuous function and sequences}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\begin{ex}
+    \[
+        f(x) = \left\{
+            \begin{align*}
+                & x^{2}, & x\in \mathbb{Q} \\
+                & -x^{2}, & x\notin \mathbb{Q}
+            \end{align*}
+            \right. \quad\;\textnormal{if $f$ is continuous at $a$}\;.
+    \]
+    But $f(a_n) = a^{2}_n \rightarrow{}a^{2}$,
+    $f(b_n) = -b^{2}_n \rightarrow{} -a^{2}$,
+    and both are equal only if $a = 0$.
+\end{ex}
+
+\begin{ex}
+    \[
+        f(x) = \left\{
+            \begin{align*}
+                & \sin{\frac{1}{x}}, & x \neq 0 \\
+                & 0, & x = 0
+            \end{align*}
+            \right.\quad\;\textnormal{not continuous at 0}\;.
+    \]
+\end{ex}
+
+\subsubsection{continuous function on closed bounded interval}
+
+\newmdtheoremenv[style=defEnv]{continuous for closed function}[theorem]{Definition}
+\begin{continuous for closed function}
+    A function $f:K\rightarrow{}\mathbb{R}$, where $K = [b,c]$, is continuous if:
+    \begin{itemize}
+        \item $f$ is continuous on $(b,c)$.
+        \item $\lim_{x\rightarrow{}c^{-}}f(x) = f(c)$.
+        \item $\lim_{x\rightarrow{}b^{+}}f(x) = f(b)$.
+    \end{itemize}
+\end{continuous for closed function}
+
+\newmdtheoremenv[style=defEnv]{closed bound in open interval is continuous}[theorem]{Lemma}
+\begin{closed bound in open interval is continuous}
+    let $I \subset \mathbb{R}$ be open, $K \subset I$ be closed bounded.
+    Then if $f:I\rightarrow{}\mathbb{R}$ continuous $\Rightarrow{}$
+    $f|_K:K\rightarrow{}\mathbb{R}$ continuous.
+\end{closed bound in open interval is continuous}
+
+\newmdtheoremenv[style=defEnv]{bounded function}[theorem]{Definition}
+\begin{bounded function}
+    Let $S \subseteq \mathbb{R}$ be a subset, $f:S\rightarrow{}\mathbb{R}$ a function.
+    $f$ is called \textbf{\emph{bounded}} $\iff$
+    $\exists R\in\mathbb{R}$ s.t. $|f(x)|\le R \;\forall x \in S$.
+\end{bounded function}
+
+\underline{Warning}: Usually continuous functions on open interval are not bounded.
+e.g. $\frac{1}{x}$ on $(0,1)$.
+
+\newmdtheoremenv[style=defEnv]{sequence is bounded in closed bounded continuous func}[theorem]{Proposition}
+\begin{sequence is bounded in closed bounded continuous func}
+    Let $K = [b,c]$ closed bounded, $f:K\rightarrow{}\mathbb{R}$ continuous.
+    Then $f$ is bounded.
+\end{sequence is bounded in closed bounded continuous func}
+
+\begin{proof}
+    Assume $f$ is not bounded $\iff$
+    $\forall n \in \mathbb{N}, \exists x_n \in K$ s.t. $|f(x_n)|>n$.
+    Consider the sequence $(x_n)$ on $K$ $\Rightarrow{}(x_n)$ is bounded.
+    By Bolzano Weierstra$\beta$, $\exists$ convergent subsequence $(x_{n_k})$
+    s.t. $x_{n_k} \rightarrow{} L \in K = [b,c]$.
+    Now by sequential criterion since $f$ is continuous $f(x_{n_k}) \rightarrow{}f(L)$.
+    But $f$ is unbounded, therefore so is $f(x_{n_k})$, it cannot be convergent!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{sup of function}[theorem]{Definition}
+\begin{sup of function}
+    If $S \subseteq \mathbb{R}$, $f:S\rightarrow{}\mathbb{R}$.
+    $\sup{f} :=$$ \sup{\{f(x) | x \in S\}}$,
+    and $\inf{f} := \inf{\{ f(x) | x \in S\}}$.
+\end{sup of function}
+
+\newmdtheoremenv[style=defEnv]{closed bounded interval func has sup}[theorem]{Theorem}
+\begin{closed bounded interval func has sup}
+    Let $K$ be a closed bounded interval, $f:K\rightarrow{}\mathbb{R}$ continuous. Then:
+    \begin{enumerate}[label = (\arabic*)]
+        \item $\exists x \in K$ s.t. $f(x) = \sup{f}$.
+        \item $\exists y \in K$ s.t. $f(y) = \inf{f}$.
+    \end{enumerate}
+    
+\end{closed bounded interval func has sup}
+
+\begin{proof}
+   \begin{enumerate}[label = (\arabic*)]
+       \item Suppose that $f(x) \neq \sup{f}$, $\forall x \in K$.
+           Define $g:K\rightarrow{}\mathbb{R}$, $g(x) := \frac{1}{\sup{f} - f(x)}$ well defined.
+           So $g$ is continuous on a bounded interval $\Rightarrow{}$ bounded.
+           Since $\sup{f}$ is supremum, $\sup{f} - \frac{1}{n}$ 
+           is not an upper bound for any $n \in \mathbb{N}$.
+           $\Rightarrow{} \forall n \in \mathbb{N}, \exists x_n \in K$ s.t. 
+           $|f(x_n)| > \sup{f} - \frac{1}{n}$ $\iff$
+           $\frac{1}{n}>\sup{f} - f(x_n)$ $\iff$
+           $n < \frac{1}{\sup{f} - f(x_n)} = g(x_n)$ is bounded!
+   \end{enumerate}
+   
+\end{proof}
+
+
 
 
 
