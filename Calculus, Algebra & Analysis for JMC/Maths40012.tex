@@ -95,7 +95,7 @@ Study of the simplest algebraic structure on a set.
 
     \begin{itemize}
         \item $+, \cdot$ on $\mathbb{N, Z, R, C}$
-        \item matrix multiplication ($AB \neq BA$ in general for $A, B$ in $M(\mathbb{R}^{n})$)
+        \item matrix multiplication ($AB \neq BA$ in general for $A, B$ in $M(\mathbb{R}^n)$)
         \item let $g, h \in \mathbb{R}$, $g * h = 1 + g \cdot h$: commutative but \emph{not associative}!
     \end{itemize}
     
@@ -4415,7 +4415,9 @@ There are four cases to consider:
     $\Rightarrow{} \infty$ many solutions.
 \end{proof}
 
-\subsection{matrix multiplication}
+\section{Matrix Multiplication}
+
+\subsection{Basics of Matrix Multiplication}
 
 \newmdtheoremenv[style=defEnv]{matrix multiplicatioin}[theorem]{Definition}
 \begin{matrix multiplicatioin}
@@ -4497,6 +4499,7 @@ Be careful with the size of the matrices.
     Lower + upper triangular = diagonal.
 \end{ex}
 
+\subsection{Inverse of a Matrix and Invertibility}
 
 \newmdtheoremenv[style=defEnv]{inverse square matrix}[theorem]{Definition}
 \begin{inverse square matrix}
@@ -4687,6 +4690,8 @@ process of elementary row operation.
 $A\pmb{x} = \pmb{b}$. (system of linear equations)
 If $A$ invertible: $A^{-1}\pmb{b} = \pmb{x}$. (Solution is unique.)
 
+\subsection{Determinant}
+
 \newmdtheoremenv[style=defEnv]{determinant}[theorem]{Definition}
 \begin{determinant}
     let $A = \begin{pmatrix}
@@ -4760,7 +4765,7 @@ Let $A \in M_{n\times n}(\mathbb{R})$.
     Let $\sigma \in S_n$. An \textbf{\emph{inversion}} is a pair of integers $(i,j)$ s.t.:\[
         0 < i < j \le n \quad\textnormal{and}\quad \sigma(i)\ge\sigma(j).
     \]
-    The \textbf{\emph{sign}} of a permutation $\textnormal{sgn}\sigma$ is given by
+    The \textbf{\emph{sign}} of a permutation $\textnormal{sgn}\;\sigma$ is given by
     \begin{itemize}
             \item $+1$, if number of inversion is even
             \item $-1$, if number of inversion is odd.
@@ -4776,6 +4781,10 @@ Let $A \in M_{n\times n}(\mathbb{R})$.
 \begin{ex}
         Let $A = I_n$. Show that $\det{I_n} = 1$.
 \end{ex}
+
+\section{Eigenvalues and Eigenvectors}
+
+\subsection{Basic Definitions}
 
 \newmdtheoremenv[style=defEnv]{eigenvalue and vector}[theorem]{Definition}
 \begin{eigenvalue and vector}
@@ -4834,10 +4843,14 @@ Let $A \in M_{n\times n}(\mathbb{R})$.
 
 \newmdtheoremenv[style=defEnv]{characteristic polynomial}[theorem]{Definition}
 \begin{characteristic polynomial}
-    The \textbf{\emph{characteristic polynomial}} of $A_{n\times n}(\mathbb{R})$ is\[
-        \lambda^{2} - \textnormal{tr}\,A\;\lambda + \det{A}
+    The \textbf{\emph{characteristic polynomial}} of $A_{2\times 2}(\mathbb{R})$ is\[
+        \lambda^{2} - \textnormal{tr}\,A\;\lambda + \det{A}.
+    \]In general, for $A_{n\times n}(\mathbb{R})$ is\[
+    \det{(A - \lambda I_n)}.
     \]
 \end{characteristic polynomial}
+
+\subsection{Diagonalization}
 
 \newmdtheoremenv[style=defEnv]{diagonalization}[theorem]{Definition}
 \begin{diagonalization}
@@ -4884,11 +4897,14 @@ $\iff B(P\pmb{\upsilon}) = \lambda (P\pmb{\upsilon})$.
 \begin{proof}
     We can consider $P^{-1}AP = D \iff AP = PD$.
     Look at the $k$-th column vector of $AP$: $A\pmb{\upsilon}_k = \lambda_k \pmb{\upsilon}_k$.
-    Look at the $k$-th column vector of $PD$: $P\lambda_k e_k = \lambda_k Pe_k = \lambda_k$.
+    Look at the $k$-th column vector of $PD$: $P\lambda_k e_k$, which 
+    the diagonal identity matrix ``extracts'' out the eigenvectors one by one.
     ($e_k$ is an identity matrix)
 \end{proof}
 
 \section{vector space}
+
+\subsection{Axioms and Examples}
 
 \newmdtheoremenv[style=defEnv]{vector space}[theorem]{Definition}
 \begin{vector space}
@@ -5031,6 +5047,8 @@ $\iff B(P\pmb{\upsilon}) = \lambda (P\pmb{\upsilon})$.
     \item $U + V := \{x + y | x \in U, y \in W\}$ is a subspace of $V$. (Exercise)
 \end{itemize}
 
+\subsection{Spanning Sets}
+
 \newmdtheoremenv[style=defEnv]{spanning sets}[theorem]{Definition}
 \begin{spanning sets}
     Let $V$ be a vector space, $S \subseteq V$ be a subset.
@@ -5079,10 +5097,11 @@ Subsequently, all $V$ denotes a vector space.
 \begin{ex}
     Take Span$\{e_1, e_2, e_3\}$ $= \mathbb{R}^{3}$,
     which forms the normal 3-D coordinate system we usually see.
+    So $\left\{e_1, e_2, e_3\right\}$ is the spanning set of $\mathbb{R}^{3}$.
 \end{ex}
 
 \newmdtheoremenv[style=defEnv]{span of subset of subspace}[theorem]{Lemma}
-\begin{span of subset of subspace}
+\begin{span of subset of subspace}\label{lemma:1}
     $S \subseteq V$ subset, $S \subset U$ for some subspace $U \subset V$.
     Then span $S \subseteq U$.
 \end{span of subset of subspace}
@@ -5095,6 +5114,8 @@ Subsequently, all $V$ denotes a vector space.
 
 \underline{Warning}: If $S$ is a spanning set of $V$, it cannot be contained 
 in any proper subspace of $V$.
+(If $S \subseteq U$ for some subspace $U \subset V$, 
+then $U$ is \emph{not} closed under linear combinations of elements of on $S$.)
 
 \newmdtheoremenv[style=defEnv]{finite spanning set}[theorem]{Definition}
 \begin{finite spanning set}
@@ -5103,16 +5124,142 @@ in any proper subspace of $V$.
 
 \underline{Notation}: $\dim{V} < \infty$.
 
+\underline{Note}: If you want to prove that a vector space $V$ is \emph{not} finite-dimensional
+then it is not enough to find an infinite spanning set: you have to prove that no finite spanning set exists.
+Indeed, every vector space (except the zero vector space) has an infinite spanning set, 
+e.g.\ the set $S = V$.
+
 \newmdtheoremenv[style=defEnv]{dimension def}[theorem]{Definition}
 \begin{dimension def}
-    The \textbf{\emph{dimension}} of a finite-dimensional vector space
+    The \textbf{\emph{dimension}} of a finite-dimensional vector space,
+    written as $\dim{V}$,
     is the size of the smallest spanning set.
 \end{dimension def}
 
+\begin{ex}
+    \begin{itemize}
+        \,
+
+            \item 
+    Consider the vector space ${\mathbb{R}[X]}_{\le d}$ of all polynomials of degree at most $d$.
+    This is finite-dimensional, since the subset $S = \left\{1, X, X^{2},\ldots,X^{d}\right\} $
+    is a spanning set.
+\item Consider the vector space $\mathbb{R}[X]$. It is not finite-dimensional.
+    Suppose we pick a finite set $S = \left\{P_1,P_2,\ldots,P_n\right\} \subset \mathbb{R}[X]$.
+    Each polynomial $P_i$ has some degree $d_i$, and if we set $d = \max{(d_1, d_2,\ldots,d_n)}$,
+    then $S$ is contained in the proper subspace ${\left\{\mathbb{R}[X]\right\}}_{\le d}$.
+    So by the previous lemma, the subset $S$ is not a spanning set.
+    \end{itemize}
+    
+\end{ex}
+
+\subsection{Linear independence}
+
 \newmdtheoremenv[style=defEnv]{linear independence}[theorem]{Definition}
 \begin{linear independence}
-    
+    A subset $L \subset V$ is called \textbf{\emph{linearly dependent}} if
+    we can find \emph{distinct} vectors $\pmb{v}_1, \pmb{v}_2,\ldots,\pmb{v}_n \in L$
+    and \emph{non-zero} scalars $\lambda_1 \neq 0, \lambda_2 \neq 0,\ldots,\lambda_n \neq 0$ s.t.\[
+        \lambda_1 \pmb{v}_1 + \lambda_2 \pmb{v}_2 + \cdots + \lambda_n \pmb{v}_n = \pmb{0}_V.
+    \]
+    If $L$ is not linearly dependent we say that it is \textbf{\emph{linearly independent}}.
 \end{linear independence}
+
+\underline{Note}: If $L' \subset L$ and $L'$ is linearly-dependent,
+then $L$ is also linearly-dependent (just use the same $\pmb{v}_i$'s and $\lambda_i$'s).
+So if $L$ is linearly-independent then any subset of $L$ is also linearly-independent.
+
+\begin{ex}
+    If $\pmb{0}_V \in L$ then $L$ is linearly-dependent,
+    because we can take any $\lambda \neq 0$ and observe that $\lambda \pmb{0}_V = \pmb{0}_V$.
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{basis}[theorem]{Definition}
+\begin{basis}
+    A \textbf{\emph{basis}} of a vector space is a linearly independent spanning set.
+    The plural of basis is \textbf{\emph{bases}}.
+\end{basis}
+
+\newmdtheoremenv[style=defEnv]{v can be written with element of basis}[theorem]{Proposition}
+\begin{v can be written with element of basis}\label{prop:1}
+    Let $B = \left\{\pmb{v}_1, \pmb{v}_2, \ldots, \pmb{v}_n\right\} \subset V$ be a (finite)
+    basis of vector space $V$. Then every vector in $V$ can be written as a linear combination
+    of elements in $B$, in a \emph{unique} way.
+    Conversely, any finite subset $B$ with the above property is a basis.
+\end{v can be written with element of basis}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{coefficients of x with respect to B}[theorem]{Definition}
+\begin{coefficients of x with respect to B}
+    If we find a (finite) basis $B = \left\{\pmb{v}_1,\ldots,\pmb{v}_n\right\} $,
+    then any vector $\pmb{x} \in V$ can be uniquely expressed as\[
+        \pmb{x} = \lambda_1 \pmb{v}_1 + \cdots + \lambda_n \pmb{v}_n.
+    \]The scalars $\lambda_i$ are called the \textbf{\emph{coefficients of $x$ with respect to $B$}}.
+    Every vector $\pmb{x}\in V$ corresponds to a unique set of coefficients
+    $\lambda_1, \lambda_2, \ldots, \lambda_n$.
+\end{coefficients of x with respect to B}
+To put it more formally, the basis $B$ allows us to define a function\[
+    \begin{align*}
+        F_B:\mathbb{R}^{n} & \mapsto V \\
+        \begin{pmatrix}
+                \lambda_1 \\
+                \lambda_2 \\
+                \vdots \\
+                \lambda_n
+            \end{pmatrix} & \mapsto \lambda_1 \pmb{v}_1 + \cdots + \lambda_n \pmb{v}_n.
+    \end{align*}
+\]
+What Proposition~\ref{prop:1} says is that the function $F_B$ is a bijection.
+Note that $F_B^{-1}$ sends a vector $\pmb{x}$ to its coefficients with respect to $B$.
+
+\newmdtheoremenv[style=defEnv]{linearly dependent spanning set removed an element to be linearly independent}[theorem]{Lemma}
+\begin{linearly dependent spanning set removed an element to be linearly independent}
+    Let $S \subset V$ be a spanning set, and suppose that $S$ is not linearly independent.
+    Then $\exists \pmb{x}\in S$ s.t. $S' = S\backslash\left\{\pmb{x}\right\} $ is still a spanning set.
+\end{linearly dependent spanning set removed an element to be linearly independent}
+
+\begin{proof}
+    Exercise!
+    (Be careful that after removing an element from the spanning set,
+    you need to show that it is not a spanning set of a subspace!)
+    
+    Set $S' = S \backslash\left\{\pmb{s}_1\right\} $. Then $\pmb{s}_1 \in \;\textnormal{span}\;{S'}$,
+    and trivially $S' \subset \;\textnormal{span}\;{S'}$, so $S \subset \;\textnormal{span}\;{S'}$.
+    By Lemma~\ref{lemma:1}, span $S \subset$ span $S' \Rightarrow{} V \subset$ span $S'$.
+    This implies that span $S' = V$.
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{any finite spanning set contains a basis}[theorem]{Corollary}
+\begin{any finite spanning set contains a basis}
+    Any finite spanning set contains a basis.
+\end{any finite spanning set contains a basis}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{any finite-dimensional v has a basis}[theorem]{Corollary}
+\begin{any finite-dimensional v has a basis}
+Any finite-dimensional vector space $V$ has a basis.
+\end{any finite-dimensional v has a basis}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{Steinitz exchange lemma}[theorem]{Proposition}
+\begin{Steinitz exchange lemma}
+Let $S \subset V$ be a spanning set of $V$, and let $L = \left\{\pmb{x}_1, \ldots, \pmb{x}_n\right\} $
+be a \emph{finite linearly independent} subset of $V$, then 
+$\exists T = \left\{\pmb{y}_1,\ldots,\pmb{y}_n\right\} \subset S$, with the same size as $L$, s.t.\[
+    S' = (S\backslash T)\cup L
+\]is a spanning set.
+\end{Steinitz exchange lemma}
+
+
 
 
 
@@ -5595,7 +5742,7 @@ There is connection between (convergent) sequences and continuous function.
     $\exists R\in\mathbb{R}$ s.t. $|f(x)|\le R \;\forall x \in S$.
 \end{bounded function}
 
-\underline{Warning}: Usually continuous functions on open interval are not bounded.
+\underline{Warning}: Usually continuous functions on open interval are not bounded,
 e.g. $\frac{1}{x}$ on $(0,1)$.
 
 \newmdtheoremenv[style=defEnv]{sequence is bounded in closed bounded continuous func}[theorem]{Proposition}
@@ -5614,12 +5761,12 @@ e.g. $\frac{1}{x}$ on $(0,1)$.
     But $f$ is unbounded, therefore so is $f(x_{n_k})$, it cannot be convergent!
 \end{proof}
 
-\newmdtheoremenv[style=defEnv]{sup of function}[theorem]{Definition}
-\begin{sup of function}
+\newmdtheoremenv[style=defEnv]{supremum of function}[theorem]{Definition}
+\begin{supremum of function}
     If $S \subseteq \mathbb{R}$, $f:S\rightarrow{}\mathbb{R}$.
-    $\sup{f} :=$$ \sup{\{f(x) | x \in S\}}$,
-    and $\inf{f} := \inf{\{ f(x) | x \in S\}}$.
-\end{sup of function}
+    $\sup{f} :=$ $ \sup{\{f(x) | x \in\ S\}}$,
+    and $\inf{f}\ := \inf{\{ f(x) | x \in\ S\}}$.
+\end{supremum of function}
 
 \newmdtheoremenv[style=defEnv]{closed bounded interval func has sup}[theorem]{Theorem}
 \begin{closed bounded interval func has sup}
@@ -5639,9 +5786,11 @@ e.g. $\frac{1}{x}$ on $(0,1)$.
            Since $\sup{f}$ is supremum, $\sup{f} - \frac{1}{n}$ 
            is not an upper bound for any $n \in \mathbb{N}$.
            $\Rightarrow{} \forall n \in \mathbb{N}, \exists x_n \in K$ s.t. 
-           $|f(x_n)| > \sup{f} - \frac{1}{n}$ $\iff$
+           $f(x_n) > \sup{f} - \frac{1}{n}$ $\iff$
            $\frac{1}{n}>\sup{f} - f(x_n)$ $\iff$
            $n < \frac{1}{\sup{f} - f(x_n)} = g(x_n)$ is bounded!
+
+       \item Largely identical process of proof.
    \end{enumerate}
    
 \end{proof}
