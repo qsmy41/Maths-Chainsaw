@@ -3763,7 +3763,7 @@ $k = y-y_0$. So\[
     \end{align*}
 \]where\[
     \begin{align*}
-        u(x_0, y_0 + k) & = u(x_0, y_0) + k\frac{\partial u}{\partial y} (x_0, y_0)
+        u(x_0, y_0 + k) & = u(x_0, y_0) + k\frac{\partial}{\partial y} u(x_0, y_0)
         + \frac{k^{2}}{2!}\frac{\partial^{2}}{\partial y^{2}} [u(x_0, y_0)] + \cdots \\
         h\frac{\partial}{\partial x} [u(x_0, y_0 + k)]
                         & = h\left[\frac{\partial}{\partial x} [u(x_0, y_0)]
@@ -3773,7 +3773,8 @@ $k = y-y_0$. So\[
                         + k\frac{\partial^{3}}{\partial y \partial x^{2}} [u(x_0, y_0)] + \cdots\right] \\
                         & \;\,\vdots
     \end{align*}
-\]Now collect the terms, and we get\[
+\]Now collect the terms, and we get
+\begin{equation}\label{PDE:1}
 \begin{align*}
 u(x,y) = u_0 
 & + \underbrace{\left[h{\left(\frac{\partial u}{\partial x} \right)}_{0}
@@ -3782,7 +3783,9 @@ u(x,y) = u_0
 + 2hk{\left(\frac{\partial^{2}u}{\partial x \partial y} \right)}_{0}
 + k^{2}{\left(\frac{\partial^{2}u}{\partial y^{2}} \right)}_{0}\right]}_\text{second order} + \cdots
 \end{align*}
-\]where the subscript $0$ means that it is evaluated at $(x_0, y_0)$.
+\end{equation}
+
+where the subscript $0$ means that it is evaluated at $(x_0, y_0)$.
 
 \medskip
 \noindent There is a straightforward pattern to these terms, where we are assuming
@@ -3793,11 +3796,267 @@ We can write the operator \[
 The above Taylor series can then be re-written as\[
     u(x_0 + h, y_0 + k) = u_0 + \mathscr{D}u_0 + \frac{\mathscr{D}^{2}u_0}{2!} + \frac{\mathscr{D}^{3}u_0}{3!} + \cdots
 \]and our pattern involves the binomial coefficients explicitly, i.e.\ \[
+\mathscr{D}^{2}u_0 =
+\left(h\frac{\partial}{\partial x} + k\frac{\partial}{\partial y} \right)
+\left(h\frac{\partial}{\partial x} + k\frac{\partial}{\partial y} \right) =
+h^{2}\frac{\partial^{2}}{\partial x^{2}} +
+2hk\frac{\partial^{2}}{\partial x\partial y} +
+k^{2}\frac{\partial^{2}}{\partial x^{2}},
+\]\[
     \mathscr{D}^{3}u_0 = h^{3}\frac{\partial^{3}u_0}{\partial x^{3}}
     + 3h^{2}k\frac{\partial^{3}u_0}{\partial x^{2} \partial y}
     + 3hk^{2}\frac{\partial^{3}u_0}{\partial x \partial y^{2}} 
     + k^{3}\frac{\partial^{3}u_0}{\partial y^{3}},\;\textnormal{etc.}
 \]
+
+\paragraph{Example}
+\[
+    u(x,y) = e^{2x-y}
+\]
+where $x_0 = 0 = y_0, x = 0 + h, y = 0 + k, u_0 = u(0,0) = 1$.
+So\[
+    \frac{\partial u}{\partial x} = 2e^{2x-y},
+    \frac{\partial u}{\partial y} = -e^{2x-y}
+    \Rightarrow{}{\left(\frac{\partial u}{\partial x} \right)}_0 = 2,
+    {\left(\frac{\partial u}{\partial y} \right)}_0 = -1.
+\]\[
+    \frac{\partial^{2}u}{\partial x^{2}} = 4e^{2x-y},
+    \frac{\partial^{2}u}{\partial x \partial y} = -2e^{2x-y},
+    \frac{\partial^{2}u}{\partial y^{2}} = e^{2x-y},
+\]\[
+\Rightarrow{}{\left(\frac{\partial^{2}u}{\partial x^{2}} \right)}_{0} = 4,
+{\left(\frac{\partial^{2}u}{\partial x \partial y} \right)}_{0} = -2,
+{\left(\frac{\partial^{2}u}{\partial y^{2}} \right)}_{0} = 1.
+\]
+Thus \[
+    e^{2x-y} = e^{2h-k} = 1 + (2h-k) + \frac{1}{2!}[4h^{2}-4hk+k^{2}] + \cdots.
+\]
+Check: $e^{2h-k} = 1 + (2h-k) + \frac{1}{2!}{(2h-k)}^{2} + \cdots$.
+
+\subsection{Stationary Points}
+
+We plotted surfaces $u(x,y)$ and their contours, we now ask whether our surface has
+a \emph{horizontal tangent plan} at any point.
+
+For \emph{one} independent variable, we have \underline{local maximum}, \underline{local minimum},
+and \underline{inflexion point} with horizontal tangent as the three cases for having horizontal tangent line.
+For \emph{two} independent variable, we also have three types of stationary points
+each with a local horizontal tangent plane. 
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{localMaximum.jpeg}
+  	\centering
+    \caption{local maximum}\label{fig:localMax}
+\end{figure}
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{localMinimum.jpeg}
+  	\centering
+    \caption{local minimum}\label{fig:localMin}
+\end{figure}
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{saddlePoint.jpeg}
+  	\centering
+    \caption{saddle point}\label{fig:saddlePoint}
+\end{figure}
+
+How do we distinguish between these cases?
+
+Consider a stationary point $(x_0,y_0)$ where we have (of course)
+${\left(\frac{\partial u}{\partial x} \right)}_{0} = 0 = {\left(\frac{\partial u}{\partial y} \right)}_{0}$.
+Then we write out the Taylor expansion for $u(x,y)$ about $(x_0, y_0)$
+exactly as Equation~\eqref{PDE:1}. The first order terms are cancelled out, so\[
+    \begin{align*}
+        \delta u & = u(x_0 + h, y_0 + k) - u(x_0, y_0) \\
+                 & = \frac{1}{2}\left[Ah^{2} + 2Bhk + Ck^{2}\right] + \cdots
+    \end{align*}
+\]where\[
+    A = {\left(\frac{\partial^{2}u}{\partial x^{2}} \right)}_{0}, \quad
+    B = {\left(\frac{\partial^{2}u}{\partial x \partial y} \right)}_{0}, \quad
+    C = {\left(\frac{\partial^{2}u}{\partial y^{2}} \right)}_{0},
+\]and $\delta u$ can be written in matrix form:\[
+    \delta u = \frac{1}{2}\begin{pmatrix}
+        h & k
+    \end{pmatrix} \begin{pmatrix}
+        A & B \\
+        B & C
+    \end{pmatrix} \begin{pmatrix}
+            h \\
+            k
+    \end{pmatrix} + \cdots.
+\]
+\underline{Note}: If $A, B, C$ are all $0$, then we need higher-order terms.
+
+\bigskip
+As such,
+\begin{enumerate}[label = (\roman*)]
+    \item $\delta u > 0$ for \emph{any} small $h,k$ then $u(x_0,y_0)$ is a (local) minimum.
+    \item $\delta u < 0$ for \emph{any} small $h,k$ then $u(x_0, y_0)$ is a (local) maximum.
+    \item $\delta u$ can be positive or negative depending on the value of $h, k$,
+        then $u(x_0,y_0)$ is a saddle point.
+\end{enumerate}
+
+The easiest way to determine this is via e.g.\[
+    \delta u = \frac{1}{2}k^{2}\left[A{\left(\frac{h}{k}\right)}_{2} 
+    + 2B\left(\frac{h}{k}\right) + C\right] + \cdots
+\]and consider\[
+F(\lambda) = A\lambda^{2} + 2B\lambda + C.
+\]
+
+(Possible to think in terms of $B^{2}-AC$, as this is more ``natural''
+while thinking about \emph{discriminant} of polynomials. Then
+all the following deductions/conclusions should be reversed!)
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{stationaryPointDet.jpeg}
+  	\centering
+    \caption{graphs to determine what type of stationary point it is}\label{fig:stationaryPointDet}
+\end{figure}
+
+\paragraph{Summary}
+
+For functions of two variables $u(x,y)$, stationary points are located at simultaneous solution
+of the two equations:\[
+    \left\{\begin{align*}
+        & \frac{\partial u}{\partial x} = 0 \\
+        & \frac{\partial u}{\partial y} = 0
+    \end{align*}\right.
+\]where $\mathrm{d}u = 0$ locally.
+Each $(x_0, y_0)$ has \emph{character} determined by\[
+    E_0 = {\left[\left(\frac{\partial^{2}u}{\partial x^{2}} \right)
+    \left(\frac{\partial^{2}u}{\partial y^{2}} \right)
+    - {\left(\frac{\partial^{2}u}{\partial x\partial y} \right)}^{2}\right]}_{0} = AC-B^{2}
+\]with
+\begin{itemize}
+    \item $E_0 < 0$ implies a saddle point,
+    \item $E_0 > 0$ and
+        \begin{itemize}
+            \item ${\left(\frac{\partial^{2}u}{\partial x^{2}} \right)}_{0} < 0$ implies a (local) maximum,
+            \item ${\left(\frac{\partial^{2}u}{\partial x^{2}} \right)}_{0} > 0$ implies a (local) minimum.
+        \end{itemize}
+\end{itemize}
+Of course there are \emph{singular} cases that can occur, such as
+$E_0 = 0, A = B = C = 0$ etc.
+These normally require higher-order derivatives to determine the issue --- not considered here.
+
+\paragraph{Examples}
+\,
+
+\begin{enumerate}[label = (\roman*)]
+    \item $u(x,y) = x^{3} + xy^{2} - x - yx^{2} - y^{3} + y = (x-y)(x^{2}+y^{2}-1)$.
+        \[
+            \Rightarrow{}\left\{\begin{align*}
+                    \frac{\partial u}{\partial x} & = 3x^{2} + y^{2} - 1 - 2xy = 0 \\
+                    \frac{\partial u}{\partial y} & = 2xy - x^{2} - 3y^{2} + 1 = 0.
+            \end{align*}\right.
+        \]By adding the two equations up, we get $2x^{2}-2y^{2}=0, y = \pm x$.
+        When $y = x$, $x = \pm \frac{1}{\sqrt{2}}$; when $y = -x$, $x = \pm \frac{1}{\sqrt{6}}$.
+        Thus there are four stationary points:\[
+            P_1\left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right),
+            P_2\left(-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right),
+            P_3\left(\frac{1}{\sqrt{6}}, -\frac{1}{\sqrt{6}}\right),
+            P_4\left(-\frac{1}{\sqrt{6}}, \frac{1}{\sqrt{6}}\right).
+        \]
+        Then we can analyse the stationary points,
+        as shown in Figure~\ref{fig:stationaryPointsAnalysis},
+        and sketch the contours, as shown in Figure~\ref{fig:contourSketch}!
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{stationaryPointsAnalysis.jpg}
+  	\centering
+    \caption{stationary points analysis}\label{fig:stationaryPointsAnalysis}
+\end{figure}
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{contourSketch.jpeg}
+  	\centering
+    \caption{contour sketch}\label{fig:contourSketch}
+\end{figure}
+
+
+        \underline{Warning}:
+        When we are faced with a function of several variables and we need to find stationary points 
+        (and potential local max and min), we need to ensure that our \emph{independent} variables 
+        are indeed independent.
+
+    \item Maximise volume $V = xyz$ of a rectangular box given the surface area 
+        $A = 2xy + 2yz + 2zx$ is fixed.
+        In this case, $x, y, z$ are \emph{not} independent.
+        We then need to write\[
+            z = \frac{A - 2xy}{2(x+y)} \Rightarrow{}
+            V = \frac{xy(A-2xy)}{2(x+y)}.
+        \]Now $x, y$ are independent, so we can solve and derive that\[
+        x_0 = \sqrt{\frac{A}{6}} = y_0 (= z_0), V_{\max} = {\left(\frac{A}{6}\right)}^{\frac{3}{2}}.
+        \]
+\end{enumerate}
+
+\subsection{Application --- Exact (First Order) Differential Equations}
+
+We know that for a function of two variables $u(x,y)$ the total differential is\[
+    \mathrm{d}u = \frac{\partial u}{\partial x} \mathrm{d}x + \frac{\partial u}{\partial y} \mathrm{d}y
+\]and of course $\frac{\partial u}{\partial x} $ and $\frac{\partial u}{\partial y} $
+will both, in general, be functions of $x$ and $y$.
+Now consider the converse problem! Given \[
+    P(x,y)\mathrm{d}x + Q(x,y)\mathrm{d}y
+\]i.e.\ given $P$ and $Q$, when is it the case that this \emph{is}
+the total differential of some (as yet unknown) function $u(x,y)$?
+If it is such then $P(x,y) = \frac{\partial u}{\partial x} $ and $Q(x,y) = \frac{\partial u}{\partial y} $
+for that function $u(x,y)$.
+This implies (easy!) and is implied by (proof not given here!) the 
+\emph{\underline{condition of integrability}}:\[
+    \frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}.
+\]
+
+\paragraph{Examples}
+\,
+
+\begin{enumerate}[label = (\roman*)]
+    \item $y^{2}\mathrm{d}x + (x^{2}+2y)\mathrm{d}y$.
+        Since\[
+            \frac{\partial P}{\partial y} = 2y
+            \not\equiv \frac{\partial Q}{\partial x} = 2x,
+        \]the test fails, and thus not an exact/total differential.
+
+    \item $(2xy + \cos{x}\cos{y})\mathrm{d}x + (x^{2}-\sin{x}\sin{y})\mathrm{d}y$.
+        \[
+            \frac{\partial P}{\partial y} = 2x - \cos{x}\sin{y} = \frac{\partial Q}{\partial x},
+        \]so the test pass and it is exact. Thus\[
+        \frac{\partial u}{\partial x} = 2xy + \cos{x}\cos{y}
+        \]\[
+        \Rightarrow{}u(x,y) = x^{2}y + \sin{x}\cos{y} + f(y)
+    \]where $f(y)$ is a `constant' of integration w.r.t. $x$.
+    Then either\[
+        \begin{align*}
+            \frac{\partial u}{\partial y} 
+            & = x^{2} - \sin{x}\sin{y} + \frac{\mathrm{d}f(y)}{\mathrm{d}y} \\
+            & = x^{2} - \sin{x}\sin{y}
+        \end{align*}
+    \]so that $\frac{\mathrm{d}f}{\mathrm{d}y} = 0$ and $f(y) = K$ constant w.r.t. $x$ and $y$,
+    or alternatively\[
+        \frac{\partial u}{\partial y} = x^{2}-\sin{x}\sin{y}
+    \]\[
+    \Rightarrow{}u(x,y) = x^{2}y + \sin{x}\cos{y} + g(x)
+\]where $g(x)$ is the `constant' of integration w.r.t. $y$.
+Comparing the two expressions and deduce that $f(y) = g(x) = K$ constant
+independent of $x$ and $y$. This also gives\[
+    u(x,y) = x^{2}y + \sin{x}\cos{y} + K
+\]and $P\mathrm{d}x + Q\mathrm{d}y = \mathrm{d}u(x,y)$.
+\end{enumerate}
+
+\bigskip
+Now consider an equation of the form\[
+    P(x,y)\mathrm{d}x + Q(x,y)\mathrm{d}y = 0.
+\]This is a first order differential equation, with alternative forms
+$\frac{\mathrm{d}y}{\mathrm{d}x} = -\frac{P(x,y)}{Q(x,y)}$ and $P + Q\frac{\mathrm{d}y}{\mathrm{d}x} = 0$.
+If $P\mathrm{d}x + Q\mathrm{d}y$ is the total differential of a function $u(x,y)$,
+i.e.\ $\mathrm{d}u(x,y) = 0$,
+then the solution is \[
+    u(x,y) = \;\textnormal{constant}\;C.
+\]
+
+
+
 
 % End of mathematical methods
 
