@@ -5361,9 +5361,14 @@ Subsequently, all $V$ denotes a vector space.
 
 \newmdtheoremenv[style=defEnv]{span of subset of subspace}[theorem]{Lemma}
 \begin{span of subset of subspace}\label{lemma:1}
-    $S \subseteq V$ subset, $S \subset U$ for some subspace $U \subset V$.
+    $S \subseteq V$ subset, $S \subseteq U$ for some subspace $U \subseteq V$.
     Then span $S \subseteq U$.
 \end{span of subset of subspace}
+
+\emph{\underline{Notation}}: Subsequently, $\subset$ and $\subseteq$ are used interchangeably,
+``strictly a subset of'' is represented by $\subsetneq$,
+denoting ``a proper subset'', and depening on additional conditions,
+``a proper subspace''.
 
 \begin{proof}
     $U$ subspace $\Rightarrow{}$ closed under addition + scalar multiplication
@@ -5374,7 +5379,7 @@ Subsequently, all $V$ denotes a vector space.
 \underline{Warning}: If $S$ is a spanning set of $V$, it cannot be contained 
 in any proper subspace of $V$.
 (If $S \subseteq U$ for some subspace $U \subset V$, 
-then $U$ is \emph{not} closed under linear combinations of elements of on $S$.)
+then $U$ is \emph{not} closed under linear combinations of elements of $S$.)
 
 \newmdtheoremenv[style=defEnv]{finite spanning set}[theorem]{Definition}
 \begin{finite spanning set}
@@ -5518,7 +5523,41 @@ $\exists T = \left\{\pmb{y}_1,\ldots,\pmb{y}_n\right\} \subset S$, with the same
 \]is a spanning set.
 \end{Steinitz exchange lemma}
 
+\begin{proof}
+    Exercise!
+\end{proof}
 
+\newmdtheoremenv[style=defEnv]{finite spanning set and linearly independent set}[theorem]{Corollary}
+\begin{finite spanning set and linearly independent set}
+    Let $V$ be a finite-dimensional vector space, $S \subset V$ be a finite spanning set
+    and $L \subset V$ be a linearly independent subset.
+    Then $L$ is finite and $|L| \le |S|$.
+\end{finite spanning set and linearly independent set}
+
+\newmdtheoremenv[style=defEnv]{dimension and basis}[theorem]{Theorem}
+\begin{dimension and basis}
+    Let $V$ be a finite-dimensional vector space with $\dim{V} = n$.
+    Then any basis of $V$ is finite and has size $n$.
+\end{dimension and basis}
+
+\begin{proof}
+    Exercise! (Hint: use $\le, \ge$ to deduce $=$.)
+\end{proof}
+
+Therefore, to check dimension,
+we just need to check if the spanning set is a basis and count its elements.
+
+\subsection{Dimension of Subspaces}
+
+\newmdtheoremenv[style=defEnv]{linearly independent subset of V}[theorem]{Lemma}
+\begin{linearly independent subset of V}
+    Assume $L \subseteq V$ linearly independent, $v \in V$, $v \notin \span{L}$,
+    then $L \cup \{v\}$ still linearly independent.
+\end{linearly independent subset of V}
+
+\begin{proof}
+    Exercise!
+\end{proof}
 
 
 
