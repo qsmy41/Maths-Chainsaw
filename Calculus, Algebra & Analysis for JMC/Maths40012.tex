@@ -5559,6 +5559,259 @@ we just need to check if the spanning set is a basis and count its elements.
     Exercise!
 \end{proof}
 
+\newmdtheoremenv[style=defEnv]{infinite dimension find basis subset}[theorem]{Lemma}
+\begin{infinite dimension find basis subset}
+    If $V$ is \emph{not} finite dimensional ($\dim{V} = \infty$),
+    then $\forall n\in \mathbb{N}, \exists L \subset V$ 
+    linearly independent subset s.t. $|L| = n$.
+\end{infinite dimension find basis subset}
+
+\begin{proof}
+    Exercise! (Hint: Induction!) Write it out formally!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{linearly independent subset of size n}[theorem]{Lemma}
+\begin{linearly independent subset of size n}
+    Let $\dim{V} < \infty = n$. Then any linearly independent subset of size $n$ is a basis.
+\end{linearly independent subset of size n}
+
+\begin{proof}
+    Exercise! (Use contradiction!)
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{linearly independent subset is contained in basis}[theorem]{Lemma}
+\begin{linearly independent subset is contained in basis}
+    Let $\dim{V} < \infty$, then any linearly independent subset is contained in a basis.
+\end{linearly independent subset is contained in basis}
+
+\begin{proof}
+     Exercise!
+\end{proof}
+
+You can prove by adding linearly independent elements to the set, and
+this procedure is called \textbf{\emph{basis extension}}.
+
+\begin{ex}
+    \[
+    v_1 = \begin{pmatrix}
+            0 \\
+            1 \\
+            0
+    \end{pmatrix} , v_2 = \begin{pmatrix}
+            -2 \\
+            0 \\
+            1
+    \end{pmatrix} \in \mathbb{R}^{3}
+\]are linearly independent. Extend it to a basis.
+
+\[
+    \span{\{\begin{pmatrix}
+            0 \\
+            1 \\
+            0
+    \end{pmatrix} ,\begin{pmatrix}
+            -2 \\
+            0 \\
+            1
+\end{pmatrix} \}} = \{\begin{pmatrix}
+        x \\
+        y \\
+        z
+\end{pmatrix} | x + 2z = 0\} \subset \mathbb{R}^{3}.
+\]
+So for instance, $v = \begin{pmatrix}
+        1 \\
+        0 \\
+        0
+    \end{pmatrix} \notin \span{L}$.
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{finite dimension subspace}[theorem]{Proposition}
+\begin{finite dimension subspace}
+    Let $\dim{V} = n < \infty$, $U \subseteq V$ subspace. Then
+    \begin{enumerate}[label = (\arabic*)]
+        \item $U$ is finite dimension
+        \item $\dim{U} \le \dim{V}$
+        \item $\dim{U} = \dim{V} \Rightarrow{} U=V$.
+    \end{enumerate}
+    
+\end{finite dimension subspace}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+
+\begin{ex}
+    Possible subspaces of $\mathbb{R}^{2}$. (dim 0, 1, 2)
+    ($\dim{\mathbb{R}^{2}}$)
+    If $n = 0: \{0_V\}$ (0 vector space, \emph{not} $\varnothing$!)
+    If $n = 2: \mathbb{R}^{2}$.
+
+    Proper subspaces have dimension $n = 1$ iff it has a one-dimensional \emph{basis} $\{v\} = L$.
+    $\span{L} = \{\lambda v | \lambda \in \mathbb{R}\}$, which is a line passing through the origin.
+\end{ex}
+
+\subsection{Linear Maps}
+
+\newmdtheoremenv[style=defEnv]{linear map}[theorem]{Definition}
+\begin{linear map}
+    Let $U,V$ be vector spaces. A function $f:U\mapsto V$ is called \textbf{\emph{linear}} if:
+    \begin{enumerate}[label = (\arabic*)]
+        \item $f(u+v) = f(u) + f(v)$
+        \item $f(\lambda v) = \lambda f(v)$
+    \end{enumerate}
+    where $u, v \in U$.
+\end{linear map}
+
+\begin{ex}
+    \,
+
+    \begin{enumerate}[label = (\arabic*)]
+        \item Let $A \in M_{n,k}(\mathbb{R}), T_A: \mathbb{R}^{k} \rightarrow{} \mathbb{R}^{n}$,
+            $x \mapsto Ax$.
+        \item $0 : U \rightarrow{} V$, $u \mapsto 0_V$.
+        \item $V = \mathbb{R}[x]$ (vector space of all polynomials).
+            $D: \mathbb{R}[x] \rightarrow{} \mathbb{R}[x]$,
+            $P \mapsto \frac{\mathrm{d}P}{\mathrm{d}x} (= P') =: D(P)$.
+        \item $f:\mathbb{R}^{2}\rightarrow{}\mathbb{R}$,
+            $\begin{pmatrix}
+                    x \\
+                    y
+            \end{pmatrix} \mapsto x^{2}+ y^{2}$.
+    \end{enumerate}
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{0v linear map}[theorem]{Lemma}
+\begin{0v linear map}
+    $f:U\rightarrow{}V$ is linear $\Rightarrow{} f(0_U) = 0_V$.
+\end{0v linear map}
+
+\begin{proof}
+    $f(0_U) = f(0_U + 0_U) = f(0_U) + f(0_U)$.
+    Then by taking the inUerse of $f(0_U)$ on both sides,
+    i.e.\ minus $f(0_U)$ on both sides, because only addition is defined,
+    so $f(0_U) = 0_V$.
+\end{proof}
+
+\underline{Warning}: The converse is not true!
+
+\newmdtheoremenv[style=defEnv]{composite function is linear}[theorem]{Lemma}
+\begin{composite function is linear}
+    Let $f:U\rightarrow{}V, g:V\rightarrow{}W$ be linear,
+    then $g\circ f : U\rightarrow{}W$ is also linear.
+\end{composite function is linear}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{image of function}[theorem]{Definition}
+\begin{image of function}
+    Let $f:U\rightarrow{}V$ be linear.
+    Then the \textbf{\emph{image}} of $f$ is: Im $f:= \{f(u) | u \in U \} \subseteq V$.
+    The \textbf{\emph{kernel}} of $f$ is: Ker $f:=\{u \in U | f(u) = 0_V\} \subseteq U$.
+\end{image of function}
+
+\newmdtheoremenv[style=defEnv]{ker and im are subspaces}[theorem]{Lemma}
+\begin{ker and im are subspaces}
+    Let $f:U\rightarrow{}V$ be linear. 
+    Then ker $f\subseteq U$ and Im $f\subseteq V$ are subspaces.
+\end{ker and im are subspaces}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\begin{ex}
+    $A \in M_{1,3}(\mathbb{R}), A = (1, 1, 1)$.
+    $T_A:\mathbb{R}^{3} \rightarrow{} \mathbb{R}, x \mapsto Ax$
+    s.t.\[
+        \begin{pmatrix}
+                x \\
+                y \\
+                z
+        \end{pmatrix} \mapsto A \begin{pmatrix}
+                x \\
+                y \\
+                z
+        \end{pmatrix} = x + y + z.
+    \]
+    ker $T_A := \{v \in \mathbb{R}^{3} | T_A v = 0_\mathbb{R}\} =
+        \{\begin{pmatrix}
+                x \\
+                y \\
+                z
+        \end{pmatrix} \in \mathbb{R}^{3} | x + y + z = 0\}$.
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{injective linear map iif ker = 0V}[theorem]{Lemma}
+\begin{injective linear map iif ker = 0V}
+    A linear map $f:U\rightarrow{}V$ is injective $\iff$ ker $f = \{0_U\}$.
+\end{injective linear map iif ker = 0V}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{preimage}[theorem]{Definition}
+\begin{preimage}
+    The \textbf{\emph{preimage}} of $y$ is the set
+    $f^{-1}(y) = \{x\in U | f(x) = y\}$.
+\end{preimage}
+
+\newmdtheoremenv[style=defEnv]{preimage = x + elements of kernel}[theorem]{Lemma}
+\begin{preimage = x + elements of kernel}
+    Let $f:U\rightarrow{} V$ linearly, $y \in V$ fixed.
+    Suppose $x \in U$ s.t. $f(x) = y$. Then\[
+        f^{-1}(y) = \{x + v | v \in \ker{f}\}.
+    \]
+\end{preimage = x + elements of kernel}
+
+\begin{proof}
+    Exercise! (Warning: it is very hard to prove directly that two sets are equal!
+    Instead, use $\subseteq$ and $\supseteq$ to derive $=$)
+    Be careful with what you are proving, is it $=$ or $\subseteq$?
+    For set, if proving $=$ directly, ensure that it is \emph{bi-directional}.
+\end{proof}
+
+\begin{ex}
+    $A \in M_{n,k}(\mathbb{R})$, $b \in \mathbb{R}^{n}$.
+    $A\pmb{x} = b, \pmb{x} \in \mathbb{R}^{k} \iff T_A \pmb{x} = b$.
+    There are three possibilities:
+    \begin{enumerate}[label = (\arabic*)]
+        \item No solution: $b \notin $ Im $T_A$.
+        \item one solution: $b \in$ Im $T_A$, $\ker{T_A} = \{0_{\mathbb{R}^{k}}\}$.
+        \item $\infty$-many solution $b \in$ Im $T_A$, $\dim{\ker{T_A}} \neq 0$.
+    \end{enumerate}
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{linear map has a matrix representation}[theorem]{Definition}
+\begin{linear map has a matrix representation}
+    Let $f:\mathbb{R}^{k} \rightarrow{} \mathbb{R}^{n}$ be linear.
+    Then $f \equiv T_A$ for some matrix $A \in M_{n,k}(\mathbb{R})$.
+\end{linear map has a matrix representation}
+
+\begin{proof}
+   Exercise! (It is constructive proof!)
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{same basis tranformed implies same linear map}[theorem]{Proposition}
+\begin{same basis tranformed implies same linear map}
+    Let $f:U\rightarrow{}V, g:U\rightarrow{}V$ be linear.
+    $B = \{b_1, b_2,\ldots,b_k\}$ basis of $U$.
+    Assume $f(b_i) = g(b_i) \;\forall i$, then $f = g$.
+\end{same basis tranformed implies same linear map}
+
+\newmdtheoremenv[style=defEnv]{sdfsdf}[theorem]{Proposition}
+\begin{sdfsdf}
+    Let $U,V$ vector spaces, $B = \{b_1, b_2,\ldots,b_k\}$ basis of $U$,
+    $\{v_1, v_2,\ldots,v_k\} \subset V$.
+    Then there exists a \emph{unique linear} map s.t. $f(b_i) = v_i \;\forall i$.
+\end{sdfsdf}
+
+
+
 
 
 
