@@ -5810,6 +5810,10 @@ So for instance, $v = \begin{pmatrix}
     Then there exists a \emph{unique linear} map s.t. $f(b_i) = v_i \;\forall i$.
 \end{sdfsdf}
 
+\begin{proof}
+    Exercise! (There are three things to prove! $f(b_i) = v_i$, linear, and unique!)
+\end{proof}
+
 
 
 
@@ -6344,6 +6348,102 @@ e.g. $\frac{1}{x}$ on $(0,1)$.
        \item Largely identical process of proof.
    \end{enumerate}
    
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{intermediate value theorem}[theorem]{Theorem}
+\begin{intermediate value theorem}
+    Let $K = [b,c]$ be a \emph{closed bounded} interval and let $f:K\rightarrow{}\mathbb{R}$
+    be \emph{continuous}. Then:
+    \begin{enumerate}
+        \item If $f(b)\le f(c)$, let $A \in \mathbb{R}$, $f(b) \le A \le f(c)$,
+            then $\exists a \in [b,c]$ s.t. $f(a) = A$
+        \item If $f(b)\ge f(c)$, let $A \in \mathbb{R}$, $f(c) \le A \le f(b)$,
+            then $\exists a \in [b,c]$ s.t. $f(a) = A$.
+    \end{enumerate}
+\end{intermediate value theorem}
+
+\begin{proof}
+    Exercise! (Hint: Use $\mathbb{R}$'s completeness axiom!)
+\end{proof}
+
+\underline{Technique}: By utilizing the $\delta$ expression,
+one can always find a smaller/larger $x$ that satisfies same inequality.
+
+\newmdtheoremenv[style=defEnv]{coro of IVT}[theorem]{Corollary}
+\begin{coro of IVT}
+    If $f:[b,c]\rightarrow{}\mathbb{R}$ is continuous,
+    and we have $f(b) < 0$ and $f(c) < 0$ (or vice versa),
+    then $\exists a \in (b,c)$ s.t. $f(a) = 0$.
+\end{coro of IVT}
+
+\newmdtheoremenv[style=defEnv]{odd degree polynomial has at least one root}[theorem]{Corollary}
+\begin{odd degree polynomial has at least one root}
+    Let $P:\mathbb{R}\rightarrow{}\mathbb{R}$ be any polynomial of odd degree.
+    Then $P$ has at least one root.
+\end{odd degree polynomial has at least one root}
+
+\begin{proof}
+    Define $P(x) = a_d x^{d} + Q(x)$, where $d \in \mathbb{N}$ is odd, $a_d\neq 0$,
+    and $Q(x)$ is a polynomial of degree $\le d - 1$. 
+
+    Proceed from here!
+    (Try to connect $Q(x)$ with $a_d x^{d}$ so that e.g.\ $P(x) > 0$ when $x > 0$, and vice versa)
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{closed bounded continuous function has a fixed point}[theorem]{Corollary}
+\begin{closed bounded continuous function has a fixed point}
+    Let $K = [b,c]$ be a \emph{closed bounded} interval,
+    $f:K\rightarrow{}K$ be a continuous function.
+    Then $\exists a \in K$ s.t. $f(a) = a$.
+\end{closed bounded continuous function has a fixed point}
+
+\begin{proof}
+    Exercise! (Think of a new function s.t.\ the previous corollary can be applied)
+\end{proof}
+
+\subsection{Differentiability}
+
+\newmdtheoremenv[style=defEnv]{differrentiable}[theorem]{Definition}
+\begin{differrentiable}
+    Let $f:(b,c) \rightarrow{} \mathbb{R}, a \in (b,c)$.
+    $f$ is \textbf{\emph{differentiable at $a$}} if\[
+        f'(a) := \lim_{x\rightarrow{}a} \frac{f(x) - f(a)}{x - a} \;\textnormal{exists.}\;
+    \]$f'(a)$ is called the \textbf{\emph{derivative}} at $a$.
+\end{differrentiable}
+
+\newmdtheoremenv[style=defEnv]{differentiable alternative def}[theorem]{Definition}
+\begin{differentiable alternative def}
+    Let $f:(b,c) \rightarrow{} \mathbb{R}, a \in (b,c), x - a =: h$.
+    $f$ is differentiable at $a$ if\[
+        f'(a) := \lim_{h\rightarrow{}0} \frac{f(a + h) - f(a)}{h} \;\textnormal{exists.}\;
+    \]
+\end{differentiable alternative def}
+
+\newmdtheoremenv[style=defEnv]{differentiable means continuous}[theorem]{Proposition}
+\begin{differentiable means continuous}
+    If $f:I\rightarrow{}\mathbb{R}$ is differentiable, $I \subset \mathbb{R}$ is open, 
+    then $f$ is continuous.
+\end{differentiable means continuous}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{construct secant around a}[theorem]{Proposition}
+\begin{construct secant around a}
+    Let $f:\mathbb{R}\rightarrow{}\mathbb{R}, I \subset \mathbb{R}$ be open, $a \in I$.
+    Then the following statements are equivalent:
+    \begin{itemize}
+            \item $f$ is differentiable at $a$.
+            \item $\exists \lambda \in \mathbb{R}, \rho:I\rightarrow{}\mathbb{R}$
+            s.t. $\rho (a) = 0, \lim_{x\rightarrow{}a} \frac{\rho(x)}{x-a} = 0$, and\[
+                    f(x) = f(a) + \lambda(x-a) + \rho(x).
+                \]
+    \end{itemize}
+\end{construct secant around a}
+
+\begin{proof}
+    Exercise!
 \end{proof}
 
 
