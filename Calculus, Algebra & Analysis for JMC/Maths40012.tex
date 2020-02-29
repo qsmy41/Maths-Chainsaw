@@ -3437,7 +3437,7 @@ It represents a wave form moving (with $c>0$ here) to the right.
 
 \item $u = \tan^{-1}{\frac{y}{x}}$.
     This satisfies\[
-        \nabla^{2} u = \frac{\partial^{2}u}{\partial x^{2}} + \frac{\partial^{2}u}{\partiay y^{2}} = 0.
+        \nabla^{2} u = \frac{\partial^{2}u}{\partial x^{2}} + \frac{\partial^{2}u}{\partial y^{2}} = 0.
     \]which is a second order linear P.D.E.
     It is famously known as the Laplace's equation.
 \end{enumerate}
@@ -3520,7 +3520,7 @@ E.g.\ if $x(r,s)$ and $y(r,s)$ then\[
     \frac{\partial \overline{u}}{\partial r} = \frac{\partial \overline{u}}{\partial x} 
     \frac{\partial x}{\partial r} + \frac{\partial \overline{u}}{\partial y} \frac{\partial y}{\partial r},\quad
     \frac{\partial \overline{u}}{\partial s} = \frac{\partial \overline{u}}{\partial x}
-    \frac{\partial x}{\partial s} + \frac{\partial \overline{u}}{\partialyy} \frac{\partial y}{\partialss}.
+    \frac{\partial x}{\partial s} + \frac{\partial \overline{u}}{\partial y} \frac{\partial y}{\partial s}.
 \]
 
 \paragraph{Examples}
@@ -3586,7 +3586,7 @@ We need to be careful! E.g.\[
     {\left(\frac{\partial x}{\partial r} \right)}_{\theta} = \cos{\theta} \quad\textnormal{and}\quad
     {\left(\frac{\partial r}{\partial x} \right)}_{y} = \frac{x}{{(x^{2} + y^{2})}^{\frac{1}{2}}} = \cos{\theta}.
 \]
-They are keeping keeping different constants, so we should \emph{not} be tempted! \[
+They are keeping different constants, so we should \emph{not} be tempted! \[
     {\left(\frac{\partial x}{\partial r} \right)}_{\theta} \neq
     \frac{1}{{\left(\frac{\partial r}{\partial x} \right)}_{y}}.
 \]
@@ -3898,7 +3898,7 @@ As such,
 \end{enumerate}
 
 The easiest way to determine this is via e.g.\[
-    \delta u = \frac{1}{2}k^{2}\left[A{\left(\frac{h}{k}\right)}_{2} 
+    \delta u = \frac{1}{2}k^{2}\left[A{\left(\frac{h}{k}\right)}^{2} 
     + 2B\left(\frac{h}{k}\right) + C\right] + \cdots
 \]and consider\[
 F(\lambda) = A\lambda^{2} + 2B\lambda + C.
@@ -4045,15 +4045,125 @@ independent of $x$ and $y$. This also gives\[
 \end{enumerate}
 
 \bigskip
-Now consider an equation of the form\[
+Now consider an equation of the form
+\begin{equation}\label{eqn:9}
     P(x,y)\mathrm{d}x + Q(x,y)\mathrm{d}y = 0.
-\]This is a first order differential equation, with alternative forms
+\end{equation}
+This is a first order differential equation, with alternative forms
 $\frac{\mathrm{d}y}{\mathrm{d}x} = -\frac{P(x,y)}{Q(x,y)}$ and $P + Q\frac{\mathrm{d}y}{\mathrm{d}x} = 0$.
 If $P\mathrm{d}x + Q\mathrm{d}y$ is the total differential of a function $u(x,y)$,
 i.e.\ $\mathrm{d}u(x,y) = 0$,
 then the solution is \[
     u(x,y) = \;\textnormal{constant}\;C.
+\]In this case~\eqref{eqn:9} is an \textbf{\emph{exact differential equation}}.  
+From the example (ii) above,\[
+    (2xy + \cos{x}\cos{y})\mathrm{d}x + (x^{2} - \sin{x}\sin{y})\mathrm{d}y = 0
+\]has solution\[
+u(x,y) = x^{2}y + \sin{x}\cos{y} = C.
 \]
+What if $P\mathrm{d}x + Q\mathrm{d}y$ is not exact, which would mean that%
+~\eqref{eqn:9} would not be an exact differential equation?
+We can consider multiplying through by a factor $\lambda(x,y)$,\[
+    \Rightarrow{}(\lambda P)\mathrm{d}x + (\lambda Q)\mathrm{d}y = 0
+\]which is the `same' differntial equation as~\eqref{eqn:9},
+but can we make it exact? Evidently we would need
+\begin{equation}\label{eqn:10}
+    \frac{\partial}{\partial y} (\lambda P) = \frac{\partial}{\partial x} (\lambda Q)
+\end{equation}
+\[
+    \Rightarrow{}P\frac{\partial \lambda}{\partial y} - Q\frac{\partial \lambda}{\partial x} 
+    + \lambda\left(\frac{\partial P}{\partial y} - \frac{\partial Q}{\partial x} \right) = 0.
+\]
+This is a \emph{partial} differential equation for $\lambda$ given $P, Q$.
+It can be shown that there is a solution, but
+this isn't normally very helpful in finding it!
+However, sometimes we can find a suitable $\lambda$ by \emph{\underline{inspection}}!
+
+\paragraph{Example}
+\begin{enumerate}[label = (\arabic*)]
+    \item 
+\[
+    (xy-1)\mathrm{d}x + (x^{2}-xy)\mathrm{d}y = 0
+\]\[
+    \Rightarrow{}\frac{\partial P}{\partial y} = x 
+    \not\equiv \frac{\partial Q}{\partial x} = 2x-y.
+\]
+Let's \emph{try} $\lambda(x)$ (with $x$ only) say and use~\eqref{eqn:10},\[
+    \Rightarrow{} \lambda(x)x = \frac{\mathrm{d}\lambda(x)}{\mathrm{d}x} (x^{2}-xy) + \lambda(x)(2x-y)
+\]($\frac{\mathrm{d}\lambda(x)}{\mathrm{d}y} = 0$) so that 
+$\frac{1}{\lambda} \frac{\mathrm{d}\lambda}{\mathrm{d}x} = -\frac{1}{x}$, 
+$\lambda = \frac{K}{x}$,
+and we can take $K = 1$ W.L.O.G.\[
+\Rightarrow{}(y-\frac{1}{x})\mathrm{d}x + (x-y)\mathrm{d}y = 0 \quad\;\textnormal{is exact!}\;
+\]\[
+\Rightarrow{}u(x,y) = xy - \ln{|x|} - \frac{1}{2}y^{2} - C,
+\]\[
+xy - \ln{|x|} - \frac{1}{2}y^{2} = C
+\]is the general solution of our equation.
+
+\item \[
+        \frac{\mathrm{d}y}{\mathrm{d}x} + f(x)y = g(x)
+\]\[
+\Rightarrow{}[yf(x) - g(x)]\mathrm{d}x + \mathrm{d}y = 0
+\]and $\frac{\partial}{\partial y} (yF-G) = F \not\equiv \frac{\partial}{\partial x} (1) = 0$ in general.
+Try integrating factor $\lambda(x)$ only:\[
+    \frac{1}{\lambda} \frac{\mathrm{d} \lambda}{\mathrm{d}x} = f(x)
+    \Rightarrow{}\lambda = K \exp{\left[\int_{}^{x} f(x)\mathrm{d}x\right]}.
+\]
+So the term \emph{integrating factor} has the same meaning, as in the previous chapter!
+\end{enumerate}
+
+\subsection{Application --- Vector Calculus}
+
+We often need to consider \emph{scalar} and \emph{vector} functions of position
+$\pmb{r} (= x\pmb{i} + y\pmb{j} + z\pmb{k})$ (\emph{fields}): 
+$\phi(\pmb{r})$ and $\pmb{u}(\pmb{r}) = u_1\pmb{i} + u_2\pmb{j} + u_3\pmb{k}$.
+These could represent e.g.\ the temperature ($\phi$) and velocity ($\pmb{u}$) within a material.
+Of course they might also practically depend on time $t$ too, but for now
+we consider \emph{spatial} rates of change.
+
+\newmdtheoremenv[style=defEnv]{partial differential operator}[theorem]{Definition}
+\begin{partial differential operator}
+The \textbf{\emph{partial differential operator}} is defined as\[
+    \nabla \equiv \pmb{i}\frac{\partial}{\partial x} + \pmb{j}\frac{\partial}{\partial y} + \pmb{k}\frac{\partial}{\partial z}
+\]
+\end{partial differential operator}
+
+There are 3 important derived fields, each involving the (partial) differential operator. They are:
+\begin{enumerate}[label = (\arabic*)]
+    \item 
+        \[
+            \nabla \phi = \pmb{i}\frac{\partial\phi}{\partial x}
+            + \pmb{j}\frac{\partial\phi}{\partial y} + \pmb{k}\frac{\partial\phi}{\partial z}
+            \equiv \;\textnormal{grad}\;\phi \quad\;\textnormal{`Gradient'}\;
+        \]which is a vector field.
+        
+    \item 
+        \[
+            \nabla \cdot \pmb{u} = \frac{\partial u_1}{\partial x} 
+            + \frac{\partial u_2}{\partial y} + \frac{\partial u_3}{\partial z}
+            \equiv \;\textnormal{div}\;\pmb{u} \quad\;\textnormal{`Divergence'}\;
+        \]which is a scalar field.
+
+    \item 
+        \[
+            \nabla \times \pmb{u} = \pmb{i}\left(\frac{\partial u_3}{\partial y}
+            - \frac{\partial u_2}{\partial z}\right)
+            + \pmb{j}\left(\frac{\partial u_1}{\partial z} - \frac{\partial u_3}{\partial x}\right)
+            + \pmb{k}\left(\frac{\partial u_2}{\partial x} - \frac{\partial u_1}{\partial y}\right)
+            \equiv \;\textnormal{curl}\;\pmb{u}
+        \]which is a vector field.
+        The expression can be `mnemonically' memorized in the following form:\[
+            \det{\begin{pmatrix}
+                    \pmb{i} & \pmb{j} & \pmb{k} \\
+                    \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+                    u_1 & u_2 & u_3
+            \end{pmatrix} }
+        \]
+\end{enumerate}
+
+Each of these fields has a strong physical meaning and can be interpreted in
+e.g. 2 dimensions $(x,y)$ if required.
 
 
 
@@ -5161,7 +5271,7 @@ $\iff B(P\pmb{\upsilon}) = \lambda (P\pmb{\upsilon})$.
     ($e_k$ is an identity matrix)
 \end{proof}
 
-\section{vector space}
+\section{Vector Space}
 
 \subsection{Axioms and Examples}
 
@@ -5652,7 +5762,9 @@ So for instance, $v = \begin{pmatrix}
     $\span{L} = \{\lambda v | \lambda \in \mathbb{R}\}$, which is a line passing through the origin.
 \end{ex}
 
-\subsection{Linear Maps}
+\section{Linear Maps}
+
+\subsection{Definitions and Properties}
 
 \newmdtheoremenv[style=defEnv]{linear map}[theorem]{Definition}
 \begin{linear map}
@@ -5814,6 +5926,104 @@ So for instance, $v = \begin{pmatrix}
     Exercise! (There are three things to prove! $f(b_i) = v_i$, linear, and unique!)
 \end{proof}
 
+\subsection{Isomorphism}
+
+\newmdtheoremenv[style=defEnv]{isomorphism}[theorem]{Definition}
+\begin{isomorphism}
+    A linear map $f:U\rightarrow{}V$ between two vector spaces is called an \textbf{\emph{isomorphism}}
+    if $f$ is bijective.
+    If there exists an isomorphism from $U$ to $V$,
+    we say that $U$ is \textbf{\emph{isomorphic}} to $V$, and write\[
+        U \cong V.
+    \]
+\end{isomorphism}
+
+\underline{Note}: $f^{-1}$ is also an isomorphism, i.e.\ $U \cong V \iff V \cong U$.
+Since $f$ is bijective, it is surjective $\Rightarrow{}$ Im $f = V$,
+and injective $\Rightarrow{} \ker{f} = \{\pmb{0}_U\}$.
+
+\begin{ex}
+    $\mathbb{R}{[X]}_{\le d} \cong \mathbb{R}^{d+1}, M_{2, 2}(\mathbb{R}) \cong \mathbb{R}^{4}$.
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{isomorphic to Rn}[theorem]{Proposition}
+\begin{isomorphic to Rn}
+    Let $V$ be a vector space with $\dim{V} = n$.
+    Then $V$ is isomorphic to $\mathbb{R}^{n}$.
+\end{isomorphic to Rn}
+
+\begin{proof}
+    Exercise! (Remember to prove that the linear map is bijective!)
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{C is basis iif f is isomorphism}[theorem]{Lemma}
+\begin{C is basis iif f is isomorphism}
+    Let $f:U\rightarrow{}V$ be a linear map, $B=\{\pmb{b}_1, \pmb{b}_2,\ldots,\pmb{b}_k\}$
+    be a basis for $U$. Let $C = \{f(\pmb{b}_1),\ldots,f(\pmb{b}_k)\} \subset V$, then:
+    \begin{enumerate}[label = (\roman*)]
+        \item $C$ is a spanning set iff $f$ is surjective
+        \item $C$ is linearly independent iff $f$ is injective
+        \item $C$ is a basis iff $f$ is an isomorphism.
+    \end{enumerate}
+\end{C is basis iif f is isomorphism}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{isomorphic vector spaces have the same dimension}[theorem]{Corollary}
+\begin{isomorphic vector spaces have the same dimension}
+    If $U \cong V$ then $\dim{U} = \dim{V}$.
+\end{isomorphic vector spaces have the same dimension}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{linear map over two V of same dim}[theorem]{Corollary}
+\begin{linear map over two V of same dim}
+    Let $f:U\rightarrow{}V$ be a linear map, $\dim{U} = \dim{V}$, then the following are equivalent:
+    \begin{enumerate}[label = (\roman*)]
+        \item $f$ is injective
+        \item $f$ is surjective
+        \item $f$ is an isomorphism.
+    \end{enumerate}
+\end{linear map over two V of same dim}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{find basis in new vector space}[theorem]{Corollary}
+\begin{find basis in new vector space}
+    If $f:\mathbb{R}^{n}\rightarrow{}V$ is an isomorphism, then the set\[
+        C = \{f(\pmb{e}_1), f(\pmb{e}_2),\ldots, f(\pmb{e}_n)\}
+    \]is a basis of $V$.
+\end{find basis in new vector space}
+
+\subsection{Rank-Nullity theorem}
+
+\newmdtheoremenv[style=defEnv]{def of rank and nullity}[theorem]{Definition}
+\begin{def of rank and nullity}
+    Let $U$ and $V$ be vector spaces, $f:U\rightarrow{}V$ be a linear map, then:
+    \begin{itemize}
+        \item the \textbf{\emph{rank}} of $f$, written as rank $f$,
+            is the dimension of Im $f$, i.e.\ $\dim{\textnormal{Im}\; f}$
+        \item the \textbf{\emph{nullity}} of $f$, written as null $f$,
+            is the dimension of $\ker{f}$, i.e.\ $\dim{\ker{f}}$.
+    \end{itemize}
+\end{def of rank and nullity}
+
+\newmdtheoremenv[style=defEnv]{rank-nullity theorem}[theorem]{Theorem}
+\begin{rank-nullity theorem}
+    Let $U$ and $V$ be vector spaces, $f:U\rightarrow{}V$ be a linear map, then\[
+        \;\textnormal{rank}\;f + \;\textnormal{null}\;f = \dim{U}.
+    \]
+\end{rank-nullity theorem}
+
+\begin{proof}
+    Exercise!
+\end{proof}
 
 
 
