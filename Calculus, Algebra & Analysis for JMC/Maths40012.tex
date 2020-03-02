@@ -5801,7 +5801,7 @@ So for instance, $v = \begin{pmatrix}
 
 \begin{proof}
     $f(0_U) = f(0_U + 0_U) = f(0_U) + f(0_U)$.
-    Then by taking the inUerse of $f(0_U)$ on both sides,
+    Then by taking the inverse of $f(0_U)$ on both sides,
     i.e.\ minus $f(0_U)$ on both sides, because only addition is defined,
     so $f(0_U) = 0_V$.
 \end{proof}
@@ -6024,6 +6024,49 @@ and injective $\Rightarrow{} \ker{f} = \{\pmb{0}_U\}$.
 \begin{proof}
     Exercise!
 \end{proof}
+
+\begin{ex}
+    \,
+
+    \begin{enumerate}[label = (\alph*)]
+        \item 
+            \[
+                \begin{align*}
+                    D:\mathbb{R}{[X]}_{\le n} & \rightarrow{}\mathbb{R}{[X]}_{\le n - 1} \\
+                    P & \mapsto \frac{\mathrm{d}P}{\mathrm{d}X}.
+                \end{align*}
+            \]
+            The kernel of $D$ is the subspace\[
+                \ker{D} = \mathbb{R}{[X]}_{\le 0} \subset \mathbb{R}{[X]}_{\le n}
+            \]which has dimension 1. The image of $D$ is the subspace\[
+                \;\textnormal{Im}\;D = \mathbb{R}{[X]}_{\le n - 1}
+            \]which has a dimension $n$. And indeed $\mathbb{R}{[X]}_{\le n}$ has dimension $n + 1$.
+
+        \item Let $T_A:\mathbb{R}^{3}\rightarrow{}\mathbb{R}^{3}$,
+            $v\mapsto Av$, with $A = \begin{pmatrix}
+                1 & 2 & 0 \\
+                0 & 0 & 1 \\
+                0 & 0 & 0
+            \end{pmatrix}$. Then\[
+            \ker{T_A} = \{v|Av = 0_{\mathbb{R}^{3}}\} = \;\textnormal{span}\;\{\begin{pmatrix}
+                    1 \\
+                    -\frac{1}{2} \\
+                    0
+            \end{pmatrix}\}.
+            \]Hence the nullity of $T_A$ is 1, and its rank is 2, since $\mathbb{R}^{3}$ has dimension 3.
+
+        \item Let $A \in M_{n\times k}(\mathbb{R})$ be a matrix in RRE form, and
+            $T_A:\mathbb{R}^{k} \rightarrow{} \mathbb{R}^{n}$ the associated linear map.
+            Suppose that $r$ of the columns of $A$ containing a leading 1.
+            Then from the definition of RRE form it's clear that Im $T_A$ contains
+            the first $r$ standard basis vectors $\pmb{e}_1, \ldots, \pmb{e}_r \in \mathbb{R}^{n}$,
+            and that these vectors span Im $T_A$, so the rank of $T_A$ is $r$.
+            Then the Rank-Nullity theorem says that\[
+                \;\textnormal{null}\;T_A = \dim{\{\pmb{u}\in \mathbb{R}^{k}, A\pmb{u} = \pmb{0}\}} = k - r.
+            \]This is the same as the number of `free parameters' for this system of linear equations.
+    \end{enumerate}
+    
+\end{ex}
 
 
 
@@ -6613,13 +6656,13 @@ one can always find a smaller/larger $x$ that satisfies same inequality.
 
 \subsection{Differentiability}
 
-\newmdtheoremenv[style=defEnv]{differrentiable}[theorem]{Definition}
-\begin{differrentiable}
+\newmdtheoremenv[style=defEnv]{differentiable}[theorem]{Definition}
+\begin{differentiable}
     Let $f:(b,c) \rightarrow{} \mathbb{R}, a \in (b,c)$.
     $f$ is \textbf{\emph{differentiable at $a$}} if\[
         f'(a) := \lim_{x\rightarrow{}a} \frac{f(x) - f(a)}{x - a} \;\textnormal{exists.}\;
     \]$f'(a)$ is called the \textbf{\emph{derivative}} at $a$.
-\end{differrentiable}
+\end{differentiable}
 
 \newmdtheoremenv[style=defEnv]{differentiable alternative def}[theorem]{Definition}
 \begin{differentiable alternative def}
@@ -6639,6 +6682,8 @@ one can always find a smaller/larger $x$ that satisfies same inequality.
     Exercise!
 \end{proof}
 
+\underline{Warning}: The converse is not true! e.g. $f(x) = |x|$.
+
 \newmdtheoremenv[style=defEnv]{construct secant around a}[theorem]{Proposition}
 \begin{construct secant around a}
     Let $f:\mathbb{R}\rightarrow{}\mathbb{R}, I \subset \mathbb{R}$ be open, $a \in I$.
@@ -6655,6 +6700,137 @@ one can always find a smaller/larger $x$ that satisfies same inequality.
 \begin{proof}
     Exercise!
 \end{proof}
+
+\newmdtheoremenv[style=defEnv]{differentiation properties}[theorem]{Proposition}
+\begin{differentiation properties}
+    Let $f,g: I\rightarrow{}\mathbb{R}$ be differentiable at $a \in I$, then:
+    \begin{enumerate}
+        \item $f+g$ differentiable and has derivative $f'(a) + g'(a)$
+        \item $fg$ differentiable and has derivative $f'(a)g(a) + f(a)g'(a)$
+        \item If $f(x) \neq 0$ everywhere, then $\frac{1}{f}$ is differentiable
+            with derivative $-\frac{f'(a)}{f^{2}(a)}$.
+    \end{enumerate}
+\end{differentiation properties}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{chain rule}[theorem]{Proposition}
+\begin{chain rule}
+    Let $f:I\rightarrow{}\mathbb{R}$ differentiable at $a$, 
+    $g:J\subset f(I) \rightarrow{}\mathbb{R}$ differentiable at $f(a)$,
+    then $g\circ f$ is differentiable at $a$, and has derivative $g'(f(a))f'(a)$.
+\end{chain rule}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{inverse function differentiation}[theorem]{Proposition}
+\begin{inverse function differentiation}
+    Let $f:I\rightarrow{}\mathbb{R}$ \emph{strictly} increasing (or decreasing),
+    differentiable at $a\in I$ s.t. $f'(a) \neq 0$.
+    Then the inverse function $g:f(I)\rightarrow{}I$ exists and is differentiable with derivative\[
+        g'(b) = \frac{1}{f'(a)} = \frac{1}{f'(g(b))}.
+    \]
+\end{inverse function differentiation}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\subsubsection{Extreme Values and Derivatives}
+
+\newmdtheoremenv[style=defEnv]{global/local maximum/minimum}[theorem]{Definition}
+\begin{global/local maximum/minimum}
+    Let $f:I\rightarrow{}\mathbb{R}$ be a function.
+    \begin{enumerate}[label = (\arabic*)]
+        \item $f$ has a \textbf{\emph{global maximum}} (resp. \textbf{\emph{global minimum}})
+            at $a\in I$, if $\forall x \in I, f(x) \le f(a)$ (resp. $f(x) \ge f(a)$).
+        \item $f$ has a \textbf{\emph{local maximum}} (resp. \textbf{\emph{local minimum}})
+            at $a\in I$ if $\exists \epsilon > 0$ s.t. $\forall x \in I \cap (a-\epsilon, a+\epsilon)$,
+            $f(x) \le f(a)$ (resp. $f(x) \ge f(a)$).
+    \end{enumerate}
+\end{global/local maximum/minimum}
+
+\underline{Warning}: Such values do not necessarily exists!
+
+\newmdtheoremenv[style=defEnv]{local extremum differentiated to be 0}[theorem]{Proposition}
+\begin{local extremum differentiated to be 0}
+    Let $f:(b,c)\rightarrow{}\mathbb{R}$ be differentiable at $a\in(b,c)$ and 
+    $f$ has a local extremum. Then $f'(a) = 0$.
+\end{local extremum differentiated to be 0}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\underline{Warning}:
+\begin{itemize}
+        \item Converse is not true! e.g. $f(x) = x^{3}$.
+        \item Last proposition is not true for end points!
+\end{itemize}
+
+\newmdtheoremenv[style=defEnv]{Rolle theorem}[theorem]{(Rolle) Theorem}
+\begin{Rolle theorem}
+    Let $f:[a,b]\rightarrow{}\mathbb{R}$ be continuous on the closed bounded interval $[a,b]$
+    and differentiable on $(a,b)$. Let $f(a) = f(b)$, then $\exists x \in (a,b)$ s.t. $f'(x) = 0$.
+\end{Rolle theorem}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{mean value theorem}[theorem]{(Mean Value Theorem) Theorem}
+\begin{mean value theorem}
+    Let $f:[a,b]\rightarrow{}\mathbb{R}$ be a continuous and differentiable on $(a,b)$.
+    Then $\exists x \in (a,b)$ s.t. $f'(x) = \frac{f(b)-f(a)}{b-a}$.
+\end{mean value theorem}
+
+\begin{proof}
+    Exercise! (Hint: construct a new function and apply the Rolle's Theorem.)
+\end{proof}
+
+\begin{ex}
+    Show that $f(x) = 4x^{5} + x^{3} + 7x - 2$ has exactly one root.
+\end{ex}
+
+\newmdtheoremenv[style=defEnv]{strictly increasing or decreasing definition}[theorem]{Corollary}
+\begin{strictly increasing or decreasing definition}
+    Let $f:[a,b]\rightarrow{}\mathbb{R}$ be differentiable.
+    \begin{enumerate}
+        \item If $f'(x)\ge 0$ ($f'(x)>0$), then $f$ is (strictly) increasing.
+        \item If $f'(x)\le 0$ ($f'(x)<0$), then $f$ is (strictly) decreasing.
+    \end{enumerate}
+\end{strictly increasing or decreasing definition}
+
+\begin{proof}
+    Exercise!
+\end{proof}
+
+\newmdtheoremenv[style=defEnv]{f is constant then gradient is 0}[theorem]{Corollary}
+\begin{f is constant then gradient is 0}
+    Let $f:[a,b]\rightarrow{}\mathbb{R}$ be continuous and differentiable on $(a,b)$.
+    Then $f'(x) = 0 \;\forall x \in (a,b) \iff f$ is constant.
+\end{f is constant then gradient is 0}
+
+\underline{Technique}: Think of using MVT in ``the other way'' round: arbitrarily choose two points,
+and the gradient of the line connecting the two points can be expressed using
+differentiation on one point in the interval.
+
+\newmdtheoremenv[style=defEnv]{Lipschitz continuous}[theorem]{Proposition}
+\begin{Lipschitz continuous}
+    Let $f:I\rightarrow{}\mathbb{R}$ be differentiable.
+    Let $L\in \mathbb{R}^{+}$ s.t. $|f'(x)|\le L \;\forall x \in I$.
+    Then $\forall x_1, x_2\in I$,\[
+        |f(x_1) - f(x_2)| \le L|x_1 - x_2|.
+    \]
+    A function satisfying the above inequality is called \textbf{\emph{Lipschitz continuous}}.
+\end{Lipschitz continuous}
+
+
+
 
 
 
