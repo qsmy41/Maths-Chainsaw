@@ -2709,13 +2709,13 @@ As a result, we cannot do certain things such as drawing the phase portrait!
                 y
         \end{pmatrix} 
     \end{equation}
-      which is $\frac{\mathrm{d}}{\mathrm{d}t} \pmb{v} = M\pmb{v}$ in vector/matrix notation.
-      Now try $\pmb{v} = \pmb{V}e^{\lambda t}$ with $\pmb{V}$ \emph{not} depending on $t$,
+      which is $\frac{\mathrm{d}}{\mathrm{d}t} \mathbf{v} = M\mathbf{v}$ in vector/matrix notation.
+      Now try $\mathbf{v} = \mathbf{V}e^{\lambda t}$ with $\mathbf{V}$ \emph{not} depending on $t$,
       i.e.\ it is a \emph{constant vector}. This implies that\[
-          M\pmb{V} = \lambda \pmb{V}, \;\textnormal{i.e.}\; (M - \lambda I)\pmb{V} = \pmb{0}
-      \]converting to an eigenvalue/eigenvector problem to find appropriate $\lambda, \pmb{V}$.
+          M\mathbf{V} = \lambda \mathbf{V}, \;\textnormal{i.e.}\; (M - \lambda I)\mathbf{V} = \mathbf{0}
+      \]converting to an eigenvalue/eigenvector problem to find appropriate $\lambda, \mathbf{V}$.
 
-      For non-trivial $\pmb{V}$ (i.e.\ $\neq 0$) then we must have\[
+      For non-trivial $\mathbf{V}$ (i.e.\ $\neq 0$) then we must have\[
           \det{
           \begin{pmatrix}
               -4-\lambda & -3 \\
@@ -2726,10 +2726,10 @@ As a result, we cannot do certain things such as drawing the phase portrait!
       $\Rightarrow{}(-4-\lambda)(3-\lambda)+6 = 0$, $\lambda^{2}+\lambda-6 = 0$,
       $\lambda_1 = 2, \lambda_2 = -3$.
       And computing the respective eigenvector, we get
-      \[\pmb{V}_1 = \begin{pmatrix}
+      \[\mathbf{V}_1 = \begin{pmatrix}
               1 \\
               -2
-      \end{pmatrix} , \pmb{V}_2 = \begin{pmatrix}
+      \end{pmatrix} , \mathbf{V}_2 = \begin{pmatrix}
               3 \\
               -1
           \end{pmatrix} ,\] or any scalar multiple of these vectors.
@@ -2754,9 +2754,9 @@ As a result, we cannot do certain things such as drawing the phase portrait!
 \end{enumerate}
 
 \subsection{System decoupling}
-How does the last method do it? From the eigenvectors $\pmb{V}_1, \pmb{V}_2$ form the matrix\[
-    S = (\pmb{V}_1 \quad \pmb{V}_2) \qquad\textnormal{i.e.\ 2 $\times$ 2}
-\]and write \[\pmb{v} = \begin{pmatrix}
+How does the last method do it? From the eigenvectors $\mathbf{V}_1, \mathbf{V}_2$ form the matrix\[
+    S = (\mathbf{V}_1 \quad \mathbf{V}_2) \qquad\textnormal{i.e.\ 2 $\times$ 2}
+\]and write \[\mathbf{v} = \begin{pmatrix}
         x \\
         y
     \end{pmatrix} = S\begin{pmatrix}
@@ -2791,10 +2791,10 @@ Then by noting that\[
             R_1 \\
             R_2
     \end{pmatrix} \begin{pmatrix}
-    \pmb{V}_1 & \pmb{V}_2
+    \mathbf{V}_1 & \mathbf{V}_2
     \end{pmatrix} = I_n
 \]where $R_1, R_2$ are of dimension $1 \times 2$.
-Using $M\pmb{V} = \lambda \pmb{V}$, we can deduce that\[
+Using $M\mathbf{V} = \lambda \mathbf{V}$, we can deduce that\[
     S^{-1}MS = \begin{pmatrix}
             R_1 \\
             R_2
@@ -2802,7 +2802,7 @@ Using $M\pmb{V} = \lambda \pmb{V}$, we can deduce that\[
             R_1 \\
             R_2
     \end{pmatrix} \begin{pmatrix}
-    \lambda_1 \pmb{V}_1 & \lambda_2 \pmb{V}_2
+    \lambda_1 \mathbf{V}_1 & \lambda_2 \mathbf{V}_2
     \end{pmatrix} = \begin{pmatrix}
     \lambda_1 & 0 \\
     0 & \lambda_2
@@ -2845,14 +2845,14 @@ $\Rightarrow{}\xi = C_1 e^{2t}, \eta = C_2 e^{-3t}$. Therefore as before, \[
 \paragraph{General Theory}
 Does this vector/matrix method always work?
 
-For $\pmb{v} = \begin{pmatrix}
+For $\mathbf{v} = \begin{pmatrix}
         x \\
         y
-\end{pmatrix} , \frac{\mathrm{d}\pmb{v}}{\mathrm{d}t} = M\pmb{v}$,
-substituting with $\pmb{v} = \pmb{V}e^{\lambda t}$,
-we get $(M - \lambda I)\pmb{V} = \pmb{0}$.
+\end{pmatrix} , \frac{\mathrm{d}\mathbf{v}}{\mathrm{d}t} = M\mathbf{v}$,
+substituting with $\mathbf{v} = \mathbf{V}e^{\lambda t}$,
+we get $(M - \lambda I)\mathbf{V} = \mathbf{0}$.
 The solution depends \emph{crucially} on the nature of the eigenvalue/eigenvector problem
-$\lambda_1, \pmb{V}_1, \lambda_2, \pmb{V}_2$.
+$\lambda_1, \mathbf{V}_1, \lambda_2, \mathbf{V}_2$.
 
 We note that $\lambda_1 + \lambda_2 =$ \emph{trace} of $M$ (sum of the leading diagonal of $M$),
 and $\lambda_1\lambda_2 = \det{M}$. Both can be derived by looking at the quadratic equation
@@ -2862,7 +2862,7 @@ The equation is \emph{characteristic} for $M$.
         \item $\lambda_1 \neq \lambda_2$
 
             Our example~\eqref{eqn:6} was of this type, thereby having
-            $\pmb{V}_1, \pmb{V}_2$ eigenvectors. Our system decouples via 
+            $\mathbf{V}_1, \mathbf{V}_2$ eigenvectors. Our system decouples via 
             the \emph{similarity transformation} and $S^{-1}MS$ is a diagonal matrix.  
             This is essentially the situation even when the $\lambda_i$ are \emph{complex}.
 
@@ -2875,15 +2875,15 @@ The equation is \emph{characteristic} for $M$.
             \begin{enumerate}[label = (\roman*)]
                 \item 2 distinct eigenvectors exist.
                     
-                    If $\pmb{V}_1, \pmb{V}_2$ are distinct for $M, \lambda$
-                    then it is true that $M\pmb{v} = \lambda\pmb{v}$ for any vector,
+                    If $\mathbf{V}_1, \mathbf{V}_2$ are distinct for $M, \lambda$
+                    then it is true that $M\mathbf{v} = \lambda\mathbf{v}$ for any vector,
                     i.e.\ $M = \lambda I$ and\[
                         \begin{pmatrix}
                                 x \\
                                 y
-                        \end{pmatrix} = B_1 \pmb{V}_1 e^{\lambda t} + B_2 \pmb{V}_2 e^{\lambda t}.
+                        \end{pmatrix} = B_1 \mathbf{V}_1 e^{\lambda t} + B_2 \mathbf{V}_2 e^{\lambda t}.
                     \]
-                    with $\pmb{V}_1, \pmb{V}_2$ being two linearly-independent 
+                    with $\mathbf{V}_1, \mathbf{V}_2$ being two linearly-independent 
                     and random vectors in the plane.
 
                 \item Only one eigenvector exists.
@@ -2922,8 +2922,8 @@ The equation is \emph{characteristic} for $M$.
 \end{itemize}
 
 \underline{Note}: If $M$ is actually a \emph{symmetric matrix} with real entries then
-$\lambda_1, \lambda_2$ are real, the $\pmb{V}_1, \pmb{V}_2$ are real and orthogonal.
-If we then choose $\pmb{V}_1, \pmb{V}_2$ (as we may, if we wish) to be of unit length (normalised),
+$\lambda_1, \lambda_2$ are real, the $\mathbf{V}_1, \mathbf{V}_2$ are real and orthogonal.
+If we then choose $\mathbf{V}_1, \mathbf{V}_2$ (as we may, if we wish) to be of unit length (normalised),
 then $S^{-1} = S^{T}$ and $S$ represents a rotation in the $x, y$ plane (or rotation + reflection).
 $S$ is an orthogonal matrix.
 
@@ -3023,7 +3023,7 @@ we can see that the graph should be \emph{elliptic}.
                         y
                 \end{pmatrix} 
             \end{equation}
-            $\Rightarrow{}\lambda_1 = 2 = \lambda_2$ and we have $\pmb{V} = \begin{pmatrix}
+            $\Rightarrow{}\lambda_1 = 2 = \lambda_2$ and we have $\mathbf{V} = \begin{pmatrix}
                     1 \\
                     -1
                 \end{pmatrix}$ (\underline{sole} eigenvector here),
@@ -3100,7 +3100,7 @@ we can see that the graph should be \emph{elliptic}.
                                 & \begin{pmatrix}
                                         a \\
                                         b
-                                \end{pmatrix} = \pmb{V} = \begin{pmatrix}
+                                \end{pmatrix} = \mathbf{V} = \begin{pmatrix}
                                         1 \\
                                         -1
                                 \end{pmatrix} \;\textnormal{or any multiple} \\
@@ -3170,10 +3170,10 @@ we can see that the graph should be \emph{elliptic}.
                         \]$\Rightarrow{}
                         \lambda_1 = -\frac{1}{2} + i, \lambda_2 = -\frac{1}{2}-i$,
                         and we can find eigenvectors formally \[
-                            \pmb{V}_1 = \begin{pmatrix}
+                            \mathbf{V}_1 = \begin{pmatrix}
                                     1 \\
                                     i
-                            \end{pmatrix}, \pmb{V}_2 = \begin{pmatrix}
+                            \end{pmatrix}, \mathbf{V}_2 = \begin{pmatrix}
                                     1 \\
                                     -i
                             \end{pmatrix}.
@@ -3236,10 +3236,10 @@ we can see that the graph should be \emph{elliptic}.
                         + \omega^{2}x = 0, y = \frac{\mathrm{d}x}{\mathrm{d}t}.
                     \]
                     $\Rightarrow{}\lambda_1 = i\omega, \lambda_2 = -i\omega$,
-                    $\pmb{V}_1 = \begin{pmatrix}
+                    $\mathbf{V}_1 = \begin{pmatrix}
                             1 \\
                             i\omega
-                        \end{pmatrix} , \pmb{V}_2 = \begin{pmatrix}
+                        \end{pmatrix} , \mathbf{V}_2 = \begin{pmatrix}
                                 1 \\
                                 -i\omega
                         \end{pmatrix}$.
@@ -3318,15 +3318,15 @@ we can see that the graph should be \emph{elliptic}.
     \]
     Since $\det{(M - \lambda I)} = 0$, $\lambda^{3} - 4 \lambda^{2} - \lambda + 4 = 0$,\[
         \lambda_1 = 4, \lambda_2 = 1, \lambda_3 = -1,
-        \pmb{V}_1 = \begin{pmatrix}
+        \mathbf{V}_1 = \begin{pmatrix}
                 1 \\
                 1 \\
                 1
-        \end{pmatrix} , \pmb{V}_2 = \begin{pmatrix}
+        \end{pmatrix} , \mathbf{V}_2 = \begin{pmatrix}
                 1 \\
                 -2 \\
                 1
-        \end{pmatrix} , \pmb{V}_3 = \begin{pmatrix}
+        \end{pmatrix} , \mathbf{V}_3 = \begin{pmatrix}
                 1 \\
                 0 \\
                 -1
@@ -4116,16 +4116,16 @@ So the term \emph{integrating factor} has the same meaning, as in the previous c
 \subsection{Application --- Vector Calculus}
 
 We often need to consider \emph{scalar} and \emph{vector} functions of position
-$\pmb{r} (= x\pmb{i} + y\pmb{j} + z\pmb{k})$ (\emph{fields}): 
-$\phi(\pmb{r})$ and $\pmb{u}(\pmb{r}) = u_1\pmb{i} + u_2\pmb{j} + u_3\pmb{k}$.
-These could represent e.g.\ the temperature ($\phi$) and velocity ($\pmb{u}$) within a material.
+$\mathbf{r} (= x\mathbf{i} + y\mathbf{j} + z\mathbf{k})$ (\emph{fields}): 
+$\phi(\mathbf{r})$ and $\mathbf{u}(\mathbf{r}) = u_1\mathbf{i} + u_2\mathbf{j} + u_3\mathbf{k}$.
+These could represent e.g.\ the temperature ($\phi$) and velocity ($\mathbf{u}$) within a material.
 Of course they might also practically depend on time $t$ too, but for now
 we consider \emph{spatial} rates of change.
 
 \newmdtheoremenv[style=defEnv]{partial differential operator}[theorem]{Definition}
 \begin{partial differential operator}
 The \textbf{\emph{partial differential operator}} is defined as\[
-    \nabla \equiv \pmb{i}\frac{\partial}{\partial x} + \pmb{j}\frac{\partial}{\partial y} + \pmb{k}\frac{\partial}{\partial z}
+    \nabla \equiv \mathbf{i}\frac{\partial}{\partial x} + \mathbf{j}\frac{\partial}{\partial y} + \mathbf{k}\frac{\partial}{\partial z}
 \]
 \end{partial differential operator}
 
@@ -4133,29 +4133,29 @@ There are 3 important derived fields, each involving the (partial) differential 
 \begin{enumerate}[label = (\arabic*)]
     \item 
         \[
-            \nabla \phi = \pmb{i}\frac{\partial\phi}{\partial x}
-            + \pmb{j}\frac{\partial\phi}{\partial y} + \pmb{k}\frac{\partial\phi}{\partial z}
+            \nabla \phi = \mathbf{i}\frac{\partial\phi}{\partial x}
+            + \mathbf{j}\frac{\partial\phi}{\partial y} + \mathbf{k}\frac{\partial\phi}{\partial z}
             \equiv \;\textnormal{grad}\;\phi \quad\;\textnormal{`Gradient'}\;
         \]which is a vector field.
         
     \item 
         \[
-            \nabla \cdot \pmb{u} = \frac{\partial u_1}{\partial x} 
+            \nabla \cdot \mathbf{u} = \frac{\partial u_1}{\partial x} 
             + \frac{\partial u_2}{\partial y} + \frac{\partial u_3}{\partial z}
-            \equiv \;\textnormal{div}\;\pmb{u} \quad\;\textnormal{`Divergence'}\;
+            \equiv \;\textnormal{div}\;\mathbf{u} \quad\;\textnormal{`Divergence'}\;
         \]which is a scalar field.
 
     \item 
         \[
-            \nabla \times \pmb{u} = \pmb{i}\left(\frac{\partial u_3}{\partial y}
+            \nabla \times \mathbf{u} = \mathbf{i}\left(\frac{\partial u_3}{\partial y}
             - \frac{\partial u_2}{\partial z}\right)
-            + \pmb{j}\left(\frac{\partial u_1}{\partial z} - \frac{\partial u_3}{\partial x}\right)
-            + \pmb{k}\left(\frac{\partial u_2}{\partial x} - \frac{\partial u_1}{\partial y}\right)
-            \equiv \;\textnormal{curl}\;\pmb{u}
+            + \mathbf{j}\left(\frac{\partial u_1}{\partial z} - \frac{\partial u_3}{\partial x}\right)
+            + \mathbf{k}\left(\frac{\partial u_2}{\partial x} - \frac{\partial u_1}{\partial y}\right)
+            \equiv \;\textnormal{curl}\;\mathbf{u}
         \]which is a vector field.
         The expression can be `mnemonically' memorized in the following form:\[
             \det{\begin{pmatrix}
-                    \pmb{i} & \pmb{j} & \pmb{k} \\
+                    \mathbf{i} & \mathbf{j} & \mathbf{k} \\
                     \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
                     u_1 & u_2 & u_3
             \end{pmatrix} }
@@ -4164,6 +4164,106 @@ There are 3 important derived fields, each involving the (partial) differential 
 
 Each of these fields has a strong physical meaning and can be interpreted in
 e.g. 2 dimensions $(x,y)$ if required.
+
+\begin{enumerate}[label = (\arabic*)]
+    \item $\nabla\phi\equiv$ grad $\phi$.
+
+        At each point $\nabla\phi$ is \emph{perpendicular} to the $\phi =$ constant surface through the point.
+        If $\mathrm{d}\mathbf{r} = \mathrm{d}x\mathbf{i}
+        + \mathrm{d}y\mathbf{j} + \mathrm{d}z\mathbf{k}$
+        along the surface at $P$, then\[
+            (\nabla\phi)\cdot\mathrm{d}\mathbf{r} = 
+            \frac{\partial\phi}{\partial x}\mathrm{d}x + \frac{\partial\phi}{\partial y}\mathrm{d}y
+            + \frac{\partial\phi}{\partial z}\mathrm{d}z = \mathrm{d}\phi = 0
+        \]because $\phi = \phi_1$ on that surface through $P$.
+        We note that $\nabla\phi$ is directed towards increasing $\phi$.
+
+        \medskip
+        \underline{Example}: 
+
+        \begin{enumerate}[label = (\alph*)]
+            \item $\phi = x^{2}y + 2xz$.
+                \[
+                    \begin{align*}
+                        \nabla\phi & = (2xy + 2z, x^{2}, 2x) \\
+                                   & = (-2, 4, 4)
+                    \end{align*}
+                \]at $P$ where $P(2, -2, 3)$.
+                Unit normal to surface at $P = \pm \frac{-2\mathbf{i} + 4\mathbf{j} + 4\mathbf{k}}{\sqrt{36}}$.
+    
+                The rate of change of $\phi$ in a given direction $\hat{\mathbf{a}}$
+                is given by\[
+                    \nabla\phi\cdot\hat{\mathbf{a}} \equiv |\nabla\phi|\cos{\alpha}
+                \]where $\alpha$ is the angle between $\nabla\phi$ and $\hat{\mathbf{a}}$.
+                
+                It is a \textbf{\emph{directional derivative}}.
+                We can use $\nabla\phi$ to find rates of change, normals to curves and surfaces, tangent planes, \ldots
+    
+            \item $2xz^{2} - 3xy - 4x - 7 = 0$ (an equation about a surface).
+
+                The normal to the surface at $(1, -1, 2)$ is\[
+                    (2z^{2}-3y-4, -3x, 4xz) = 7\mathbf{i} - 3\mathbf{j} + 8\mathbf{k}.
+                \]
+                Equation of the tangent plane is\[
+                    (\mathbf{r} - \mathbf{r}_0)\cdot(7, -3, 8) = 0
+                \]i.e.\ \[
+                ((x, y, z) - (1, -1, 2))\cdot(7, -3, 8) = 0
+                \]\[
+                \Rightarrow{}7(x-1) - 3(y+1) + 8(z-2) = 0.
+                \]
+        \end{enumerate}
+        
+    \item $\nabla\cdot\mathbf{u} \equiv$ div $\mathbf{u}$.
+
+        It acts as a local field \emph{source} ($+$) `outflow' / \emph{sink} ($-$) `inflow'.
+
+        \underline{Example}:\[
+            \begin{align*}
+                \mathbf{u} & = \frac{C\mathbf{r}}{r^{3}} \\
+                           & = \frac{C}{r^{2}} \hat{\mathbf{r}} \\
+                           & = C \frac{x\mathbf{i}+y\mathbf{j}+z\mathbf{k}}
+                           {{(x^{2}+y^{2}+z^{2})}^{\frac{3}{2}}}
+            \end{align*}
+        \]\[
+            \Rightarrow{}\frac{\partial u_1}{\partial x} 
+            = \frac{\partial}{\partial x}\frac{Cx}{{(x^{2}+y^{2}+z^{2})}^{\frac{3}{2}}}
+            = C \frac{y^{2}+z^{2}-2x^{2}}{{(x^{2}+y^{2}+z^{2})}^{\frac{5}{2}}}
+        \]and two similar expressions.We can then derive that\[
+            \nabla\cdot\mathbf{u}=\frac{\partial u_1}{\partial x}
+            + \frac{\partial u_2}{\partial y} + \frac{\partial u_3}{\partial z} = 0
+        \]except at $\mathbf{r} = 0$, where $\nabla\cdot\mathbf{u}$ is infinite!
+        
+        Some physical examples (inverse square law) include:
+        \begin{enumerate}[label = (\roman*)]
+            \item gravitational field $C = -Gm$, where mass is the source of the field.
+            \item fluid source $C = \frac{V}{4\pi}$, where $V$ is the volume per second injected.
+        \end{enumerate}
+        
+    \item $\nabla\times\mathbf{u}\equiv$ curl $\mathbf{u}$.
+
+        It acts as a local rotation.
+
+        \underline{Example}:
+        \begin{enumerate}[label = (\alph*)]
+            \item $\mathbf{u} = \mathbf{w}\times \mathbf{r}
+                = w\mathbf{k}\times(x\mathbf{i}+y\mathbf{j}+z\mathbf{k})
+                = -wy\mathbf{i} + wx\mathbf{j}$.\[
+                    \Rightarrow{}\nabla\times\mathbf{u} = 2w\mathbf{k} = 2\mathbf{w}.
+                \]This describes the solid rotation,
+                and it turns out the the curl of $\mathbf{u}$ 
+                is twice the constant rotation rate $\mathbf{w}$.
+
+            \item $\mathbf{u} = (U+\alpha y, 0, 0)$
+
+                This describes uniform shear flow.
+                By keeping $U$ and $\alpha$ constant, we can derive that\[
+                    \nabla\times\mathbf{u} = -\alpha \mathbf{k}
+                \]
+        \end{enumerate}
+        
+\end{enumerate}
+
+
 
 
 
@@ -4179,9 +4279,9 @@ e.g. 2 dimensions $(x,y)$ if required.
 
 \newmdtheoremenv[style=defEnv]{column vector}[theorem]{Definition}
 \begin{column vector}
-    A \emph{column vector} ($n$-column vector) $\pmb{v}_n$ is a tuple of $n$ real numbers written as a single columnn, 
+    A \emph{column vector} ($n$-column vector) $\mathbf{v}_n$ is a tuple of $n$ real numbers written as a single columnn, 
     with $a_1, a_2, a_3, \ldots, a_n \in \mathbb{R}$:\[
-    \pmb{v}_n := 
+    \mathbf{v}_n := 
     \begin{pmatrix}
         a_1 \\
         a_2 \\
@@ -4215,45 +4315,45 @@ e.g. 2 dimensions $(x,y)$ if required.
 
 \newmdtheoremenv[style=defEnv]{zero vector}[theorem]{Definition}
 \begin{zero vector}
-    The \textbf{\emph{zero vector $\pmb{0}_n$}} is the height $n$-column vector all of whose entries are 0.
+    The \textbf{\emph{zero vector $\mathbf{0}_n$}} is the height $n$-column vector all of whose entries are 0.
 \end{zero vector}
 
 
 \newmdtheoremenv[style=defEnv]{standard basis vector}[theorem]{Definition}
 \begin{standard basis vector}
     The \textbf{\emph{standard basis vectors}} in $\mathbb{R}^{n}$ are the vectors\[
-        \pmb{e}_1 = \begin{pmatrix}
+        \mathbf{e}_1 = \begin{pmatrix}
                 1\\
                 0\\
                 \vdots\\
                 0
         \end{pmatrix}, \quad
-        \pmb{e}_2 = \begin{pmatrix}
+        \mathbf{e}_2 = \begin{pmatrix}
                 0\\
                 1\\
                 \vdots\\
                 0
         \end{pmatrix}, \quad \ldots, \quad
-        \pmb{e}_n = \begin{pmatrix}
+        \mathbf{e}_n = \begin{pmatrix}
                 0\\
                 0\\
                 \vdots\\
                 1
         \end{pmatrix}
     \]
-    i.e. $\pmb{e}_k$ is the vector with $k$th entry equal to 1 and all other entries equal to 0.
+    i.e. $\mathbf{e}_k$ is the vector with $k$th entry equal to 1 and all other entries equal to 0.
 \end{standard basis vector}
 
 \paragraph{Operations on column vectors}
 
     \[
-        \pmb{v} := \begin{pmatrix}
+        \mathbf{v} := \begin{pmatrix}
                 v_1\\
                 v_2\\
                 \vdots\\
                 v_n
         \end{pmatrix}, \quad
-        \pmb{u} := \begin{pmatrix}
+        \mathbf{u} := \begin{pmatrix}
                 u_1\\
                 u_2\\
                 \vdots\\
@@ -4271,7 +4371,7 @@ e.g. 2 dimensions $(x,y)$ if required.
                 \end{pmatrix}
             \]$+ : \mathbb{R}^{n} \times \mathbb{R}^{n} \rightarrow \mathbb{R}^{n}$ (binary operatioin).
             $(\mathbb{R}^{n}, +)$ is a group.
-        \item \textbf{\emph{Scalar multiplication}} $\lambda \pmb{v}$ on $\mathbb{R}^{n}$:\[
+        \item \textbf{\emph{Scalar multiplication}} $\lambda \mathbf{v}$ on $\mathbb{R}^{n}$:\[
             \begin{pmatrix}
                     \lambda v_1\\
                     \lambda v_2\\
@@ -4286,48 +4386,48 @@ e.g. 2 dimensions $(x,y)$ if required.
 \begin{ex}
     Show that $(\mathbb{R}^{n}, +)$ is an Abelian group.
     \begin{itemize}
-        \item Identity: $\pmb{0}_n$ ($v + \pmb{0}_n = \pmb{v}$)
-        \item $-\pmb{v}$ are inverses, where \[
-            -\pmb{v} := \begin{pmatrix}
+        \item Identity: $\mathbf{0}_n$ ($v + \mathbf{0}_n = \mathbf{v}$)
+        \item $-\mathbf{v}$ are inverses, where \[
+            -\mathbf{v} := \begin{pmatrix}
                     -v_1\\
                     -v_2\\
                     \vdots\\
                     -v_n
             \end{pmatrix}
         \]
-        \item associativity: $(\pmb{u} + \pmb{v}) + \pmb{w} = \pmb{u} + (\pmb{v} + \pmb{w})$.
-        \item commutative: $\pmb{u} + \pmb{v} = \pmb{v} + \pmb{u}$
+        \item associativity: $(\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$.
+        \item commutative: $\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$
     \end{itemize}
     \underline{Caution}: $+$ only makes sense for vectors of the \emph{same size}.
-    e.g. $\pmb{v} \cdot \pmb{0}_n = 0 \in \mathbb{R}$.
+    e.g. $\mathbf{v} \cdot \mathbf{0}_n = 0 \in \mathbb{R}$.
 \end{ex}
 
 \newmdtheoremenv[style=defEnv]{combination of add and scalar multi}[theorem]{Definition}
 \begin{combination of add and scalar multi}
-    let $\pmb{v}_1, \pmb{v}_2, \pmb{v}_3, \ldots, \pmb{v}_n \in \mathbb{R}^{n}, \lambda_1, \lambda_2, \lambda_3, \ldots, \lambda_n \in \mathbb{R}$,
+    let $\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3, \ldots, \mathbf{v}_n \in \mathbb{R}^{n}, \lambda_1, \lambda_2, \lambda_3, \ldots, \lambda_n \in \mathbb{R}$,
     then \[
-        \lambda_1 \pmb{v}_1 + \lambda_2 \pmb{v}_2 + \cdots + \lambda_n \pmb{v}_n
-    \]is called a \textbf{\emph{linear combination}} of $\pmb{v}_1, \pmb{v}_2, \pmb{v}_3, \ldots, \pmb{v}_n$.
+        \lambda_1 \mathbf{v}_1 + \lambda_2 \mathbf{v}_2 + \cdots + \lambda_n \mathbf{v}_n
+    \]is called a \textbf{\emph{linear combination}} of $\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3, \ldots, \mathbf{v}_n$.
 \end{combination of add and scalar multi}
 
 \newmdtheoremenv[style=defEnv]{span of vectors}[theorem]{Definition}
 \begin{span of vectors}
-    The set of all linear combinatioins of a collection of vectors $\pmb{v}_1, \pmb{v}_2, \ldots, \pmb{v}_n$
-    is called the \textbf{\emph{span}} of the vectors $\pmb{v}_1, \pmb{v}_2, \ldots, \pmb{v}_n$.
+    The set of all linear combinatioins of a collection of vectors $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n$
+    is called the \textbf{\emph{span}} of the vectors $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n$.
     \\Notation: 
     
-    span$\left\{\pmb{v}_1, \pmb{v}_2,\ldots,\pmb{v}_n\right\} := 
-    \left\{\lambda_1 \pmb{v}_1 + \lambda_2 \pmb{v}_2 + \cdots + \lambda_n \pmb{v}_n 
+    span$\left\{\mathbf{v}_1, \mathbf{v}_2,\ldots,\mathbf{v}_n\right\} := 
+    \left\{\lambda_1 \mathbf{v}_1 + \lambda_2 \mathbf{v}_2 + \cdots + \lambda_n \mathbf{v}_n 
     | \lambda_1, \ldots, \lambda_n \in \mathbb{R}\right\}$
 \end{span of vectors}
 
 \begin{ex}
     compute the span of 
     \begin{itemize}
-        \item $\{\pmb{e}_1, \pmb{e}_2\}$, $\pmb{e}_1, \pmb{e}_2 \in \mathbb{R}^2$.
+        \item $\{\mathbf{e}_1, \mathbf{e}_2\}$, $\mathbf{e}_1, \mathbf{e}_2 \in \mathbb{R}^2$.
             \[
-                \textnormal{span}\{\pmb{e}_1, \pmb{e}_2\} 
-                = \{\lambda_1 \pmb{e}_1 + \lambda_2 \pmb{e}_2 | \lambda_1, \lambda_2 \in \mathbb{R}\}
+                \textnormal{span}\{\mathbf{e}_1, \mathbf{e}_2\} 
+                = \{\lambda_1 \mathbf{e}_1 + \lambda_2 \mathbf{e}_2 | \lambda_1, \lambda_2 \in \mathbb{R}\}
             = \{
                     \begin{pmatrix}
                             \lambda_1\\
@@ -4359,19 +4459,19 @@ e.g. 2 dimensions $(x,y)$ if required.
 
 \newmdtheoremenv[style=defEnv]{length and norm}[theorem]{Definition}
 \begin{length and norm}
-    let $\pmb{v} \in \mathbb{R}^{n}$. The \textbf{\emph{length}} of $\pmb{v}$, a.k.a.\ the \textbf{\emph{norm}} 
-    of $\pmb{v}$, is the non-negative real number $\lVert\pmb{v}\rVert$ defined by \[
-        \lVert\pmb{v}\rVert = \sqrt{\pmb{v} \cdot \pmb{v}}
+    let $\mathbf{v} \in \mathbb{R}^{n}$. The \textbf{\emph{length}} of $\mathbf{v}$, a.k.a.\ the \textbf{\emph{norm}} 
+    of $\mathbf{v}$, is the non-negative real number $\lVert\mathbf{v}\rVert$ defined by \[
+        \lVert\mathbf{v}\rVert = \sqrt{\mathbf{v} \cdot \mathbf{v}}
     \]
-    \underline{Note}: $\lVert\pmb{0}\rVert = 0$, and conversely if $\pmb{v} \neq 0$ then $\lVert\pmb{v}\rVert > 0$.
+    \underline{Note}: $\lVert\mathbf{0}\rVert = 0$, and conversely if $\mathbf{v} \neq 0$ then $\lVert\mathbf{v}\rVert > 0$.
     This definition agrees with out usual ideas about the length of a vector in $\mathbb{R}^{2}$
     or $\mathbb{R}^{3}$, which follows from Pythagoras' theorem.
 \end{length and norm}
 
 \newmdtheoremenv[style=defEnv]{unit vector}[theorem]{Definition}
 \begin{unit vector}
-    A vector $\pmb{v} \in \mathbb{R}^{n}$ is called a \textbf{\emph{unit vector}}
-    if $\lVert\pmb{v}\rVert = 1$.
+    A vector $\mathbf{v} \in \mathbb{R}^{n}$ is called a \textbf{\emph{unit vector}}
+    if $\lVert\mathbf{v}\rVert = 1$.
 \end{unit vector}
 
 \smallskip
@@ -4379,8 +4479,8 @@ e.g. 2 dimensions $(x,y)$ if required.
     \;
 
     \begin{enumerate}[label = (\arabic*)]
-        \item Any non-zero vector $\pmb{v}$ can be made into a unit vector
-            $\hat{\pmb{u}} := \frac{\pmb{v}}{\lVert\pmb{v}\rVert}$. This process is called \textbf{\emph{normalizing}}.
+        \item Any non-zero vector $\mathbf{v}$ can be made into a unit vector
+            $\hat{\mathbf{u}} := \frac{\mathbf{v}}{\lVert\mathbf{v}\rVert}$. This process is called \textbf{\emph{normalizing}}.
         \item The standard basis vectors are unit vectors.
     \end{enumerate}
     
@@ -4425,8 +4525,8 @@ e.g. 2 dimensions $(x,y)$ if required.
 
 \newmdtheoremenv[style=defEnv]{multiplying matrix with vector}[theorem]{(Multiplying matrices with vectors) Definition}
 \begin{multiplying matrix with vector}
-    Let $A = (a_{ij})$ be an $n \times m$-matrix, $\pmb{v} \in \mathbb{R}^{m}$.
-    Then $A\pmb{v}$ is the vector in $\mathbb{R}^{n}$ with $i$-th row entry $\sum_{j=1}^{m} a_{ij}\pmb{v}_j$
+    Let $A = (a_{ij})$ be an $n \times m$-matrix, $\mathbf{v} \in \mathbb{R}^{m}$.
+    Then $A\mathbf{v}$ is the vector in $\mathbb{R}^{n}$ with $i$-th row entry $\sum_{j=1}^{m} a_{ij}\mathbf{v}_j$
 \end{multiplying matrix with vector}
 
 \begin{ex}
@@ -4434,28 +4534,28 @@ e.g. 2 dimensions $(x,y)$ if required.
 
     \begin{itemize}
             \item 
-                Prove that for $A \in M_{n \times m}(\mathbb{R}), \pmb{e}_k \in \mathbb{R}^{m}$,
-                $A\pmb{e}_k = k$-th column of A.
+                Prove that for $A \in M_{n \times m}(\mathbb{R}), \mathbf{e}_k \in \mathbb{R}^{m}$,
+                $A\mathbf{e}_k = k$-th column of A.
     
-                \underline{Proof}: let $A = (a_{ij})$. By definition the $i$-th entry of $A\pmb{e}_k$ is\[
-                    \sum_{j=1}^{m} a_{ij}{(\pmb{e}_k)}_j = a_{ik}
-                \]since $ {(\pmb{e}_k)}_j = 0$ whenever $j \neq k$, 1 for $j = k$
-            \item Let $I_n$ be the identity matrix. Show formally that $I_n \pmb{\nu} = \pmb{\nu}$, $\forall \pmb{\nu} \in \mathbb{R}^{n}$.
-            \item $\pmb{\nu} \cdot \pmb{v} = \pmb{\nu}^{T} \pmb{v}$
-            \item let $\pmb{\nu}_1, \pmb{\nu}_2, \pmb{\nu}_3 \in \mathbb{R}^{3}$.
-                Write the linear combination $3\pmb{\nu}_1 - 5\pmb{\nu}_2 + 7\pmb{\nu}_3$ as a multiplication of matrix
-                $A \in M_{3 \times 3}(\mathbb{R})$ with a vector $\pmb{x} \in \mathbb{R}^{3}$. Then\[
-                    A\pmb{x} = \begin{pmatrix}
-                        \pmb{\nu}_1 & \pmb{\nu}_2 & \pmb{\nu}_3
+                \underline{Proof}: let $A = (a_{ij})$. By definition the $i$-th entry of $A\mathbf{e}_k$ is\[
+                    \sum_{j=1}^{m} a_{ij}{(\mathbf{e}_k)}_j = a_{ik}
+                \]since $ {(\mathbf{e}_k)}_j = 0$ whenever $j \neq k$, 1 for $j = k$
+            \item Let $I_n$ be the identity matrix. Show formally that $I_n \mathbf{\nu} = \mathbf{\nu}$, $\forall \mathbf{\nu} \in \mathbb{R}^{n}$.
+            \item $\mathbf{\nu} \cdot \mathbf{v} = \mathbf{\nu}^{T} \mathbf{v}$
+            \item let $\mathbf{\nu}_1, \mathbf{\nu}_2, \mathbf{\nu}_3 \in \mathbb{R}^{3}$.
+                Write the linear combination $3\mathbf{\nu}_1 - 5\mathbf{\nu}_2 + 7\mathbf{\nu}_3$ as a multiplication of matrix
+                $A \in M_{3 \times 3}(\mathbb{R})$ with a vector $\mathbf{x} \in \mathbb{R}^{3}$. Then\[
+                    A\mathbf{x} = \begin{pmatrix}
+                        \mathbf{\nu}_1 & \mathbf{\nu}_2 & \mathbf{\nu}_3
                     \end{pmatrix} 
                     \begin{pmatrix}
                             x_1 \\
                             x_2 \\
                             x_3
                     \end{pmatrix} 
-                    = x_1\pmb{\nu}_1 + x_2\pmb{\nu}_2 + x_3\pmb{\nu}_3
+                    = x_1\mathbf{\nu}_1 + x_2\mathbf{\nu}_2 + x_3\mathbf{\nu}_3
                 \]
-                with $\pmb{\nu}_1, \pmb{\nu}_2, \pmb{\nu}_3$ written as a column vector to form a matrix
+                with $\mathbf{\nu}_1, \mathbf{\nu}_2, \mathbf{\nu}_3$ written as a column vector to form a matrix
                 in the above expression, thus using matrix multiplication to express linear combination of vectors.
     \end{itemize}
     
@@ -4478,7 +4578,7 @@ e.g. 2 dimensions $(x,y)$ if required.
 \newmdtheoremenv[style=defEnv]{simultaneous list of linear equations}[theorem]{Definition}
 \begin{simultaneous list of linear equations}
     A system of $n$ linear equations is a list of simultaneous linear equations.
-    It can be converted to $A\pmb{x} = \pmb{b} \in \mathbb{R}^{m}$,with\[
+    It can be converted to $A\mathbf{x} = \mathbf{b} \in \mathbb{R}^{m}$,with\[
         A = \begin{pmatrix}
             a_{11} & a_{12} & \cdots & a_{1n} \\
             a_{21} & a_{22} & \cdots & a_{2n} \\
@@ -4489,7 +4589,7 @@ e.g. 2 dimensions $(x,y)$ if required.
     \]
 \end{simultaneous list of linear equations}
 \underline{Caution}: Thee $m \times n$-matrix $A$ is called coefficient matrix.
-The matrix $(A|\pmb{b})$ where the vector $\pmb{b}$ is added as a column on the  right
+The matrix $(A|\mathbf{b})$ where the vector $\mathbf{b}$ is added as a column on the  right
 is called \textbf{\emph{augmented matrix}}.
 
 \newmdtheoremenv[style=defEnv]{consistent system}[theorem]{Definition}
@@ -4550,9 +4650,9 @@ is called \textbf{\emph{augmented matrix}}.
 
 \newmdtheoremenv[style=defEnv]{row operation on augmented matrix}[theorem]{Proposition}
 \begin{row operation on augmented matrix}
-    Let $A\pmb{x} = \pmb{b}$ be a system of linear equations in matrix form, $(A|\pmb{b})$
-    the augmented matrix, $(A'|\pmb{b}')$ the augmented matrix of the system after row operation.
-    Show that $x$ is solution of $A\pmb{x} = \pmb{b} \iff$ $x$ is solution of $A'\pmb{x} = \pmb{b}'$.
+    Let $A\mathbf{x} = \mathbf{b}$ be a system of linear equations in matrix form, $(A|\mathbf{b})$
+    the augmented matrix, $(A'|\mathbf{b}')$ the augmented matrix of the system after row operation.
+    Show that $x$ is solution of $A\mathbf{x} = \mathbf{b} \iff$ $x$ is solution of $A'\mathbf{x} = \mathbf{b}'$.
 \end{row operation on augmented matrix}
 
 \begin{proof}
@@ -4621,7 +4721,7 @@ is called \textbf{\emph{augmented matrix}}.
 \end{ex}
 
 The point of RRE form is that if we have a system of equations\[
-    A\pmb{x} = \pmb{b}
+    A\mathbf{x} = \mathbf{b}
 \]and $A$ is in RRE form, then we can easily read off the solution (if any).
 There are four cases to consider:
 \begin{enumerate}[label = (\arabic*)]
@@ -4635,14 +4735,14 @@ There are four cases to consider:
                 x_n & = b_n 
             \end{align*}
         \]
-        and they have a unique solution, the entries of $\pmb{b}$.
+        and they have a unique solution, the entries of $\mathbf{b}$.
 
     \item Every column of $A$ contains a leading 1, and there are some zero rows.
         Then $A$ must have more rows than columns, and it must be a matrix of the form\[
             A = 
             \begin{pmatrix}
                   I_n \\
-                  \pmb{0}_{k \times n}
+                  \mathbf{0}_{k \times n}
             \end{pmatrix} 
         \]
         i.e.\ it looks like an identity matrix with a block of zeros underneath.
@@ -4664,11 +4764,11 @@ There are four cases to consider:
         \]
         Now there are two possibilities:
         \begin{itemize}
-                \item If any of the last $k$ entries of $\pmb{b}$ are non-zero
+                \item If any of the last $k$ entries of $\mathbf{b}$ are non-zero
                     then this system has no solutions, because the last $k$ equations
-                    are never satisfied for any $\pmb{x}$ and the system is inconsistent.
+                    are never satisfied for any $\mathbf{x}$ and the system is inconsistent.
 
-                \item If the last $k$ entries of $\pmb{b}$ are all zero then the system
+                \item If the last $k$ entries of $\mathbf{b}$ are all zero then the system
                     has a unique solution, given by setting $x_i = b_i$ for each $i \in [1, n]$.
         \end{itemize}
         
@@ -4690,7 +4790,7 @@ There are four cases to consider:
         x_j + (\ldots) = b_j
     \]
     where the expression in the brackets only contains free parameters.
-    This equations determines the value of $x_j$, in terms of the entries in $\pmb{b}$
+    This equations determines the value of $x_j$, in terms of the entries in $\mathbf{b}$
     and the values of the free parameters.
     This kind of system always has infinitely many solutions, we say it is \textbf{\emph{underdetermined}}.
 \end{enumerate}
@@ -4734,14 +4834,14 @@ There are four cases to consider:
     the result is the same as the output of the algorithm we just described.
 
     Now we have a systematic procedure for solving a system of simultaneous linear equations
-    $A\pmb{x} = \pmb{b}$:
+    $A\mathbf{x} = \mathbf{b}$:
     \begin{enumerate}[label = (\arabic*)]
-        \item Form the augmented matrix $(A|\pmb{b})$.
-        \item Apply the algorithm above to put the augmented matrix into RRE form $(A'|\pmb{b}')$.
-        \item Read off the solutions to $A'\pmb{x} = \pmb{b}'$
+        \item Form the augmented matrix $(A|\mathbf{b})$.
+        \item Apply the algorithm above to put the augmented matrix into RRE form $(A'|\mathbf{b}')$.
+        \item Read off the solutions to $A'\mathbf{x} = \mathbf{b}'$
     \end{enumerate}
     
-    In fact it's not necessary to get the whole matrix $(A'|\pmb{b}')$ into RRE form, 
+    In fact it's not necessary to get the whole matrix $(A'|\mathbf{b}')$ into RRE form, 
     you can stop when the left block $A'$ is in RRE form. Doing further operations to adjust
     the final column will not help you read the solutions.
 
@@ -4768,19 +4868,19 @@ There are four cases to consider:
 
 \newmdtheoremenv[style=defEnv]{Solutions to a system is 0, 1, infinity}[theorem]{Proposition}
 \begin{Solutions to a system is 0, 1, infinity}
-    The number of solutions to a system $A\pmb{x} = \pmb{b}$ is always either 0, 1, or $\infty$.
+    The number of solutions to a system $A\mathbf{x} = \mathbf{b}$ is always either 0, 1, or $\infty$.
 \end{Solutions to a system is 0, 1, infinity}
 
 \begin{proof}
     Assume the number of solutions is not 0, and not 1.
-    Take 2 solution $\nu$ and $\upsilon$, $\pmb{\nu} \neq \pmb{\upsilon}$.\[
-        \Rightarrow{} A\pmb{\nu} = A\pmb{\upsilon} = b \Rightarrow{}
-        A(\pmb{\nu} - \pmb{\upsilon}) = 0 = \omega \neq 0
+    Take 2 solution $\nu$ and $\upsilon$, $\mathbf{\nu} \neq \mathbf{\upsilon}$.\[
+        \Rightarrow{} A\mathbf{\nu} = A\mathbf{\upsilon} = b \Rightarrow{}
+        A(\mathbf{\nu} - \mathbf{\upsilon}) = 0 = \omega \neq 0
     \]
     Take: $\nu + \lambda \omega, \lambda \in \mathbb{R}$\[
-        \Rightarrow{} A(\nu + \lambda\omega) = A\nu + \lambda A\omega = A\pmb{\nu} = \pmb{b} = \pmb{b}
+        \Rightarrow{} A(\nu + \lambda\omega) = A\nu + \lambda A\omega = A\mathbf{\nu} = \mathbf{b} = \mathbf{b}
     \]
-    So $\pmb{\nu} + \lambda \pmb{\omega}$ is a solution $\forall \lambda \in \mathbb{R}$
+    So $\mathbf{\nu} + \lambda \mathbf{\omega}$ is a solution $\forall \lambda \in \mathbb{R}$
     $\Rightarrow{} \infty$ many solutions.
 \end{proof}
 
@@ -4912,10 +5012,10 @@ Be careful with the size of the matrices.
 \begin{invertibility}
     Let $A \in M_{n \times n}(\mathbb{R})$.
     \begin{enumerate}[label = (\arabic*)]
-        \item If $\exists \pmb{\upsilon} \in \mathbb{R}^{n}, \pmb{\upsilon} \neq \pmb{0}$ 
-            s.t. $A\pmb{\upsilon} = \pmb{0}$, then $A$ is not invertible.
+        \item If $\exists \mathbf{\upsilon} \in \mathbb{R}^{n}, \mathbf{\upsilon} \neq \mathbf{0}$ 
+            s.t. $A\mathbf{\upsilon} = \mathbf{0}$, then $A$ is not invertible.
 
-            (extended: same if $\pmb{\upsilon} \in \mathbb{R}^{n}^{T}, \pmb{\upsilon}A = \pmb{0}$.)
+            (extended: same if $\mathbf{\upsilon} \in \mathbb{R}^{n}^{T}, \mathbf{\upsilon}A = \mathbf{0}$.)
         \item If $\exists B \in M_{n \times n}(\mathbb{R}), B \neq 0_{n \times n}$ s.t.
             $AB = 0_{n \times n}$ or $BA = 0_{n \times n}$, then $A$ is not invertible.
     \end{enumerate}
@@ -4927,7 +5027,7 @@ Be careful with the size of the matrices.
     \begin{enumerate}[label = (\arabic*)]
         \item (contrapositive) Assume $A$ is invertible $\iff \exists A^{-1} \in M_{n\times n}(\mathbb{R})$,
             s.t. $AA^{-1} = A^{-1}A = I_n$.
-            Assume $A\pmb{\upsilon} = 0$, so 
+            Assume $A\mathbf{\upsilon} = 0$, so 
             $A^{-1}A\upsilon = I_n \upsilon = \upsilon$, contradiction.
         \item Assume $BA = 0_{n\times n}$. $A$ invertible $\Rightarrow{}\exists A^{-1}$
             s.t. $AA^{-1} = I_n$.
@@ -5056,8 +5156,8 @@ process of elementary row operation.
 
 \underline{Caution}: If at any point you get a row of 0s, Stop! (matrix not invertible)
 \underline{Caution}: Now that we know how to get inverses. Consider:
-$A\pmb{x} = \pmb{b}$. (system of linear equations)
-If $A$ invertible: $A^{-1}\pmb{b} = \pmb{x}$. (Solution is unique.)
+$A\mathbf{x} = \mathbf{b}$. (system of linear equations)
+If $A$ invertible: $A^{-1}\mathbf{b} = \mathbf{x}$. (Solution is unique.)
 
 \subsection{Determinant}
 
@@ -5158,18 +5258,18 @@ Let $A \in M_{n\times n}(\mathbb{R})$.
 \newmdtheoremenv[style=defEnv]{eigenvalue and vector}[theorem]{Definition}
 \begin{eigenvalue and vector}
     Let $A \in M_{n\times n}(\mathbb{R}), \lambda \in \mathbb{R}, \lambda$ is an \textbf{\emph{eigenvalue}}
-    to the \textbf{\emph{eigenvector}} $\pmb{\upsilon} \in \mathbb{R}^{n}\backslash\{\pmb{0}\}$ if\[
-        A\pmb{\upsilon} = \lambda\pmb{\upsilon}.
+    to the \textbf{\emph{eigenvector}} $\mathbf{\mathbf{v}} \in \mathbb{R}^{n}\backslash\{\mathbf{0}\}$ if\[
+        A\mathbf{\mathbf{v}} = \lambda\mathbf{\mathbf{v}}.
     \]
-    Geometrically, applying $A$ to $\pmb{\upsilon}$ just ``rescales'' $\pmb{\upsilon}$.
+    Geometrically, applying $A$ to $\mathbf{\mathbf{v}}$ just ``rescales'' $\mathbf{\mathbf{v}}$.
 \end{eigenvalue and vector}
 
 \underline{Warning}:
 \begin{itemize}
-    \item $\pmb{\upsilon}$ eigenvector $\iff (A-\lambda I_n)\pmb{\upsilon} = \pmb{0}$.
-    \item $I_n \pmb{\upsilon} = \pmb{\upsilon} \,\forall \pmb{\upsilon} \neq \pmb{0}$
+    \item $\mathbf{\mathbf{v}}$ eigenvector $\iff (A-\lambda I_n)\mathbf{\mathbf{v}} = \mathbf{0}$.
+    \item $I_n \mathbf{\mathbf{v}} = \mathbf{\mathbf{v}} \,\forall \mathbf{\mathbf{v}} \neq \mathbf{0}$
         $\Rightarrow{}$ 1 is the only eigenvalue to \emph{all} vectors.
-    \item $0_{n\times n} \pmb{\upsilon} = \pmb{0}_n = 0\cdot\pmb{\upsilon}$ 
+    \item $0_{n\times n} \mathbf{\mathbf{v}} = \mathbf{0}_n = 0\cdot\mathbf{\mathbf{v}}$ 
         $\Rightarrow{}$ 0 is the only eigenvalue to \emph{all} vectors.
 \end{itemize}
 
@@ -5180,8 +5280,8 @@ Let $A \in M_{n\times n}(\mathbb{R})$.
 \end{eigenvalue property}
 
 \begin{proof}
-    $A$ invertible $\iff$ $\exists n$ non-zero vectors s.t. $A\pmb{\upsilon} = \pmb{0}$.
-    Since we want \emph{non-zero} solutions of $(A - \lambda I_n)\pmb{\upsilon} = 0$,
+    $A$ invertible $\iff$ $\exists n$ non-zero vectors s.t. $A\mathbf{\upsilon} = \mathbf{0}$.
+    Since we want \emph{non-zero} solutions of $(A - \lambda I_n)\mathbf{\upsilon} = 0$,
     $A - \lambda I_n$ cannot be invertible!
 \end{proof}
 
@@ -5252,20 +5352,20 @@ Let $A \in M_{n\times n}(\mathbb{R})$.
 \end{proof}
 
 \underline{Warning}: The eigenvectors are in general \emph{not} the same.
-But if $A\pmb{\upsilon} = \lambda \pmb{\upsilon} \iff P^{-1}BP\pmb{\upsilon} = \lambda\pmb{\upsilon}$
-$\iff B(P\pmb{\upsilon}) = \lambda (P\pmb{\upsilon})$.
+But if $A\mathbf{\upsilon} = \lambda \mathbf{\upsilon} \iff P^{-1}BP\mathbf{\upsilon} = \lambda\mathbf{\upsilon}$
+$\iff B(P\mathbf{\upsilon}) = \lambda (P\mathbf{\upsilon})$.
 
 \newmdtheoremenv[style=defEnv]{eigenvalues of D}[theorem]{Lemma}
 \begin{eigenvalues of D}
-    Let $A \in M_{n\times n}(\mathbb{R})$. Assume $\pmb{\upsilon}_1, \pmb{\upsilon}_2,\ldots,\pmb{\upsilon}_n$
-    are eigenvectors of $A$. Then if $P = (\pmb{\upsilon}_1 \quad \pmb{\upsilon}_2 \,\cdots\, \pmb{\upsilon}_n)$
+    Let $A \in M_{n\times n}(\mathbb{R})$. Assume $\mathbf{\upsilon}_1, \mathbf{\upsilon}_2,\ldots,\mathbf{\upsilon}_n$
+    are eigenvectors of $A$. Then if $P = (\mathbf{\upsilon}_1 \quad \mathbf{\upsilon}_2 \,\cdots\, \mathbf{\upsilon}_n)$
     is invertible, then $A$ is diagonalizable and $A = PDP^{-1}$ with $D$'s leading
     diagonal entries being the eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$.
 \end{eigenvalues of D}
 
 \begin{proof}
     We can consider $P^{-1}AP = D \iff AP = PD$.
-    Look at the $k$-th column vector of $AP$: $A\pmb{\upsilon}_k = \lambda_k \pmb{\upsilon}_k$.
+    Look at the $k$-th column vector of $AP$: $A\mathbf{\upsilon}_k = \lambda_k \mathbf{\upsilon}_k$.
     Look at the $k$-th column vector of $PD$: $P\lambda_k e_k$, which 
     the diagonal identity matrix ``extracts'' out the eigenvectors one by one.
     ($e_k$ is an identity matrix)
@@ -5532,20 +5632,20 @@ e.g.\ the set $S = V$.
 \newmdtheoremenv[style=defEnv]{linear independence}[theorem]{Definition}
 \begin{linear independence}
     A subset $L \subset V$ is called \textbf{\emph{linearly dependent}} if
-    we can find \emph{distinct} vectors $\pmb{v}_1, \pmb{v}_2,\ldots,\pmb{v}_n \in L$
+    we can find \emph{distinct} vectors $\mathbf{v}_1, \mathbf{v}_2,\ldots,\mathbf{v}_n \in L$
     and \emph{non-zero} scalars $\lambda_1 \neq 0, \lambda_2 \neq 0,\ldots,\lambda_n \neq 0$ s.t.\[
-        \lambda_1 \pmb{v}_1 + \lambda_2 \pmb{v}_2 + \cdots + \lambda_n \pmb{v}_n = \pmb{0}_V.
+        \lambda_1 \mathbf{v}_1 + \lambda_2 \mathbf{v}_2 + \cdots + \lambda_n \mathbf{v}_n = \mathbf{0}_V.
     \]
     If $L$ is not linearly dependent we say that it is \textbf{\emph{linearly independent}}.
 \end{linear independence}
 
 \underline{Note}: If $L' \subset L$ and $L'$ is linearly-dependent,
-then $L$ is also linearly-dependent (just use the same $\pmb{v}_i$'s and $\lambda_i$'s).
+then $L$ is also linearly-dependent (just use the same $\mathbf{v}_i$'s and $\lambda_i$'s).
 So if $L$ is linearly-independent then any subset of $L$ is also linearly-independent.
 
 \begin{ex}
-    If $\pmb{0}_V \in L$ then $L$ is linearly-dependent,
-    because we can take any $\lambda \neq 0$ and observe that $\lambda \pmb{0}_V = \pmb{0}_V$.
+    If $\mathbf{0}_V \in L$ then $L$ is linearly-dependent,
+    because we can take any $\lambda \neq 0$ and observe that $\lambda \mathbf{0}_V = \mathbf{0}_V$.
 \end{ex}
 
 \newmdtheoremenv[style=defEnv]{basis}[theorem]{Definition}
@@ -5556,7 +5656,7 @@ So if $L$ is linearly-independent then any subset of $L$ is also linearly-indepe
 
 \newmdtheoremenv[style=defEnv]{v can be written with element of basis}[theorem]{Proposition}
 \begin{v can be written with element of basis}\label{prop:1}
-    Let $B = \left\{\pmb{v}_1, \pmb{v}_2, \ldots, \pmb{v}_n\right\} \subset V$ be a (finite)
+    Let $B = \left\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n\right\} \subset V$ be a (finite)
     basis of vector space $V$. Then every vector in $V$ can be written as a linear combination
     of elements in $B$, in a \emph{unique} way.
     Conversely, any finite subset $B$ with the above property is a basis.
@@ -5568,11 +5668,11 @@ So if $L$ is linearly-independent then any subset of $L$ is also linearly-indepe
 
 \newmdtheoremenv[style=defEnv]{coefficients of x with respect to B}[theorem]{Definition}
 \begin{coefficients of x with respect to B}
-    If we find a (finite) basis $B = \left\{\pmb{v}_1,\ldots,\pmb{v}_n\right\} $,
-    then any vector $\pmb{x} \in V$ can be uniquely expressed as\[
-        \pmb{x} = \lambda_1 \pmb{v}_1 + \cdots + \lambda_n \pmb{v}_n.
+    If we find a (finite) basis $B = \left\{\mathbf{v}_1,\ldots,\mathbf{v}_n\right\} $,
+    then any vector $\mathbf{x} \in V$ can be uniquely expressed as\[
+        \mathbf{x} = \lambda_1 \mathbf{v}_1 + \cdots + \lambda_n \mathbf{v}_n.
     \]The scalars $\lambda_i$ are called the \textbf{\emph{coefficients of $x$ with respect to $B$}}.
-    Every vector $\pmb{x}\in V$ corresponds to a unique set of coefficients
+    Every vector $\mathbf{x}\in V$ corresponds to a unique set of coefficients
     $\lambda_1, \lambda_2, \ldots, \lambda_n$.
 \end{coefficients of x with respect to B}
 To put it more formally, the basis $B$ allows us to define a function\[
@@ -5583,16 +5683,16 @@ To put it more formally, the basis $B$ allows us to define a function\[
                 \lambda_2 \\
                 \vdots \\
                 \lambda_n
-            \end{pmatrix} & \mapsto \lambda_1 \pmb{v}_1 + \cdots + \lambda_n \pmb{v}_n.
+            \end{pmatrix} & \mapsto \lambda_1 \mathbf{v}_1 + \cdots + \lambda_n \mathbf{v}_n.
     \end{align*}
 \]
 What Proposition~\ref{prop:1} says is that the function $F_B$ is a bijection.
-Note that $F_B^{-1}$ sends a vector $\pmb{x}$ to its coefficients with respect to $B$.
+Note that $F_B^{-1}$ sends a vector $\mathbf{x}$ to its coefficients with respect to $B$.
 
 \newmdtheoremenv[style=defEnv]{linearly dependent spanning set removed an element to be linearly independent}[theorem]{Lemma}
 \begin{linearly dependent spanning set removed an element to be linearly independent}
     Let $S \subset V$ be a spanning set, and suppose that $S$ is not linearly independent.
-    Then $\exists \pmb{x}\in S$ s.t. $S' = S\backslash\left\{\pmb{x}\right\} $ is still a spanning set.
+    Then $\exists \mathbf{x}\in S$ s.t. $S' = S\backslash\left\{\mathbf{x}\right\} $ is still a spanning set.
 \end{linearly dependent spanning set removed an element to be linearly independent}
 
 \begin{proof}
@@ -5600,7 +5700,7 @@ Note that $F_B^{-1}$ sends a vector $\pmb{x}$ to its coefficients with respect t
     (Be careful that after removing an element from the spanning set,
     you need to show that it is not a spanning set of a subspace!)
     
-    Set $S' = S \backslash\left\{\pmb{s}_1\right\} $. Then $\pmb{s}_1 \in \;\textnormal{span}\;{S'}$,
+    Set $S' = S \backslash\left\{\mathbf{s}_1\right\} $. Then $\mathbf{s}_1 \in \;\textnormal{span}\;{S'}$,
     and trivially $S' \subset \;\textnormal{span}\;{S'}$, so $S \subset \;\textnormal{span}\;{S'}$.
     By Lemma~\ref{lemma:1}, span $S \subset$ span $S' \Rightarrow{} V \subset$ span $S'$.
     This implies that span $S' = V$.
@@ -5626,9 +5726,9 @@ Any finite-dimensional vector space $V$ has a basis.
 
 \newmdtheoremenv[style=defEnv]{Steinitz exchange lemma}[theorem]{Proposition}
 \begin{Steinitz exchange lemma}
-Let $S \subset V$ be a spanning set of $V$, and let $L = \left\{\pmb{x}_1, \ldots, \pmb{x}_n\right\} $
+Let $S \subset V$ be a spanning set of $V$, and let $L = \left\{\mathbf{x}_1, \ldots, \mathbf{x}_n\right\} $
 be a \emph{finite linearly independent} subset of $V$, then 
-$\exists T = \left\{\pmb{y}_1,\ldots,\pmb{y}_n\right\} \subset S$, with the same size as $L$, s.t.\[
+$\exists T = \left\{\mathbf{y}_1,\ldots,\mathbf{y}_n\right\} \subset S$, with the same size as $L$, s.t.\[
     S' = (S\backslash T)\cup L
 \]is a spanning set.
 \end{Steinitz exchange lemma}
@@ -5889,7 +5989,7 @@ So for instance, $v = \begin{pmatrix}
 
 \begin{ex}
     $A \in M_{n,k}(\mathbb{R})$, $b \in \mathbb{R}^{n}$.
-    $A\pmb{x} = b, \pmb{x} \in \mathbb{R}^{k} \iff T_A \pmb{x} = b$.
+    $A\mathbf{x} = b, \mathbf{x} \in \mathbb{R}^{k} \iff T_A \mathbf{x} = b$.
     There are three possibilities:
     \begin{enumerate}[label = (\arabic*)]
         \item No solution: $b \notin $ Im $T_A$.
@@ -5940,7 +6040,7 @@ So for instance, $v = \begin{pmatrix}
 
 \underline{Note}: $f^{-1}$ is also an isomorphism, i.e.\ $U \cong V \iff V \cong U$.
 Since $f$ is bijective, it is surjective $\Rightarrow{}$ Im $f = V$,
-and injective $\Rightarrow{} \ker{f} = \{\pmb{0}_U\}$.
+and injective $\Rightarrow{} \ker{f} = \{\mathbf{0}_U\}$.
 
 \begin{ex}
     $\mathbb{R}{[X]}_{\le d} \cong \mathbb{R}^{d+1}, M_{2, 2}(\mathbb{R}) \cong \mathbb{R}^{4}$.
@@ -5958,8 +6058,8 @@ and injective $\Rightarrow{} \ker{f} = \{\pmb{0}_U\}$.
 
 \newmdtheoremenv[style=defEnv]{C is basis iif f is isomorphism}[theorem]{Lemma}
 \begin{C is basis iif f is isomorphism}
-    Let $f:U\rightarrow{}V$ be a linear map, $B=\{\pmb{b}_1, \pmb{b}_2,\ldots,\pmb{b}_k\}$
-    be a basis for $U$. Let $C = \{f(\pmb{b}_1),\ldots,f(\pmb{b}_k)\} \subset V$, then:
+    Let $f:U\rightarrow{}V$ be a linear map, $B=\{\mathbf{b}_1, \mathbf{b}_2,\ldots,\mathbf{b}_k\}$
+    be a basis for $U$. Let $C = \{f(\mathbf{b}_1),\ldots,f(\mathbf{b}_k)\} \subset V$, then:
     \begin{enumerate}[label = (\roman*)]
         \item $C$ is a spanning set iff $f$ is surjective
         \item $C$ is linearly independent iff $f$ is injective
@@ -5997,7 +6097,7 @@ and injective $\Rightarrow{} \ker{f} = \{\pmb{0}_U\}$.
 \newmdtheoremenv[style=defEnv]{find basis in new vector space}[theorem]{Corollary}
 \begin{find basis in new vector space}
     If $f:\mathbb{R}^{n}\rightarrow{}V$ is an isomorphism, then the set\[
-        C = \{f(\pmb{e}_1), f(\pmb{e}_2),\ldots, f(\pmb{e}_n)\}
+        C = \{f(\mathbf{e}_1), f(\mathbf{e}_2),\ldots, f(\mathbf{e}_n)\}
     \]is a basis of $V$.
 \end{find basis in new vector space}
 
@@ -6059,10 +6159,10 @@ and injective $\Rightarrow{} \ker{f} = \{\pmb{0}_U\}$.
             $T_A:\mathbb{R}^{k} \rightarrow{} \mathbb{R}^{n}$ the associated linear map.
             Suppose that $r$ of the columns of $A$ containing a leading 1.
             Then from the definition of RRE form it's clear that Im $T_A$ contains
-            the first $r$ standard basis vectors $\pmb{e}_1, \ldots, \pmb{e}_r \in \mathbb{R}^{n}$,
+            the first $r$ standard basis vectors $\mathbf{e}_1, \ldots, \mathbf{e}_r \in \mathbb{R}^{n}$,
             and that these vectors span Im $T_A$, so the rank of $T_A$ is $r$.
             Then the Rank-Nullity theorem says that\[
-                \;\textnormal{null}\;T_A = \dim{\{\pmb{u}\in \mathbb{R}^{k}, A\pmb{u} = \pmb{0}\}} = k - r.
+                \;\textnormal{null}\;T_A = \dim{\{\mathbf{u}\in \mathbb{R}^{k}, A\mathbf{u} = \mathbf{0}\}} = k - r.
             \]This is the same as the number of `free parameters' for this system of linear equations.
     \end{enumerate}
     
