@@ -4137,6 +4137,7 @@ There are 3 important derived fields, each involving the (partial) differential 
             + \mathbf{j}\frac{\partial\phi}{\partial y} + \mathbf{k}\frac{\partial\phi}{\partial z}
             \equiv \;\textnormal{grad}\;\phi \quad\;\textnormal{`Gradient'}\;
         \]which is a vector field.
+        It is measuring \emph{the rate of change of a value in each dimension}.
         
     \item 
         \[
@@ -4144,6 +4145,9 @@ There are 3 important derived fields, each involving the (partial) differential 
             + \frac{\partial u_2}{\partial y} + \frac{\partial u_3}{\partial z}
             \equiv \;\textnormal{div}\;\mathbf{u} \quad\;\textnormal{`Divergence'}\;
         \]which is a scalar field.
+        It is measuring \emph{the overall rate of change of a vector in each standard basis}
+        by decomposing the vector into its corresponding dimensions
+        and summing up the rate of change of each component.
 
     \item 
         \[
@@ -4153,6 +4157,9 @@ There are 3 important derived fields, each involving the (partial) differential 
             + \mathbf{k}\left(\frac{\partial u_2}{\partial x} - \frac{\partial u_1}{\partial y}\right)
             \equiv \;\textnormal{curl}\;\mathbf{u}
         \]which is a vector field.
+        It is measuring \emph{the rate of rotation/curl about a point},
+        hence the output is a vector field with vectors describing the
+        direction and magnitude of rotation about each point.
         The expression can be `mnemonically' memorized in the following form:\[
             \det{\begin{pmatrix}
                     \mathbf{i} & \mathbf{j} & \mathbf{k} \\
@@ -4215,7 +4222,13 @@ e.g. 2 dimensions $(x,y)$ if required.
         
     \item $\nabla\cdot\mathbf{u} \equiv$ div $\mathbf{u}$.
 
-        It acts as a local field \emph{source} ($+$) `outflow' / \emph{sink} ($-$) `inflow'.
+        It acts as a measurement of whether a local field is a
+        \emph{source} ($+$) `outflow' / \emph{sink} ($-$) `inflow'.
+        In general, the divergence at a point $\mathbf{x}$ is
+        the limit of the ratio of the flux through the surface
+        over the volume enclosing $\mathbf{x}$ approaching 0.
+        In three dimensional Cartesian coordinates, the divergence
+        is defined to be the above scalar function.
 
         \underline{Example}:\[
             \begin{align*}
@@ -4249,20 +4262,41 @@ e.g. 2 dimensions $(x,y)$ if required.
                 = w\mathbf{k}\times(x\mathbf{i}+y\mathbf{j}+z\mathbf{k})
                 = -wy\mathbf{i} + wx\mathbf{j}$.\[
                     \Rightarrow{}\nabla\times\mathbf{u} = 2w\mathbf{k} = 2\mathbf{w}.
-                \]This describes the solid rotation,
+                \]where $\mathbf{w}$ is a vector pointing upward
+                out of the plane, describing the rate of rotation.
+
+                This describes the solid rotation,
+                as illustrated in Figure~\ref{fig:solidRotation},
                 and it turns out the the curl of $\mathbf{u}$ 
                 is twice the constant rotation rate $\mathbf{w}$.
 
+                \begin{figure}
+                  	\includegraphics[scale=0.15]{solidRotation.jpeg}
+                  	\centering
+                    \caption{solid rotation illustration}\label{fig:solidRotation}
+                \end{figure}
+                
+
             \item $\mathbf{u} = (U+\alpha y, 0, 0)$
 
-                This describes uniform shear flow.
+                This describes uniform shear flow,
+                as illustrated in Figure~\ref{fig:shearFlow}.
                 By keeping $U$ and $\alpha$ constant, we can derive that\[
                     \nabla\times\mathbf{u} = -\alpha \mathbf{k}
-                \]
+                \]Note that $\alpha > 0$ in Figure~\ref{fig:shearFlow},
+                resulting in a clockwise rotation as $O$ translates.
+                L $\rightarrow{}$ R ($y>-\frac{U}{\alpha}$),
+                R $\rightarrow{}$ L ($y<-\frac{U}{\alpha}$).
+
+                \begin{figure}
+                  	\includegraphics[scale=0.15]{uniformShearFlow.jpeg}
+                  	\centering
+                    \caption{uniform shear flow illustration}\label{fig:shearFlow}
+                \end{figure}
         \end{enumerate}
-        
 \end{enumerate}
 
+\subsection{Application --- Double/Repeated Integrals}
 
 
 
