@@ -4298,7 +4298,51 @@ e.g. 2 dimensions $(x,y)$ if required.
 
 \subsection{Application --- Double/Repeated Integrals}
 
+Solving double integral involves in the change of variable $(x,y) \rightarrow{}(u,v)$,
+transforming the original double integral into:\[
+    \iint_{A}^{} f(x,y)\mathrm{d}x\mathrm{d}y = \iint_{A}^{} f(x(u,v),y(u,v))J\mathrm{d}u\mathrm{d}v
+\]where $J$ is the \textbf{\emph{Jacobian}} of the transformation.
 
+\begin{figure}
+  	\includegraphics[scale=0.15]{JacobianTransform.jpeg}
+  	\centering
+    \caption{Jacobian transform illustration}\label{fig:Jacobian}
+\end{figure}
+
+
+One possible illustration is as shown in Figure~\ref{fig:Jacobian}.
+The three critical points are $P(x,y), Q\left(x+\frac{\partial x}{\partial v}\delta v, 
+y + \frac{\partial y}{\partial v}\delta v\right), 
+R\left(x + \frac{\partial x}{\partial u}\delta u, y+\frac{\partial y}{\partial u}\delta u\right)$.
+Area of the shaded parallelogram is\[
+    \left|\left(\frac{\partial x}{\partial u}\delta u, 
+    \frac{\partial y}{\partial u}\delta u\right)
+    \times\left(\frac{\partial x}{\partial v}\delta v,
+    \frac{\partial y}{\partial v}\delta v\right)\right|
+    = J \delta u \delta v
+\]where\[
+J = \left|\det{\begin{pmatrix}
+        \dfrac{\partial x}{\partial u} & \dfrac{\partial x}{\partial v} \\[2ex]
+        \dfrac{\partial y}{\partial u} & \dfrac{\partial y}{\partial v}
+\end{pmatrix} }\right|
+= \nabla x(u,v) \times \nabla y(u,v).
+\]
+
+For example, if Cartesian is transformed to polar, i.e.\ $(x,y)\rightarrow{}(r,\theta)$,
+since $x=r\cos{\theta}, y=r\sin{\theta}$, then\[
+    \frac{\partial x}{\partial r}=\cos{\theta},\;
+    \frac{\partial x}{\partial \theta}=-r\sin{\theta},\;
+    \frac{\partial y}{\partial r}=\sin{\theta},\;
+    \frac{\partial y}{\partial \theta}=r\cos{\theta},
+\]\[
+\Rightarrow{}J = \left|\det{\begin{pmatrix}
+        \cos{\theta} & -r\sin{\theta} \\
+        \sin{\theta} & r\cos{\theta}
+\end{pmatrix} }\right| = r.
+\]
+
+
+\section{Fourier Integrals}
 
 
 
