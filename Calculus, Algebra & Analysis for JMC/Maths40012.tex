@@ -4344,6 +4344,469 @@ since $x=r\cos{\theta}, y=r\sin{\theta}$, then\[
 
 \section{Fourier Integrals}
 
+\subsection{Definitions and Examples}
+
+\paragraph{Recap}
+
+A function $f(x)$ defined on $-L\le x \le L$ (the \emph{fundamental interval})
+can be expressed in the form\[
+    f(x) \sim \frac{1}{2}a_0 + \sum_{n=1}^{\infty} \left[a_n\cos{\frac{n\pi x}{L}}
+        + b_n\sin{\frac{n\pi x}{L}}\right],
+\]where\[
+    \begin{align*}
+        a_n & = \frac{1}{L}\int_{-L}^{L} f(x)\cos{\frac{n\pi x}{L}}\mathrm{d}x, \\
+        b_n & = \frac{1}{L}\int_{-L}^{L} f(x)\sin{\frac{n\pi x}{L}}\mathrm{d}x,
+    \end{align*}
+\]and $n \in \mathbb{Z}$. $f(x)$ is continuous, and the series converges to $f(x)$;
+at points of discontinuity the series converges to $\frac{1}{2}[f(x_-) + f(x_+)]$.
+The series is, of course, $2L$ periodic. The complex form is\[
+    f(x) \sim \sum_{n=-\infty}^{\infty}y_n e^{\frac{in\pi x}{L}},
+\]where\[
+y_n = \frac{1}{2L}\int_{-L}^{L} f(x) e^{-\frac{in\pi x}{L}}\mathrm{d}x,
+\]and $n \in \mathbb{Z}$.
+We also note the \textbf{\emph{Parseval's theorem}}:\[
+    \frac{1}{L}\int_{-L}^{L} {\left(f(x)\right)}^{2}\mathrm{d}x
+    = \frac{1}{2}a_0^{2} + \sum_{n=1}^{\infty} (a_n^{2} + b_n^{2}).
+\]
+We now extend these ideas to that of a function $f(x)$ defined on $(-\infty, \infty)$,
+by taking the limit $L\rightarrow{}\infty$.
+The complex form can be combined as\[
+    f(x) = \frac{1}{2\pi}\sum_{n=-\infty}^{\infty}\left[\int_{-L}^{L} f(s)e^{-i\omega_n s}\mathrm{d}s\right]
+    e^{i\omega_n x}\delta\omega
+\]where $\omega_n = \frac{n\pi}{L}$, $\delta\omega = \omega_{n+1}-\omega_n = \frac{\pi}{L}$,
+and the equality is interpreted as previously at points of continuity/discontinuity of $f(x)$.
+Formally, we allow $L\rightarrow{}\infty$ so that $\delta\omega\rightarrow{}0$.
+
+\newmdtheoremenv[style=defEnv]{fourier tranform}[theorem]{Theorem}
+\begin{fourier tranform}
+    The \textbf{\emph{Fourier transform}} is defined as\[
+        \hat{f}(\omega) = \int_{-\infty}^{\infty} f(x)e^{-i\omega x}\mathrm{d}x
+    \]and the \textbf{\emph{inverse Fourier transform}} is defined as\[
+        f(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} \hat{f}(\omega) e^{i\omega x}\mathrm{d}\omega.
+    \]
+    Together, they are called the \textbf{\emph{Fourier transform pair}}.
+\end{fourier tranform}
+
+Of course the Fourier Transform needs a proof.
+For now we assume that $\int_{-\infty}^{\infty} |f(x)|\mathrm{d}x$
+converges and that $f(x)$, $f'(x)$ are continuous for all $x$
+--- these requirements may be relaxed later.
+
+We write the RHS of the transform in the form\[
+    \begin{align*}
+        f(x)
+        & = \frac{1}{2\pi}\int_{-\infty}^{\infty} \left\{
+        \int_{-\infty}^{\infty} f(s)e^{-i\omega s}\mathrm{d}s\right\}e^{i\omega x}\mathrm{d}\omega \\
+        & = \lim_{L\rightarrow{}\infty}\frac{1}{2\pi}\int_{-L}^{L} \left[
+        \int_{-\infty}^{\infty} f(s)e^{-i\omega (s-x)}\mathrm{d}s\right] \mathrm{d}\omega \\
+        & = \lim_{L\rightarrow{}\infty} \frac{1}{2\pi}\int_{-L}^{L}
+        \begin{aligned}[t]
+        & \bigg\{\int_{-\infty}^{\infty} f(s)\cos{[\omega(s-x)]}\mathrm{d}s \\
+        & - i \int_{-\infty}^{\infty} f(s)\sin{[\omega(s-x)]}\mathrm{d}s\bigg\}\mathrm{d}\omega
+        \end{aligned}
+    \end{align*}
+\]
+The first term in $\hat{f}(\omega)$ is even about $\omega = 0$,
+and the second term is odd.
+Because the inner integral is absolutely convergent
+we can change the order of integration.
+So we get\[
+    \begin{align*}
+        & \lim_{L\rightarrow{}\infty}\frac{1}{\pi}\int_{0}^{L} \left\{
+        \int_{-\infty}^{\infty} f(s)\cos{[\omega(s-x)]}\mathrm{d}s\right\}\mathrm{d}\omega \\
+        = & \lim_{L\rightarrow{}\infty} \frac{1}{\pi}\int_{-\infty}^{\infty} f(s)\left\{
+        \int_{0}^{L} \cos{[\omega(s-x)]}\mathrm{d}\omega\right\}\mathrm{d}s \\
+            = & \lim_{L\rightarrow{}\infty}\frac{1}{\pi}\int_{-\infty}^{\infty}
+            f(s) \frac{\sin{[L(s-x)]}}{s-x}\mathrm{d}s \\
+            = & \lim_{L\rightarrow{}\infty}\frac{1}{\pi}\int_{-\infty}^{\infty} f(x+u)
+            \frac{\sin{Lu}}{u}\mathrm{d}u \qquad\;\textnormal{(substitute $s=x+u$)}\; \\
+            = & \lim_{L\rightarrow{}\infty}\frac{1}{\pi}\left\{
+            \int_{-\infty}^{\infty} \frac{f(x+u)-f(x)}{u}\sin{Lu}\mathrm{d}u
+        + f(x)\int_{-\infty}^{\infty} \frac{\sin{Lu}}{u}\mathrm{d}u\right\}.
+    \end{align*}
+\]
+The first integral tends to zero as $L\rightarrow{}\infty$
+by the Riemann-Lebesgue lemma.
+We then note that $\int_{-\infty}^{\infty} \frac{\sin{p}}{p}\mathrm{d}p = \pi$.
+We then, finally, get $f(x)$ for this limit,
+and obtain the previously defined Fourier transform pair.
+
+\begin{ex}
+    Rectangular wave\[
+        f(x) = \left\{\begin{align*}
+            & 1 && |x|\le d \\
+            & 0 && |x|\ge d.
+        \end{align*}
+    \]\[
+        \begin{align*}
+            \hat{f}(\omega) & = \int_{-d}^{d} 1\cdot e^{-i\omega x}\mathrm{d}x \\
+                            & = {\left[\frac{e^{-i\omega x}}{-i\omega}\right]}^{d}_{-d} \\
+                            & = -\frac{1}{i\omega}(e^{-i\omega d}-e^{i\omega d}) \\
+                            & = \frac{2}{\omega}\sin{\omega d}.
+        \end{align*}
+    \]
+\end{ex}
+
+We note that at a point $x=x_0$ of discontinuity of $f(x)$,
+$f(x)$ in the Fourier transform becomes $\frac{1}{2}(f(x_0^{-}) + f(x_0^{+}))$.
+
+\subsection{Cosine and Sine Transforms}
+
+Symmetry was exploited to define half range Fourier \emph{series}.
+We can now do the same thing for \emph{transforms} over the range $[0,\infty)$.%chktex 9
+If $f(x)$ is even about $x=0$ then we can write\[
+    \begin{align*}
+        \hat{f}(\omega) & = \int_{-\infty}^{\infty} f(x)e^{-i\omega x}\mathrm{d}x \\
+                        & = \int_{-\infty}^{\infty} f(x) (\cos{\omega x} - i\sin{\omega x}) \mathrm{d}x \\
+                        & = 2 \int_{0}^{\infty} f(x)\cos{\omega x}\mathrm{d}x.
+    \end{align*}
+\]We define\[
+\hat{f}_c(\omega) = \int_{0}^{\infty} f(x)\cos{\omega x}\mathrm{d}x.
+\]So\[
+\hat{f}(\omega) = 2\hat{f}_c(\omega).
+\]
+Of course $\hat{f}_c(\omega)$ is even about $\omega = 0$,
+implying that\[
+    \begin{align*}
+        f(x) & = \frac{1}{2\pi}\int_{-\infty}^{\infty} \hat{f}(\omega)e^{i\omega x}\mathrm{d}\omega \\
+             & = \frac{1}{\pi}\int_{-\infty}^{\infty} \hat{f}_c(\omega)e^{i\omega x}\mathrm{d}\omega \\
+             & = \frac{2}{\pi}\int_{0}^{\infty} \hat{f}_c(\omega)\cos{\omega x}\mathrm{d}\omega.
+    \end{align*}
+\]
+Similarly, if $f(x)$ is odd about $x=0$ we can define the Fourier sine transform\[
+    \hat{f}_s(\omega) = \int_{0}^{\infty} f(x)\sin{\omega x}\mathrm{d}x
+\]so that\[
+f(x) = \frac{2}{\pi}\int_{0}^{\infty} \hat{f}_s(\omega)\sin{\omega x}\mathrm{d}\omega.
+\]
+
+\subsection{Properties of Fourier Transforms}
+
+\begin{enumerate}[label = (\roman*)]
+    \item Linearity:\[
+            h(x) = af(x) + bg(x) \longleftrightarrow \hat{h}(\omega) = a\hat{f}(\omega) + b\hat{g}(\omega)
+        \]where $a,b$ are constants.
+        \begin{proof}
+            Exercise!
+        \end{proof} 
+
+    \item Time scaling:
+        \[
+            a\in\mathbb{R}, a\neq 0 \Longrightarrow{}
+            \widehat{f(ax)} = \frac{1}{|a|}\hat{f}\left(\frac{\omega}{a}\right).
+        \]
+
+        Alternatively, if $h(x)=f(ax)$, then\[
+            \hat{h}(\omega) = \frac{1}{|a|}\hat{f}\left(\frac{\omega}{a}\right).
+        \]
+        \begin{proof}
+            \[
+                \begin{align*}
+                    \hat{f}(\omega)
+                    & = \int_{-\infty}^{\infty} f(x)e^{-i\omega x}\mathrm{d}x \\
+                    & = \int_{-\infty}^{\infty} f(ax)e^{-i\omega ax}\mathrm{d}(ax) \\
+                    & = |a|\int_{-\infty}^{\infty} f(ax)e^{-i\omega ax}\mathrm{d}x.
+                \end{align*} 
+            \]By additional substitution on $\omega$, we get\[
+            \frac{1}{|a|}\hat{f}\left(\frac{\omega}{a}\right) =
+            \int_{-\infty}^{\infty} f(ax) e^{-i\omega x}\mathrm{d}x.
+            \]
+            Alternative approach:\[
+                \begin{align*}
+                    f(ax)
+                    & = \frac{1}{2\pi} \int_{-\infty}^{\infty} \hat{f}(\omega)e^{i\omega ax}\mathrm{d}\omega \\
+                    & = \frac{1}{2\pi}\int_{-\infty}^{\infty} \frac{1}{|a|}\hat{f}(\omega)e^{i\omega ax}d(a\omega) \\
+                    & = \frac{1}{2\pi}\int_{-\infty}^{\infty} \frac{1}{|a|}\hat{f}\left(\frac{\omega}{a}\right)
+                    e^{i\omega x}\mathrm{d}\omega \\
+                    & = h(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} \hat{h}(\omega) e^{i\omega x} \mathrm{d}\omega
+                \end{align*} 
+            \]
+        \end{proof} 
+        Specially, $\widehat{f(-x)} = \hat{f}(-\omega)$, i.e.\
+        $h(x) = f(-x) \Rightarrow{} \hat{h}(\omega) = \hat{f}(-\omega)$,
+        the so-called \emph{time-reversal} property.
+
+    \item Translation/time shifting:
+        \[
+            \forall x_0\in\mathbb{R}, \widehat{f(x-x_0)} = e^{-i\omega x_0}\hat{f}(\omega).
+        \]
+
+        Alternatively, if $h(x) = f(x-x_0)$, then\[
+            \hat{h}(\omega) = e^{-i\omega x_0}\hat{f}(\omega).
+        \]
+        \begin{proof}
+            \begin{align*}
+                \hat{f}(\omega)
+                & = \int_{-\infty}^{\infty} f(x)e^{-i\omega x}\mathrm{d}x \\
+                & = \int_{-\infty}^{\infty} f(x-x_0)e^{i\omega(x_0-x)}\mathrm{d}(x-x_0) \\
+            \end{align*} 
+            By multiplying $e^{-i\omega x_0}$, we obtain\[
+                e^{-i\omega x_0}\hat{f}(\omega) = \int_{-\infty}^{\infty} f(x-x_0)e^{i\omega x}\mathrm{d}x.
+            \]Alternative approach:
+            \begin{align*}
+                f(x-x_0)
+                & = \frac{1}{2\pi}\int_{-\infty}^{\infty} \hat{f}(\omega)e^{i\omega (x-x_0)}\mathrm{d}\omega \\
+                & = \frac{1}{2\pi}\int_{-\infty}^{\infty} e^{-i\omega x_0}\hat{f}(\omega)e^{i\omega x}\mathrm{d}\omega \\
+                & = h(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} \hat{h}(\omega)e^{i\omega x}\mathrm{d}\omega
+            \end{align*} 
+        \end{proof} 
+
+    \item Modulation/frequency shifting:
+        \[
+            \forall \omega_0\in\mathbb{R}, \widehat{e^{i\omega_0x}f(x)} = \hat{f}(\omega - \omega_0).
+        \]
+
+        Alternatively, if $h(x) = e^{i\omega_0x}f(x)$, then\[
+            \hat{h}(\omega) = \hat{f}(\omega - \omega_0).
+        \]
+
+        \begin{proof}
+            Exercise!
+        \end{proof} 
+
+    \item Symmetry:
+        \[
+            \widehat{\hat{f}(x)} = 2\pi f(-\omega).
+        \]
+        \begin{proof}
+            \[
+                \begin{align*}
+                    f(x)
+                    & = \frac{1}{2\pi}\int_{-\infty}^{\infty} \hat{f}(\omega)e^{i\omega x}\mathrm{d}\omega \\
+                    & = \frac{1}{2\pi}\int_{-\infty}^{\infty} \hat{f}(s)e^{isx}\mathrm{d}s.
+                \end{align*} 
+            \]And then by another substitution of $x = -\omega$, we get\[
+                \begin{align*}
+                    f(-\omega)
+                    & = \frac{1}{2\pi} \int_{-\infty}^{\infty} \hat{f}(s)e^{-i\omega s}\mathrm{d}s \\
+                    & = \frac{1}{2\pi}\int_{-\infty}^{\infty} \hat{f}(x)e^{-i\omega x}\mathrm{d}x \\
+                    & = \frac{1}{2\pi}\widehat{\hat{f}(x)}.
+                \end{align*} 
+            \]
+        \end{proof} 
+
+    \item Derivatives: (Useful for ODE, PDE\ldots)
+
+        If $f$ and its derivatives $\rightarrow{}0$ at $\pm\infty$,
+        (i.e.\ the derivatives have \textbf{\emph{compact support}})
+        \begin{align*}
+            \widehat{\frac{\mathrm{d}^{n}f(x)}{\mathrm{d}x^{n}}}
+            & = \int_{-\infty}^{\infty} \frac{\mathrm{d}^{n}f}{\mathrm{d}x^{n}}e^{-i\omega x}\mathrm{d}x \\
+            & = {\left[\frac{\mathrm{d}^{n-1}f}{\mathrm{d}x^{n-1}}e^{-i\omega x}\right]}_{-\infty}^{\infty}
+            + i\omega \int_{-\infty}^{\infty} \frac{\mathrm{d}^{n-1}f}{\mathrm{d}x^{n-1}}e^{-i\omega x}\mathrm{d}x \\
+            & \;\:\vdots \\
+            & = {(i\omega)}^{n}\hat{f}.
+        \end{align*} 
+
+    \item 
+        \begin{align*}
+            \widehat{xf(x)}
+            & = \int_{-\infty}^{\infty} xf(x)e^{-i\omega x}\mathrm{d}x \\
+            & = i \frac{\mathrm{d}}{\mathrm{d}\omega} \int_{-\infty}^{\infty} f(x)e^{-i\omega x}\mathrm{d}x \\
+            & = i\frac{\mathrm{d}}{\mathrm{d}\omega}\widehat{f(\omega)}.
+        \end{align*} 
+
+    \item For cosine and sine transforms we have similarly (for reference only)
+        \begin{enumerate}[label = (\alph*)]
+            \item ${\widehat{f'(x)}}_c = -f(0)+\omega\hat{f}_s(\omega)$
+                \begin{proof}
+                    \begin{align*}
+                        {\widehat{f'(x)}}_c
+                        & = \int_{0}^{\infty} f'(x) \cos{\omega x}\mathrm{d}x \\
+                        & = {\left[f(x)\cos{\omega x}\right]}_0^{\infty}
+                        + \omega \int_{0}^{\infty} f(x) \sin{\omega x}\mathrm{d}x \\
+                        & = - f(0) +\omega\hat{f}_s(\omega)
+                    \end{align*}
+                    where $f(\infty)=0$ due to the ``\emph{compact support}'' property of derivatives.
+                \end{proof} 
+
+            \item ${\widehat{f'(x)}}_s = -\omega\hat{f}_c(\omega)$
+                \begin{proof}
+                    Exercise!
+                \end{proof} 
+
+            \item ${\widehat{f''(x)}}_c = -f'(0) - \omega^{2}\hat{f}_c(\omega)$
+                \begin{proof}
+                    Exercise!
+                \end{proof} 
+
+            \item ${\widehat{f''(x)}}_s = \omega f(0) - \omega^{2}\hat{f}_s(\omega)$.
+                \begin{proof}
+                    Exercise!
+                \end{proof} 
+
+        \end{enumerate}
+
+    \item If $f(x)$ is \emph{complex} with conjugate ${[f(x)]}^{*}$, then\[
+            \widehat{{[f(x)]}^{*}} = {[\hat{f}(-\omega)]}^{*}.
+        \]
+        \begin{proof}
+            \[
+                \widehat{{[f(x)]}^{*}} = \int_{-\infty}^{\infty} {[f(x)]}^{*}e^{-i\omega x}\mathrm{d}x.
+            \]
+            On the other hand,\[
+                \hat{f}(-\omega) = \int_{-\infty}^{\infty} f(x)e^{i\omega x}\mathrm{d}x
+            \]\[
+            \Rightarrow{}{[\hat{f}(-\omega)]}^{*} = \int_{-\infty}^{\infty} {[f(x)]}^{*}e^{-i\omega x}\mathrm{d}x.
+            \]
+        \end{proof} 
+\end{enumerate}
+
+\subsection{The Convolution Theorem}
+
+\newmdtheoremenv[style=defEnv]{convolution}[theorem]{Definition}
+\begin{convolution}
+    For two functions $f(x)$, $g(x)$, we define their \textbf{\emph{convolution}} to be\[
+        f(x)*g(x) = \int_{-\infty}^{\infty} f(x-u)g(u)\mathrm{d}u.
+    \]
+\end{convolution}
+
+\newmdtheoremenv[style=defEnv]{convolution property}[theorem]{Proposition}
+\begin{convolution property}
+    \[
+        \widehat{f(x)*g(x)} = \hat{f}(\omega)\hat{g}(\omega).
+    \]
+\end{convolution property}
+
+\begin{proof}
+    \begin{align*}
+        \widehat{f(x)*g(x)} 
+        & = \int_{-\infty}^{\infty} \left[\int_{-\infty}^{\infty} f(x-u)g(u)\mathrm{d}u\right]
+        e^{-i\omega x}\mathrm{d}x \\
+        & \quad\;\textnormal{(change order of integration)}\;\\
+        & = \int_{-\infty}^{\infty} g(u)\left[\int_{-\infty}^{\infty} 
+        f(x-u)e^{-i\omega x}\mathrm{d}x\right]\mathrm{d}u \\
+        & \quad\;(s = x-u) \\
+        & = \int_{-\infty}^{\infty} g(u) \left[\int_{-\infty}^{\infty} 
+        f(s)e^{-i\omega(s+u)}\mathrm{d}s\right]\mathrm{d}u \\
+        & = \left(\int_{-\infty}^{\infty} g(u)e^{-i\omega u}\mathrm{d}u\right)
+        \left(\int_{-\infty}^{\infty} f(s)e^{-i\omega s}\mathrm{d}s\right) \\
+        & = \hat{f}(\omega)\hat{g}(\omega).
+    \end{align*} 
+\end{proof} 
+
+\begin{ex}
+    Consider $\hat{f}(\omega) = \frac{1}{4+\omega^{2}}$, $\hat{g}(\omega) = \frac{1}{9+\omega^{2}}$.
+    It can be shown that $f(x) = \frac{1}{4}e^{-2|x|}, g(x) = \frac{1}{6}e^{-3|x|}$,
+    so that the inverse transform of $\frac{1}{(4+\omega^{2})(9+\omega^{2})}$ is
+    \begin{align*}
+        f*g
+        & = \frac{1}{24}\int_{-\infty}^{\infty} e^{-2|x-u|}e^{-3|u|}\mathrm{d}u \\
+        & \;\:\vdots \\
+        & = \frac{1}{20}e^{-2|x|}-\frac{1}{30}e^{-3|x|}.
+    \end{align*} 
+\end{ex} 
+
+\subsection{The Plancherel/Energy Theorem}
+
+As we should expect, there is an analogue to Parseval's theorem for Fourier series.
+
+\newmdtheoremenv[style=defEnv]{Plancherel Theorem}[theorem]{Theorem}
+\begin{Plancherel Theorem}
+    If $f(x)$ is a real valued function, then\[
+        \int_{-\infty}^{\infty} {[f(u)]}^{2}\mathrm{d}u
+        = \frac{1}{2\pi}\int_{-\infty}^{\infty} {|\hat{f}(\omega)|}^{2}\mathrm{d}\omega.
+    \]
+    
+\end{Plancherel Theorem}
+
+\begin{proof}
+We can use the previous properties to show that\[
+    \widehat{{[f(-x)]}^{*}} = {[\hat{f}(\omega)]}^{*}
+\]and apply this for real $f(x)$ we get\[
+\widehat{f(-x)} = {[\hat{f}(\omega)]}^{*}.
+\]Now we use the convolution theorem with $\hat{g}(\omega) = {[\hat{f}(\omega)]}^{*}$, we get\[
+\widehat{f(x)*f(-x)} = \hat{f}(\omega){[\hat{f}(\omega)]}^{*} = {|\hat{f}(\omega)|}^{2}.
+\]So inverting we get\[
+f(x)*f(-x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} {|\hat{f}(\omega)|}^{2}e^{i\omega x}\mathrm{d}\omega.
+\]
+The LHS of the above is equation is $=\int_{-\infty}^{\infty} f(u+x)f(u)\mathrm{d}u$.
+Put $x = 0$ to obtain the result.
+\end{proof} 
+
+\subsection{The Dirac Delta Function}
+
+\newmdtheoremenv[style=defEnv]{Dirac Delta Function}[theorem]{Definition}
+\begin{Dirac Delta Function}
+We define the \textbf{\emph{Dirac Delta}} function as\[
+    \delta(x) = \lim_{k\rightarrow{}\infty}f_k(x).
+\]where\[
+    f_k(x) = \left\{\begin{align*}
+        & \frac{k}{2} && (|x|<\frac{1}{k}) \\
+        & 0 && (|x|>\frac{1}{k})
+    \end{align*} 
+\]
+\end{Dirac Delta Function}
+
+Of course,\[
+\int_{-\infty}^{\infty} f_k(x)\mathrm{d}x = 1.
+\]
+
+\paragraph{Note}
+
+This is \emph{not} a function in the normal sense ---
+it is a \emph{generalised function}, being $\infty$ at $x=0$ and 0 for $x\neq 0$
+with $\int_{-\infty}^{\infty} \delta(x)\mathrm{d}x=1$.
+
+\paragraph{Shifting property}
+\begin{align*}
+    \int_{-\infty}^{\infty} g(x)\delta(x)\mathrm{d}x
+    & = \lim_{k\rightarrow{}\infty}\int_{-\infty}^{\infty} g(x)f_k(x)\mathrm{d}x \\
+    & = \lim_{k\rightarrow{}\infty}\int_{-\frac{1}{k}}^{\frac{1}{k}} g(x)\frac{k}{2}\mathrm{d}x \\
+    & = \lim_{k\rightarrow{}\infty}\left[\frac{k}{2}\cdot \frac{2}{k}g(\overline{x})\right] \\
+    & = g(0)
+\end{align*} 
+where the second last step is by the mean value theorem, that $-\frac{1}{k}<\overline{x}<\frac{1}{k}$.
+This means that\[
+    \int_{-\infty}^{\infty} g(x)\delta(x-a)\mathrm{d}x = g(a).
+\]We can also derive that\[
+\widehat{\delta(x)} = \int_{-\infty}^{\infty} e^{-i\omega x}\delta(x)\mathrm{d}x = e^{-i\omega 0}= 1
+\]
+so that $\delta(x)$ is the inverse transform of 1. Naturally we can then write\[
+    \delta(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} e^{\pm i\omega x}\mathrm{d}\omega
+\]as an alternative representation, and, of course,\[
+    \delta(\omega) = \frac{1}{2\pi}\int_{-\infty}^{\infty} e^{\pm i\omega x}\mathrm{d}x.
+\]So this helps us to find Fourier transforms of functions that do not decay as $x\rightarrow{}\pm\infty$.
+
+\begin{ex}
+    Find the fourier transform of $\cos{\omega_0x}$.
+    \begin{align*}
+        \widehat{\cos{\omega_0}}
+        & = \int_{-\infty}^{\infty} \frac{1}{2}(e^{i\omega_0x}+e^{-i\omega_0x})e^{-i\omega x}\mathrm{d}x \\
+        & = \frac{1}{2}\int_{-\infty}^{\infty} e^{-i(\omega-\omega_0)x}\mathrm{d}x
+        + \frac{1}{2}\int_{-\infty}^{\infty} e^{-i(\omega+\omega_0)x}\mathrm{d}x \\
+        & = \pi\delta(\omega-\omega_0) + \pi\delta(\omega+\omega_0).
+    \end{align*}
+\end{ex} 
+
+\subsection{Application of Transforms --- To Come!}
+
+A general principle in solving e.g.\ a differential equation would be to
+transform from real space to transform space, solve these and then invert back,
+as shown in Figure~\ref{fig:transformApp}.
+
+\begin{figure}
+  	\includegraphics[scale=0.15]{transformApp.jpeg}
+  	\centering
+    \caption{Fourier transform application}\label{fig:transformApp}
+\end{figure}
+
+\begin{ex}
+    \[
+        \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}}+y=f(x)
+    \]
+    From the Fourier transform property for derivatives, we can transform the first term\[
+        \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} = {(i\omega)}^{2}\hat{y} = -\omega^{2}\hat{y}
+    \]
+    following the other terms, deriving\[
+        \hat{y} = \frac{\hat{f}}{1-\omega^{2}}
+    \]and thus,\[
+        \Rightarrow{}y(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} \frac{\hat{f}}{1-\omega^{2}}e^{i\omega x}\mathrm{d}\omega.
+    \]
+    If $f(x)$ is `simple' then we can use the transform properties to perform this ---
+    if not then more integration technique is required!
+\end{ex} 
+
+
 
 
 % End of mathematical methods
