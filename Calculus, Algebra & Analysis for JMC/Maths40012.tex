@@ -40,7 +40,7 @@ Study of the simplest algebraic structure on a set.
 \begin{theorem}
     \emph{Set} is a collection of distinct elements. Let $G$ be a set.
     \textbf{\emph{Binary operation on G}} is a function\[
-        *: G \times G \rightarrow G \textnormal{(Closure is included)}
+        *: G \times G \rightarrow G \text{(Closure is included)}
     \]
 \end{theorem}
 
@@ -76,7 +76,7 @@ Study of the simplest algebraic structure on a set.
     \;
 
     \begin{itemize}
-        \item $+$ on $\mathbb{N, Z, R}$? Yes
+        \item $+$ on $\mathbb{N}, \mathbb{Z}, \mathbb{R}$? Yes
         \item $-$ on $\mathbb{R}$? No
         \item $g*h = g^{h}$ on $\mathbb{N}$? No
     \end{itemize}
@@ -94,7 +94,7 @@ Study of the simplest algebraic structure on a set.
     \;
 
     \begin{itemize}
-        \item $+, \cdot$ on $\mathbb{N, Z, R, C}$
+        \item $+, \cdot$ on $\mathbb{N}, \mathbb{Z}, \mathbb{R}, \mathbb{C}$
         \item matrix multiplication ($AB \neq BA$ in general for $A, B$ in $M(\mathbb{R}^n)$)
         \item let $g, h \in \mathbb{R}$, $g * h = 1 + g \cdot h$: commutative but \emph{not associative}!
     \end{itemize}
@@ -104,7 +104,7 @@ Study of the simplest algebraic structure on a set.
 \newmdtheoremenv[style=defEnv]{identity element}[theorem]{Definition}
 \begin{identity element}
     Let $(G, *)$ be a set. An element $e$ is called \emph{left identity} (respectively \emph{right identity}) if:\[
-        e * g = g (\textnormal{resp.}\; g * e = g) \;\forall\; g \in G
+        e * g = g (\text{resp.}\; g * e = g) \;\forall\; g \in G
     \]
     \underline{Caution}: There might be \emph{many} left/right identities or none.
 \end{identity element}
@@ -129,7 +129,7 @@ Idea: We want a good unique identity.
 \begin{unique identity}
     let $(G, *)$ be set, such that $*$ has both a left identity $e_1$ \emph{and}
     a right identity $e_2$, then\[
-        e_1 = e_2 =: e \quad \textnormal{and} \quad e \textnormal{ is unique.}
+        e_1 = e_2 =: e \quad \text{and} \quad e \text{ is unique.}
     \]
 \end{unique identity}
 
@@ -153,7 +153,7 @@ Idea: We want a good unique identity.
             \]\[
                 g * e' = e * e' = e'
             \]Therefore \[
-                e = e'
+                e = e'.
             \]
     \end{itemize}
     
@@ -164,7 +164,7 @@ As soon as you get one left and one right identity, you have a unique identity $
 \begin{inverse}
     let $(G,*)$ be a set. Let $g \in G$.
     An element $h \in G$ is called left (resp.\ right) inverse if\[
-        h * g = e \;(\textnormal{resp. } g * h = e)
+        h * g = e \;(\text{resp. } g * h = e).
     \]
     \underline{Caution}: Again inverses might not exist, 
     there might be many, or \emph{not} the same on both sides.
@@ -186,7 +186,7 @@ As soon as you get one left and one right identity, you have a unique identity $
 \begin{equal left right inverse}
     Let $(G, *)$ be a set with associative binary operation and identity $e$.
     Then if $h_1$ is left inverse, and $h_2$ is right inverse, then\[
-        h_1 = h_2 = g^{-1} \;\textnormal{ and \emph{it is unique}}
+        h_1 = h_2 = g^{-1} \;\text{ and \emph{it is unique}}.
     \]
 \end{equal left right inverse}
 
@@ -1090,7 +1090,7 @@ Set of right cosets: $H:G \,:= \{Hg | g \in G\}$.
     \item study of symmetries $\rightarrow$ ``Lie Groups''
 \end{enumerate}
 
-% End of Group Theory
+% End of GT, start of MM
 
 
 \chapter{Applied Mathematical Methods}
@@ -1292,7 +1292,7 @@ Let's look at them one by one:
     i.e.\ a new dependent variable, \[
         \begin{align*}
             \frac{\mathrm{d}y}{\mathrm{d}x} = u + x\frac{\mathrm{d}u}{\mathrm{d}x} & (= f(u)) 
-            \quad \textnormal{\textbf{\emph{(Remember!)}}} \\
+            \quad \text{\textbf{\emph{(Remember!)}}} \\
             f(u) - u & = \frac{x\mathrm{d}u}{\mathrm{d}x} \\
             \int \frac{\mathrm{d}u}{f(u) - u} & = \int \frac{\mathrm{d}x}{x} \\
             \vdots
@@ -4809,7 +4809,7 @@ as shown in Figure~\ref{fig:transformApp}.
 
 
 
-% End of mathematical methods
+% End of MM, start of LA
 
 
 \chapter{Linear Algebra}
@@ -6556,12 +6556,12 @@ So for instance, $v = \begin{pmatrix}
     Assume $f(b_i) = g(b_i) \;\forall i$, then $f = g$.
 \end{same basis tranformed implies same linear map}
 
-\newmdtheoremenv[style=defEnv]{sdfsdf}[theorem]{Proposition}
-\begin{sdfsdf}
+\newmdtheoremenv[style=defEnv]{unique linear map from U to V}[theorem]{Proposition}
+\begin{unique linear map from U to V}
     Let $U,V$ vector spaces, $B = \{b_1, b_2,\ldots,b_k\}$ basis of $U$,
     $\{v_1, v_2,\ldots,v_k\} \subset V$.
     Then there exists a \emph{unique linear} map s.t. $f(b_i) = v_i \;\forall i$.
-\end{sdfsdf}
+\end{unique linear map from U to V}
 
 \begin{proof}
     Exercise! (There are three things to prove! $f(b_i) = v_i$, linear, and unique!)
@@ -6711,9 +6711,7 @@ and injective $\Rightarrow{} \ker{f} = \{\mathbf{0}_U\}$.
 
 
 
-
-
-% End of Linear Algebra
+% End of LA, start of Anal
 
 
 
@@ -7059,7 +7057,7 @@ and injective $\Rightarrow{} \ker{f} = \{\mathbf{0}_U\}$.
     \end{enumerate}
 \end{Algebra of limits}
 
-\subsection{Continuous functions}
+\section{Continuity}
 
 \newmdtheoremenv[style=defEnv]{continuous at a}[theorem]{Definition}
 \begin{continuous at a}
@@ -7105,7 +7103,7 @@ and injective $\Rightarrow{} \ker{f} = \{\mathbf{0}_U\}$.
 \newmdtheoremenv[style=defEnv]{discontinuous at a}[theorem]{Definition}
 \begin{discontinuous at a}
     $f$ is \textbf{\emph{discontinuous at}} $a$ iff\[
-        \exists \epsilon>0 \;\textnormal{s.t.}\; \forall\delta>0,
+        \exists \epsilon>0 \;\text{s.t.}\; \forall\delta>0,
         \exists x\in\mathbb{R} [|x-a|<\delta \wedge|f(x)-f(a)|\ge\epsilon].
     \]
 \end{discontinuous at a}
@@ -7126,7 +7124,23 @@ ensure that it satisfy for \emph{all} $\delta$.
     then $g\circ f:I\rightarrow{}\mathbb{R}$ is continuous.
 \end{continiuos function composition is continuous}
 
-\subsubsection{Sequential Criterion for continuous functions}
+\begin{proof}
+    Since $g$ is continuous at $b \in J$ so we can write
+    $\forall \epsilon > 0, \exists \delta' > 0$ s.t.
+    $\forall y \in J [|y-b|<\delta' \rightarrow |g(y)-g(b)|<\epsilon]$.
+
+    Similarly for $f$, since it is mapped from $I$ to $J$ we can write
+    $\forall \delta' > 0, \exists \delta > 0$ s.t. 
+    $\forall x \in I [|x-a|<\delta \rightarrow |f(x)-f(a)|<\delta']$.
+    We can write it as such because the codomain of $f$ is the domain of $g$.
+
+    Combining the two statements, we can deduce that
+    $\forall \epsilon > 0, \exists \delta' > 0, \delta > 0$ s.t.
+    $\forall x \in I [|x-a|<\delta \rightarrow |f(x)-f(a)|<\delta' 
+    \rightarrow |g(f(x))-g(f(a))|=|g\circ f(x) - g\circ f(a)|<\epsilon]$.
+\end{proof} 
+
+\subsection{Sequential Criterion for continuous functions}
 
 There is connection between (convergent) sequences and continuous function.
 
@@ -7136,8 +7150,38 @@ There is connection between (convergent) sequences and continuous function.
     $\iff f(a_n) \rightarrow{} f(a)$ $\forall (a_n)$ s.t. $a_n \rightarrow{}a$.
 \end{continuous function and sequences}
 
-\begin{proof}
-    Exercise!
+\begin{proof} 
+    \;
+
+    \begin{itemize}
+            \item $``\Rightarrow''$:
+                Since the function is continuous, we can deduce that
+                $\forall \epsilon > 0, \exists \delta > 0$ 
+                s.t. $\forall x [|x-a| < \delta \rightarrow |a_n - a|<\epsilon]$.
+
+                Since $a_n \rightarrow a$, we can write $\forall \epsilon' > 0$
+                $\exists N \in \mathbb{N}$ s.t. $\forall n \ge N$, $|a_n - a| < \epsilon'$.
+
+                Let $\epsilon' = \delta$, thus, $
+                    \forall \epsilon > 0, \exists \delta > 0, \exists N \in \mathbb{N} \;\text{s.t.}\;
+                    \forall n \ge N, |a_n - a| < \delta \Rightarrow
+                    |f(a_n)-f(a)| < \epsilon$.
+                
+            \item $``\Leftarrow''$:
+                We can alternatively prove that,
+                if $f(x)$ is not continuous at $a$, 
+                then $\exists a_n$ s.t. $a_n\rightarrow a$ s.t. 
+                $f(a_n)$ does not converge to $f(a)$.
+
+                $f(x)$ is not continuous at $a$ implies that
+                $\exists \epsilon > 0$ s.t.  $\forall \delta > 0$,
+                $\exists x [ |x-a|<\delta \wedge |f(x)-f(a)|\ge\epsilon ]$.
+
+                Let $\delta = \frac{1}{n}$, and substitute $x$ with $a_n$,
+                we obtain $\forall n > 0, |a_n - a|<\frac{1}{n}$.
+                The sequence is thus convergent, and leave it as an exercise!
+                While $f(a_n)$ does not converge to $f(a)$.
+    \end{itemize}
 \end{proof}
 
 \begin{ex}
@@ -7147,11 +7191,12 @@ There is connection between (convergent) sequences and continuous function.
                 & x^{2}, & x\in \mathbb{Q} \\
                 & -x^{2}, & x\notin \mathbb{Q}
             \end{align*}
-            \right. \quad\;\textnormal{if $f$ is continuous at $a$}\;.
+            \right. \quad\;\text{is continuous at $a$ iff $a=0$}\;.
     \]
     But $f(a_n) = a^{2}_n \rightarrow{}a^{2}$,
     $f(b_n) = -b^{2}_n \rightarrow{} -a^{2}$,
     and both are equal only if $a = 0$.
+    Next, prove that it is continuous at $a = 0$.
 \end{ex}
 
 \begin{ex}
@@ -7163,9 +7208,10 @@ There is connection between (convergent) sequences and continuous function.
             \end{align*}
             \right.\quad\;\textnormal{not continuous at 0}\;.
     \]
+    Challenge: Prove $\sin{n}$ diverges.
 \end{ex}
 
-\subsubsection{continuous function on closed bounded interval}
+\subsection{Continuous function on closed bounded interval}
 
 \newmdtheoremenv[style=defEnv]{continuous for closed function}[theorem]{Definition}
 \begin{continuous for closed function}
@@ -7217,7 +7263,7 @@ e.g. $\frac{1}{x}$ on $(0,1)$.
     and $\inf{f}\ := \inf{\{ f(x) | x \in\ S\}}$.
 \end{supremum of function}
 
-\newmdtheoremenv[style=defEnv]{closed bounded interval func has sup}[theorem]{Theorem}
+\newmdtheoremenv[style=defEnv]{closed bounded interval func has sup}[theorem]{(Extreme Value) Theorem}
 \begin{closed bounded interval func has sup}
     Let $K$ be a closed bounded interval, $f:K\rightarrow{}\mathbb{R}$ continuous. Then:
     \begin{enumerate}[label = (\arabic*)]
@@ -7239,12 +7285,18 @@ e.g. $\frac{1}{x}$ on $(0,1)$.
            $\frac{1}{n}>\sup{f} - f(x_n)$ $\iff$
            $n < \frac{1}{\sup{f} - f(x_n)} = g(x_n)$ is bounded!
 
+           Alternatively, let $a = \sup{f}$, then
+           $\exists k \in K$ s.t. $a-\frac{1}{n} < f(k) \le a$.
+           This shows that $f(k)\rightarrow a$.
+           Given that $f$ is continuous, $\forall k_n \rightarrow k$,
+           $f(k_n)\rightarrow f(k)$.
+           Since limit is unique, $f(k)=a$.
+
        \item Largely identical process of proof.
    \end{enumerate}
-   
 \end{proof}
 
-\newmdtheoremenv[style=defEnv]{intermediate value theorem}[theorem]{Theorem}
+\newmdtheoremenv[style=defEnv]{intermediate value theorem}[theorem]{(Intermediate Value) Theorem}
 \begin{intermediate value theorem}
     Let $K = [b,c]$ be a \emph{closed bounded} interval and let $f:K\rightarrow{}\mathbb{R}$
     be \emph{continuous}. Then:
@@ -7266,7 +7318,7 @@ one can always find a smaller/larger $x$ that satisfies same inequality.
 \newmdtheoremenv[style=defEnv]{coro of IVT}[theorem]{Corollary}
 \begin{coro of IVT}
     If $f:[b,c]\rightarrow{}\mathbb{R}$ is continuous,
-    and we have $f(b) < 0$ and $f(c) < 0$ (or vice versa),
+    and we have $f(b) < 0$ and $f(c) > 0$ (or vice versa),
     then $\exists a \in (b,c)$ s.t. $f(a) = 0$.
 \end{coro of IVT}
 
@@ -7282,6 +7334,7 @@ one can always find a smaller/larger $x$ that satisfies same inequality.
 
     Proceed from here!
     (Try to connect $Q(x)$ with $a_d x^{d}$ so that e.g.\ $P(x) > 0$ when $x > 0$, and vice versa)
+    (Hint: sequential criterion!)
 \end{proof}
 
 \newmdtheoremenv[style=defEnv]{closed bounded continuous function has a fixed point}[theorem]{Corollary}
@@ -7295,7 +7348,42 @@ one can always find a smaller/larger $x$ that satisfies same inequality.
     Exercise! (Think of a new function s.t.\ the previous corollary can be applied)
 \end{proof}
 
-\subsection{Differentiability}
+\newmdtheoremenv[style=defEnv]{image of bounded continuous function}[theorem]{Proposition}
+\begin{image of bounded continuous function}
+    Let $f:[a,b] \rightarrow \mathbb{R}$ be a continuous function.
+    Then $\exists c,d\in[a,b]$ s.t.\ the image $f([a,b])$ is the closed
+    interval $[f(c), f(d)]$.
+\end{image of bounded continuous function}
+
+\begin{proof}
+    Exercise! (Hint: combine IVT and EVT!)
+\end{proof} 
+
+\newmdtheoremenv[style=defEnv]{one-to-one continuous map}[theorem]{Proposition}
+\begin{one-to-one continuous map}
+    If $f:[a,b]\rightarrow\mathbb{R}$ or $f:\mathbb{R}\rightarrow\mathbb{R}$ is
+    continuous, then $f$ is injective $\iff$
+    it is strictly monotonic.
+\end{one-to-one continuous map}
+
+\begin{proof}
+    Exercise!
+\end{proof} 
+
+\newmdtheoremenv[style=defEnv]{continuous and injective f from R to R}[theorem]{Theorem}
+\begin{continuous and injective f from R to R}
+    If $f:\mathbb{R}\rightarrow\mathbb{R}$ is continuous and injective, then
+    $f^{-1}:f(\mathbb{R})\rightarrow\mathbb{R}$ is continuous.
+\end{continuous and injective f from R to R}
+
+\begin{proof}
+    Exercise!
+\end{proof} 
+
+\subsection{Open, closed and compact sets}
+
+
+\section{Differentiability}
 
 \newmdtheoremenv[style=defEnv]{differentiable}[theorem]{Definition}
 \begin{differentiable}
@@ -7381,7 +7469,7 @@ one can always find a smaller/larger $x$ that satisfies same inequality.
     Exercise!
 \end{proof}
 
-\subsubsection{Extreme Values and Derivatives}
+\subsection{Extreme Values and Derivatives}
 
 \newmdtheoremenv[style=defEnv]{global/local maximum/minimum}[theorem]{Definition}
 \begin{global/local maximum/minimum}
@@ -7456,7 +7544,8 @@ one can always find a smaller/larger $x$ that satisfies same inequality.
     Then $f'(x) = 0 \;\forall x \in (a,b) \iff f$ is constant.
 \end{f is constant then gradient is 0}
 
-\underline{Technique}: Think of using MVT in ``the other way'' round: arbitrarily choose two points,
+\underline{Technique}: Think of using MVT in ``the other way'' round: 
+arbitrarily choose two points,
 and the gradient of the line connecting the two points can be expressed using
 differentiation on one point in the interval.
 
