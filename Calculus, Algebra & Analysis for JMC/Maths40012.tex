@@ -7380,16 +7380,293 @@ one can always find a smaller/larger $x$ that satisfies same inequality.
     Exercise!
 \end{proof} 
 
+
 \subsection{Open, closed and compact sets}
+
+\newmdtheoremenv[style=defEnv]{open set}[theorem]{Definition}
+\begin{open set}
+    A set $S\subset\mathbb{R}$ is \textbf{\emph{open}} iff \[
+        \forall x \in S, \exists \delta > 0 \;\text{s.t.}\; 
+        (x-\delta, x+\delta) \subset S.
+    \]
+\end{open set}
+In other words, if $x$ is a point of an open set $S$, then $S$ has to contain
+every other point within a small \emph{neighborhood} of x.
+
+\newmdtheoremenv[style=defEnv]{union of open sets are open}[theorem]{Proposition}
+\begin{union of open sets are open}\label{prop:2}
+    Given a collection $\{S_\alpha\}$ of open subsets of $\mathbb{R}$,
+    which may or may not be finite,
+    the union $S = \bigcup_\alpha S_\alpha$ is open.
+\end{union of open sets are open}
+
+\begin{proof}
+    Exercise!
+\end{proof} 
+
+\newmdtheoremenv[style=defEnv]{intersection of finite open sets are open}[theorem]{Proposition}
+\begin{intersection of finite open sets are open}\label{prop:3}
+    Given finitely many open sets $S_1, S_2,\ldots,S_n\subset\mathbb{R}$,
+    the intersection $S=\bigcap_{i=1}^{n}S_i$ is open.
+\end{intersection of finite open sets are open}
+
+\begin{proof}
+    Exercise!
+\end{proof} 
+
+Challenge: Prove that it is not true for infinitely many open sets.
+
+\newmdtheoremenv[style=defEnv]{closed set}[theorem]{Definition}
+\begin{closed set}
+    A set $S\subset\mathbb{R}$ is \textbf{\emph{closed}} iff \[
+        \forall\;\text{sequence}\,(x_n)\subset S,
+        x_n\rightarrow x\in\mathbb{R}\Longrightarrow x\in S.
+    \]
+\end{closed set}
+In other words, the limit of any convergent subsequence of $S$
+must also be in $S$.
+
+\newmdtheoremenv[style=defEnv]{compact set}[theorem]{Definition}
+\begin{compact set}
+    A set $S\subset\mathbb{R}$ is \textbf{\emph{compact}} iif it is closed and
+    bounded.
+\end{compact set}
+
+\begin{ex}
+    Are the following sets closed?
+    \begin{itemize}
+        \item $\{\frac{1}{n}\,|\,n\in\mathbb{N}\}$,
+        \item $[3,\infty)$, % chktex 9
+        \item $\{40002\}$,
+        \item $\mathbb{Q}$,
+        \item $\mathbb{R}$.
+    \end{itemize}
+\end{ex} 
+
+\newmdtheoremenv[style=defEnv]{open set complement is closed}[theorem]{Proposition}
+\begin{open set complement is closed}
+    A set $S\subset\mathbb{R}$ is open iff
+    its complement $T=\mathbb{R}\backslash S$ is closed.
+\end{open set complement is closed}
+
+\begin{proof}
+    Exercise!
+    (The proof can show that, open set's complement must be closed, by definition,
+    and not-closed set is not open.)
+\end{proof} 
+
+
+The following two properties can be proved by utilizing the propositions%
+~\ref{prop:2} and~\ref{prop:3}.
+
+\newmdtheoremenv[style=defEnv]{union of finite closed sets is closed}[theorem]{Proposition}
+\begin{union of finite closed sets is closed}
+    A union of finitely many closed sets is closed.
+\end{union of finite closed sets is closed}
+
+\begin{proof}
+    Exercise!
+\end{proof} 
+
+\newmdtheoremenv[style=defEnv]{intersection of closed sets is closed}[theorem]{Proposition}
+\begin{intersection of closed sets is closed}
+    An intersection of arbitrarily many closed sets is closed.
+\end{intersection of closed sets is closed}
+
+\begin{proof}
+    Exercise!
+\end{proof} 
+
+
+\subsection{Uniform continuity and convergence}
+
+\newmdtheoremenv[style=defEnv]{uniformly continuous}[theorem]{Definition}
+\begin{uniformly continuous}
+    A function $f:S\rightarrow\mathbb{R}$ is said to be \textbf{\emph{uniformly
+    continuous}} iff \[
+        \forall \epsilon > 0, \exists \delta > 0 \;\text{s.t.}\;
+        \forall x,y\in S [|x-y|<\delta \rightarrow |f(x)-f(y)|<\epsilon].
+    \]
+\end{uniformly continuous}
+
+\newmdtheoremenv[style=defEnv]{not uniformly continuous}[theorem]{Definition}
+\begin{not uniformly continuous}
+    A function $f:S\rightarrow\mathbb{R}$ is not uniformly continuous iff \[
+        \exists \epsilon > 0 \;\text{s.t.}\; \forall \delta > 0,
+        \exists x,y\in S [|x-y|<\delta \wedge |f(x)-f(y)|\ge\epsilon].
+    \]
+\end{not uniformly continuous}
+
+
+\newmdtheoremenv[style=defEnv]{uniformly continuous is continuous}[theorem]{Proposition}
+\begin{uniformly continuous is continuous}
+    If $f:S\rightarrow\mathbb{R}$ is uniformly continuous, 
+    then it is continuous.
+\end{uniformly continuous is continuous}
+
+\begin{proof}
+    Exercise!
+\end{proof} 
+
+\begin{ex}
+    Determine if the following functions are uniformly continuous?
+    \begin{itemize}
+        \item $f(x) = ax + b$,
+        \item $f(x) = x^{2}$,
+        \item Define $f:(0,1]\rightarrow\mathbb{R}$ by %chktex 9
+            $f(x) = \frac{1}{x}$.
+    \end{itemize} 
+\end{ex} 
+
+\newmdtheoremenv[style=defEnv]{compact and continuous is uniformly continuous}[theorem]{Proposition}
+\begin{compact and continuous is uniformly continuous}
+    If $S$ is compact and $f:S\rightarrow\mathbb{R}$ is continuous, then $f$ is 
+    uniformly continuous.
+\end{compact and continuous is uniformly continuous}
+
+\begin{proof}
+    Suppose that $f$ is not uniformly continuous.
+    Then there must be an $\epsilon > 0$ s.t. \[
+        \forall \delta > 0, \exists x,y\in S \;\text{s.t.}\;
+        |x-y|<\delta \wedge |f(x)-f(y)|\ge{}\epsilon.
+    \]
+    Now we look at $\forall \delta > 0, \exists x,y\in S$ s.t. $|x-y|<\delta$ 
+    to see if there is anything we can get.
+    In general, this statement means that ``you can always
+    find two points in $S$ s.t.\ they are arbitrarily close.
+    (traditional sense of $\delta$ in statements about continuity
+    is not applicable here, so should not confuse with the $\delta$
+    in the statement we extracted out.)
+
+    \medskip\noindent
+    We take a sequence of points $x_i, y_i$ with $|x_i-y_i|<\frac{1}{i}$
+    for all $i$. By Bolzano-Weierstrass, there is a subsequence
+    $(x_{i_j})$ of the $x_i$ which converges (since $S$ is bounded)
+    to some limit $x\in S$ (since S is closed). Then \[
+        \forall i, |x-y_{i_j}|\le|x-x_{i_j}|+|x_{i_j}-y_{i_j}|
+    \]by the triangle inequality, and both terms on the right
+    go to 0 as $j\rightarrow\infty$, so $y_{i_j}\rightarrow x$ as well.  
+    Since $f$ is sequentially continuous at $x$, we know that \[
+        \lim_{j\rightarrow\infty}f(x_{i_j}) = f(x) =
+        \lim_{j\rightarrow\infty}f(y_{i_j}).
+    \]
+    So,\[
+        \exists N\in\mathbb{N} \;\text{s.t.}\; \forall j \ge N
+        \left[|f(x_{i_j})-f(x)|<\frac{\epsilon}{2} \wedge
+        |f(x)-f(y_{i_j})|<\frac{\epsilon}{2}].
+    \]
+    Combining these two triangle inequalities and we get\[
+        |f(x_{i_j})-f(y_{i_j})|
+        \le|f(x_{i_j})-f(x)| + |f(x)-f(y_{i_j})|
+        < \frac{\epsilon}{2}+\frac{\epsilon}{2} = \epsilon.
+    \]
+    This contradicts with the assumption.
+\end{proof} 
+
+\newmdtheoremenv[style=defEnv]{function convergence}[theorem]{Definition}
+\begin{function convergence}
+    Let $f_1, f_2,\ldots:S\rightarrow\mathbb{R}$ be a sequence of functions
+    defined on $S\subset\mathbb{R}$.
+    We say that $f_n$ converges \textbf{\emph{pointwise}} to $f:S\rightarrow\mathbb{R}$
+    if \[
+        \forall x\in S, \forall \epsilon>0, \exists N\in\mathbb{N}
+        \;\text{s.t.}\; n\ge N \Longrightarrow
+        |f_n(x)-f(x)|<\epsilon.
+    \] We say that $f_n$ converges \textbf{\emph{uniformly}} to $f$ if\[
+        \forall \epsilon>0, \exists N\in\mathbb{N} \;\text{s.t.}\;
+        \forall x\in S, n\ge N \Longrightarrow |f_n(x)-f(x)|<\epsilon.
+    \]
+\end{function convergence}
+
+\begin{ex}
+    Prove that $f_n(x) = x^{n}$ on $[0,1]$ converges pointwise to \[
+        f(x) = \left\{\begin{align*}
+            & 0, && 0 \le x < 1 \\
+            & 1, && x = 1
+        \end{align*}\right.,
+    \]but not uniformly.
+\end{ex} 
+
+\newmdtheoremenv[style=defEnv]{uniformly continuous function converged from}[theorem]{Theorem}
+\begin{uniformly continuous function converged from}
+    If a sequence of uniformly continuous functions $f_n:S\rightarrow\mathbb{R}$
+    converges uniformly to $f:S\rightarrow\mathbb{R}$,
+    then $f$ is uniformly continuous.
+\end{uniformly continuous function converged from}
+
+\begin{proof}
+    Exercise!
+\end{proof} 
+
+\newmdtheoremenv[style=defEnv]{continuous function converged from}[theorem]{Proposition}
+\begin{continuous function converged from}
+    Let $S\subset\mathbb{R}$.
+    If a sequence of continuous functions $f_n:S\rightarrow\mathbb{R}$
+    converges uniformly to $f:S\rightarrow\mathbb{R}$,
+    then $f$ is continuous.
+\end{continuous function converged from}
+
+\begin{proof}
+    Exercise!
+\end{proof} 
+
+\newmdtheoremenv[style=defEnv]{function series convergence}[theorem]{Definition}
+\begin{function series convergence}
+    We say that a series \[
+        \sum_{i=1}^{\infty} f_i(x)
+    \]converges iff the sequence of partial sums\[
+        S_n(x)=\sum_{i=1}^{n} f_i(x)
+    \]converges, and it converges uniformly iff the sequence $S_n(x)$
+    converges uniformly.
+\end{function series convergence}
+
+\newmdtheoremenv[style=defEnv]{Weierstrass M-test}[theorem]{(Weierstrass M-test) Theorem}
+\begin{Weierstrass M-test}
+    Let $f_1,f_2,\ldots:S\rightarrow\mathbb{R}$ be a sequence of continuous
+    functions, and suppose there are constants $M_1,M_2,\ldots$ s.t.\[
+        \forall i\in\mathbb{N} \;\forall x\in S, |f_i(x)|\le M_i.
+    \]If $\sum_{i=1}^{\infty} M_i$ converges, then the series
+    $\sum_{n=1}^{\infty} f_i(x)$ converges uniformly to a continuous function
+    $g:S\rightarrow\mathbb{R}$.
+\end{Weierstrass M-test}
+
+\begin{proof}
+    Exercise!
+\end{proof} 
+
+\begin{ex}
+    Suppose for some $r>0$ that the series $\sum_{i=0}^{\infty} a_i r^{i}$
+    converges absolutely, where the $a_i$ are a sequence of real numbers.
+    For all $i\ge 0$, we take \[
+        f_i(x) = a_i x^{i}, M_i = |a_i|r^{i} \Longrightarrow
+        \forall x\in[-r,r], |f_i(x)|\le M_i.
+    \]
+    Since $\sum_{i}^{} M_i$ converges, the Weierstrass M-test then tells us that
+    the \emph{power series} \[
+        \sum_{i=0}^{\infty} a_i x^{i} = \sum_{i=0}^{\infty} f_i(x)
+    \]converges uniformly to a continuous function on the interval $[-r,r]$.
+\end{ex} 
+
+\begin{ex}
+    The series $f(x)=\sum_{i=0}^{\infty} \frac{\cos{(13^{i}\pi x)}}{2^{i}}$
+    converges uniformly on all of $\mathbb{R}$,
+    since if we take $M_i = \frac{1}{2^{i}}$ for all $i$ then\[
+        \left|\frac{\cos{(13^{i}\pi x)}}{2^{i}}\right|\le M_i
+        \;\text{and}\; \sum_{i=0}^{\infty} M_i \;\text{converges.}
+    \]
+    This is one of a family of functions constructed by Weierstrass which
+    are famously continuous on all of $\mathbb{R}$ but not differentiable
+    anywhere.
+\end{ex} 
+
 
 
 \section{Differentiability}
 
-\newmdtheoremenv[style=defEnv]{differentiable}[theorem]{Definition}
 \begin{differentiable}
     Let $f:(b,c) \rightarrow{} \mathbb{R}, a \in (b,c)$.
     $f$ is \textbf{\emph{differentiable at $a$}} if\[
-        f'(a) := \lim_{x\rightarrow{}a} \frac{f(x) - f(a)}{x - a} \;\textnormal{exists.}\;
+        f'(a) := \lim_{x\rightarrow{}a} \frac{f(x) - f(a)}{x - a} \;\text{exists.}\;
     \]$f'(a)$ is called the \textbf{\emph{derivative}} at $a$.
 \end{differentiable}
 
@@ -7397,7 +7674,7 @@ one can always find a smaller/larger $x$ that satisfies same inequality.
 \begin{differentiable alternative def}
     Let $f:(b,c) \rightarrow{} \mathbb{R}, a \in (b,c), x - a =: h$.
     $f$ is differentiable at $a$ if\[
-        f'(a) := \lim_{h\rightarrow{}0} \frac{f(a + h) - f(a)}{h} \;\textnormal{exists.}\;
+        f'(a) := \lim_{h\rightarrow{}0} \frac{f(a + h) - f(a)}{h} \;\text{exists.}\;
     \]
 \end{differentiable alternative def}
 
