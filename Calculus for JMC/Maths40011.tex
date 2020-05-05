@@ -650,6 +650,10 @@ Using segments of angles $\Delta \theta_i$,\[
     \int f(x)\mathrm{d}x = \sum_{n=0}^{\infty} \frac{a_n x^{n+1}}{n+1}
     \]
     For a power series \emph{within its radius of convergence}, we can differentiate or integrate term by term.
+    (When we are differentiating a function, we are assuming that we are
+    differentiating over points that are differentiable. Similarly,
+    integrating a function assumes that we are integrating over a range
+    that is integrable.)
 \end{diff and int of power series}
 \begin{notes}
     $f(x) = \sum_{n=0}^{\infty} a_n x^{n}$ can be differentiated an infinite number of times as long as $|x| < R$, 
@@ -866,7 +870,7 @@ Sometimes it is easier to use Taylor's theorem instead of differentiating many t
 \section{Orthogonal and orthonormal function spaces}
 \newmdtheoremenv[style=defEnv]{inner product of f and g}[theorem]{Definition}
 \begin{inner product of f and g}
-    If $f$, $g$ are real valuedtfunctions that are Riemann integrable on $[a,b]$, 
+    If $f$, $g$ are real-valued functions that are Riemann integrable on $[a,b]$, 
     then we define the inner product of $f$ and $g$, denoted by $(f,g)$, by \[
         (f,g) := \int_{a}^{b} f(x)g(x) \mathrm{d}x
     \]\underline{Note} ${(f,f)}^{\frac{1}{2}} = {\left(\int_{a}^{b} f^{2} \mathrm{d}x\right)}^{\frac{1}{2}} 
