@@ -6743,7 +6743,7 @@ So the $j$th column of the matrix ${}_C{[f]}_{B}$ is the vector\[
     = F_C^{-1} \circ f(\mathbf{b}_j)\in\mathbb{R}^{n}.
 \]The map $F_C^{-1}:V\rightarrow\mathbb{R}^{n}$ is the map that
 sends a vector $\mathbf{v}$ to the componenets of $\mathbf{v}$
-with respect to $C$, so the procedure for finding ${}_B{[f]}_{C}$
+with respect to $C$, so the procedure for finding ${}_C{[f]}_{B}$
 is as follows:
 \begin{itemize}
         \item For each $j = 1,\ldots,k$, take the $j$th basis vector 
@@ -6762,14 +6762,23 @@ Then for each $j$, we have $F_C^{-1}(\mathbf{b}_j) = \begin{pmatrix}
         a_{nj}
     \end{pmatrix}$, so ${}_C{[f]}_{B}$ is the matrix $(a_{ij})$.
 
-\begin{ex}
+\begin{ex}\label{ex:matrix-representing-f}
     Let $T_A:\mathbb{R}^{2}\rightarrow\mathbb{R}^{2}$ be the linear map
     given by multiplying by the matrix\[
         A=\begin{pmatrix}
             1 & 2 \\
             3 & 4
         \end{pmatrix}.
-    \]If we pick the standard basis $B=C=\{\mathbf{e}_1,\mathbf{e}_2\}$ then\[
+    \]
+    (Caution! Here, $T_A$ is the ``$f$'' in definition!
+    Don't confuse $\mathbb{R}^{2}\rightarrow\mathbb{R}^{2}$
+    with the ``$\mathbb{R}^{k}\rightarrow\mathbb{R}^{n}$'' in the definition!
+    On top of this, notice that $T_A$ is a linear transformation,
+    not the matrix itself! \emph{One transformation can be represented
+    using different matrices according to different bases!})
+
+    \medskip
+    \noindent If we pick the standard basis $B=C=\{\mathbf{e}_1,\mathbf{e}_2\}$ then\[
     T_A(\mathbf{e}_1)=\begin{pmatrix}
             1 \\
             3
@@ -6828,21 +6837,7 @@ Then for each $j$, we have $F_C^{-1}(\mathbf{b}_j) = \begin{pmatrix}
             1 & 1
         \end{pmatrix}.
     \]
-    This is indeed true since \[
-        \begin{pmatrix}
-            1 & 0 \\
-            2 & 1
-        \end{pmatrix} \begin{pmatrix}
-            3 & 1 \\
-            1 & 1
-        \end{pmatrix} \begin{pmatrix}
-            1 & 1 \\
-            1 & 0
-        \end{pmatrix}^{-1} = \begin{pmatrix}
-            1 & 2 \\
-            3 & 4
-        \end{pmatrix}
-    \]and\[
+    This is indeed true since\[
         \begin{pmatrix}
             1 & 0 \\
             2 & 1
@@ -6884,6 +6879,196 @@ Then for each $j$, we have $F_C^{-1}(\mathbf{b}_j) = \begin{pmatrix}
     then the coefficients of $\mathbf{x}$ with respect to $C$ are the vector
     $P\mathbf{v}$.
 \end{coefficients with change-of-basis matrix}
+
+\begin{proof}
+    Exercise!
+\end{proof} 
+
+\begin{ex}
+    Now consider the identity map id $:
+    \mathbb{R}^{2}\rightarrow\mathbb{R}^{2}$.
+    If $B,C\subset \mathbb{R}^{2}$ are both the standard basis
+    then ${}_C{[\text{id}]}_{B}$ is the identity matrix $I_2$.
+    But if we take the bases $B', C'$ from the
+    example~\ref{ex:matrix-representing-f} then \[
+        \text{id}(\mathbf{b}_1) = \begin{pmatrix}
+                1 \\
+                1
+        \end{pmatrix} = \mathbf{c}_1 - \mathbf{c}_2
+        \quad\text{and}\quad
+        \text{id}(\mathbf{b}_2) = \begin{pmatrix}
+                1 \\
+                0
+        \end{pmatrix} = \mathbf{c}_1 - 2\mathbf{c}_2.
+    \]
+    So the matrix representing id with respect to $B'$ and $C'$,
+    i.e.\ change-of-basis matrix from $B'$ to $C'$, is\[
+        {}_{C'}{[\text{id}]}_{B'} = \begin{pmatrix}
+            1 & 1 \\
+            -1 & -2
+        \end{pmatrix} = {}_{C'}P_{B'}.
+    \]
+    Take the vector $\mathbf{x} = \begin{pmatrix}
+            1 \\
+            1
+    \end{pmatrix} $. If we write this using $B'$ we get\[
+        \mathbf{x} = \begin{pmatrix}
+                1 \\
+                -1
+        \end{pmatrix} = -\begin{pmatrix}
+                1 \\
+                1
+        \end{pmatrix} + 2\begin{pmatrix}
+                1 \\
+                0
+        \end{pmatrix} = -\mathbf{b}_1 + 2\mathbf{b}_2.
+    \]
+    Thus the coefficients of $\mathbf{x}$ with respect to $B$ are
+    $F_B^{-1}(\mathbf{x}) = \begin{pmatrix}
+            -1 \\
+            2
+    \end{pmatrix} $. The lemma claims that the coefficients of $\mathbf{x}$
+    with respect to $C$ should be\[
+        P(F_B^{-1}(\mathbf{x})) = \begin{pmatrix}
+            1 & 1 \\
+            -1 & -2
+        \end{pmatrix} \begin{pmatrix}
+                -1 \\
+                2
+        \end{pmatrix} = \begin{pmatrix}
+                1 \\
+                -3
+        \end{pmatrix},
+    \]and indeed\[
+        \mathbf{c}_1 - 3\mathbf{c}_2 = \begin{pmatrix}
+                1 \\
+                2
+        \end{pmatrix} - 3\begin{pmatrix}
+                0 \\
+                1
+        \end{pmatrix} = \begin{pmatrix}
+                1 \\
+                -1
+        \end{pmatrix} = \mathbf{x}.
+    \]
+\end{ex} 
+
+\newmdtheoremenv[style=defEnv]{change-of-basis formula}[theorem]{Proposition}
+\begin{change-of-basis formula}
+    Let $f:U\rightarrow V$ be a linear map.
+    Let $B$ and $B'$ be two bases for $U$,
+    and let ${}_B{P}_{B'}$ be the change-of-basis matrix between them.
+    Similarly define ${}_{C'}P_{C}$ be the change-of-basis matrix between 
+    two bases for $V$, $C'$ and $C$. Then the matrices representing $f$ with
+    respect to $B$ and $C$ or with respect to $B'$ and $C'$ are related by\[
+        {}_{C'}{[f]}_{B'} = {}_{C'}P_{C}\,{}_{C}{[f]}_{B}\,{}_{B}P_{B'}.
+    \]
+\end{change-of-basis formula}
+
+\begin{proof}
+    Exercise!
+\end{proof} 
+
+\begin{ex}
+    Let $D:\mathbb{R}{[X]}_{\le 2}\rightarrow\mathbb{R}{[X]}_{\le 1}$
+    be the differentiation map.
+    If we choose bases $B=\{X^{2}, X, 1\}$ and $C=\{X, 1\}$
+    then the matrix representing $D$ is\[
+        {}_C{[D]}_{B} = \begin{pmatrix}
+            2 & 0 & 0 \\
+            0 & 1 & 0
+        \end{pmatrix}.
+    \]Now switch to the bases $B'=\{X^{2} + X + 1, X + 1, 1\}$
+    and $C'=\{X + 1, 1\}$. To compute the change-of-basis matrix
+    ${}_B{P}_{B'}$ we have to express each polynomial in $B'$ as
+    a linear combination of the elements of $B$ --- This is easy, and\[
+        {}_B{P}_{B'} = \begin{pmatrix}
+           1 & 0 & 0 \\
+           1 & 1 & 0 \\
+           1 & 1 & 1
+       \end{pmatrix}.
+    \]
+    To compute the change-of-basis matrix ${}_{C'}P_C$ we have to 
+    express the polynomials in $C$ in terms of the basis $C'$.
+    This is also not hard, the matrix is\[
+       {}_{C'}P_C = \begin{pmatrix}
+           1 & 0 \\
+           -1 & 1
+       \end{pmatrix}.
+   \](This is the same problem as inverting the matrix ${}_C{P}_{C'}$.)
+   The change-of-basis formula then says that
+   \begin{align*}
+        {}_{C'}{[D]}_{B'} = {}_{C'}P_{C}\,{}_{C}{[D]}_{B}\,{}_{B}P_{B'}
+        & = \begin{pmatrix}
+            1 & 0 \\
+            -1 & 1
+        \end{pmatrix} \begin{pmatrix}
+            2 & 0 & 0 \\
+            0 & 1 & 0
+        \end{pmatrix} \begin{pmatrix}
+            1 & 0 & 0 \\
+            1 & 1 & 0 \\
+            1 & 1 & 1
+        \end{pmatrix} \\
+        & = \begin{pmatrix}
+            1 & 0 \\
+            -1 & 1
+        \end{pmatrix} \begin{pmatrix}
+            2 & 0 & 0 \\
+            1 & 1 & 0
+        \end{pmatrix} \\
+        & = \begin{pmatrix}
+            2 & 0 & 0 \\
+            -1 & 1 & 0
+        \end{pmatrix}.
+   \end{align*} 
+   This is exactly the same matrix as the one if we were to obtain the matrix
+   directly from $B'$ and $C'$.
+\end{ex} 
+
+There is a special case of the change-of-basis formula which is important in its
+own right. Suppose that\[
+    f:V\rightarrow V
+\]is a linear map from $V$ to itself. If we pick a single basis $B\subset V$
+then we can write down $f$ as the matrix ${}_B{[f]}_{B}$.
+Or we could choose another basis $B'$ and write $f$ down as the matrix
+${}_{B'}{[f]}_{B'}$. If we let $P={}_B{[\text{id}_V]}_{B'}$ be the
+change-of-basis matrix from $B'$ to $B$, then $P^{-1}$ is the change-of-basis 
+matrix from $B$ to $B'$, and the change-of-basis formula says that\[
+    {}_{B'}{[f]}_{B'} = P^{-1}\left({}_B{[f]}_{B}\right)P.
+\]
+Remember that we say that two matrices $M$ and $N$ are \textbf{\emph{similar}}
+if $M = P^{-1}NP$ for some invertible matrix $P$. So the matrices
+${}_{B'}{[f]}_{B'}$ and ${}_B{[f]}_{B}$ are similar to each other.
+In addition, you can diagonalize a matrix $A$ iff you can find a basis consisting
+of eigenvectors for $A$.
+
+\subsubsection{Observation on Similar Matrices}
+
+Notice that $P$ needs to be \emph{invertible} for the two matrices to be
+similar. Recall that $P$ is invertible if $\neg\exists \mathbf{v}\neq\mathbf{0}$
+s.t. $P\mathbf{v}=\mathbf{0}$.
+This is equivalent to saying, $\ker{P} = \{\mathbf{0}\}$.
+Thus nullity of $P$ is 0. 
+This means that $P$, as an $n\times n$ matrix,
+\emph{cannot map different original bases to the same new basis!}
+In other words, if both bases are $n$ dimensions, one of them cannot be
+\emph{pseudo-$n$ dimensions}---two vectors $\mathbf{v}_1, \mathbf{v}_2$
+from one of the bases can be associated by $\mathbf{v}_1 = \lambda\mathbf{v}_2$,
+$\lambda\in\mathbb{R}$.
+In fact, one of the bases is therefore not even a basis,
+because $\mathbf{v}_1$ and $\mathbf{v}_2$ are linearly dependent.
+
+\medskip
+\noindent For instance, although this might sound very ridiculous, but if a basis of
+$\mathbb{R}^{2}$, say $A$, is $\{(1, 2), (2, 4)\}$,
+this actually only has 1 dimension,
+and any attempt to doing change-of-basis matrix from other legitimate basis 
+to this \emph{pseudo-basis} will fail, because $A$ is not even a basis, and it
+is one-dimensional.
+
+\medskip
+\noindent In short, make sure that the chosen basis \emph{is} a basis.
 
 
 
