@@ -4520,6 +4520,18 @@ f(x) = \frac{2}{\pi}\int_{0}^{\infty} \hat{f}_s(\omega)\sin{\omega x}\mathrm{d}\
                     & = h(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} \hat{h}(\omega) e^{i\omega x} \mathrm{d}\omega
                 \end{align*} 
             \]
+
+            And the final most direct, intuitive approach:\[
+                \begin{align*}
+                    \widehat{f(ax)}
+                    & = \int_{-\infty}^{\infty} f(ax)e^{-i\omega x}\mathrm{d}x \\
+                    & = \int_{-\infty}^{\infty} f(y)
+                    e^{-i\frac{\omega}{a}y}\mathrm{d}\left(\frac{y}{a}\right) \\
+                    & = \frac{1}{\left|a\right|}\int_{-\infty}^{\infty} 
+                    f(y)e^{-i\frac{\omega}{a}y}\mathrm{d}y \\
+                    & = \frac{1}{|a|}\hat{f}\left(\frac{\omega}{a}\right).
+                \end{align*} 
+            \]
         \end{proof} 
         Specially, $\widehat{f(-x)} = \hat{f}(-\omega)$, i.e.\
         $h(x) = f(-x) \Rightarrow{} \hat{h}(\omega) = \hat{f}(-\omega)$,
@@ -4547,6 +4559,16 @@ f(x) = \frac{2}{\pi}\int_{0}^{\infty} \hat{f}_s(\omega)\sin{\omega x}\mathrm{d}\
                 & = \frac{1}{2\pi}\int_{-\infty}^{\infty} \hat{f}(\omega)e^{i\omega (x-x_0)}\mathrm{d}\omega \\
                 & = \frac{1}{2\pi}\int_{-\infty}^{\infty} e^{-i\omega x_0}\hat{f}(\omega)e^{i\omega x}\mathrm{d}\omega \\
                 & = h(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} \hat{h}(\omega)e^{i\omega x}\mathrm{d}\omega
+            \end{align*} 
+            The most direct approach:
+            \begin{align*}
+                \widehat{f(x-x_0)}
+                & = \int_{-\infty}^{\infty} f(x-x_0)e^{-i\omega x}\mathrm{d}x \\
+                & = \int_{-\infty}^{\infty} f(y)e^{-i\omega(y+x_0)}
+                \mathrm{d}(y+x_0) \\
+                & = (e^{-i\omega x_0})\int_{-\infty}^{\infty} 
+                f(y)e^{-i\omega y}\mathrm{d}y \\
+                & = e^{-i\omega x_0} \hat{f}(x).
             \end{align*} 
         \end{proof} 
 
@@ -4582,6 +4604,13 @@ f(x) = \frac{2}{\pi}\int_{0}^{\infty} \hat{f}_s(\omega)\sin{\omega x}\mathrm{d}\
                     & = \frac{1}{2\pi}\widehat{\hat{f}(x)}.
                 \end{align*} 
             \]
+            And the direct approach:
+            \begin{align*}
+                \widehat{\hat{f}(x)}
+                & = \int_{-\infty}^{\infty} \hat{f}(x)
+                e^{-i\omega x}\mathrm{d}x \\
+                & = 2\pi f(-\omega).
+            \end{align*} 
         \end{proof} 
 
     \item Derivatives: (Useful for ODE, PDE\ldots)
@@ -4765,18 +4794,23 @@ so that $\delta(x)$ is the inverse transform of 1. Naturally we can then write\[
     \delta(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} e^{\pm i\omega x}\mathrm{d}\omega
 \]as an alternative representation, and, of course,\[
     \delta(\omega) = \frac{1}{2\pi}\int_{-\infty}^{\infty} e^{\pm i\omega x}\mathrm{d}x.
-\]So this helps us to find Fourier transforms of functions that do not decay as $x\rightarrow{}\pm\infty$.
+\]
+($\pm$ is because $\delta(x) = \delta(-x)$.)
+
+So this helps us to find Fourier transforms of functions that do not decay as $x\rightarrow{}\pm\infty$.
 
 \begin{ex}
     Find the fourier transform of $\cos{\omega_0x}$.
     \begin{align*}
-        \widehat{\cos{\omega_0}}
+        \widehat{\cos{\omega_0x}}
         & = \int_{-\infty}^{\infty} \frac{1}{2}(e^{i\omega_0x}+e^{-i\omega_0x})e^{-i\omega x}\mathrm{d}x \\
         & = \frac{1}{2}\int_{-\infty}^{\infty} e^{-i(\omega-\omega_0)x}\mathrm{d}x
         + \frac{1}{2}\int_{-\infty}^{\infty} e^{-i(\omega+\omega_0)x}\mathrm{d}x \\
         & = \pi\delta(\omega-\omega_0) + \pi\delta(\omega+\omega_0).
     \end{align*}
 \end{ex} 
+
+\noindent Exercise: Find the fourier transform of $\sin{x}$.
 
 \subsection{Application of Transforms --- To Come!}
 
