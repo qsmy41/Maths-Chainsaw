@@ -795,7 +795,7 @@ In terms of \emph{bounding the remainder}, for maclaurin series with $x_0 = 0$, 
         \item \[
             f(x) = \sin{x} = \sum_{k=0}^{n} {(-1)}^{k}\frac{x^{2k+1}}{(2k+1)!} + R_{2n+3}
         \]where\[
-            |R_{2n+3}| = \left|\frac{f^{(2n+3)}(x)}{(2n+3)!}x^{2n+3}\right| \le \frac{{|x|}^{2n+3}}{(2n+3)!}
+            |R_{2n+1}| = \left|\frac{f^{(2n+3)}(x)}{(2n+3)!}x^{2n+3}\right| \le \frac{{|x|}^{2n+3}}{(2n+3)!}
         \]Hence \[
         \sin{(0.1)} \approx 0.1 - \frac{10^{-3}}{3!} + \frac{10^{-5}}{5!}
         \]with an error which is less than\[
@@ -810,7 +810,7 @@ In terms of \emph{bounding the remainder}, for maclaurin series with $x_0 = 0$, 
             \Rightarrow |R_n| \le \frac{0.2^{n+1}}{(n+1)!}
             \Rightarrow R_3 \le \frac{0.2^{4}}{24} = \frac{16 \times 10^{-4}}{24} < 10^{-4}
             \]\[
-            \Rightarrow \sin{(\frac{\pi}{6})} \approx \sin{\frac{\pi}{6}} + 0.2\cos{\frac{\pi}{6}} 
+            \Rightarrow \sin{\left(\frac{\pi}{6} + 0.2\right)} \approx \sin{\frac{\pi}{6}} + 0.2\cos{\frac{\pi}{6}} 
             + \frac{0.2^{2}}{2!} \left(-\sin{\frac{\pi}{6}}\right) + \frac{0.2^{3}}{3!}\left(-\cos{\frac{\pi}{6}}\right) 
             \]
         \item Compute $e$ to 3 decimals. \[
@@ -1312,7 +1312,7 @@ where\[
         &=& \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x) e^{-inx}\mathrm{d}x
 \end{eqnarray*}
 Similarly, \[
-    r_n = \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x) e^{inx}\mathrm{d}x
+    r_{-n} = \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x) e^{inx}\mathrm{d}x
 \]
 (Clearly $r_n^{*} = r_{-n}$ since $f(x)$ is real)
 \medskip
