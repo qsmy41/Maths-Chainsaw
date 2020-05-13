@@ -12,6 +12,7 @@
 \graphicspath{{./images/}} % for the path to images
 \usepackage{soul} % for separable underline
 \usepackage{textcomp} % for using degree symbot
+\usepackage{hyperref} % for clickable link in the pdf
 
 \theoremstyle{definition}
 \mdfdefinestyle{defEnv}{%
@@ -1288,8 +1289,10 @@ Let's look at them one by one:
 
 \item \textbf{\underline{Homogeneous}} \[
         \frac{\mathrm{d}y}{\mathrm{d}x} = f\left(\frac{y}{x}\right) 
-    \]Substitution $\frac{y}{x} = u(x)$,
-    i.e.\ a new dependent variable, \[
+    \]Substitution $\frac{y}{x} = u$,
+    i.e.\ a new dependent variable, 
+    and do implicit differentiation on $y=ux$ with respect to $x$,
+    we get\[
         \begin{align*}
             \frac{\mathrm{d}y}{\mathrm{d}x} = u + x\frac{\mathrm{d}u}{\mathrm{d}x} & (= f(u)) 
             \quad \text{\textbf{\emph{(Remember!)}}} \\
@@ -1633,7 +1636,7 @@ where $A_1, A_2$ or $C_1, C_2$ can be taken as our arbitrary constants.
     \]with $\omega = {(\omega^{2} + k^{2})}^{\frac{1}{2}}$.
 
 \item $k^{2} > \omega^{2}$, i.e. \emph{Heavy Damping}.\[
-    x = A_1 e^{-|\lambda_1|t + A_2 e^{-|\lambda_2|t}}
+    x = A_1 e^{-|\lambda_1|t} + A_2 e^{-|\lambda_2|t}
 \]
 since $\lambda_1, \lambda_2$ are each neagative real.
 
@@ -2295,7 +2298,7 @@ We put $X = x_n + \epsilon_n$ and imagine $x_0$ is chosen so that
 $\epsilon_0$ is `small' i.e.\ $x_0$ is `near' to $X$.
 Let's see how $\epsilon_n$ develops (whether $x_n$ converges or diverges to $X$):\[
         X - \epsilon_{n + 1} & = x_{n + 1} = F(x_n) = F(X - \epsilon_n)
-        = F(X) - \epsilon_n F'(X) + \frac{1}{2}\epsilon_n^{2}F(X) + \cdots
+        = F(X) - \epsilon_n F'(X) + \frac{1}{2}\epsilon_n^{2}F''(X) + \cdots
         \]with the last step using taylor expansion, and by cancelling $X$ and $F(X)$, we get\[
         \epsilon_{n + 1} = \epsilon_n F'(X) - \frac{1}{2}\epsilon_n^{2}F''(X) + \cdots.
 \]
@@ -2417,14 +2420,14 @@ including choosing a value near roots, having multiple roots, etc.
     \begin{itemize}
         \item $0 \le a < 1$, $a = 0$ is trivial.
 
-            We can deduce that $x = 0$ is an attractor,
-            while $x = 1 - \frac{1}{a}$ is a repeller.
+            We can deduce that $X = 0$ is an attractor,
+            while $X = 1 - \frac{1}{a}$ is a repeller.
             This makes sense because it is a linear model made worse by overcrowding.
 
         \item $1 < a < 3$.
 
-            We can decude that $x= 0$ is a repeller,
-            while $x = 1 - \frac{1}{a}$ is an attractor.
+            We can decude that $X= 0$ is a repeller,
+            while $X = 1 - \frac{1}{a}$ is an attractor.
             This makes sense because it is an exponential growth stabilised by overcrowding.
 
             This behaviour is very similar to that of the logistic differential equation
@@ -2432,7 +2435,7 @@ including choosing a value near roots, having multiple roots, etc.
 
         \item $a > 3$.
 
-            We can deduce that $x = 0$ and $x = 1 - \frac{1}{a}$ are both repellers.
+            We can deduce that $X = 0$ and $X = 1 - \frac{1}{a}$ are both repellers.
 
             So what exactly do we get?
             We get `\emph{period doubling}'.
@@ -2565,7 +2568,7 @@ Similarly, $j(t)$ is Juliet's love/hate for Romeo at time $t$.)
         \left\{
             \begin{align*}
                 & \frac{\mathrm{d}x}{\mathrm{d}t} = y \\
-                & \frac{\mathrm{d}y}{\mathrm{d}t} = \omega^{2}x - 2ky.
+                & \frac{\mathrm{d}y}{\mathrm{d}t} = -\omega^{2}x - 2ky.
             \end{align*}
             \right.
     \end{equation}
@@ -2753,7 +2756,8 @@ As a result, we cannot do certain things such as drawing the phase portrait!
       (Note: results are the same as the previous methods.)
 \end{enumerate}
 
-\subsection{System decoupling}
+\subsection{System decoupling}%
+\label{sec:system_decoupling}
 How does the last method do it? From the eigenvectors $\mathbf{V}_1, \mathbf{V}_2$ form the matrix\[
     S = (\mathbf{V}_1 \quad \mathbf{V}_2) \qquad\textnormal{i.e.\ 2 $\times$ 2}
 \]and write \[\mathbf{v} = \begin{pmatrix}
@@ -2763,7 +2767,10 @@ How does the last method do it? From the eigenvectors $\mathbf{V}_1, \mathbf{V}_
             \xi \\
             \eta
     \end{pmatrix}.
-\](\emph{Similarity transformation}: tranform linearly $(x,y)$ to new axes $(\xi, \eta)$)
+\]
+(\emph{Similarity transformation}: tranform linearly from old basis (axis) $(x,y)$ 
+to new basis (axis) $(\xi, \eta)$. For more background knolwedge on how this
+works, please refer to \autoref{sec:change-of-basis}.)
 The vector form of~\eqref{eqn:6} becomes\[
     \frac{\mathrm{d}}{\mathrm{d}t} \left[S \begin{pmatrix}
             \xi \\
@@ -2935,14 +2942,15 @@ and the time $t$ evolution arrows on the trajectories.
 
 The eigenvectors determine the crucial $\xi, \eta$ decoupled coordinate directions,
 where appropriate. We note in the interpretation of the diagrams that\[
-    \xi \propto e^{\lambda_1 t},\quad \eta \propto e^{\lambda_2 t}
-\]\[
-\Rightarrow{}\xi \propto \eta^{\frac{\lambda_1}{\lambda_2}},\quad
+    \xi \propto e^{\lambda_1 t},\eta \propto e^{\lambda_2 t}
+\quad\Longrightarrow{}\quad\xi \propto \eta^{\frac{\lambda_1}{\lambda_2}},
 \frac{\mathrm{d}\xi}{\mathrm{d}\eta} \propto \eta^{\frac{\lambda_1}{\lambda_2} - 1}
 \;\textnormal{in general}.
 \]
 Thus dominant eigenvector \emph{nearly always} depends on 
-$\left|\frac{\lambda_1}{\lambda_2}\right| > 1$ or $\left|\frac{\lambda_1}{\lambda_2}\right| < 1$,
+$\left|\frac{\lambda_1}{\lambda_2}\right|$.
+$\left|\frac{\lambda_1}{\lambda_2}\right| < 1 \Longrightarrow \mathbf{V}_1$
+is the dominant eigenvector,
 and the other trajectories come in \emph{parallel}/\emph{tangent} to the dominant eigenvector.  
 Now pardon me for the shameleses numerous screenshots of Berkshire's notes for the phase portraits.
 
@@ -3272,7 +3280,7 @@ we can see that the graph should be \emph{elliptic}.
 \subsection{Extensions}
 
 \begin{enumerate}[label = (\roman*)]
-    \item inhomogeneous systems\[
+    \item Inhomogeneous systems\[
         \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
                 x \\
                 y
@@ -3296,10 +3304,10 @@ we can see that the graph should be \emph{elliptic}.
                     \end{pmatrix}_{\textnormal{PI}}
     \]
     We solved CF earlier in this chapter. For PI, it is very difficult in general.
-    Here1 we just need to find any single particular solution for simple cases such as
-    $f_1$ and $f_2$ are constants, so the let PI be a constant vector, and solve for it will do.
+    Here we just need to find any single particular solution for simple cases such as
+    $f_1$ and $f_2$ are constants, then let PI be a constant vector, and solve for it will do.
 
-\item higher order systems
+\item Higher order systems
 
     The whole process may be generalised, e.g.\[
         \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix}
@@ -3437,14 +3445,15 @@ It represents a wave form moving (with $c>0$ here) to the right.
 
 \item $u = \tan^{-1}{\frac{y}{x}}$.
     This satisfies\[
-        \nabla^{2} u = \frac{\partial^{2}u}{\partial x^{2}} + \frac{\partial^{2}u}{\partial y^{2}} = 0.
+        \nabla^{2} u = (\nabla\cdot\nabla) u
+        = \frac{\partial^{2}u}{\partial x^{2}} + \frac{\partial^{2}u}{\partial y^{2}} = 0.
     \]which is a second order linear P.D.E.
     It is famously known as the Laplace's equation.
 \end{enumerate}
 
 \subsection{The Total Differential}
 
-When we have a function of a single varialbe $f(x)$,
+When we have a function of a single variable $f(x)$,
 and we make a small change $x \rightarrow{} x + \delta x$
 so that $f \rightarrow{} f + \delta f$, then 
 $\delta f \approx \frac{\mathrm{d}f}{\mathrm{d}x} \delta x$.
@@ -3691,7 +3700,7 @@ Hence\[
     + \frac{1}{r^{2}} \frac{\partial^{2}\overline{u}}{\partial \theta^{2}} = 0.
 \]
 Laplace in 3 dimensions is\[
-    \frac{\partial^{2}u}{\partial x^{2}} + \frac{\partial^{2}u}{\partial y} + \frac{\partial^{2}u}{\partial z} = 0.
+    \frac{\partial^{2}u}{\partial x^{2}} + \frac{\partial^{2}u}{\partial y^{2}} + \frac{\partial^{2}u}{\partial z^{2}} = 0.
 \]
 \end{enumerate}
 
@@ -3796,7 +3805,7 @@ We can write the operator \[
 The above Taylor series can then be re-written as\[
     u(x_0 + h, y_0 + k) = u_0 + \mathscr{D}u_0 + \frac{\mathscr{D}^{2}u_0}{2!} + \frac{\mathscr{D}^{3}u_0}{3!} + \cdots
 \]and our pattern involves the binomial coefficients explicitly, i.e.\ \[
-\mathscr{D}^{2}u_0 =
+\mathscr{D}^{2} =
 \left(h\frac{\partial}{\partial x} + k\frac{\partial}{\partial y} \right)
 \left(h\frac{\partial}{\partial x} + k\frac{\partial}{\partial y} \right) =
 h^{2}\frac{\partial^{2}}{\partial x^{2}} +
@@ -4175,10 +4184,13 @@ e.g. 2 dimensions $(x,y)$ if required.
 \begin{enumerate}[label = (\arabic*)]
     \item $\nabla\phi\equiv$ grad $\phi$.
 
-        At each point $\nabla\phi$ is \emph{perpendicular} to the $\phi =$ constant surface through the point.
+        At each point, $\nabla\phi$ is \emph{perpendicular} to the 
+        ``$\phi =$ constant'' (say $\phi_1$) surface through the point.
+        The direction also increases the value \emph{most rapidly}.
+
         If $\mathrm{d}\mathbf{r} = \mathrm{d}x\mathbf{i}
         + \mathrm{d}y\mathbf{j} + \mathrm{d}z\mathbf{k}$
-        along the surface at $P$, then\[
+        along the surface at a point $P$, then\[
             (\nabla\phi)\cdot\mathrm{d}\mathbf{r} = 
             \frac{\partial\phi}{\partial x}\mathrm{d}x + \frac{\partial\phi}{\partial y}\mathrm{d}y
             + \frac{\partial\phi}{\partial z}\mathrm{d}z = \mathrm{d}\phi = 0
@@ -4203,7 +4215,16 @@ e.g. 2 dimensions $(x,y)$ if required.
                     \nabla\phi\cdot\hat{\mathbf{a}} \equiv |\nabla\phi|\cos{\alpha}
                 \]where $\alpha$ is the angle between $\nabla\phi$ and $\hat{\mathbf{a}}$.
                 
-                It is a \textbf{\emph{directional derivative}}.
+                This is defined as \textbf{\emph{directional derivative}}: Given a
+                direction and a point, find out the rate of change at that point
+                along the given direction.
+
+                This shows that when $\alpha = n\pi$, i.e.\ 
+                the direction perpendicular to the surface,
+                \emph{has the greatest rate of change}, i.e.\ steepest slope.
+                Following the direction of $2k\pi$ results in the 
+                \emph{greatest rate of increment}.
+
                 We can use $\nabla\phi$ to find rates of change, normals to curves and surfaces, tangent planes, \ldots
     
             \item $2xz^{2} - 3xy - 4x - 7 = 0$ (an equation about a surface).
@@ -4224,6 +4245,14 @@ e.g. 2 dimensions $(x,y)$ if required.
 
         It acts as a measurement of whether a local field is a
         \emph{source} ($+$) `outflow' / \emph{sink} ($-$) `inflow'.
+
+        From the expression, we can see that the expression adds
+        the rate of change of respective componenets together.
+        It makes sense, and you will feel it so much by listening to
+        how 3B1B explains the intuition, using the following link:
+
+        \ul{https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/divergence-grant-videos/v/divergence-formula-part-1}
+
         In general, the divergence at a point $\mathbf{x}$ is
         the limit of the ratio of the flux through the surface
         over the volume enclosing $\mathbf{x}$ approaching 0.
@@ -4255,6 +4284,10 @@ e.g. 2 dimensions $(x,y)$ if required.
     \item $\nabla\times\mathbf{u}\equiv$ curl $\mathbf{u}$.
 
         It acts as a local rotation.
+        Again, for clear intuition behind the formula, visit the following link
+        to see how 3B1B explains it:
+
+        \ul{https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/curl-grant-videos/v/2d-curl-formula}
 
         \underline{Example}:
         \begin{enumerate}[label = (\alph*)]
@@ -6745,7 +6778,8 @@ and injective $\Rightarrow{} \ker{f} = \{\mathbf{0}_U\}$.
 \end{ex}
 
 
-\subsection{Linear Maps and Matrices}
+\subsection{Linear Maps and Matrices}%
+\label{sec:change-of-basis}
 
 Suppose that $U$ and $V$ are arbitrary vector spaces of dimensions $k$ and $n$,
 and that $f:U\rightarrow V$ is a linear map.
@@ -7071,6 +7105,10 @@ change-of-basis matrix from $B'$ to $B$, then $P^{-1}$ is the change-of-basis
 matrix from $B$ to $B'$, and the change-of-basis formula says that\[
     {}_{B'}{[f]}_{B'} = P^{-1}\left({}_B{[f]}_{B}\right)P.
 \]
+
+For an apt application of this concept in action, check out
+\autoref{sec:system_decoupling}. 
+
 Remember that we say that two matrices $M$ and $N$ are \textbf{\emph{similar}}
 if $M = P^{-1}NP$ for some invertible matrix $P$. So the matrices
 ${}_{B'}{[f]}_{B'}$ and ${}_B{[f]}_{B}$ are similar to each other.
