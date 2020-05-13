@@ -198,7 +198,7 @@ As soon as you get one left and one right identity, you have a unique identity $
             \item $h_1 = h_2$
 
                 $h_1 * g = e, g * h_2 = e$. Therefore\[
-                    h_2 = e * h_2 = (h_1 * g) * h_2 = h_1 * (g * h_2) = e = h_1
+                    h_2 = e * h_2 = (h_1 * g) * h_2 = h_1 * (g * h_2) = h_1 * e = h_1
                 \]
             \item unicity: Assume $\exists g'^{-1}$ another inverse.\[
                     g'^{-1} = e * g'^{-1} = (g^{-1} * g) * g'^{-1} 
@@ -490,12 +490,12 @@ As soon as you get one left and one right identity, you have a unique identity $
 \newmdtheoremenv[style=defEnv]{distinct element in a group}[theorem]{Lemma}
 \begin{distinct element in a group}
     Let $G$ be a group, $g \in G$, ord $g = n$. %chktex 1
-    Then all elements $\left\{g_0, g_1, g_2, \ldots, g^{n-1}\right\} $ are distinct.
+    Then all elements $\left\{g^0, g^1, g^2, \ldots, g^{n-1}\right\} $ are distinct.
 \end{distinct element in a group}
 
 \begin{proof}
     Assume that $g^{i} = g^{j}$ for some $i, j, 0 \le i \le j \le n - 1$. %chktex 1, chktex 8
-    Then $g^{j-i} = g^0 = e$. Since $i < j, {j-i} < n$. Since n is smallest integer, s.t. $g^{n} = e$,
+    Then $g^{j-i} = g^0 = e$ and $j-i < n$. Since $n$ is the smallest integer s.t. $g^{n} = e$,
     contradicts with the condition.
 \end{proof}
 
@@ -505,10 +505,10 @@ As soon as you get one left and one right identity, you have a unique identity $
 \end{ord g <= n}
 
 \begin{proof}
-    Assume $\exists{}i \in{}\mathbb{Z}, i \ge{}n + 1, \;\textnormal{s.t.}\; g^{i} = e $
+    Let $i \in{}\mathbb{Z}, i \ge{}n + 1$, and assume $\exists{}g^{i} = e$,
     where $g \in{}G$, $i$ is the smallest such integer.
     By previous lemma, $\left\{g_0, g_1, g_2, \ldots, g^{i-1}\right\} $ all distinct.
-    There are $i$ elements $i > n$.
+    There are $i$ elements $i > n = |G|$, contradiction.
 \end{proof}
 
 \newmdtheoremenv[style=defEnv]{cyclic group}[theorem]{Definition}
@@ -544,7 +544,7 @@ As soon as you get one left and one right identity, you have a unique identity $
     for some generators $g \in G \Rightarrow h = g^{i}, k = g^{j}$.
     \\$\Rightarrow{} h \cdot k = g^{i} \cdot g^{j} = g^{i + j} = g^{j + i} = g^{j} \cdot g^{i} = k \cdot h$.
 \end{proof}
-\\\underline{Warning}: The converse \emph{is not} true (Abelian does not imiply cyclic)
+\\\underline{Warning}: The converse \emph{is not} true (Abelian does not imply cyclic)
 One counter example is $ (\mathbb{Q}, +)$.
 Assume $\mathbb{Q}$ is cyclic under +. \[
     \Rightarrow \exists g \in \mathbb{Q} \;\textnormal{s.t.}\; q = g^{n} (= ng) \forall q \in \mathbb{Q}.
@@ -587,18 +587,21 @@ Take $\frac{g}{2}$ ($\in \mathbb{Q}$ since $g \in \mathbb{Q}$)\[
     Assume $\exists$ an element of order 2: $h = g^{i}, (i \ge{}0, i \in{}\mathbb{Z})$, then\[
         {(g^{i})}^{2} = e = g^{2i} \Rightarrow{}2i = n \Rightarrow{}
         \left\{\begin{align*}
-            & \textnormal{$n$ is even: exactly one element,} \\
-            & \textnormal{$n$ is odd: no element of order 2.}
+            & \text{$n$ is even: exactly one element,} \\
+            & \text{$n$ is odd: no element of order 2.}
         \end{align*}\right.
     \]
+    \underline{Subtlety}: $2i$ cannot be equal to $kn,
+    k\in\mathbb{N}\backslash\{0,1\}$, whereas $3i$ or $mi$,
+    $m\ge 3$, is possible to be equated to $kn$,
+    thus no conclusion can be drawn for elements of order greater than 2!
 \end{proof}
 
 \begin{ex}
     Are $(\mathbb{Z}^{*}_5, \cdot), (\mathbb{Z}^{*}_{15}, \cdot)$ cyclic?
     (Recall that the notation $\mathbb{Z}^{*} = \mathbb{Z} \backslash\{0\}$,
     and $\mathbb{Z}_n^{*}$ = set of all invertible congruence classes ${[a]}_{n}$.)
-
-    Hint: Use the previous lemma, or find out the generator.
+    (Hint: Use the previous lemma, or find out the generator.)
 \end{ex}
 
 
@@ -1030,7 +1033,7 @@ Set of right cosets: $H:G \,:= \{Hg | g \in G\}$.
 \begin{size of left coset}
     Let $G$ be a group and let $H \le G$ be finite.
     Then all left cosets of $H$ have the same size, i.e.\ \[
-        \#gH = |H| \;\forall g \in G.
+        |gH| = |H| \;\forall g \in G.
     \]
 \end{size of left coset}
 
@@ -5481,10 +5484,12 @@ There are four cases to consider:
 
 \begin{proof}
     Assume the number of solutions is not 0, and not 1.
-    Take 2 solution $\nu$ and $\upsilon$, $\mathbf{\nu} \neq \mathbf{\upsilon}$.\[
+    Take 2 solutions $\nu$ and $\upsilon$, $\mathbf{\nu} \neq \mathbf{\upsilon}$.\[
         \Rightarrow{} A\mathbf{\nu} = A\mathbf{\upsilon} = b \Rightarrow{}
-        A(\mathbf{\nu} - \mathbf{\upsilon}) = 0 = \omega \neq 0
+        A(\mathbf{\nu} - \mathbf{\upsilon}) = 0
     \]
+    Note that $\nu-\upsilon \neq 0$,
+    and let $\omega = \nu - \upsilon$.
     Take: $\nu + \lambda \omega, \lambda \in \mathbb{R}$\[
         \Rightarrow{} A(\nu + \lambda\omega) = A\nu + \lambda A\omega = A\mathbf{\nu} = \mathbf{b} = \mathbf{b}
     \]
@@ -5576,7 +5581,10 @@ Be careful with the size of the matrices.
     Lower + upper triangular = diagonal.
 \end{ex}
 
-\subsection{Inverse of a Matrix and Invertibility}
+\subsection{Inverse of a Matrix and Invertibility}\label{sec:inverse_of_matrix}
+
+Please visit \autoref{sec:linear_maps} for close link between the concepts
+introduced here and others such as nullity.
 
 \newmdtheoremenv[style=defEnv]{inverse square matrix}[theorem]{Definition}
 \begin{inverse square matrix}
@@ -5593,7 +5601,7 @@ Be careful with the size of the matrices.
 
     \begin{enumerate}[label = (\arabic*)]
         \item If $A$ is invertible, then its inverse is unique.
-        \item If $A$ is invertible and either $AB = I_n$ or $BA = I_n$, for some $B \ini M_{n\times n}(\mathbb{R})$,
+        \item If $A$ is invertible and either $AB = I_n$ or $BA = I_n$, for some $B \in M_{n\times n}(\mathbb{R})$,
             then $B = A^{-1}$.
     \end{enumerate}
     
@@ -5615,6 +5623,10 @@ Be careful with the size of the matrices.
     Assume $A,B \in M_{n \times n}(\mathbb{R})$, invertible.
     Then $AB$ is invertible and ${(AB)}^{-1} = B^{-1}A^{-1}$.
 \end{AB = A-1 B-1}
+
+\begin{proof}
+    Exercise!
+\end{proof} 
 
 \newmdtheoremenv[style=defEnv]{invertibility}[theorem]{Lemma}
 \begin{invertibility}
@@ -5706,7 +5718,18 @@ process of elementary row operation.
     $A$ is invertible $\iff$ Its RRE form is the identity matrix.
 \end{invertible matrix is identity itself}
 
-\underline{Algorithm to compute inverse}:
+\newmdtheoremenv[style=defEnv]{invertible and non-zero vector}[theorem]{Proposition}
+\begin{invertible and non-zero vector}\label{prop:4}
+    An $n\times n$ matrix $A$ is invertible
+    $\iff\neg\exists\mathbf{v}\neq\mathbf{0}$,
+    $\mathbf{v}\in\mathbb{R}^{n}$ s.t. $A\mathbf{v}=\mathbf{0}$.
+\end{invertible and non-zero vector}
+
+\begin{proof}
+    Exercise!
+\end{proof} 
+
+\paragraph{Algorithm to compute inverse}
 
 \begin{description}
     \item[Step 1] Write the augmented matrix $(A|I_n)$.
@@ -5839,7 +5862,8 @@ Let $A \in M_{n\times n}(\mathbb{R})$.
 
 \newmdtheoremenv[style=defEnv]{permutation theory}[theorem]{Definition}
 \begin{permutation theory}
-    Let $\sigma \in S_n$. An \textbf{\emph{inversion}} is a pair of integers $(i,j)$ s.t.:\[
+    Let $\sigma \in S_n$. An \textbf{\emph{inversion}} $(i,j)$ of $\sigma$
+    is a pair of integers $(i,j)$ s.t.:\[
         0 < i < j \le n \quad\textnormal{and}\quad \sigma(i)\ge\sigma(j).
     \]
     The \textbf{\emph{sign}} of a permutation $\textnormal{sgn}\;\sigma$ is given by
@@ -5888,7 +5912,8 @@ Let $A \in M_{n\times n}(\mathbb{R})$.
 \end{eigenvalue property}
 
 \begin{proof}
-    $A$ invertible $\iff$ $\exists n$ non-zero vectors s.t. $A\mathbf{\upsilon} = \mathbf{0}$.
+    $A$ is not invertible $\iff$ $\exists$ non-zero vector $\mathbf{v}$ 
+    s.t. $A\mathbf{v} = \mathbf{0}$. (by Proposition~\ref{prop:4})
     Since we want \emph{non-zero} solutions of $(A - \lambda I_n)\mathbf{\upsilon} = 0$,
     $A - \lambda I_n$ cannot be invertible!
 \end{proof}
@@ -6471,7 +6496,10 @@ So for instance, $v = \begin{pmatrix}
     $\span{L} = \{\lambda v | \lambda \in \mathbb{R}\}$, which is a line passing through the origin.
 \end{ex}
 
-\section{Linear Maps}
+\section{Linear Maps}\label{sec:linear_maps}
+
+Please visit \autoref{sec:inverse_of_matrix} for close link between the concepts
+introduced here and the properties related to the inverse of a matrix.
 
 \subsection{Definitions and Properties}
 
