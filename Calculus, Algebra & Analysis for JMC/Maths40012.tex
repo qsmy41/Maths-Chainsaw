@@ -29,6 +29,7 @@
 \maketitle
 \tableofcontents
 
+
 \addcontentsline{toc}{chapter}{Preface}
 \chapter*{Preface}
 
@@ -49,6 +50,8 @@ As of 2019/2020 batch, the following sections are not covered:%
 
 \bigskip\noindent
 Hope that this is helpful for you! Happy studying~:)%chktex 10, 26
+
+
 
 \chapter{Group theory}
 
@@ -7528,7 +7531,7 @@ is one-dimensional.
 
 \newmdtheoremenv[style=defEnv]{Algebra of limits}[theorem]{Definition}
 \begin{Algebra of limits}
-    Let $I\subset \mathbb{R}$ be an open iinterval and let $a\in I$ be a point.
+    Let $I\subset \mathbb{R}$ be an open interval and let $a\in I$ be a point.
     Take two functions $f,g:I\backslash\{a\}\mapsto\mathbb{R}$ s.t.\[
         \lim_{x\rightarrow{}a} f(x) = L_1 \qquad\;\textnormal{and}\;\qquad
         \lim_{x\to a} g(x) = L_2,
@@ -7875,6 +7878,8 @@ one can always find a smaller/larger $x$ that satisfies same inequality.
 \end{open set}
 In other words, if $x$ is a point of an open set $S$, then $S$ has to contain
 every other point within a small \emph{neighborhood} of x.
+Using formal notation, $x$ is in an open set iff $\exists \delta>0$ s.t.
+$(x-\delta, x+\delta)\subset S$.
 
 \newmdtheoremenv[style=defEnv]{union of open sets are open}[theorem]{Proposition}
 \begin{union of open sets are open}\label{prop:2}
@@ -7902,12 +7907,14 @@ Challenge: Prove that it is not true for infinitely many open sets.
 \newmdtheoremenv[style=defEnv]{closed set}[theorem]{Definition}
 \begin{closed set}
     A set $S\subset\mathbb{R}$ is \textbf{\emph{closed}} iff \[
-        \forall\;\text{sequence}\,(x_n)\subset S,
+        \forall\;\text{sequence}\,(x_n)\subset S \wedge
         x_n\rightarrow x\in\mathbb{R}\Longrightarrow x\in S.
     \]
 \end{closed set}
 In other words, the limit of any convergent subsequence of $S$
 must also be in $S$.
+Using formal notation, $x$ is in a closed set iff $\forall(x_n)\subset S$,
+$x_n\rightarrow x\in\mathbb{R}\Longrightarrow x\in S$.
 
 \newmdtheoremenv[style=defEnv]{compact set}[theorem]{Definition}
 \begin{compact set}
@@ -7934,8 +7941,32 @@ must also be in $S$.
 
 \begin{proof}
     Exercise!
-    (The proof can show that, open set's complement must be closed, by definition,
+    (The proof on the note shows that, open set's complement must be closed, by definition,
     and not-closed set is not open.)
+
+    \medskip\noindent
+    The following is my more direct approach to the question.
+    Before continuing, let's define $x$ to be a random element,
+    $A = (x-\delta, x+\delta)\backslash\{x\}$, $x'\in A$.
+    \begin{itemize}
+            \item $``\Longrightarrow''$:
+                Assume that $x\notin S, x\in T$.
+                By definition of open set, reversing its meaning implies that
+                $x'\notin S$, so $x'\in T, A\subset T$.
+                This means that we can form convergent sequences
+                $(x_n)\in A\subset T, x_n\rightarrow x$,
+                implying that $T$ is closed.
+
+            \item $``\Longleftarrow''$:
+                Assume that $x\notin T, x\in S$.
+                Using the contrapositive of the definition of closed set,
+                $x\notin T$ implies that either 
+                $x_n\nrightarrow x\in\mathbb{R}$ or $(x_n)\nsubseteq T$.
+                Since for all convergent sequences $(x_n)\in A, x_n\rightarrow x$,
+                $x_n\notin T$, i.e.\ $x_n\in S$.
+                We can thus have $x$ with $A$ as its $\delta$ neighborhood in $T$, 
+                thus $T$ is open.
+    \end{itemize} 
 \end{proof} 
 
 
@@ -8248,7 +8279,7 @@ The following two properties can be proved by utilizing the propositions%
 \newmdtheoremenv[style=defEnv]{local extremum differentiated to be 0}[theorem]{Proposition}
 \begin{local extremum differentiated to be 0}
     Let $f:(b,c)\rightarrow{}\mathbb{R}$ be differentiable at $a\in(b,c)$ and 
-    $f$ has a local extremum. Then $f'(a) = 0$.
+    $f$ has a local extremum at $a$. Then $f'(a) = 0$.
 \end{local extremum differentiated to be 0}
 
 \begin{proof}
@@ -8319,6 +8350,9 @@ differentiation on one point in the interval.
     A function satisfying the above inequality is called \textbf{\emph{Lipschitz continuous}}.
 \end{Lipschitz continuous}
 
+If a function is Lipschitz continuous, then it is continuous.
+Given that function $f$ is differentiable, $f$ is Lipschitz continuous
+$\iff$ $f'$ is bounded.
 
 
 
