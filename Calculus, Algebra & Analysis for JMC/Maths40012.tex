@@ -52,6 +52,10 @@ As of 2019/2020 batch, the following sections are not covered:%
 Hope that this is helpful for you! Happy studying~:)%chktex 10, 26
 
 
+% in math mode, use aligned env.
+% align env alr is in math mode.
+
+
 
 \chapter{Group theory}
 
@@ -318,14 +322,16 @@ As soon as you get one left and one right identity, you have a unique identity $
 
 \newmdtheoremenv[style=defEnv]{g to the power of n}[theorem]{Definition}
 \begin{g to the power of n}
-    Let $n \in \mathbb{Z}$, let $(G,*)$ be a group and let $g \in G$. Then we definie $g^{n}$ as follows:\[
-        g^{n} = \left\{
-            \begin{align*}
-                & g * g * \cdots * g & n > 0 \\
-                & g^{-1} * g^{-1} * \cdots * g^{-1} & n < 0 \\
-                & e & n = 0
-            \end{align*}
-            \right.
+    Let $n \in \mathbb{Z}$, let $(G,*)$ be a group and let $g \in G$. 
+    Then we define $g^{n}$ as follows:
+    \begin{align*}
+        g^{n} = \begin{cases}
+            g * g * \cdots * g & n > 0 \\
+            g^{-1} * g^{-1} * \cdots * g^{-1} & n < 0 \\
+            e & n = 0
+        \end{cases} 
+    \end{align*}
+    \[
     \]
     where in the first case there are $n$ copies of $g$ in the product and ni the second there are $-n$
     copies of $g^{-1}$, so that $g^{n} = {(g^{-1})}^{-n}$.
@@ -345,7 +351,7 @@ As soon as you get one left and one right identity, you have a unique identity $
     Exercise! (Hint: Induction.)
 \end{proof}
 
-\subsection{Modular Artihmetic and the group $\mathbb{Z}_n$}
+\subsection{Modular Artihmetic and the group \texorpdfstring{$\mathbb{Z}_n$}{}}
 
 \newmdtheoremenv[style=defEnv]{congruent modulo n}[theorem]{Definition}
 \begin{congruent modulo n}
@@ -568,7 +574,8 @@ As soon as you get one left and one right identity, you have a unique identity $
     for some generators $g \in G \Rightarrow h = g^{i}, k = g^{j}$.
     \\$\Rightarrow{} h \cdot k = g^{i} \cdot g^{j} = g^{i + j} = g^{j + i} = g^{j} \cdot g^{i} = k \cdot h$.
 \end{proof}
-\\\underline{Warning}: The converse \emph{is not} true (Abelian does not imply cyclic)
+\medskip
+\underline{Warning}: The converse \emph{is not} true (Abelian does not imply cyclic)
 One counter example is $ (\mathbb{Q}, +)$.
 Assume $\mathbb{Q}$ is cyclic under +. \[
     \Rightarrow \exists g \in \mathbb{Q} \;\textnormal{s.t.}\; q = g^{n} (= ng) \forall q \in \mathbb{Q}.
@@ -1256,7 +1263,7 @@ assigninig definite values to these constants.
     \item Family or parabolae $y = Cx^{2}$ as constant $C$ takes different values.
 
         On a particular curve of the family $\frac{\mathrm{d}y}{\mathrm{d}x} = 2Cx$.
-        By substitutiion, eliminate $C \Rightarrow \frac{\mathrm{d}y}{\mathrm{d}x} = \frac{2y}{x}$.
+        By substitution, eliminate $C \Rightarrow \frac{\mathrm{d}y}{\mathrm{d}x} = \frac{2y}{x}$.
         This is a geometrical statement about slopes.
 
         \underline{Note}: 1st order differential equation $\leftrightarrow$ 1 arbitrary constant in general solution.
@@ -1302,11 +1309,11 @@ Let's look at them one by one:
     \int_{}^{y} \frac{\mathrm{d}y}{H(y)} = \int_{}^{x} G(x)\mathrm{d}x
     \]
     E.g. \[
-        \begin{align*}
+        \begin{aligned}
             \frac{\mathrm{d}y}{\mathrm{d}x} & = xy^{2}e^{-x} \\
             \int \frac{1}{y^{2}} \mathrm{d}y & = \int xe^{-x} \mathrm{d}x \\
             -\frac{1}{y} & = -xe^{-x} - e^{-x} + C
-        \end{align*}
+        \end{aligned}
     \]
     Or singular solution $y = 0$.
 
