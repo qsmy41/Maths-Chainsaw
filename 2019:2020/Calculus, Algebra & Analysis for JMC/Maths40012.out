@@ -1,0 +1,82 @@
+\BOOKMARK [0][-]{chapter*.1}{Preface}{}% 1
+\BOOKMARK [0][-]{chapter.1}{Group theory}{}% 2
+\BOOKMARK [1][-]{section.1.1}{Basic Definitions and Examples}{chapter.1}% 3
+\BOOKMARK [2][-]{subsection.1.1.1}{Binary operations and groups}{section.1.1}% 4
+\BOOKMARK [2][-]{subsection.1.1.2}{Consequences of the axioms of group}{section.1.1}% 5
+\BOOKMARK [2][-]{subsection.1.1.3}{Modular Artihmetic and the group }{section.1.1}% 6
+\BOOKMARK [1][-]{section.1.2}{Cyclic groups}{chapter.1}% 7
+\BOOKMARK [1][-]{section.1.3}{Symmetric groups}{chapter.1}% 8
+\BOOKMARK [2][-]{subsection.1.3.1}{Permutations}{section.1.3}% 9
+\BOOKMARK [2][-]{subsection.1.3.2}{Cycle}{section.1.3}% 10
+\BOOKMARK [1][-]{section.1.4}{subgroup}{chapter.1}% 11
+\BOOKMARK [1][-]{section.1.5}{Cosets and Lagrange Theorem}{chapter.1}% 12
+\BOOKMARK [1][-]{section.1.6}{Future Direction of Study in Group Theory}{chapter.1}% 13
+\BOOKMARK [0][-]{chapter.2}{Applied Mathematical Methods}{}% 14
+\BOOKMARK [1][-]{section.2.1}{Differential Equations}{chapter.2}% 15
+\BOOKMARK [2][-]{subsection.2.1.1}{Definitions and examples}{section.2.1}% 16
+\BOOKMARK [2][-]{subsection.2.1.2}{First Order Differential Equations}{section.2.1}% 17
+\BOOKMARK [2][-]{subsection.2.1.3}{`Special' Second Order Differential Equations}{section.2.1}% 18
+\BOOKMARK [2][-]{subsection.2.1.4}{Equations with variable coefficients}{section.2.1}% 19
+\BOOKMARK [1][-]{section.2.2}{Difference Equations}{chapter.2}% 20
+\BOOKMARK [2][-]{subsection.2.2.1}{Definitions and Examples}{section.2.2}% 21
+\BOOKMARK [2][-]{subsection.2.2.2}{Linear Difference Equations}{section.2.2}% 22
+\BOOKMARK [2][-]{subsection.2.2.3}{Differencing and Difference Tables}{section.2.2}% 23
+\BOOKMARK [2][-]{subsection.2.2.4}{First Order Recurrence/Discrete Nonlinear Systems}{section.2.2}% 24
+\BOOKMARK [1][-]{section.2.3}{Linear Systems of Differential Equations}{chapter.2}% 25
+\BOOKMARK [2][-]{subsection.2.3.1}{definitions and examples}{section.2.3}% 26
+\BOOKMARK [2][-]{subsection.2.3.2}{System decoupling}{section.2.3}% 27
+\BOOKMARK [2][-]{subsection.2.3.3}{Typical Phase Portraits}{section.2.3}% 28
+\BOOKMARK [2][-]{subsection.2.3.4}{Extensions}{section.2.3}% 29
+\BOOKMARK [1][-]{section.2.4}{Partial Differentiation}{chapter.2}% 30
+\BOOKMARK [2][-]{subsection.2.4.1}{Introduction}{section.2.4}% 31
+\BOOKMARK [2][-]{subsection.2.4.2}{The Total Differential}{section.2.4}% 32
+\BOOKMARK [2][-]{subsection.2.4.3}{Function of a function \204 `The Chain Rule'}{section.2.4}% 33
+\BOOKMARK [2][-]{subsection.2.4.4}{From Cartesians to Polars}{section.2.4}% 34
+\BOOKMARK [2][-]{subsection.2.4.5}{Implicit Functions}{section.2.4}% 35
+\BOOKMARK [2][-]{subsection.2.4.6}{Taylor Series}{section.2.4}% 36
+\BOOKMARK [2][-]{subsection.2.4.7}{Stationary Points}{section.2.4}% 37
+\BOOKMARK [2][-]{subsection.2.4.8}{Application \204 Exact \(First Order\) Differential Equations}{section.2.4}% 38
+\BOOKMARK [2][-]{subsection.2.4.9}{Application \204 Vector Calculus}{section.2.4}% 39
+\BOOKMARK [2][-]{subsection.2.4.10}{Application \204 Double/Repeated Integrals}{section.2.4}% 40
+\BOOKMARK [1][-]{section.2.5}{Fourier Integrals}{chapter.2}% 41
+\BOOKMARK [2][-]{subsection.2.5.1}{Definitions and Examples}{section.2.5}% 42
+\BOOKMARK [2][-]{subsection.2.5.2}{Cosine and Sine Transforms}{section.2.5}% 43
+\BOOKMARK [2][-]{subsection.2.5.3}{Properties of Fourier Transforms}{section.2.5}% 44
+\BOOKMARK [2][-]{subsection.2.5.4}{The Convolution Theorem}{section.2.5}% 45
+\BOOKMARK [2][-]{subsection.2.5.5}{The Plancherel/Energy Theorem}{section.2.5}% 46
+\BOOKMARK [2][-]{subsection.2.5.6}{The Dirac Delta Function}{section.2.5}% 47
+\BOOKMARK [2][-]{subsection.2.5.7}{Application of Transforms \204 To Come!}{section.2.5}% 48
+\BOOKMARK [0][-]{chapter.3}{Linear Algebra}{}% 49
+\BOOKMARK [1][-]{section.3.1}{Introduction to Matrices and Vectors}{chapter.3}% 50
+\BOOKMARK [2][-]{subsection.3.1.1}{Column vectors}{section.3.1}% 51
+\BOOKMARK [2][-]{subsection.3.1.2}{Basic Matrix Operations}{section.3.1}% 52
+\BOOKMARK [1][-]{section.3.2}{Systems of linear equations}{chapter.3}% 53
+\BOOKMARK [2][-]{subsection.3.2.1}{Definitions}{section.3.2}% 54
+\BOOKMARK [2][-]{subsection.3.2.2}{Gauss algorithm}{section.3.2}% 55
+\BOOKMARK [1][-]{section.3.3}{Matrix Multiplication}{chapter.3}% 56
+\BOOKMARK [2][-]{subsection.3.3.1}{Basics of Matrix Multiplication}{section.3.3}% 57
+\BOOKMARK [2][-]{subsection.3.3.2}{Inverse of a Matrix and Invertibility}{section.3.3}% 58
+\BOOKMARK [2][-]{subsection.3.3.3}{Determinant}{section.3.3}% 59
+\BOOKMARK [1][-]{section.3.4}{Eigenvalues and Eigenvectors}{chapter.3}% 60
+\BOOKMARK [2][-]{subsection.3.4.1}{Basic Definitions}{section.3.4}% 61
+\BOOKMARK [2][-]{subsection.3.4.2}{Diagonalization}{section.3.4}% 62
+\BOOKMARK [1][-]{section.3.5}{Vector Space}{chapter.3}% 63
+\BOOKMARK [2][-]{subsection.3.5.1}{Axioms and Examples}{section.3.5}% 64
+\BOOKMARK [2][-]{subsection.3.5.2}{Spanning Sets}{section.3.5}% 65
+\BOOKMARK [2][-]{subsection.3.5.3}{Linear independence}{section.3.5}% 66
+\BOOKMARK [2][-]{subsection.3.5.4}{Dimension of Subspaces}{section.3.5}% 67
+\BOOKMARK [1][-]{section.3.6}{Linear Maps}{chapter.3}% 68
+\BOOKMARK [2][-]{subsection.3.6.1}{Definitions and Properties}{section.3.6}% 69
+\BOOKMARK [2][-]{subsection.3.6.2}{Isomorphism}{section.3.6}% 70
+\BOOKMARK [2][-]{subsection.3.6.3}{Rank-Nullity theorem}{section.3.6}% 71
+\BOOKMARK [2][-]{subsection.3.6.4}{Linear Maps and Matrices}{section.3.6}% 72
+\BOOKMARK [0][-]{chapter.4}{Analysis}{}% 73
+\BOOKMARK [1][-]{section.4.1}{Sequence and Convergence}{chapter.4}% 74
+\BOOKMARK [1][-]{section.4.2}{Limits}{chapter.4}% 75
+\BOOKMARK [1][-]{section.4.3}{Continuity}{chapter.4}% 76
+\BOOKMARK [2][-]{subsection.4.3.1}{Sequential Criterion for continuous functions}{section.4.3}% 77
+\BOOKMARK [2][-]{subsection.4.3.2}{Continuous function on closed bounded interval}{section.4.3}% 78
+\BOOKMARK [2][-]{subsection.4.3.3}{Open, closed and compact sets}{section.4.3}% 79
+\BOOKMARK [2][-]{subsection.4.3.4}{Uniform continuity and convergence}{section.4.3}% 80
+\BOOKMARK [1][-]{section.4.4}{Differentiability}{chapter.4}% 81
+\BOOKMARK [2][-]{subsection.4.4.1}{Extreme Values and Derivatives}{section.4.4}% 82
