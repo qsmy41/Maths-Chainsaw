@@ -1856,8 +1856,13 @@ and then note the following
     Suppose $X\sim\text{N}(0,1)$. Derive the MGF and the first four moments of
     $X$.
     \begin{align*}
-        M_X(t)&=E(e^{tX})=\int_{-\infty}^{\infty}
-        e^{tx}\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2}\mathrm{d}x=e^{\frac{1}{2}t^2},\\
+        M_X(t)
+        & =E(e^{tX}) =\int_{-\infty}^{\infty}
+        e^{tx}\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2}\mathrm{d}x\\
+        & =e^{\frac{1}{2}t^2}\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}}
+        e^{-\frac{1}{2}{(x-t)}^{2}}\mathrm{d}x \\
+        & =e^{\frac{1}{2}t^2}\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}}
+        e^{-\frac{1}{2}u^2}\mathrm{d}u =e^{\frac{1}{2}t^2},\\
         M_X^{(1)}(t)&=\frac{\mathrm{d}}{\mathrm{d}t}\left(e^{\frac{1}{2}t^2}\right)=te^{\frac{1}{2}t^2},\\
         M_X^{(2)}(t)&=\frac{\mathrm{d}}{\mathrm{d}t}\left(te^{\frac{1}{2}t^2}\right)=(t^2+1)e^{\frac{1}{2}t^2},\\
         M_X^{(3)}(t)&=t(t^2+3)e^{\frac{1}{2}t^2},\\
