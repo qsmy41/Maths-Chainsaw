@@ -19,3 +19,33 @@
 \BOOKMARK [1][-]{section.4.3}{Functions of a Discrete Random Variable}{chapter.4}% 19
 \BOOKMARK [1][-]{section.4.4}{Mean and Variance}{chapter.4}% 20
 \BOOKMARK [1][-]{section.4.5}{Some important Discrete Random Variables}{chapter.4}% 21
+\BOOKMARK [0][-]{chapter.5}{Continuous Random Variable}{}% 22
+\BOOKMARK [1][-]{section.5.1}{Definitions}{chapter.5}% 23
+\BOOKMARK [1][-]{section.5.2}{Transformations}{chapter.5}% 24
+\BOOKMARK [1][-]{section.5.3}{Mean, Variance and Quantiles}{chapter.5}% 25
+\BOOKMARK [1][-]{section.5.4}{Some Important Continuous Random Variables}{chapter.5}% 26
+\BOOKMARK [0][-]{chapter.6}{Jointly Distributed Random Variables}{}% 27
+\BOOKMARK [1][-]{section.6.1}{Definitions}{chapter.6}% 28
+\BOOKMARK [1][-]{section.6.2}{Independence, Conditional Probability, Expectation}{chapter.6}% 29
+\BOOKMARK [1][-]{section.6.3}{Multivariate Transformations}{chapter.6}% 30
+\BOOKMARK [1][-]{section.6.4}{Gamma and Beta Distributions}{chapter.6}% 31
+\BOOKMARK [0][-]{chapter.7}{Convergence Concepts and Theorems}{}% 32
+\BOOKMARK [1][-]{section.7.1}{Modes of Convergence}{chapter.7}% 33
+\BOOKMARK [1][-]{section.7.2}{Moment Generating Functions}{chapter.7}% 34
+\BOOKMARK [1][-]{section.7.3}{Central Limit Theorem}{chapter.7}% 35
+\BOOKMARK [1][-]{section.7.4}{The Law of Large Numbers and Inequalities}{chapter.7}% 36
+\BOOKMARK [0][-]{chapter.8}{Estimation}{}% 37
+\BOOKMARK [1][-]{section.8.1}{Estimators}{chapter.8}% 38
+\BOOKMARK [1][-]{section.8.2}{Maximum Likelihood Estimation}{chapter.8}% 39
+\BOOKMARK [1][-]{section.8.3}{Confidence Intervals}{chapter.8}% 40
+\BOOKMARK [0][-]{chapter.9}{Hypothesis Testing}{}% 41
+\BOOKMARK [1][-]{section.9.1}{Definitions}{chapter.9}% 42
+\BOOKMARK [1][-]{section.9.2}{Testing for a Population Mean}{chapter.9}% 43
+\BOOKMARK [2][-]{subsection.9.2.1}{Normal Distribution with Known Variance}{section.9.2}% 44
+\BOOKMARK [2][-]{subsection.9.2.2}{Normal Distribution with Unknown Variance}{section.9.2}% 45
+\BOOKMARK [1][-]{section.9.3}{Testing for Differences in Population Means}{chapter.9}% 46
+\BOOKMARK [2][-]{subsection.9.3.1}{Normal Distribution with Known Variances}{section.9.3}% 47
+\BOOKMARK [2][-]{subsection.9.3.2}{Normal Distribution with Unknown Variances}{section.9.3}% 48
+\BOOKMARK [1][-]{section.9.4}{Goodness of Fit}{chapter.9}% 49
+\BOOKMARK [2][-]{subsection.9.4.1}{Chi-square Test}{section.9.4}% 50
+\BOOKMARK [2][-]{subsection.9.4.2}{Independence using Chi-square Statistic}{section.9.4}% 51
