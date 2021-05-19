@@ -1786,7 +1786,7 @@ and then note the following
     Let $X$ be a random variable, and $X_n=X+Y_n$, where
     \[
         E(Y_n)=\frac{1}{n}\quad\text{and}\quad
-        \Var(Y_n)=\frac{\sigma^{2}}{n},
+        \text{Var}(Y_n)=\frac{\sigma^{2}}{n},
     \]
     where $\sigma>0$ is a constant. Show that $X_n\rightarrow_\text{p}X$.
 
@@ -1802,7 +1802,7 @@ and then note the following
         & = P(|Y_n|\ge\epsilon) \\
         & \le P(|Y_n-E(Y_n)|+\frac{1}{n}\ge\epsilon) \\
         & = P(|Y_n-E(Y_n)|\ge\epsilon-\frac{1}{n}) \\
-        & \le \frac{\Var(Y_n)}{{\left(\epsilon-\frac{1}{n}\right)}^{2}}
+        & \le \frac{\text{Var}(Y_n)}{{\left(\epsilon-\frac{1}{n}\right)}^{2}}
         \quad\text{(by Chebyshev's inequality)} \\
         & = \frac{\sigma^{2}}{n{\left(\epsilon-\frac{1}{n}\right)}^{2}}
         \rightarrow 0\quad\text{as }n\rightarrow\infty.
