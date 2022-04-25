@@ -1,0 +1,472 @@
+\documentclass[12pt]{report}
+\usepackage[thinc]{esdiff} % for typesettign derivatives
+\usepackage{amsthm} % provides an enhanced version of LaTex's \newtheorem command
+\usepackage{mdframed} % framed environments that can split at page boundaries
+\usepackage{enumitem} % bulletin points or other means of listing things
+\usepackage{amssymb} % for AMS symbols
+\usepackage{amsmath} % so as to use align
+\usepackage{latexsym} % so as to use symbols like \leadsto
+\usepackage{mathrsfs} % for using mathscr for char like operators
+\usepackage{commath} % for using norm symbol
+\usepackage{mathtools} % for using environments like dcases
+\usepackage{authblk} % for writing affiliations
+\usepackage{graphicx} % for importing images
+\graphicspath{{./images/}} % for the path to images, also always put label behind captions
+\usepackage{textcomp} % for using degree symbol
+\usepackage{hyperref} % for clickable link in the pdf & customizable reference text
+\usepackage[all]{hypcap} % for clickable link to images instead of caption
+\usepackage[margin=1.0in]{geometry} % default is 1.5in
+% \usepackage[left=0.4in, right=0.4in, top=0.8in, bottom=0.8in]{geometry}
+\usepackage[title]{appendix} % for attaching appendix
+\allowdisplaybreaks % allow page breaking in display maths, like align
+\usepackage{xcolor} % for setting color of a block of text, use \textcolor{<color>}{}
+\usepackage[normalem]{ulem} % for strikethrough text, use \sout{}
+% allow for more advanced table layout
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{siunitx}
+% for adjusting caption settings
+\usepackage{caption}
+\captionsetup[table]{skip=10pt}
+
+\theoremstyle{definition}
+\mdfdefinestyle{defEnv}{%
+  hidealllines=false,
+  nobreak=true,
+  innertopmargin=-1ex,
+}
+
+% The following is for writing block of code
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+% setting of the thickness of the 4 lines of box
+\setlength{\fboxrule}{2pt}
+
+% Use the following to change code language and related settings
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3,
+  literate={~} {$\sim$}{1}
+}
+
+\pagestyle{headings}
+\author{Lectured by Dr Dante Kalise}
+\title{Optimization}
+\affil{Typed by Aris Zhu Yi Qing}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Mathematical Preliminaries}
+
+\section{Topological Concepts}
+
+\newmdtheoremenv[style=defEnv]{theorem}{Definition}
+\begin{theorem}
+    The \textbf{open ball} with center $c\in\mathbb{R}^{n}$ and radius $r$ is
+    \[
+        B(c,r)=\left\{\mathbf{x}:\norm{\mathbf{x}-c}<r\right\}.
+    \]
+    Similarly, the \textbf{closed ball} with center $c$ and radius $r$ is
+    \[
+        B[c,r]=\left\{\mathbf{x}:\norm{\mathbf{x}-c}\le r\right\}.
+    \]
+\end{theorem}
+
+\newmdtheoremenv[style=defEnv]{interior point}[theorem]{Definition}
+\begin{interior point}
+    Given a set $U\subseteq\mathbb{R}^{n}$, a point $\mathbf{c}\in U$ is called an
+    \textbf{interior point} of $U$ if $\exists r>0$ for which
+    $B(\mathbf{c},r)\subseteq U$. The set of all interior points of a given set
+    $U$ is called the interior of the set and is denoted by
+    \[
+        \text{int}(U)=\left\{\mathbf{x}\in U:B(\mathbf{x},r)\subseteq U\text{
+        for some }r>0\right\}.
+    \]
+\end{interior point}
+
+\newmdtheoremenv[style=defEnv]{boundary points}[theorem]{Definition}
+\begin{boundary points}
+    Given a set $U\subseteq\mathbb{R}^{n}$, a \textbf{boundary point} of $U$ is
+    a vector $\mathbf{x}\in\mathbb{R}^{n}$ satisfying that any neighbourhood of $\mathbf{x}$
+    contains at least one point in $U$ and at least one point in its
+    completement $U^{c}$. 
+    We denote
+    \[
+        \text{bd}(U) = \text{The set of all boundary points of a set $U$}.
+    \]
+\end{boundary points}
+
+\newmdtheoremenv[style=defEnv]{closure}[theorem]{Definition}
+\begin{closure}
+    The \textbf{closure} of a set $U\subseteq\mathbb{R}^{n}$ is 
+    the smallest closed set containing $U$,
+    denoted by cl$(U)$ with
+    \[
+        \text{cl}(U)=U\cup\text{bd}(U).
+    \]
+\end{closure}
+
+\newmdtheoremenv[style=defEnv]{boundedness}[theorem]{Definition}
+\begin{boundedness}
+    A set $U\subseteq\mathbb{R}^{n}$ is called \textbf{bounded}
+    if $\exists M>0$ for which $U\subseteq B(0,M)$.
+\end{boundedness}
+
+\newmdtheoremenv[style=defEnv]{compactness}[theorem]{Definition}
+\begin{compactness}
+    A set $U\subseteq\mathbb{R}^{n}$ is called \textbf{compact}
+    if it is closed and bounded.
+\end{compactness}
+
+\section{Multi-variable Calculus}
+
+\newmdtheoremenv[style=defEnv]{directional derivative}[theorem]{Definition}
+\begin{directional derivative}
+    The \textbf{directional derivative} of a scalar function $f$ w.r.t.
+    $\mathbf{d}$ at a point $\mathbf{x}$ is denoted as
+    \[
+        f'(\mathbf{x};\mathbf{d})=\nabla f(\mathbf{x})^T\mathbf{d}
+    \]
+\end{directional derivative}
+
+
+\newmdtheoremenv[style=defEnv]{gradient and hessian of quadratic functions}[theorem]{Theorem}
+\begin{gradient and hessian of quadratic functions}
+    Given the general quadratic functions of the form
+    \[
+        f(\mathbf{w})=\mathbf{w}^TA\mathbf{w}+\mathbf{b}^T\mathbf{w}+\gamma
+    \]
+    we have
+    \[
+        \nabla f(\mathbf{w})=(A^T+A)\mathbf{w}+\mathbf{b},
+        \qquad
+        \nabla^2 f(\mathbf{w})=A+A^T.
+    \]
+    If $A$ is symmetric, then
+    \[
+        \nabla f(\mathbf{w})=2A\mathbf{w}+\mathbf{b},
+        \qquad
+        \nabla^2 f(\mathbf{w})=2A.
+    \]
+\end{gradient and hessian of quadratic functions}
+
+\section{Positive Definiteness of Matrix}
+
+\newmdtheoremenv[style=defEnv]{diagonal elem positive}[theorem]{Proposition}
+\begin{diagonal elem positive}
+    Let $A$ be a positive definite (semidefinite) matrix, then 
+    \begin{itemize}
+        \item the diagonal elements of $A$ are positive (nonnegative)
+        \item Tr($A$) and det($A$) are positive (nonnegative)
+    \end{itemize} 
+\end{diagonal elem positive}
+
+\newmdtheoremenv[style=defEnv]{eigenvalue characterization}[theorem]{(Test 1) Theorem}
+\begin{eigenvalue characterization}
+    Let $A\in\mathbb{R}^{n\times n}$ be symmetric, then
+    \begin{itemize}
+        \item $A$ is positive definite (semidefinite) iff all its eigenvalues
+            are positive (nonnegative).
+        \item $A$ is indefinte iff it has at least one positive eigenvalue and
+            at least one negative eigenvalue.
+    \end{itemize} 
+\end{eigenvalue characterization}
+
+\newmdtheoremenv[style=defEnv]{diagonal dominance}[theorem]{Definition}
+\begin{diagonal dominance}
+    Let $A\in\mathbb{R}^{n\times n}$ be symmetric, then
+    \begin{itemize}
+        \item $A$ is \textbf{diagonally dominant} if
+            \[
+                |A_{ii}| \ge \sum_{j\neq i}|A_{ij}|\quad\forall i=1,2,\ldots,n
+            \]
+        \item $A$ is \textbf{strictly diagonally dominant} if
+            \[
+                |A_{ii}|>\sum_{j\neq i}|A_{ij}|\quad\forall i=1,2,\ldots,n
+            \]
+    \end{itemize} 
+\end{diagonal dominance}
+
+\newmdtheoremenv[style=defEnv]{positive definiteness of diagonally dominant matrices}[theorem]{(Test 2) Theorem}
+\begin{positive definiteness of diagonally dominant matrices}
+    If $A\in\mathbb{R}^{n\times n}$ is symmetric, diagonally dominant with
+    positive (nonnegative) diagonal elements, then $A$ is positive definite
+    (semidefinite).
+\end{positive definiteness of diagonally dominant matrices}
+
+
+
+
+
+\chapter{Unconstrained Optimization}
+
+\section{Optimums}
+
+\newmdtheoremenv[style=defEnv]{global optimum}[theorem]{Definition}
+\begin{global optimum}
+    Let $f:S\rightarrow\mathbb{R}$ be defined on a set
+    $S\subseteq\mathbb{R}^{n}$, then $\forall \mathbf{x}\in S$,
+    \[
+        \mathbf{x}^* \in S \text{ is a \textbf{global minimum} point of $f$ over
+        $S$ if $f(\mathbf{x})\ge f(\mathbf{x}^*)$},
+    \]
+    \[
+        \mathbf{x}^* \in S \text{ is a \textbf{strict global minimum} point of $f$ over
+        $S$ if $f(\mathbf{x})> f(\mathbf{x}^*)$},
+    \]
+    and similar definitions for maximum.
+\end{global optimum}
+
+\newmdtheoremenv[style=defEnv]{local optimum}[theorem]{Definition}
+\begin{local optimum}
+    Let $f:S\rightarrow\mathbb{R}$ be defined on a set
+    $S\subseteq\mathbb{R}^{n}$, $\mathbf{x}^*\in S$ 
+    is a \textbf{local minimum} of $f$ over $S$ if
+    $\exists r>0$ s.t. $f(\mathbf{x}^*)\le f(\mathbf{x})$ 
+    for any $\mathbf{x}\in S\cap B(\mathbf{x}^*,r)$.
+    Similar definitions for \textbf{strict local minimum} and maximum.
+\end{local optimum}
+
+\newmdtheoremenv[style=defEnv]{stationary points}[theorem]{Definition}
+\begin{stationary points}
+    Let $f:U\rightarrow\mathbb{R}$ be a function defined on a set
+    $U\subseteq\mathbb{R}^{n}$.
+    Suppose that $\mathbf{x}^*\in\text{int}(U)$ and that all the partial
+    derivatives of $f$ are defined at $\mathbf{x}^*$, then $\mathbf{x}^*$ is
+    called a \textbf{stationary point} of $f$ if $\nabla f(\mathbf{x}^*)=0$.
+\end{stationary points}
+
+\section{Second-order Optimality Conditions}
+
+\newmdtheoremenv[style=defEnv]{second-order optimality conditions}[theorem]{Theorem}
+\begin{second-order optimality conditions}
+    Let $f:U\rightarrow\mathbb{R}$ be a function defined on an open set
+    $U\subseteq\mathbb{R}^{n}$. Suppose that $f$ is twice continuously
+    differentiable over $U$ and that $\mathbf{x}^*$ is a stationary point, then
+    \begin{itemize}
+        \item $\mathbf{x}^*$ is a local minimum point $\iff$
+            $\nabla^2f(\mathbf{x}^*)\succeq 0$.
+        \item $\mathbf{x}^*$ is a strict local minimum point $\iff$
+            $\nabla^2f(\mathbf{x}^*)\succ 0$.
+        \item similar necessary and sufficient conditions for (strict) local
+            maximum point
+    \end{itemize} 
+\end{second-order optimality conditions}
+
+\newmdtheoremenv[style=defEnv]{saddle points}[theorem]{Definition}
+\begin{saddle points}
+    Let $f:U\rightarrow\mathbb{R}$ be a continuously differentiable function
+    defined on an open set $U\subseteq\mathbb{R}^{n}$. A stationary point 
+    $\mathbf{x}^*\in U$ is called a \textbf{saddle point} of $f$ over $U$ if it
+    is neither a local minimum nor a local maximum point of $f$ over $U$.
+\end{saddle points}
+
+\newmdtheoremenv[style=defEnv]{sufficient condition for saddle points}[theorem]{Theorem}
+\begin{sufficient condition for saddle points}
+    Let $f:U\rightarrow\mathbb{R}$ be a continuously differentiable function
+    defined on an open set $U\subseteq\mathbb{R}^{n}$. 
+    Suppose that $f$ is twice continuously differentiable over $U$ and that
+    $\mathbf{x}^*$ is a stationary point. Then
+    \[
+        \nabla^2 f(\mathbf{x}^*) \text{ is an indefinite matrix} \Longrightarrow \mathbf{x}^*
+        \text{ is a saddle point of $f$ over $U$}.
+    \]
+\end{sufficient condition for saddle points}
+
+\section{Attainment of Minimal/Maximal Points}
+
+\newmdtheoremenv[style=defEnv]{Weierstrass' Theorem}[theorem]{(Weierstrass') Theorem}
+\begin{Weierstrass' Theorem}
+    Let $f$ be a continuous function defined over a nonempty conpact set
+    $C\subseteq\mathbb{R}^{n}$. Then $\exists$ a global minimum point of $f$
+    over $C$ and a global maximum point of $f$ over $C$.
+\end{Weierstrass' Theorem}
+
+\newmdtheoremenv[style=defEnv]{coerciveness}[theorem]{Definition}
+\begin{coerciveness}
+    Let $f:\mathbb{R}^{n}\rightarrow\mathbb{R}$ be a continuous function over
+    $\mathbb{R}^{n}$. $f$ is called \textbf{coercive} if
+    \[
+        \underset{\norm{\mathbf{x}}\rightarrow\infty}{\lim}f(\mathbf{x})=\infty
+    \]
+\end{coerciveness}
+
+\newmdtheoremenv[style=defEnv]{attainment of global optima}[theorem]{Theorem}
+\begin{attainment of global optima}
+    Let $f:\mathbb{R}^{n}\rightarrow\mathbb{R}$ be a continuous and coercive function
+    and let $S\subseteq\mathbb{R}^{n}$ be a nonempty closed set. Then $f$
+    attains a global minimum point on $S$.
+\end{attainment of global optima}
+
+
+\section{Global Optimality Conditions}
+
+\newmdtheoremenv[style=defEnv]{global optimality condition}[theorem]{Theorem}
+\begin{global optimality condition}
+    Let $f$ be a twice continuously differentiable function defined over
+    $\mathbb{R}^{n}$.
+    Let $\mathbf{x}^*\in\mathbb{R}^{n}$ be a
+    stationary point of $f$. Then
+    \[
+        \nabla^2 f(\mathbf{x})\succeq 0\;\forall \mathbf{x}\in\mathbb{R}^{n}
+        \Longrightarrow
+        \mathbf{x}^* \text{ is a global minimum point of $f$}.
+    \]
+\end{global optimality condition}
+
+\newmdtheoremenv[style=defEnv]{quadratic function optimality}[theorem]{Proposition}
+\begin{quadratic function optimality}
+    Let $f(\mathbf{x})=\mathbf{x}^TA\mathbf{x}+2\mathbf{b}^T\mathbf{x}+c$, with
+    $A\in\mathbb{R}^{n\times n}$ symmetric, then
+    \begin{enumerate}
+        \item $\mathbf{x}$ is a stationary point of $f$ iff
+            $A\mathbf{x}=-\mathbf{b}$.
+        \item if $A\succeq 0$, then $\mathbf{x}$ is a global minimum point of
+            $f$ iff $A\mathbf{x}=-\mathbf{b}$.
+        \item if $A\succ 0$, then $\mathbf{x}=-A^{-1}\mathbf{b}$ is a strict
+            global minimum point of $f$.
+    \end{enumerate} 
+\end{quadratic function optimality}
+
+
+\chapter{Linear Least Squares}
+
+\section{Problem Formulation}
+
+Consider the linear system
+\[
+    S\mathbf{x}\approx\mathbf{b},\quad(S\in\mathbb{R}^{m\times
+    n},\mathbf{b}\in\mathbb{R}^{m},m>n)
+\]
+To solve the above system, the usual approach is to transform it to become
+\[
+    \underset{\mathbf{x}}{\text{min}}\norm{S\mathbf{x}-\mathbf{b}}^2
+    \iff
+    \underset{\mathbf{x}\in\mathbb{R}^{n}}{\text{min}}
+    \left\{f(\mathbf{x})\equiv
+    \mathbf{x}^TS^TS\mathbf{x}-2\mathbf{b}^TS\mathbf{x}+\norm{\mathbf{b}}^2\right\}.
+\]
+Note that $\nabla^2f(\mathbf{x})=2S^TS\succeq 0$ since
+$\mathbf{x}^TS^TS\mathbf{x}=(S\mathbf{x})^T(S\mathbf{x})=\norm{S\mathbf{x}}^2\ge 0$.
+Therefore, the unique optimal solution $\mathbf{x}_\text{LS}$ is the solution
+$\nabla f(\mathbf{x})=0$, namely
+\[
+    (S^TS)\mathbf{x}_\text{LS}=S^T\mathbf{b} \Longrightarrow
+    \mathbf{x}_\text{LS}={(S^TS)}^{-1}S^T\mathbf{b}.
+\]
+
+\section{Data Fitting}
+
+\begin{enumerate}
+    \item For dataset $(\mathbf{s}_i,b_i)$ where $\mathbf{s}_i\in\mathbb{R}^{n}$ 
+        and $b_i\in\mathbb{R}$, we could transform to problem
+        \[
+            \underset{\mathbf{x}}{\text{min}}
+            \sum_{i=1}^{m} {(\mathbf{s}_i^T\mathbf{x}-b_i)}^{2}
+            \Longrightarrow
+            \underset{\mathbf{x}}{\text{min}}
+            \norm{S\mathbf{x}-\mathbf{b}}^2
+        \]
+    \item For polynomial fitting, given a set of points $\mathbb{R}^{2}:(u_i,y_i)$,
+        the associated linear system is
+        \[
+            \begin{pmatrix}
+                1 & u_1 & u_1^2 & \cdots & u_1^d \\
+                1 & u_2 & u_2^2 & \cdots & u_2^d \\
+                \vdots & \vdots & \vdots & \ddots & \vdots \\
+                1 & u_m & u_m^2 & \cdots & u_m^d \\
+            \end{pmatrix} 
+            \begin{pmatrix}
+                a_0 \\
+                a_1 \\
+                \vdots \\
+                a_d
+            \end{pmatrix} 
+            =
+            \begin{pmatrix}
+                y_0 \\
+                y_1 \\
+                \vdots \\
+                y_m
+            \end{pmatrix} 
+        \]
+\end{enumerate} 
+
+\section{Regularized Least Squares}
+
+A Regularized Least Square problem is formulated as
+\[
+    \underset{\mathbf{x}}{\text{min}}
+    \norm{S\mathbf{x}-\mathbf{b}}^2
+    +\lambda R(\mathbf{x}),
+\]
+where $\lambda$ is the regularization parameter and $R(\cdot)$ is the
+regularization function (also called a \emph{penalty} function).
+A common choice is a quadratic regularization function:
+\[
+    \underset{\mathbf{x}}{\text{min}}
+    \norm{S\mathbf{x}-\mathbf{b}}^2
+    +\lambda \norm{D\mathbf{x}}^2
+\]
+with its optimal solution being
+\[
+    \mathbf{x}_\text{RLS}={(S^TS+\lambda D^TD)}^{-1}S^T \mathbf{b}
+\]
+since $\nabla f=2S^TS\mathbf{x}-2S^T \mathbf{b}+2\lambda D^TD\mathbf{x}=0$.
+
+\section{Denoising}
+
+Suppose a noisy measurement of a signal $\mathbf{x}\in\mathbb{R}^{n}$ is given
+\[
+    \mathbf{b}=\mathbf{x}+\mathbf{w}
+\]
+where $\mathbf{x}$ is the ``true'' unknown signal, $\mathbf{w}$ is the unknown
+noise and $\mathbf{b}$ is the (known) measures vector.
+We could define
+\[
+    R(\mathbf{x})=\norm{L\mathbf{x}}^2, \text{ where }
+    L=
+    \begin{pmatrix}
+        1 & -1 & 0 & 0 & \cdots & 0 & 0 \\
+        0 & 1 & -1 & 0 & \cdots & 0 & 0 \\
+        0 & 0 & 1 & -1 & \cdots & 0 & 0 \\
+        \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+        0 & 0 & 0 & 0 & \cdots & 1 & -1
+    \end{pmatrix} 
+\]
+as the regularization function to penalize any sudden variations in signal. The
+RLS is thus
+\[
+    \underset{\mathbf{x}}{\text{min}}
+    \norm{\mathbf{x}-\mathbf{b}}^2
+    +\lambda\norm{L\mathbf{x}}^2
+\]
+with its direct solution being
+\[
+    \mathbf{x}_\text{RLS}(\lambda)={(I+\lambda L^TL)}^{-1}\mathbf{b}.
+\]
+
+
+\chapter{The Gradient Method}
+
+
+
+\end{document}
