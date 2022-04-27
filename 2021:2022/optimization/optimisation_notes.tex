@@ -1340,7 +1340,772 @@ every point is always below $f$.
 \end{maximum of a convex function over a compact convex set}
 
 
+\chapter{Convex Optimization}
 
+\section{Problem Definition}
+
+A \textbf{convex optimization problem} is a problem consisting of minimizing a
+convex function $f(\mathbf{x})$ over a convex set $C$:
+\begin{equation}\label{eq:CVX}
+    \tag{CVX}
+    \begin{array}{c @{\quad} l}
+        \min & f(\mathbf{x}) \\
+        \text{ s.t.} & \mathbf{x}\in C
+    \end{array} 
+\end{equation} 
+A functional form of a convex problem can be written as
+\begin{equation*}
+    \begin{array}{c @{\quad} l @{\quad} l}
+        \min & f(\mathbf{x}) & \\
+        \text{s.t.} & g_i(\mathbf{x})\le 0, & i=1,2,\ldots,m \\
+        & h_j(\mathbf{x})=0, & j=1,2,\ldots,p,
+    \end{array} 
+\end{equation*} 
+where $f,g_1,g_2,\ldots,g_m:\mathbb{R}^{n}\rightarrow\mathbb{R}$ are convex
+functions, and $h_1,h_2,\ldots,h_p:\mathbb{R}^{m}\rightarrow\mathbb{R}$
+are affine functions.
+The functional form does fit into the general formulation~\eqref{eq:CVX}.
+
+\newmdtheoremenv[style=defEnv]{local minima are global in CVX}[theorem]{Theorem}
+\begin{local minima are global in CVX}
+    Let $f:C\rightarrow\mathbb{R}$ be a (strict) convex function 
+    defined on the convex set $C\subseteq\mathbb{R}^{n}$.
+    Let $\mathbf{x}^*\in C$ be a local minimum of $f$ over $C$.
+    Then $\mathbf{x}^*$ is a strict global minimum of $f$ over $C$.
+\end{local minima are global in CVX}
+
+\newmdtheoremenv[style=defEnv]{CVX optimal solutions are convex}[theorem]{Theorem}
+\begin{CVX optimal solutions are convex}
+    Let $f:C\rightarrow\mathbb{R}$ be a (strict) convex function 
+    defined on the convex set $C\subseteq\mathbb{R}^{n}$.
+    Then the set of optimal solutions of the problem
+    \[
+        \min{\left\{f(\mathbf{x}):\mathbf{x}\in C\right\}}
+    \]
+    is convex. If, in addition, $f$ is strictly convex over $C$, then there
+    exists at most one optimal solution of the problem.
+\end{CVX optimal solutions are convex}
+
+\newtheorem{CVX example}[theorem]{Example}
+\begin{CVX example}
+    \;
+
+    \begin{itemize}
+        \item A convex problem:
+            \begin{equation*}
+                \begin{array}{c @{\quad} l}
+                    \min & -2x_1+x_2 \\
+                    \text{s.t.} & x_1^2+x_2^2\le 3
+                \end{array} 
+            \end{equation*} 
+        \item A nonconvex problem:
+            \begin{equation*}
+                \begin{array}{c @{\quad} l}
+                    \min & x_1^2-x_2 \\
+                    \text{s.t.} & x_1^2+x_2^2=3
+                \end{array} 
+            \end{equation*} 
+        \item \textbf{Linear Programming}:
+            \begin{equation*}
+                \begin{array}{c @{\quad} c @{\quad} l}
+                    & \min & \mathbf{c}^T\mathbf{x} \\
+                    (\text{\textbf{LP}}): & \text{s.t.} & A\mathbf{x}\le\mathbf{b} \\
+                                          & & B\mathbf{x}=\mathbf{g}
+                \end{array} 
+            \end{equation*} 
+            
+        \item Convex quadratic problems: minimizing a convex function quadratic
+            function subject to affine constraints. The general form is
+            \begin{equation*}
+                \begin{array}{c @{\quad} l}
+                    \min & \mathbf{x}^TQ\mathbf{x}+2\mathbf{b}^T\mathbf{x} \\
+                    \text{s.t.} & A\mathbf{x}\le \mathbf{c}
+                \end{array} 
+            \end{equation*} 
+            where $Q\in\mathbb{R}^{n\times n}$ is positive semidefinite,
+            $\mathbf{b}\in\mathbb{R}^{n}$, $A\in\mathbb{R}^{m\times n}$,
+            $\mathbf{c}\in\mathbb{R}^{m}$.
+    \end{itemize} 
+\end{CVX example}
+
+\section{Stationarity}
+
+Consider the constrained optimization problem given by
+\begin{equation}\label{eq:p}
+    \tag{P}
+    \underset{\mathbf{x}}{\min}\quad\left\{f(\mathbf{x}):\mathbf{x}\in C\right\},
+\end{equation}
+where $C\subseteq\mathbb{R}^{n}$ is closed and convex,
+and $f$ is continuously differentiable over C, not necessarily convex.
+
+\newmdtheoremenv[style=defEnv]{stationarity}[theorem]{Definition}
+\begin{stationarity}
+    $\mathbf{x}^*$ is called a \textbf{stationary point}
+    of~\eqref{eq:p} if
+    \[
+        \forall \mathbf{x}\in C,\;
+        \nabla f(\mathbf{x}^*)^T(\mathbf{x}-\mathbf{x}^*)\ge 0.
+    \]
+    
+\end{stationarity}
+
+\newmdtheoremenv[style=defEnv]{stationarity as a necessary optimality condition}[theorem]{Theorem}
+\begin{stationarity as a necessary optimality condition}
+    Let $f$ be a continuously differentiable function over a nonempty closed
+    convex set $C$, and let $\mathbf{x}^*$ be a local minimum of~\eqref{eq:p},
+    then $\mathbf{x}^*$ is a stationary point of~\eqref{eq:p}.
+\end{stationarity as a necessary optimality condition}
+
+\def\arraystretch{1.5}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c}
+        Feasible Set & Explicit Stationarity Condition \\
+        \hline\hline
+        $\mathbb{R}^{n}$ & $\nabla f(\mathbf{x}^*)=\mathbf{0}$ \\[4px]
+        \hline
+        $\mathbb{R}_+^n$ & $\frac{\partial f}{\partial x_i}(\mathbf{x}^*)
+        \begin{cases}
+            =0 & x_i^*>0 \\
+            \ge 0 & x_i^*=0
+        \end{cases}
+        $ \\
+        \hline
+        $\left\{\mathbf{x}\in\mathbb{R}^{n}:\mathbf{e}^T\mathbf{x}=1\right\}$
+                         & $\frac{\partial f}{\partial
+                         x_1}(\mathbf{x}^*)=\cdots=\frac{\partial f}{\partial
+                         x_n}(\mathbf{x}^*)$ \\
+        \hline
+        $B[\mathbf{0},\mathbf{1}]$ 
+                         & $\nabla f(\mathbf{x}^*)=\mathbf{0}$ or
+                         $\norm{\mathbf{x}^*}=1$ and $\exists \lambda\le
+                         0:\nabla f(\mathbf{x}^*)=\lambda\mathbf{x}^*$
+    \end{tabular} 
+\end{table} 
+\def\arraystretch{1.0}
+
+\newmdtheoremenv[style=defEnv]{stationarity in convex optimization}[theorem]{Theorem}
+\begin{stationarity in convex optimization}
+    Let $f$ be a continuously differentiable function over a nonempty closed
+    convfex set $C\subseteq\mathbb{R}^{n}$, then $\mathbf{x}^*$ is a stationary
+    point of~\eqref{eq:p} iff $\mathbf{x}^*$ is an optimal solution
+    of~\eqref{eq:p}.
+\end{stationarity in convex optimization}
+
+\section{Orthogonal Projection Operator}
+
+\newmdtheoremenv[style=defEnv]{orthogonal projection}[theorem]{Definition}
+\begin{orthogonal projection}
+    Given a nonempty closed convex set $C$, the orthogonal projection operator
+    $P_C:\mathbb{R}^{n}\rightarrow C$ is defined by
+    \[
+        P_C(\mathbf{x})=\text{argmin}\left\{\norm{\mathbf{y}-\mathbf{x}}^2:\mathbf{y}\in
+        C\right\}.
+    \]
+\end{orthogonal projection}
+
+\newmdtheoremenv[style=defEnv]{1 projection theorem}[theorem]{Theorem}
+\begin{1 projection theorem}
+    Let $C\subseteq\mathbb{R}^{n}$ be a nonempty closed convex set, then
+    \[
+        \forall \mathbf{x}\in\mathbb{R}^{n},
+        \exists ! P_C(\mathbf{x})
+    \]
+    
+\end{1 projection theorem}
+
+\newmdtheoremenv[style=defEnv]{2 projection theorem}[theorem]{Theorem}
+\begin{2 projection theorem}
+    Let $C$ be a nonempty closed convex set and let
+    $\mathbf{x}\in\mathbb{R}^{n}$, then
+    \[
+        \mathbf{z}=P_C(\mathbf{x})
+        \quad\iff\quad
+        \forall \mathbf{y}\in C,
+        (\mathbf{x}-\mathbf{z})^T(\mathbf{y}-\mathbf{z})\le 0.
+    \]
+    
+\end{2 projection theorem}
+
+\newtheorem{examples of orthogonal projections}[theorem]{Example}
+\begin{examples of orthogonal projections}
+    \;
+
+    \begin{itemize}
+        \item For $C=\mathbb{R}_+^n$,
+            \[
+                P_{\mathbb{R}_+^n}(\mathbf{x})={[\mathbf{x}]}_{+}
+            \]
+            where
+            ${[\mathbf{x}]}_{+}={(\max{\left\{x_1,0\right\}},\max{\left\{x_2,0\right\}},\ldots,\max{\left\{x_n,0\right\}})}^{T}$.
+            
+        \item A \textbf{box} is a subset of $\mathbb{R}^{n}$ of the form
+            \[
+                B=[l_1,u_1]\times[l_2,u_2]\times\cdots\times[l_n,u_n]
+                =\left\{\mathbf{x}\in\mathbb{R}^{n}:l_i\le x_i\le u_i\right\},
+            \]
+            where $l_i\le u_i\;\forall i=1,2,\ldots,n$ . For this set
+            \[
+                {[P_B(\mathbf{x})]}_{i}=
+                \begin{cases}
+                    u_i & x_i\ge u_i \\
+                    x_i & l_i<x_i<u_i \\
+                    l_i & x_i\le l_i.
+                \end{cases}
+            \]
+        \item For the closed ball in $\mathbb{R}^{n}$, $C=B[\mathbf{0},r]$, it
+            holds
+            \[
+                P_{B[\mathbf{0},r]}(\mathbf{x})=
+                \begin{cases}
+                    \mathbf{x} & \norm{\mathbf{x}}\le r \\
+                    r \frac{\mathbf{x}}{\norm{\mathbf{x}}} &
+                    \norm{\mathbf{x}}>r.
+                \end{cases}
+            \]
+    \end{itemize}
+\end{examples of orthogonal projections}
+
+\newmdtheoremenv[style=defEnv]{representation of stationarity via P_C}[theorem]{Theorem}
+\begin{representation of stationarity via P_C}
+    Let $f$ be a continuously differentiable function over the nonempty closed
+    convex set $C$, and let $s>0$. Then 
+    \[
+        \mathbf{x}^*\text{ is a stationary point of~\eqref{eq:p}}
+        \quad\iff\quad
+        \mathbf{x}^*=P_C(\mathbf{x}^*-s\nabla f(\mathbf{x}^*)).
+    \]
+\end{representation of stationarity via P_C}
+
+\section{Gradient Projection Method}
+
+\newmdtheoremenv[style=defEnv]{gradient mapping}[theorem]{Definition}
+\begin{gradient mapping}
+    We can define the \textbf{gradient mapping} as
+    \[
+        G_L(\mathbf{x})=L\left[\mathbf{x}-P_C\left(\mathbf{x}-\frac{1}{L}\nabla
+        f(\mathbf{x})\right)\right]
+    \]
+    where $L>0$. 
+\end{gradient mapping}
+\underline{\textbf{Comments}}: 
+\begin{itemize}
+    \item In the unconstrained case,
+        $G_L(\mathbf{x})=\nabla f(\mathbf{x})$ since projecting onto the same point.
+        Otherwise, $G_L(\mathbf{x})=\mathbf{0}\iff\mathbf{x}$ is a stationary point.
+        We can thus consider $\norm{G_L(\mathbf{x})}^2$ to be 
+        \emph{optimality measure}.
+    \item Slight modification can be made for gradient descent method to become
+        \textbf{gradient projection method} for solving convex optimization
+        problem, whose descent step becomes
+        \[
+            \mathbf{x}^{k+1}=P_C\left(\mathbf{x}^k-t^k\nabla
+            f(\mathbf{x}^k)\right)
+        \]
+        to ensure that at each iteration $i$, $x^{i}$ is within the convex set.
+\end{itemize}
+
+\newmdtheoremenv[style=defEnv]{convergence of gradient projection method}[theorem]{Theorem}
+\begin{convergence of gradient projection method}
+    Let $\left\{\mathbf{x}^k\right\}$ be the sequence generated by the gradient
+    projection method for solving problem~\eqref{eq:p} with either a constant
+    stepsize $\overline{t}\in\left(0,\frac{2}{L}\right)$, where $L$ is a
+    Lipschitz constant of $\nabla f$, or a backtracking stepsize strategy.
+    Assume that $f$ is bounded below, then:
+    \begin{enumerate}
+        \item The sequence $\left\{\mathbf{x}^k\right\}$ is nonincreasing.
+        \item $G_d(\mathbf{x}^k)\rightarrow 0$ as $k\rightarrow \infty$, where
+            \[
+                d=
+                \begin{cases}
+                    1 / \overline{t} & \text{constant stepsize} \\
+                    1 / s & \text{backtracking}.
+                \end{cases}
+            \]
+    \end{enumerate}
+    
+\end{convergence of gradient projection method}
+
+\section{Separation Theorem}
+
+\newmdtheoremenv[style=defEnv]{separation theorem}[theorem]{Definition}
+\begin{separation theorem}
+    A hyperplane
+    \[
+        H=\left\{\mathbf{x}\in\mathbb{R}^{n}:\mathbf{a}^T\mathbf{x}=b\right\}
+        \quad
+        (\mathbf{a}\in\mathbb{R}^{n}\backslash\left\{\mathbf{0}\right\},b\in\mathbb{R})
+    \]
+    is said to \textbf{strictly separate} a point $\mathbf{y}\notin S$ from $S$
+    if
+    \[
+        \mathbf{a}^T\mathbf{y}>b
+        \quad\text{and}\quad
+        \forall\mathbf{x}\in S,\mathbf{a}^T\mathbf{x}\le b.
+    \]
+\end{separation theorem}
+
+\newmdtheoremenv[style=defEnv]{separation of a point from closed convex set}[theorem]{Theorem}
+\begin{separation of a point from closed convex set}
+    Let $C\subseteq\mathbb{R}^{n}$ be a nonempty closed convex set, and let
+    $\mathbf{y}\notin C$. Then $\exists
+    \mathbf{p}\in\mathbb{R}^n\backslash\left\{\mathbf{0}\right\}$ and
+    $\alpha\in\mathbb{R}$ s.t. $\mathbf{p}^T\mathbf{y}>\alpha$ and
+    $\mathbf{p}^T\mathbf{x}\le\alpha$ for all $\mathbf{x}\in C$.
+\end{separation of a point from closed convex set}
+
+\newmdtheoremenv[style=defEnv]{farkas form 1}[theorem]{(Farkas') Lemma}
+\begin{farkas form 1}
+    Let $\mathbf{c}\in\mathbb{R}^{n}$ and $A\in\mathbb{R}^{m\times n}$.
+    Then exactly one of the following systems has a solution:
+    \begin{enumerate}[label = (\roman*)]
+        \item $A\mathbf{x}\le \mathbf{0}, \mathbf{c}^T\mathbf{x}>0$.
+        \item $A^T\mathbf{y}=\mathbf{c},\mathbf{y}\ge 0$.
+    \end{enumerate}
+\end{farkas form 1}
+
+\newmdtheoremenv[style=defEnv]{farkas form 2}[theorem]{Lemma}
+\begin{farkas form 2}
+    Let $\mathbf{c}\in\mathbb{R}^{n}$ and $A\in\mathbb{R}^{m\times n}$.
+    Then the following two claims are equivalent:
+    \begin{enumerate}[label = (\alph*)]
+        \item The implication 
+            $A\mathbf{x}\le\mathbf{0}\;\Rightarrow\;\mathbf{c}^T\mathbf{x}\le 0$
+            holds true.
+        \item $\exists \mathbf{y}\in\mathbb{R}_+^{m}$ s.t.
+            $A^T\mathbf{y}=\mathbf{c}$.
+    \end{enumerate}
+\end{farkas form 2}
+
+\newmdtheoremenv[style=defEnv]{gordan's alternative theorem}[theorem]{Theorem}
+\begin{gordan's alternative theorem}
+    Let $A\in\mathbb{R}^{m\times n}$, then exactly one of the following two
+    systems has a solution:
+    \begin{enumerate}[label = (\roman*)]
+        \item $A\mathbf{x}<\mathbf{0}$
+        \item $\mathbf{p}\neq \mathbf{0},A^T\mathbf{p}=0,\mathbf{p}\ge \mathbf{0}$.
+    \end{enumerate}
+\end{gordan's alternative theorem}
+
+
+\section{KKT Conditions}
+
+\newmdtheoremenv[style=defEnv]{KKT for linearly constrained problems}[theorem]{Theorem}
+\begin{KKT for linearly constrained problems}
+    Consider the minimization problem
+    \begin{equation}\label{eq:lcp}
+        \tag{LCP}
+        \begin{array}{c @{\quad} l @{\quad} l}
+            \min & f(\mathbf{x}) & \\
+            \text{subject to} & \mathbf{a}_i^T\mathbf{x}\le b_i & i=1,2,\ldots,m \\
+        \end{array} 
+    \end{equation} 
+    where $f$ is continuously differentiable over $\mathbb{R}^{n}$,
+    $\mathbf{a}_i\in\mathbb{R}^{n}$, $b_i\in\mathbb{R}$, and let $\mathbf{x}^*$
+    be a local minimum point of~\eqref{eq:lcp}. Then $\exists \lambda_i\ge 0$
+    s.t.
+    \[
+        \nabla f(\mathbf{x}^*)+\sum_{i=1}^{m} \lambda_i\mathbf{a}_i=\mathbf{0}
+        \quad\text{and}\quad
+        \lambda_i(\mathbf{a}_i^T\mathbf{x}^*-b_i)=0
+    \]
+    where the above equations are called the \textbf{KKT condition} or
+    \textbf{KKT system}.
+\end{KKT for linearly constrained problems}
+
+\newmdtheoremenv[style=defEnv]{KKT for convex linearly constrained problem}[theorem]{Theorem}
+\begin{KKT for convex linearly constrained problem}
+    Consider the problem~\eqref{eq:lcp} where additionally $f$ is convex.
+    Then $\mathbf{x}^*$ is an optimal solution $\iff$ $\exists \lambda_i\ge 0$ s.t.
+    \[
+        \nabla f(\mathbf{x}^*)+\sum_{i=1}^{m} \lambda_i\mathbf{a}_i=\mathbf{0}
+        \quad\text{and}\quad
+        \lambda_i(\mathbf{a}_i^T\mathbf{x}^*-b_i)=0
+    \]
+\end{KKT for convex linearly constrained problem}
+
+\newmdtheoremenv[style=defEnv]{KKT for LCP}[theorem]{Theorem}
+\begin{KKT for LCP}
+    Consider the minimization problem
+    \begin{equation}\label{eq:lcpi}
+        \tag{LCPI}
+        \begin{array}{c @{\quad} l @{\quad} l}
+            \min & f(\mathbf{x}) & \\
+            \text{subject to} & \mathbf{a}_i^T\mathbf{x}\le b_i & i=1,2,\ldots,m \\
+                              & \mathbf{c}_j^T\mathbf{x}=d_j, & j=1,2,\ldots,p
+        \end{array} 
+    \end{equation} 
+    where $f$ is continuously differentiable,
+    $\mathbf{a}_i,\mathbf{c}_j\in\mathbb{R}^{n}$, $b_i,d_j\in\mathbb{R}$.
+    \begin{enumerate}[label = (\roman*)]
+        \item (Necessity of the KKT condition)
+            If $\mathbf{x}^*$ is a local minimum of~\eqref{eq:lcpi}, then
+            $\mathbf{x}^*$ satisfies the KKT condition, i.e.\
+            $\exists\lambda_i\ge 0$ and $\mu_i\in\mathbb{R}$ s.t.
+            \begin{equation*}
+                \begin{array}{r @{\quad} l}
+                    \nabla f(\mathbf{x}^*)+\sum_{i=1}^{m}
+                    \lambda_i\mathbf{a}_i+\sum_{j=1}^{p} \mu_j\mathbf{c}_j=0, &
+                    \\[1ex]
+                    \lambda_i(\mathbf{a}_i^T\mathbf{x}^*-b_i)=0, &
+                    i=1,2,\ldots,m.
+                \end{array} 
+            \end{equation*}
+        \item (Sufficiency in the convex case) If $f$ is convex over
+            $\mathbb{R}^{n}$ and $\mathbf{x}^*$ is a feasible solution
+            of~\eqref{eq:lcpi} for which $\exists\lambda_i\ge 0$ and
+            $\mu_i\in\mathbb{R}$ s.t. the KKT conditions are satisfied, then
+            $\mathbf{x}^*$ is an optimal solution of~\eqref{eq:lcpi}.
+    \end{enumerate}
+\end{KKT for LCP}
+
+\newtheorem{KKT LCPI example}[theorem]{Example}
+\begin{KKT LCPI example}
+    Solve the problem
+    \begin{equation*}
+        \begin{array}{c @{\quad} l}
+            \min & \frac{1}{2}(x_1^2+x_2^2+x_3^2) \\
+            \text{s.t.} & x_1+x_2+x_3=3.
+        \end{array} 
+    \end{equation*} 
+    Since the function is convex, and the constraint is a hyperplane which is a
+    convex set, KKT conditions are \underline{necessary and sufficient} for this problem.
+
+    \medskip\noindent
+    Now we assemble the \textbf{Lagrangian}
+    \[
+        L(\mathbf{x},\mu)=\frac{1}{2}(x_1^2+x_2^2+x_3^2)+\mu(x_1+x_2+x_3-3)
+    \]
+    and solve for the KKT system, which is to find $\mathbf{x}^*, \mu^*$ s.t.
+    \[
+        \nabla_\mathbf{x}L(\mathbf{x}^*,\mu^*)=0
+        \quad\text{subject to}\quad
+        x_1+x_2+x_3=3.
+    \]
+    This translates to
+    \[
+        \begin{cases}
+            \frac{\partial L}{\partial x_1}=x_1+\mu=0 \\
+            \frac{\partial L}{\partial x_2}=x_2+\mu=0 \\
+            \frac{\partial L}{\partial x_3}=x_3+\mu=0 \\
+            x_1+x_2+x_3=3
+        \end{cases}
+        \Longrightarrow
+        \begin{cases}
+            \mu=-1 \\
+            x_1=x_2=x_3=1.
+        \end{cases}
+    \]
+    Thus, $\mathbf{1}$ is the solution to the problem.
+\end{KKT LCPI example}
+
+\section{Orthogonal projections}
+
+\newmdtheoremenv[style=defEnv]{orthogonal projectinos onto affine space}[theorem]{Theorem}
+\begin{orthogonal projectinos onto affine space}
+    Let $C$ be the affine space
+    $C=\left\{\mathbf{x}\in\mathbb{R}^{n}:A\mathbf{x}=\mathbf{b}\right\}$
+    where $A\in\mathbb{R}^{m\times n}$ and $\mathbf{b}\in\mathbb{R}^{n}$, then
+    \[
+        P_C(\mathbf{y})=\mathbf{y}-A^T{(AA^T)}^{-1}(A\mathbf{y}-\mathbf{b}).
+    \]
+\end{orthogonal projectinos onto affine space}
+\newtheorem{hyperplane orthogonal projection}[theorem]{Example}
+\begin{hyperplane orthogonal projection}
+    Consider the hyperplane
+    \[
+        H=\left\{\mathbf{x}\in\mathbb{R}^{n}:\mathbf{a}^T\mathbf{x}=b\right\}
+        \quad
+        \left(\mathbf{0}\neq\mathbf{a}\in\mathbb{R}^{n},b\in\mathbb{R}\right),
+    \]
+    then by the projection on an affine space result (as shown previously),
+    \[
+        P_H(\mathbf{y})=\mathbf{y}-\mathbf{a}{(\mathbf{a}^T\mathbf{a})}^{-1}(\mathbf{a}^T\mathbf{y}-b)
+        =\mathbf{y}-\frac{\mathbf{a}^T\mathbf{y}-b}{\norm{\mathbf{a}}^2}\mathbf{a}.
+    \]
+    Thus the distance of $\mathbf{y}$ to the hyperplane $H$ is
+    \[
+        d(\mathbf{y},H)=\frac{|\mathbf{a}^T\mathbf{y}-b|}{\norm{\mathbf{a}}}.
+    \]
+\end{hyperplane orthogonal projection}
+
+\newmdtheoremenv[style=defEnv]{distance of a point from a half space}[theorem]{Lemma}
+\begin{distance of a point from a half space}
+    Let $H^-=\left\{\mathbf{x}\in\mathbb{R}^n:\mathbf{a}^T\mathbf{x}\le
+    b\right\}$ where $\mathbf{0}\neq\mathbf{a}\in\mathbb{R}^{n}$ and
+    $b\in\mathbb{R}$. Then
+    \[
+        P_{H^-}(\mathbf{x})=\mathbf{x}-\frac{{[\mathbf{a}^T\mathbf{x}-b]}_{+}}{\norm{\mathbf{a}}^2}\mathbf{a}.
+    \]
+\end{distance of a point from a half space}
+
+\newmdtheoremenv[style=defEnv]{sufficiency of KKT conditions for convex problem}[theorem]{Theorem}
+\begin{sufficiency of KKT conditions for convex problem}
+    Let $\mathbf{x}^*$ be a feasible solution of
+    \begin{equation}\label{eq:nlp}
+        \tag{NLP}
+        \begin{array}{c @{\quad} l @{\quad} l}
+            \min & f(\mathbf{x}) & \\
+            \text{subject to} & g_i(\mathbf{x})\le 0, & i=1,2,\ldots,m \\
+                              & h_j(\mathbf{x})=0, & j=1,2,\ldots,p
+        \end{array} 
+    \end{equation} 
+    where $f,g_i$ are continuously differentiable functions over
+    $\mathbb{R}^{n}$ and $h_i$ are affine functions. We can define the
+    \textbf{Lagrangian}
+    \[
+        L(\mathbf{x},\pmb{\lambda},\pmb{\mu})=
+        f(\mathbf{x})+\sum_{i=1}^{m} \lambda_ig_i(\mathbf{x})
+        +\sum_{j=1}^{p} \mu_jh_j(\mathbf{x})
+    \]
+    s.t.
+    \[
+        \nabla_\mathbf{x}L(\mathbf{x^*},\pmb{\lambda},\pmb{\mu}) = 0
+        \quad\text{and}\quad
+        \lambda_ig_i(\mathbf{x}^*)=0,
+    \]
+    then $\mathbf{x}^*$ is an optimal solution of~\eqref{eq:nlp}.
+\end{sufficiency of KKT conditions for convex problem}
+
+\newmdtheoremenv[style=defEnv]{necessity of the KKT conditions under slater}[theorem]{Theorem}
+\begin{necessity of the KKT conditions under slater}
+    Let $\mathbf{x}^*$ be an optimal solution of the problem
+    \begin{equation}\label{eq:nlp2}
+        \tag{NLP2}
+        \begin{array}{c @{\quad} l @{\quad} l}
+            \min & f(\mathbf{x}) & \\
+            \text{subject to} & g_i(\mathbf{x})\le 0, & i=1,2,\ldots,m \\
+                              & h_j(\mathbf{x})\le 0, & j=1,2,\ldots,p \\
+                              & s_k(\mathbf{x})=0, & k=1,2,\ldots,q
+        \end{array} 
+    \end{equation} 
+    where $f,g_i$ are continuously differentiable convex functions over
+    $\mathbb{R}^{n}$, $h_i,s_i$ are affine functions.
+    Suppose $\exists \hat{\mathbf{x}}$ satisfying the generalized \textbf{Slater's
+    condition}:
+    \begin{align*}
+        g_i(\hat{\mathbf{x}})<0, &\quad i = 1,2,\ldots,m \\
+        h_j(\hat{\mathbf{x}})\le 0, &\quad j = 1,2,\ldots,p \\
+        s_k(\hat{\mathbf{x}})=0, &\quad k = 1,2,\ldots,q
+    \end{align*}
+    then $\exists \lambda_i,\eta_j\ge 0$ and $\mu_i\in\mathbb{R}$ s.t.
+    \begin{equation*}
+        \begin{array}{r @{\quad} l}
+            \nabla f(\mathbf{x}^*)+\sum_{i=1}^{m}
+            \lambda_i\nabla g_i(\mathbf{x}^*)+\sum_{j=1}^{p} \eta_j\nabla
+            h_j(\mathbf{x}^*)+\sum_{k=1}^{q} \mu_k\nabla s_k(\mathbf{x}^*)=0, &
+            \\[1ex]
+            \lambda_i g_i(\mathbf{x}^*)=0, &
+            i=1,2,\ldots,m \\[1ex]
+            \eta_j h_j(\mathbf{x}^*)=0, &
+            j=1,2,\ldots,p.
+        \end{array} 
+    \end{equation*}
+\end{necessity of the KKT conditions under slater}
+
+
+\chapter{Duality}
+
+\section{The Primal and Dual Problems}
+
+Consider the problem
+\begin{equation}\label{eq:primal}
+    \tag{Primal}
+    \begin{array}{c @{\quad} l @{\quad} l}
+        \min & f(\mathbf{x}) & \\
+        \text{subject to} & g_i(\mathbf{x})\le 0, & i=1,2,\ldots,m \\
+                          & h_j(\mathbf{x})=0, & j=1,2,\ldots,p \\
+        & \mathbf{x}\in X,
+    \end{array} 
+\end{equation} 
+where $f,g_i,h_j$ are functions defined on the set $X\subseteq\mathbb{R}^{n}$.
+This is the ``usual'' optimization problem, and we refer to it as the
+\textbf{primal} problem. The associated Lagrangian is
+\[
+        L(\mathbf{x},\pmb{\lambda},\pmb{\mu})=
+        f(\mathbf{x})+\sum_{i=1}^{m} \lambda_ig_i(\mathbf{x})
+        +\sum_{j=1}^{p} \mu_jh_j(\mathbf{x})
+        \quad
+        (\mathbf{x}\in
+        X,\pmb{\lambda}\in\mathbb{R}^m_+,\pmb{\mu}\in\mathbb{R}^{p}).
+\]
+The \textbf{dual} objective function
+$q:\mathbb{R}^m_+\times\mathbb{R}^{p}\rightarrow\mathbb{R}\cup\left\{-\infty\right\}$
+is defined to be
+\[
+    q(\pmb{\lambda},\pmb{\mu})=\underset{\mathbf{x}\in
+    X}{\min}L(\mathbf{x},\pmb{\lambda},\pmb{\mu})
+\]
+The domain of the dual objective function is
+\[
+    \text{dom}(q)=\left\{(\pmb{\lambda},\pmb{\mu})\in\mathbb{R}^{m}_+\times\mathbb{R}^{p}:q(\pmb{\lambda},\pmb{\mu})>-\infty\right\}.
+\]
+The \textbf{dual problem} is given by
+\begin{equation*}\label{eq:dual}
+    \tag{Dual}
+    \begin{array}{c @{\quad} l}
+        \max & q(\pmb{\lambda},\pmb{\mu}) \\
+        \text{s.t.} & (\pmb{\lambda},\pmb{\mu})\in\text{dom}(q)
+    \end{array} 
+\end{equation*}
+
+\newmdtheoremenv[style=defEnv]{concavity of q}[theorem]{Theorem}
+\begin{concavity of q}
+    Consider the primal problem~\eqref{eq:primal} with $f,g_i,h_j$ and $q$ the
+    dual function defined in~\eqref{eq:dual}. Then
+    \begin{enumerate}[label = (\alph*)]
+        \item dom($q$) is a convex set
+        \item $q$ is a concave function over dom($q$)
+    \end{enumerate}
+\end{concavity of q}
+
+\section{Weak and Strong Duality}
+
+\newmdtheoremenv[style=defEnv]{weak duality}[theorem]{(Weak Duality) Theorem}
+\begin{weak duality}
+    Consider the primal problem~\eqref{eq:primal} and its dual
+    probelm~\eqref{eq:dual}. Then
+    \[
+        q^*\le f^*
+    \]
+    where $f^*,q^*$ are the primal and dual optimal values respectively.
+\end{weak duality}
+
+\newtheorem{weak duality example}[theorem]{Example}
+\begin{weak duality example}
+    Consider the problem
+    \begin{equation*}
+        \begin{array}{c @{\quad} l}
+            \min & x_1^2-3x_2^2 \\
+            \text{s.t.} & x_1=x_2^3
+        \end{array} 
+    \end{equation*}
+    We can easily solve this to obtain $\mathbf{x}^*=(1,1)$ or $(-1,-1)$ so that
+    $f^*=-2$.
+
+    \medskip\noindent
+    To solve the dual problem, we formulate the Lagrangian
+    \[
+        L(x_1,x_2,\lambda)=x_1^2-3x_2^2+\lambda(x_1-x_2^3)
+    \]
+    so that
+    \[
+        q(\lambda)
+        =\underset{x_1,x_2}{\min} \;x_1^2+\lambda x_1-3x_2^2-\lambda x_2^3
+        =-\infty
+    \]
+    since we can set $\lambda=\infty$ if $x_2>0$ or set $\lambda=-\infty$ if
+    $x_2<0$.
+\end{weak duality example}
+
+\newmdtheoremenv[style=defEnv]{strong duality}[theorem]{Theorem}
+\begin{strong duality}
+    Consider the optimization problem $f^*$
+    \begin{equation*}
+        \begin{array}{c @{\quad} l @{\quad} l}
+            \min & f(\mathbf{x}) & \\
+            \text{s.t.} & g_i(\mathbf{x})\le 0, & i = 1,2,\ldots,m \\
+                        & \mathbf{x}\in X
+        \end{array} 
+    \end{equation*}
+    where $X$ is a convex set and $f, g_i$ are convex functions over $X$.
+    Suppose that $\exists\mathbf{\mathbf{x}}\in X$ for which
+    $g_i(\hat{\mathbf{x}})<0$. If this problem has a finite optimal value, then
+    \begin{enumerate}
+        \item the optimal value of the dual problem is obtained
+        \item the primal and dual problems have the same optimal value,
+            $f^*=q^*$.
+    \end{enumerate}
+\end{strong duality}
+
+\newtheorem{strong duality example}[theorem]{Example}
+\begin{strong duality example}
+    Consider the problem
+    \begin{equation*}
+        \begin{array}{c @{\quad} l}
+            \min & x_1^2-x_2 \\
+            \text{s.t.} & x_2^2\le 0
+        \end{array} 
+    \end{equation*}
+    We can deduce from $x_2^2\le 0$ that $x_2=0$, and since the minimal value of
+    $x_1^2$ is 0, we can deduce that $x_1=0$ as well, so $\mathbf{x}^*=(0,0)$
+    with $f^*=0$.
+
+    \medskip\noindent
+    To look at the dual problem, we construct the Lagrangian
+    \[
+        L(x_1,x_2,\lambda)=x_1^2-x_2+\lambda x_2^2
+    \]
+    thereby having
+    \[
+        q^*=\underset{x_1,x_2}{\min}\;x_1^2-x_2+\lambda x_2^2=
+        \begin{cases}
+            -\infty & \lambda=0 \\
+            -\frac{1}{4\lambda} & \lambda>0
+        \end{cases}
+    \]
+    and the duality problem yields $0$ with $\lambda=\infty$.
+    Note that this is however never actually attained because Slator's condition
+    is not fulfilled.
+\end{strong duality example}
+
+\newmdtheoremenv[style=defEnv]{complementary slackness condition}[theorem]
+{(Complementary Slackness Conditions) Theorem}
+\begin{complementary slackness condition}
+    Consider the optimization problem
+    \[
+        f^*:=\min \left\{f(\mathbf{x}):g_i(\mathbf{x})\le
+        0,i=1,2,\ldots,m,\mathbf{x}\in X\right\},
+    \]
+    and assume that $f^*=q^*$ where $q^*$ is the optimal value of the dual
+    problem. Let $\mathbf{x}^*,\pmb{\lambda}^*$ be feasible solutions of the
+    primal and dual problems. Then $\mathbf{x}^*$ and $\pmb{\lambda}^*$ are
+    optimal solutions of the primal and dual problems iff
+    \begin{enumerate}
+        \item \label{csc1}
+            $\mathbf{x}^*\in \underset{\mathbf{x}\in
+            X}{\text{argmin}}\;L(\mathbf{x},\pmb{\lambda}^*)$
+        \item $\lambda_i^*g_i(\mathbf{x}^*)=0,i=1,2,\ldots,m$.
+    \end{enumerate}
+\end{complementary slackness condition}
+\underline{\textbf{Comments}}: By establishing e.g. strong duality condition,
+the assumption of $f^*=g^*$ is automatically met, thereby the theorem could be
+applied, e.g. find $\pmb{\lambda}^*$ first so that $\mathbf{x}^*$ could be
+subsequently found by condition~\ref{csc1}.
+
+\newmdtheoremenv[style=defEnv]{general strong duality theorem}[theorem]
+{(General Strong Duality) Theorem}
+\begin{general strong duality theorem}
+    Consider the optimization problem
+    \begin{equation*}
+        \begin{array}{c @{\quad} l @{\quad} l}
+            \min & f(\mathbf{x}) & \\
+            \text{subject to} & g_i(\mathbf{x})\le 0, & i=1,2,\ldots,m \\
+                              & h_j(\mathbf{x})\le 0, & j=1,2,\ldots,p \\
+                              & s_k(\mathbf{x})=0, & k=1,2,\ldots,q \\
+                              & \mathbf{x}\in X,
+        \end{array} 
+    \end{equation*} 
+    where $X$ is a convex set and $f,g_i$ are convex functions over $X$. The
+    functions $h_j,s_k$ are affine functions. Suppose that $\exists
+    \hat{\mathbf{x}}\in\text{int}(X)$ 
+    for which the \underline{Slater's conditions are met}.
+    Then if the problem has a finite optimal value, then the optimal value of
+    the dual problem
+    \[
+        q^*=\max
+        \left\{q(\pmb{\lambda},\pmb{\eta},\pmb{\mu}):(\pmb{\lambda},\pmb{\eta},\pmb{\mu})\in\text{dom}(q)\right\}
+    \]
+    where
+    \[
+        q(\pmb{\lambda},\pmb{\eta},\pmb{\mu})=\underset{\mathbf{x}\in X}{\min}
+        \left[f(\mathbf{x})+\sum_{i=1}^{m}
+        \lambda_ig_i(\mathbf{x})+\sum_{j=1}^{p}\eta_jh_j(\mathbf{x})+\sum_{k=1}^{q}\mu_ks_k(\mathbf{x})\right]
+    \]
+    is attained, and $f^*=q^*$.
+\end{general strong duality theorem}
+
+See the 3 examples on notes for applications of duality concept.
 
 
 
